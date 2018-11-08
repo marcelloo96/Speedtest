@@ -11,18 +11,15 @@ namespace Speedtest
 {
     public partial class SpeedTest : Form
     {
-        private SpeedTestVm viewModel = new SpeedTestVm();
+        public SpeedTestVm viewModel;
         public SerialPort serialPort = new SerialPort();
-        
+        public int numOfSeries { get { return (int)numberOfPorts.Value; } }        
 
         public SpeedTest()
         {
             InitializeComponent();
-            
-            cartesianChart1 = ChartController.SetDefaultChart(cartesianChart1, viewModel);
             spCombobox.Items.AddRange(SerialPort.GetPortNames());
 
-            trackBarControl1.Value = viewModel.keepRecords;
             startButton.Enabled = false;
             stopButton.Enabled = false;
             clearButton.Enabled = false;
@@ -30,7 +27,7 @@ namespace Speedtest
 
 
         private void StartOnClick(object sender, System.EventArgs e)
-        {
+        {            
             viewModel.IsReading = true;
             viewModel.Read();
         }
@@ -42,7 +39,9 @@ namespace Speedtest
 
         private void ClearOnClick(object sender, System.EventArgs e)
         {
-            viewModel.Chart1.Clear();
+            foreach (var i in viewModel.listOfCharts) {
+                i.Clear();
+            }
         }
 
         private void refreshPortsList_Click(object sender, System.EventArgs e)
@@ -54,6 +53,9 @@ namespace Speedtest
 
         private void openButton_Click(object sender, System.EventArgs e)
         {
+            cartesianChart1 = ChartController.SetDefaultChart(cartesianChart1, this);
+            trackBarControl1.Value = viewModel.keepRecords;
+            numberOfPorts.Enabled = false;
             openButton.Enabled = false;
             closeButton.Enabled = true;
             refreshButton.Enabled = false;

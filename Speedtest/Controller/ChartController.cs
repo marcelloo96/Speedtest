@@ -12,27 +12,27 @@ namespace Speedtest.Controller
 {
     public static class ChartController
     {
-        public static CartesianChart SetDefaultChart(CartesianChart chart, SpeedTestVm viewModel)
+        public static CartesianChart SetDefaultChart(CartesianChart chart, SpeedTest speedtest)
         {
+            speedtest.viewModel = new SpeedTestVm(speedtest.numOfSeries);
+
             chart.Hoverable = false;
             chart.DataTooltip = null;
             chart.Zoom = ZoomingOptions.X;
-            var converter = new BrushConverter();
-            chart.Series.Add(new GLineSeries
-            {
-                Values = viewModel.Chart1,
-                DataLabels = false,
-                Fill = (Brush)converter.ConvertFromString("#00FFFFFF"),
-                LineSmoothness = 0
-            });
-            chart.Series.Add(new GLineSeries
-            {
-                Values = viewModel.Chart2,
-                DataLabels = false,
-                Fill = (Brush)converter.ConvertFromString("#00FFFFFF"),
-                LineSmoothness = 0
-            });
             chart.DisableAnimations = true;
+
+            var transparent = (Brush)new BrushConverter().ConvertFromString("#00FFFFFF");
+
+            for (int i = 0; i < speedtest.numOfSeries; i++) {
+                chart.Series.Add(new GLineSeries
+                {
+                    Values = speedtest.viewModel.listOfCharts[i],
+                    DataLabels = false,
+                    Fill = transparent,
+                    LineSmoothness = 0
+                });
+            }
+
             return chart;
 
         }
@@ -41,18 +41,21 @@ namespace Speedtest.Controller
 
         internal static void refreshChartValues(SpeedTestVm model, List<double> current)
         {
-            var first = model.Chart1.DefaultIfEmpty(0).FirstOrDefault();
-            if (model.Chart1.Count > model.keepRecords - 1) model.Chart1.Remove(first);
-            if (model.Chart1.Count < model.keepRecords) model.Chart1.Add(current[0]);
+            int index = 0;
+            foreach (var i in model.listOfCharts) {
+                if (index < model.listOfCharts.Count() && index<current.Count()) {
 
-            if (current.Count() ==2) {
-                first = model.Chart2.DefaultIfEmpty(0).FirstOrDefault();
-                if (model.Chart2.Count > model.keepRecords - 1) model.Chart2.Remove(first);
-                if (model.Chart2.Count < model.keepRecords) model.Chart2.Add(current[1]);
+                    var first = i.DefaultIfEmpty(0).FirstOrDefault();
+                    if (i.Count > model.keepRecords - 1) i.Remove(first);
+                    if (i.Count < model.keepRecords) i.Add(current[index]);
+
+                    index++;
+                }
+
 
             }
+
             model.IsHot = current[0] > 0;
-            model.Count = model.Chart1.Count;
             model.CurrentLecture = current[0];
 
         }

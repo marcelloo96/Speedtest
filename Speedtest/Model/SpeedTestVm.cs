@@ -12,6 +12,11 @@ namespace Speedtest
 {
     public class SpeedTestVm
     {
+        #region datafields
+
+        /// <summary>
+        /// revicedChartValue is the values that given by the 'Datarecived' action listener
+        /// </summary>
         private List<double> recivedChartValues;
         int tmp = 0;
         double tryparseTmp;
@@ -19,33 +24,42 @@ namespace Speedtest
 
         public SerialPort serialPort { get; set; }
         public bool IsReading { get; set; }
-        public GearedValues<double> Chart1 { get; set; }
-        public GearedValues<double> Chart2 { get; set; }
+        /// <summary>
+        /// Each element in 'listOfChars' represent a different channel.
+        /// The number of element this chart must equal the sum of the ports
+        /// </summary>
+        public List<GearedValues<double>> listOfCharts { get; set; }
         public double Count { get; set; }
         public double CurrentLecture { get; set; }
         public bool IsHot { get; set; }
+        public int numOfSeries;
         System.IO.StreamWriter file;
+        #endregion
 
-        public SpeedTestVm()
+        public SpeedTestVm(int numOfSeries)
         {
+            this.numOfSeries = numOfSeries;
+            listOfCharts = new List<GearedValues<double>>();
             recivedChartValues = new List<double>();
-            Chart1 = new GearedValues<double>().WithQuality(Quality.High);
-            Chart2 = new GearedValues<double>().WithQuality(Quality.High);
+
+            for (int i=0; i<numOfSeries; i++) {
+                listOfCharts.Add(new GearedValues<double>().WithQuality(Quality.High));
+            }
             file = new System.IO.StreamWriter(@"D:\Egyetem\VII. Félév\Szakdolgozat\ArduinoCode\sender\asd.txt", true);
 
         }
 
         public void Clear()
         {
-            Chart1.Clear();
-            Chart2.Clear();
+            foreach (var i in listOfCharts) {
+                i.Clear();
+
+            }
         }
 
         public void Read()
         {
 
-            //(new Thread(() =>
-            //{
             serialPort.DataReceived += (s, e) =>
             {
                 tmp++;
@@ -72,9 +86,6 @@ namespace Speedtest
 
             };
 
-            //})).Start();
-
-
         }
 
         public void Stop()
@@ -83,13 +94,5 @@ namespace Speedtest
             file.Close();
         }
 
-        /*public void refreshChartValues() {
-            var first = Values.DefaultIfEmpty(0).FirstOrDefault();
-            if (Values.Count > keepRecords - 1) Values.Remove(first);
-            if (Values.Count < keepRecords) Values.Add(_trend);
-            IsHot = _trend > 0;
-            Count = Values.Count;
-            CurrentLecture = _trend;
-        }*/
     }
 }
