@@ -22,7 +22,7 @@ namespace Speedtest
             cartesianChart1 = ChartController.SetDefaultChart(cartesianChart1, viewModel);
             spCombobox.Items.AddRange(SerialPort.GetPortNames());
 
-
+            trackBarControl1.Value = viewModel.keepRecords;
             startButton.Enabled = false;
             stopButton.Enabled = false;
             clearButton.Enabled = false;
@@ -31,7 +31,8 @@ namespace Speedtest
 
         private void StartOnClick(object sender, System.EventArgs e)
         {
-            viewModel.Read(serialPort);
+            viewModel.IsReading = true;
+            viewModel.Read();
         }
 
         private void StopOnClik(object sender, System.EventArgs e)
@@ -41,7 +42,7 @@ namespace Speedtest
 
         private void ClearOnClick(object sender, System.EventArgs e)
         {
-            viewModel.Values.Clear();
+            viewModel.Chart1.Clear();
         }
 
         private void refreshPortsList_Click(object sender, System.EventArgs e)
@@ -62,6 +63,7 @@ namespace Speedtest
             try
             {
                 serialPort.PortName = spCombobox.Text;
+                viewModel.serialPort = this.serialPort;
                 serialPort.Open();
             }
             catch (Exception ex)
