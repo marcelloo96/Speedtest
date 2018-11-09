@@ -77,5 +77,23 @@ namespace Speedtest.Properties {
                 return ResourceManager.GetString("disconnect", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Port Status: Connected.
+        /// </summary>
+        internal static string portStatusConnected {
+            get {
+                return ResourceManager.GetString("portStatusConnected", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Port Status: Disconnected.
+        /// </summary>
+        internal static string portStatusDisconnected {
+            get {
+                return ResourceManager.GetString("portStatusDisconnected", resourceCulture);
+            }
+        }
     }
 }

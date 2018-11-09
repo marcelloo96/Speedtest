@@ -12,22 +12,26 @@ namespace Speedtest
     public partial class SpeedTest : UserControl
     {
         public SpeedTestVm viewModel;
-        public SerialPort serialPort = new SerialPort();
-        public int numOfSeries { get { return (int)numberOfPorts.Value; } }
+        public SerialPort serialPort;
+        public Int32 numOfSeries;
 
-        public SpeedTest()
+
+        public SpeedTest(SerialPort serialPort ,int numOfSeries)
         {
             InitializeComponent();
-            spCombobox.Items.AddRange(SerialPort.GetPortNames());
 
-            startButton.Enabled = false;
-            stopButton.Enabled = false;
-            clearButton.Enabled = false;
+            this.serialPort = serialPort;
+
+            this.numOfSeries = numOfSeries;
+
+
+            cartesianChart1 = ChartController.SetDefaultChart(cartesianChart1, this);
+
         }
 
 
         private void StartOnClick(object sender, System.EventArgs e)
-        {            
+        {
             viewModel.IsReading = true;
             viewModel.Read();
         }
@@ -39,96 +43,52 @@ namespace Speedtest
 
         private void ClearOnClick(object sender, System.EventArgs e)
         {
-            foreach (var i in viewModel.listOfCharts) {
+            foreach (var i in viewModel.listOfCharts)
+            {
                 i.Clear();
             }
         }
 
-        private void refreshPortsList_Click(object sender, System.EventArgs e)
-        {
-            string[] ports = SerialPort.GetPortNames();
-            spCombobox.Items.Clear();
-            spCombobox.Items.AddRange(ports);
-        }
-
-        private void openButton_Click(object sender, System.EventArgs e)
-        {
-            cartesianChart1 = ChartController.SetDefaultChart(cartesianChart1, this);
-            trackBarControl1.Value = viewModel.keepRecords;
-            numberOfPorts.Enabled = false;
-            openButton.Enabled = false;
-            closeButton.Enabled = true;
-            refreshButton.Enabled = false;
-            startButton.Enabled = true;
-            stopButton.Enabled = true;
-            clearButton.Enabled = true;
-            //try
-            //{
-            //    serialPort.PortName = spCombobox.Text;
-            //    viewModel.serialPort = this.serialPort;
-            //    serialPort.Open();
-            //}
-            //catch (Exception ex)
-            //{
-            //    MessageBox.Show(ex.Message);
-            //}
-        }
 
         private void closeButton_Click(object sender, EventArgs e)
         {
-            openButton.Enabled = true;
-            closeButton.Enabled = false;
-            startButton.Enabled = false;
-            stopButton.Enabled = false;
-            clearButton.Enabled = false;
-
-            Thread CloseDown = new Thread(new ThreadStart(CloseSerialOnExit));
-            CloseDown.Start();
-        }
-        private void CloseSerialOnExit()
-        {
-            if (serialPort.IsOpen)
+            (new Thread(() =>
             {
-                try
-                {
-                    serialPort.DtrEnable = false;
-                    serialPort.RtsEnable = false;
-                    serialPort.DiscardInBuffer();
-                    serialPort.DiscardOutBuffer();
-                    serialPort.Close();
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message);
+                //CloseSerialOnExit();
+            })).Start();
 
-                }
-            }
-
+            //Thread CloseDown = new Thread(new ThreadStart(CloseSerialOnExit));
+            //CloseDown.Start();
         }
+
 
         private void trackBarControl1_EditValueChanged(object sender, EventArgs e)
         {
-            totalPoints.Text = "Displayed points: " + trackBarControl1.Value;
-            viewModel.keepRecords = trackBarControl1.Value;
+            //totalPoints.Text = "Displayed points: " + trackBarControl1.Value;
+            //viewModel.keepRecords = trackBarControl1.Value;
         }
 
-        public void externalStart(int seriesNum, string portname) {
-            //numOfSeries = seriesNum;
-            //viewModel.keepRecords = 500;
-            cartesianChart1 = ChartController.SetDefaultChart(cartesianChart1, this);
-            try
+        public void externalStart()
+        {
+            if (viewModel.IsReading)
             {
-                serialPort.PortName = portname;
-                viewModel.serialPort = this.serialPort;
-                serialPort.Open();
+                //Stop
+                viewModel.Stop();
+                //(new Thread(() =>
+                //{
+                //    CloseSerialOnExit();
+                //})).Start();
             }
-            catch (Exception ex)
+            else
             {
-                MessageBox.Show(ex.Message);
+                //Start
+
+
+                viewModel.IsReading = true;
+                viewModel.Read();
+
             }
 
-            viewModel.IsReading = true;
-            viewModel.Read();
         }
     }
 }

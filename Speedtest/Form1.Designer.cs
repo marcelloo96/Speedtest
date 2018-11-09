@@ -40,6 +40,7 @@
             this.displayModeRepositoryItemComboBox = new DevExpress.XtraEditors.Repository.RepositoryItemComboBox();
             this.connectButton = new DevExpress.XtraBars.BarButtonItem();
             this.startStopButton = new DevExpress.XtraBars.BarButtonItem();
+            this.portStatusLabel = new DevExpress.XtraBars.BarStaticItem();
             this.ribbonPage1 = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.ribbonPageGroup1 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.ribbonPageGroup2 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
@@ -66,9 +67,10 @@
             this.channelsElement,
             this.displayModeElement,
             this.connectButton,
-            this.startStopButton});
+            this.startStopButton,
+            this.portStatusLabel});
             this.ribbonControl1.Location = new System.Drawing.Point(0, 0);
-            this.ribbonControl1.MaxItemId = 8;
+            this.ribbonControl1.MaxItemId = 9;
             this.ribbonControl1.Name = "ribbonControl1";
             this.ribbonControl1.Pages.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPage[] {
             this.ribbonPage1});
@@ -161,6 +163,11 @@
             this.startStopButton.Name = "startStopButton";
             this.startStopButton.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.startStopButton_ItemClick);
             // 
+            // portStatusLabel
+            // 
+            this.portStatusLabel.Id = 8;
+            this.portStatusLabel.Name = "portStatusLabel";
+            // 
             // ribbonPage1
             // 
             this.ribbonPage1.Groups.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageGroup[] {
@@ -196,6 +203,7 @@
             // 
             // ribbonStatusBar1
             // 
+            this.ribbonStatusBar1.ItemLinks.Add(this.portStatusLabel);
             this.ribbonStatusBar1.Location = new System.Drawing.Point(0, 460);
             this.ribbonStatusBar1.Name = "ribbonStatusBar1";
             this.ribbonStatusBar1.Ribbon = this.ribbonControl1;
@@ -256,5 +264,6 @@
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup controlPanelGroup;
         private DevExpress.XtraBars.BarEditItem baudRateElement;
         private DevExpress.XtraEditors.PanelControl contentPanel;
+        private DevExpress.XtraBars.BarStaticItem portStatusLabel;
     }
 }

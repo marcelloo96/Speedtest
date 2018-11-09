@@ -35,13 +35,14 @@ namespace Speedtest
         System.IO.StreamWriter file;
         #endregion
 
-        public SpeedTestVm(int numOfSeries)
+        public SpeedTestVm(int numOfSeries, SerialPort serialPort)
         {
+            this.serialPort = serialPort;
             ChartController.InitializeListOfCharts(this, numOfSeries);
             recivedChartValues = new List<double>();
 
             
-            file = new System.IO.StreamWriter(@"D:\Egyetem\VII. Félév\Szakdolgozat\ArduinoCode\sender\asd.txt", true);
+           // file = new System.IO.StreamWriter(@"D:\Egyetem\VII. Félév\Szakdolgozat\ArduinoCode\sender\asd.txt", true);
 
         }
 
@@ -64,7 +65,7 @@ namespace Speedtest
                     var recived = serialPort.ReadLine();
                     Debug.WriteLine(recived);
 
-                    file.WriteLine(recived);
+                   // file.WriteLine(recived);
 
                     string[] chartValues = recived.Split(' ');
 

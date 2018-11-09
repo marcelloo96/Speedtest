@@ -12,9 +12,9 @@ namespace Speedtest.Controller
 {
     public static class ChartController
     {
-        public static CartesianChart SetDefaultChart(CartesianChart chart, SpeedTest speedtest)
+        public static CartesianChart SetDefaultChart(CartesianChart chart, SpeedTest model)
         {
-            speedtest.viewModel = new SpeedTestVm(speedtest.numOfSeries);
+            model.viewModel = new SpeedTestVm(model.numOfSeries, model.serialPort);
 
             chart.Hoverable = false;
             chart.DataTooltip = null;
@@ -23,10 +23,10 @@ namespace Speedtest.Controller
 
             var transparent = (Brush)new BrushConverter().ConvertFromString("#00FFFFFF");
 
-            for (int i = 0; i < speedtest.numOfSeries; i++) {
+            for (int i = 0; i < model.numOfSeries; i++) {
                 chart.Series.Add(new GLineSeries
                 {
-                    Values = speedtest.viewModel.listOfCharts[i],
+                    Values = model.viewModel.listOfCharts[i],
                     DataLabels = false,
                     Fill = transparent,
                     LineSmoothness = 0

@@ -123,4 +123,10 @@
   <data name="disconnect" xml:space="preserve">
     <value>Disconnect</value>
   </data>
+  <data name="portStatusConnected" xml:space="preserve">
+    <value>Port Status: Connected</value>
+  </data>
+  <data name="portStatusDisconnected" xml:space="preserve">
+    <value>Port Status: Disconnected</value>
+  </data>
 </root>

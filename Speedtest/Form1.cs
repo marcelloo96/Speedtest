@@ -29,6 +29,9 @@ namespace Speedtest
         public BarEditItem SelectedPortElement { get { return selectedPortElement; } }
         public BarButtonItem ConnectButton { get { return connectButton; } }
         public BarButtonItem StartStopButton { get { return startStopButton; } }
+        public BarStaticItem IsPortConnectedStatusBarLabel { get { return portStatusLabel; } set { portStatusLabel = value; } }
+        public SerialPort serialPort;
+        public SpeedTest gearedChart;
         public bool connectedState { get; set; }
         public string displayMode { get; set; }
         public string selectedPortName { get; set; }
@@ -43,24 +46,26 @@ namespace Speedtest
             MeasureTabController.FillEditors(this);
             MeasureTabController.SetInitialState(this);
             
-
-
         }
 
         private void connectButton_ItemClick(object sender, ItemClickEventArgs e)
         {
-            MeasureTabController.SetConnection(this);
+            MeasureTabController.ConnectionManager(this);
 
         }
 
         private void startStopButton_ItemClick(object sender, ItemClickEventArgs e)
         {
-            SpeedTest asd = new SpeedTest();
-            asd.Dock = DockStyle.Fill;
-            contentPanel.Controls.Add(asd);
-            int tmp = 0;
-            int.TryParse(channelsElement.EditValue.ToString(), out tmp);
-            asd.externalStart(tmp, SelectedPortElement.EditValue.ToString());
+            int numberOfChannels = Int32.Parse(channelsElement.EditValue.ToString());
+
+            gearedChart = new SpeedTest(serialPort, numberOfChannels)
+            {
+                Dock = DockStyle.Fill
+            };
+
+            contentPanel.Controls.Add(gearedChart);
+
+            gearedChart.externalStart();
         }
     }
 }

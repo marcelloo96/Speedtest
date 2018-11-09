@@ -4,7 +4,9 @@ using System.Collections.Generic;
 using System.IO.Ports;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace Speedtest.Controller
 {
@@ -32,10 +34,10 @@ namespace Speedtest.Controller
             //   model.DisplayModeRepositoryItemComboBox.ReadOnly = true;
         }
 
-        internal static void SetConnection(Form1 model)
+        internal static void ConnectionManager(Form1 model)
         {
             if (model.connectedState)
-            { 
+            {
                 /*Disconnecting*/
 
                 model.SelectedPortElement.Enabled = true;
@@ -48,10 +50,42 @@ namespace Speedtest.Controller
                 model.ConnectButton.Caption = StringConstants.connect;
 
                 model.connectedState = !model.connectedState;
+
+                try
+                {
+                        CloseSerialOnExit(model.serialPort);
+                    
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+
+                }
+
+                if (!model.serialPort.IsOpen)
+                {
+                    model.IsPortConnectedStatusBarLabel.Caption = StringConstants.portStatusDisconnected;
+                }
             }
             else
             {
                 /*Connecting*/
+                string portName = model.SelectedPortElement.EditValue.ToString();
+                int baudRate = Int32.Parse(model.BaudRateElement.EditValue.ToString());
+
+                model.serialPort = new SerialPort(portName, baudRate);
+                try
+                {
+                    model.serialPort.Open();
+                    if (model.serialPort.IsOpen)
+                    {
+                        model.IsPortConnectedStatusBarLabel.Caption = StringConstants.portStatusConnected;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
 
                 if (model.BaudRateElement.EditValue != null &&
                     model.SelectedPortElement.EditValue != null &&
@@ -74,6 +108,26 @@ namespace Speedtest.Controller
 
             }
 
+
+        }
+        private static void CloseSerialOnExit(SerialPort serialPort)
+        {
+            if (serialPort.IsOpen)
+            {
+                try
+                {
+                    serialPort.DtrEnable = false;
+                    serialPort.RtsEnable = false;
+                    serialPort.DiscardInBuffer();
+                    serialPort.DiscardOutBuffer();
+                    serialPort.Close();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+
+                }
+            }
 
         }
     }
