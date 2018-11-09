@@ -93,6 +93,11 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Properties\StringConstants.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>StringConstants.resx</DependentUpon>
+    </Compile>
     <Compile Include="View\SpeedTest.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -106,6 +111,10 @@
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\licenses.licx" />
+    <EmbeddedResource Include="Properties\StringConstants.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>StringConstants.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="View\SpeedTest.resx">
       <DependentUpon>SpeedTest.cs</DependentUpon>
     </EmbeddedResource>

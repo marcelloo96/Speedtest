@@ -46,11 +46,13 @@
             this.controlPanelGroup = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.ribbonStatusBar1 = new DevExpress.XtraBars.Ribbon.RibbonStatusBar();
             this.defaultLookAndFeel1 = new DevExpress.LookAndFeel.DefaultLookAndFeel(this.components);
+            this.contentPanel = new DevExpress.XtraEditors.PanelControl();
             ((System.ComponentModel.ISupportInitialize)(this.ribbonControl1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.selectedPortRepositoryItemComboBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.baudRateRepositoryItemComboBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numberOfChannelsRepositoryItemComboBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.displayModeRepositoryItemComboBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.contentPanel)).BeginInit();
             this.SuspendLayout();
             // 
             // ribbonControl1
@@ -149,6 +151,7 @@
             this.connectButton.Id = 6;
             this.connectButton.ImageOptions.SvgImage = global::Speedtest.Properties.Resources.connect;
             this.connectButton.Name = "connectButton";
+            this.connectButton.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.connectButton_ItemClick);
             // 
             // startStopButton
             // 
@@ -156,6 +159,7 @@
             this.startStopButton.Id = 7;
             this.startStopButton.ImageOptions.SvgImage = global::Speedtest.Properties.Resources.start;
             this.startStopButton.Name = "startStopButton";
+            this.startStopButton.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.startStopButton_ItemClick);
             // 
             // ribbonPage1
             // 
@@ -201,11 +205,20 @@
             // 
             this.defaultLookAndFeel1.LookAndFeel.SkinName = "Office 2016 Colorful";
             // 
+            // contentPanel
+            // 
+            this.contentPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.contentPanel.Location = new System.Drawing.Point(0, 146);
+            this.contentPanel.Name = "contentPanel";
+            this.contentPanel.Size = new System.Drawing.Size(968, 314);
+            this.contentPanel.TabIndex = 2;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(968, 481);
+            this.Controls.Add(this.contentPanel);
             this.Controls.Add(this.ribbonStatusBar1);
             this.Controls.Add(this.ribbonControl1);
             this.Name = "Form1";
@@ -217,6 +230,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.baudRateRepositoryItemComboBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numberOfChannelsRepositoryItemComboBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.displayModeRepositoryItemComboBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.contentPanel)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -241,5 +255,6 @@
         private DevExpress.XtraBars.BarButtonItem startStopButton;
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup controlPanelGroup;
         private DevExpress.XtraBars.BarEditItem baudRateElement;
+        private DevExpress.XtraEditors.PanelControl contentPanel;
     }
 }

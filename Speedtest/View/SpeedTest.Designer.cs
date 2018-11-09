@@ -79,9 +79,10 @@
             // cartesianChart1
             // 
             this.cartesianChart1.BackColorTransparent = true;
-            this.cartesianChart1.Location = new System.Drawing.Point(12, 111);
+            this.cartesianChart1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.cartesianChart1.Location = new System.Drawing.Point(0, 0);
             this.cartesianChart1.Name = "cartesianChart1";
-            this.cartesianChart1.Size = new System.Drawing.Size(776, 397);
+            this.cartesianChart1.Size = new System.Drawing.Size(800, 517);
             this.cartesianChart1.TabIndex = 4;
             this.cartesianChart1.Text = "cartesianChart1";
             // 
@@ -182,7 +183,6 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 517);
             this.Controls.Add(this.numberOfPorts);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
@@ -197,7 +197,7 @@
             this.Controls.Add(this.startButton);
             this.Controls.Add(this.cartesianChart1);
             this.Name = "SpeedTest";
-            this.Text = "Form1";
+            this.Size = new System.Drawing.Size(800, 517);
             ((System.ComponentModel.ISupportInitialize)(this.trackBarControl1.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarControl1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numberOfPorts.Properties)).EndInit();

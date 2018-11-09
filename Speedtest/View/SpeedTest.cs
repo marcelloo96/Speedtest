@@ -9,11 +9,11 @@ using Speedtest.Controller;
 
 namespace Speedtest
 {
-    public partial class SpeedTest : Form
+    public partial class SpeedTest : UserControl
     {
         public SpeedTestVm viewModel;
         public SerialPort serialPort = new SerialPort();
-        public int numOfSeries { get { return (int)numberOfPorts.Value; } }        
+        public int numOfSeries { get { return (int)numberOfPorts.Value; } }
 
         public SpeedTest()
         {
@@ -62,16 +62,16 @@ namespace Speedtest
             startButton.Enabled = true;
             stopButton.Enabled = true;
             clearButton.Enabled = true;
-            try
-            {
-                serialPort.PortName = spCombobox.Text;
-                viewModel.serialPort = this.serialPort;
-                serialPort.Open();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
+            //try
+            //{
+            //    serialPort.PortName = spCombobox.Text;
+            //    viewModel.serialPort = this.serialPort;
+            //    serialPort.Open();
+            //}
+            //catch (Exception ex)
+            //{
+            //    MessageBox.Show(ex.Message);
+            //}
         }
 
         private void closeButton_Click(object sender, EventArgs e)
@@ -110,6 +110,25 @@ namespace Speedtest
         {
             totalPoints.Text = "Displayed points: " + trackBarControl1.Value;
             viewModel.keepRecords = trackBarControl1.Value;
+        }
+
+        public void externalStart(int seriesNum, string portname) {
+            //numOfSeries = seriesNum;
+            //viewModel.keepRecords = 500;
+            cartesianChart1 = ChartController.SetDefaultChart(cartesianChart1, this);
+            try
+            {
+                serialPort.PortName = portname;
+                viewModel.serialPort = this.serialPort;
+                serialPort.Open();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+
+            viewModel.IsReading = true;
+            viewModel.Read();
         }
     }
 }
