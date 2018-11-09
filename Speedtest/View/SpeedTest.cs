@@ -108,7 +108,7 @@ namespace Speedtest
 
         private void trackBarControl1_EditValueChanged(object sender, EventArgs e)
         {
-            totalPoints.Text = "Megjelenített pontok: " + trackBarControl1.Value;
+            totalPoints.Text = "Displayed points: " + trackBarControl1.Value;
             viewModel.keepRecords = trackBarControl1.Value;
         }
     }

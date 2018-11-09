@@ -18,7 +18,6 @@ namespace Speedtest
         /// revicedChartValue is the values that given by the 'Datarecived' action listener
         /// </summary>
         private List<double> recivedChartValues;
-        int tmp = 0;
         double tryparseTmp;
         public int keepRecords = 300;
 
@@ -32,19 +31,16 @@ namespace Speedtest
         public double Count { get; set; }
         public double CurrentLecture { get; set; }
         public bool IsHot { get; set; }
-        public int numOfSeries;
+
         System.IO.StreamWriter file;
         #endregion
 
         public SpeedTestVm(int numOfSeries)
         {
-            this.numOfSeries = numOfSeries;
-            listOfCharts = new List<GearedValues<double>>();
+            ChartController.InitializeListOfCharts(this, numOfSeries);
             recivedChartValues = new List<double>();
 
-            for (int i=0; i<numOfSeries; i++) {
-                listOfCharts.Add(new GearedValues<double>().WithQuality(Quality.High));
-            }
+            
             file = new System.IO.StreamWriter(@"D:\Egyetem\VII. Félév\Szakdolgozat\ArduinoCode\sender\asd.txt", true);
 
         }
@@ -62,8 +58,6 @@ namespace Speedtest
 
             serialPort.DataReceived += (s, e) =>
             {
-                tmp++;
-
                 if (IsReading)
                 {
                     recivedChartValues.Clear();
@@ -80,7 +74,7 @@ namespace Speedtest
                         recivedChartValues.Add(tryparseTmp);
                     }
 
-                    ChartController.refreshChartValues(this, recivedChartValues);
+                    ChartController.RefreshChartValues(this, recivedChartValues);
                 }
 
 

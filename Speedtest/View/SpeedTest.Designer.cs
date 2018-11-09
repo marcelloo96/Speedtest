@@ -40,6 +40,7 @@
             this.totalPoints = new System.Windows.Forms.Label();
             this.numberOfPorts = new DevExpress.XtraEditors.SpinEdit();
             this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarControl1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarControl1.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numberOfPorts.Properties)).BeginInit();
@@ -86,7 +87,7 @@
             // 
             // closeButton
             // 
-            this.closeButton.Location = new System.Drawing.Point(238, 12);
+            this.closeButton.Location = new System.Drawing.Point(330, 12);
             this.closeButton.Name = "closeButton";
             this.closeButton.Size = new System.Drawing.Size(75, 23);
             this.closeButton.TabIndex = 10;
@@ -96,7 +97,7 @@
             // 
             // openButton
             // 
-            this.openButton.Location = new System.Drawing.Point(157, 12);
+            this.openButton.Location = new System.Drawing.Point(249, 12);
             this.openButton.Name = "openButton";
             this.openButton.Size = new System.Drawing.Size(75, 23);
             this.openButton.TabIndex = 9;
@@ -107,14 +108,14 @@
             // spCombobox
             // 
             this.spCombobox.FormattingEnabled = true;
-            this.spCombobox.Location = new System.Drawing.Point(12, 12);
+            this.spCombobox.Location = new System.Drawing.Point(104, 12);
             this.spCombobox.Name = "spCombobox";
             this.spCombobox.Size = new System.Drawing.Size(121, 21);
             this.spCombobox.TabIndex = 8;
             // 
             // refreshButton
             // 
-            this.refreshButton.Location = new System.Drawing.Point(319, 12);
+            this.refreshButton.Location = new System.Drawing.Point(411, 12);
             this.refreshButton.Name = "refreshButton";
             this.refreshButton.Size = new System.Drawing.Size(75, 23);
             this.refreshButton.TabIndex = 9;
@@ -125,7 +126,7 @@
             // trackBarControl1
             // 
             this.trackBarControl1.EditValue = 200;
-            this.trackBarControl1.Location = new System.Drawing.Point(12, 47);
+            this.trackBarControl1.Location = new System.Drawing.Point(551, 60);
             this.trackBarControl1.Name = "trackBarControl1";
             this.trackBarControl1.Properties.LabelAppearance.Options.UseTextOptions = true;
             this.trackBarControl1.Properties.LabelAppearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
@@ -138,7 +139,7 @@
             // totalPoints
             // 
             this.totalPoints.AutoSize = true;
-            this.totalPoints.Location = new System.Drawing.Point(255, 70);
+            this.totalPoints.Location = new System.Drawing.Point(437, 62);
             this.totalPoints.Name = "totalPoints";
             this.totalPoints.Size = new System.Drawing.Size(108, 13);
             this.totalPoints.TabIndex = 12;
@@ -151,8 +152,8 @@
             0,
             0,
             0});
-            this.numberOfPorts.Location = new System.Drawing.Point(632, 52);
-            this.numberOfPorts.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.numberOfPorts.Location = new System.Drawing.Point(104, 55);
+            this.numberOfPorts.Margin = new System.Windows.Forms.Padding(2);
             this.numberOfPorts.Name = "numberOfPorts";
             this.numberOfPorts.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
@@ -162,11 +163,20 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(553, 56);
+            this.label1.Location = new System.Drawing.Point(12, 58);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(74, 13);
+            this.label1.Size = new System.Drawing.Size(86, 13);
             this.label1.TabIndex = 12;
-            this.label1.Text = "Portok száma:";
+            this.label1.Text = "Number of Ports:";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(14, 17);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(84, 13);
+            this.label2.TabIndex = 12;
+            this.label2.Text = "Select The Port:";
             // 
             // SpeedTest
             // 
@@ -174,6 +184,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 517);
             this.Controls.Add(this.numberOfPorts);
+            this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.totalPoints);
             this.Controls.Add(this.trackBarControl1);
@@ -209,6 +220,7 @@
         private System.Windows.Forms.Label totalPoints;
         private DevExpress.XtraEditors.SpinEdit numberOfPorts;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label2;
     }
 }
 

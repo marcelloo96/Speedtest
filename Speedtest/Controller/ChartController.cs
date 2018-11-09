@@ -38,8 +38,7 @@ namespace Speedtest.Controller
         }
 
 
-
-        internal static void refreshChartValues(SpeedTestVm model, List<double> current)
+        internal static void RefreshChartValues(SpeedTestVm model, List<double> current)
         {
             int index = 0;
             foreach (var i in model.listOfCharts) {
@@ -58,6 +57,19 @@ namespace Speedtest.Controller
             model.IsHot = current[0] > 0;
             model.CurrentLecture = current[0];
 
+        }
+
+        /// <summary>
+        /// The model's 'listOfCharts' List will contain the same amount of element as the model's 'numOfSeries' value is.  
+        /// </summary>
+        /// <param name="model"></param>
+        internal static void InitializeListOfCharts(SpeedTestVm model, int numOfSeries)
+        {
+            model.listOfCharts = new List<GearedValues<double>>();
+            for (int i = 0; i < numOfSeries; i++)
+            {
+                model.listOfCharts.Add(new GearedValues<double>().WithQuality(Quality.High));
+            }
         }
     }
 }
