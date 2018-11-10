@@ -13,6 +13,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Speedtest.Properties;
 using DevExpress.XtraEditors;
+using DevExpress.XtraBars.Ribbon;
 
 namespace Speedtest
 {
@@ -48,6 +49,11 @@ namespace Speedtest
         public BarEditItem WriteBufferSizeElement { get { return writeBufferSizeElement; } }
 
         #endregion
+        #region Groups
+        public RibbonPageGroup PortBasicsGroup { get { return portBasicsGroup; } }
+        public RibbonPageGroup PortAdvancedsGroup { get { return portAdvancedsGroup; } }
+        public RibbonPageGroup MeasurePortBasicGroup { get { return measurePortBasicGroup; } }
+        #endregion
         #region Buttons
         public BarButtonItem ConnectButton { get { return connectButton; } }
         public BarButtonItem StartStopButton { get { return startStopButton; } }
@@ -77,7 +83,7 @@ namespace Speedtest
 
         private void connectButton_ItemClick(object sender, ItemClickEventArgs e)
         {
-            MeasureTabController.ConnectionManager(this);
+           MeasureTabController.ConnectionManager(this);
 
         }
 

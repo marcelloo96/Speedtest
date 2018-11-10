@@ -63,7 +63,7 @@
             this.handShakeElement = new DevExpress.XtraBars.BarEditItem();
             this.handShakeRepositoryItemComboBox = new DevExpress.XtraEditors.Repository.RepositoryItemComboBox();
             this.measurePage = new DevExpress.XtraBars.Ribbon.RibbonPage();
-            this.measurePortOptionsGroup = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
+            this.measurePortBasicGroup = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.measureDisplayGroup = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.measureControlPanelGroup = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.portOptionsPage = new DevExpress.XtraBars.Ribbon.RibbonPage();
@@ -74,6 +74,7 @@
             this.defaultLookAndFeel1 = new DevExpress.LookAndFeel.DefaultLookAndFeel(this.components);
             this.contentPanel = new DevExpress.XtraEditors.PanelControl();
             this.serialPort1 = new System.IO.Ports.SerialPort(this.components);
+            this.connectiongGroup = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             ((System.ComponentModel.ISupportInitialize)(this.ribbonControl1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.backstageViewControl1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.selectedPortRepositoryItemComboBox)).BeginInit();
@@ -390,21 +391,21 @@
             // measurePage
             // 
             this.measurePage.Groups.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageGroup[] {
-            this.measurePortOptionsGroup,
+            this.measurePortBasicGroup,
+            this.connectiongGroup,
             this.measureDisplayGroup,
             this.measureControlPanelGroup});
             this.measurePage.Name = "measurePage";
             this.measurePage.Text = "Measure";
             // 
-            // measurePortOptionsGroup
+            // measurePortBasicGroup
             // 
-            this.measurePortOptionsGroup.AllowTextClipping = false;
-            this.measurePortOptionsGroup.ItemLinks.Add(this.selectedPortElement);
-            this.measurePortOptionsGroup.ItemLinks.Add(this.baudRateElement);
-            this.measurePortOptionsGroup.ItemLinks.Add(this.channelsElement);
-            this.measurePortOptionsGroup.ItemLinks.Add(this.connectButton, true);
-            this.measurePortOptionsGroup.Name = "measurePortOptionsGroup";
-            this.measurePortOptionsGroup.Text = "Port Options";
+            this.measurePortBasicGroup.AllowTextClipping = false;
+            this.measurePortBasicGroup.ItemLinks.Add(this.selectedPortElement);
+            this.measurePortBasicGroup.ItemLinks.Add(this.baudRateElement);
+            this.measurePortBasicGroup.ItemLinks.Add(this.channelsElement);
+            this.measurePortBasicGroup.Name = "measurePortBasicGroup";
+            this.measurePortBasicGroup.Text = "Port Basics";
             // 
             // measureDisplayGroup
             // 
@@ -479,6 +480,13 @@
             this.contentPanel.Size = new System.Drawing.Size(1198, 379);
             this.contentPanel.TabIndex = 2;
             // 
+            // connectiongGroup
+            // 
+            this.connectiongGroup.AllowTextClipping = false;
+            this.connectiongGroup.ItemLinks.Add(this.connectButton);
+            this.connectiongGroup.Name = "connectiongGroup";
+            this.connectiongGroup.Text = "Connecting";
+            // 
             // MainFrame
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 16F);
@@ -518,7 +526,7 @@
 
         private DevExpress.XtraBars.Ribbon.RibbonControl ribbonControl1;
         private DevExpress.XtraBars.Ribbon.RibbonPage measurePage;
-        private DevExpress.XtraBars.Ribbon.RibbonPageGroup measurePortOptionsGroup;
+        private DevExpress.XtraBars.Ribbon.RibbonPageGroup measurePortBasicGroup;
         private DevExpress.XtraBars.Ribbon.RibbonStatusBar ribbonStatusBar1;
         private DevExpress.LookAndFeel.DefaultLookAndFeel defaultLookAndFeel1;
         private DevExpress.XtraBars.BarEditItem selectedPortElement;
@@ -561,5 +569,6 @@
         private DevExpress.XtraBars.BarEditItem handShakeElement;
         private DevExpress.XtraEditors.Repository.RepositoryItemComboBox handShakeRepositoryItemComboBox;
         private DevExpress.XtraEditors.Repository.RepositoryItemComboBox repositoryItemComboBox2;
+        private DevExpress.XtraBars.Ribbon.RibbonPageGroup connectiongGroup;
     }
 }
