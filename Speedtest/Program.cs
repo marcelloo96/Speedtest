@@ -17,7 +17,7 @@ namespace Speedtest
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             //Application.Run(new SpeedTest());
-            Application.Run(new Form1());
+            Application.Run(new MainFrame());
         }
     }
 }

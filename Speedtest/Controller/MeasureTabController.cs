@@ -15,7 +15,7 @@ namespace Speedtest.Controller
         public static readonly int[] baudRates = new int[] { 300, 1200, 2400, 4800, 9600, 19200, 38400, 57600, 74880, 115200, 230400, 250000, 500000, 1000000, 2000000 };
         public static readonly int[] numberOfChannels = new int[] { 1, 2, 3, 4, 5 };
 
-        internal static void FillEditors(Form1 model)
+        internal static void FillEditors(MainFrame model)
         {
             model.BaudRateRepositoryItemComboBox.Items.AddRange(baudRates);
             model.SelectedPortRepositoryItemComboBox.Items.AddRange(SerialPort.GetPortNames());
@@ -27,14 +27,14 @@ namespace Speedtest.Controller
 
         }
 
-        internal static void SetInitialState(Form1 model)
+        internal static void SetInitialState(MainFrame model)
         {
             model.DisplayModeElement.Enabled = false;
             model.StartStopButton.Enabled = false;
             //   model.DisplayModeRepositoryItemComboBox.ReadOnly = true;
         }
 
-        internal static void ConnectionManager(Form1 model)
+        internal static void ConnectionManager(MainFrame model)
         {
             if (model.connectedState)
             {

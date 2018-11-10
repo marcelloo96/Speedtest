@@ -16,12 +16,12 @@ using DevExpress.XtraEditors;
 
 namespace Speedtest
 {
-    public partial class Form1 : DevExpress.XtraBars.Ribbon.RibbonForm
+    public partial class MainFrame : DevExpress.XtraBars.Ribbon.RibbonForm
     {
         #region fields
         public RepositoryItemComboBox BaudRateRepositoryItemComboBox { get { return baudRateRepositoryItemComboBox; } }
         public RepositoryItemComboBox SelectedPortRepositoryItemComboBox { get { return selectedPortRepositoryItemComboBox; } }
-        public RepositoryItemComboBox NumberOfChannelsRepositoryItemComboBox { get { return numberOfChannelsRepositoryItemComboBox; } }
+        public RepositoryItemComboBox NumberOfChannelsRepositoryItemComboBox { get { return dataBitsRepositoryItemComboBox; } }
         public RepositoryItemComboBox DisplayModeRepositoryItemComboBox { get { return displayModeRepositoryItemComboBox; } }
         public BarEditItem DisplayModeElement { get { return displayModeElement; } }
         public BarEditItem BaudRateElement { get { return baudRateElement; } }
@@ -39,7 +39,7 @@ namespace Speedtest
         public string baudRate { get; set; }
         #endregion
 
-        public Form1()
+        public MainFrame()
         {
             InitializeComponent();
 
