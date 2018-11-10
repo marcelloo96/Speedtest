@@ -40,57 +40,57 @@
             this.baudRateElement = new DevExpress.XtraBars.BarEditItem();
             this.baudRateRepositoryItemComboBox = new DevExpress.XtraEditors.Repository.RepositoryItemComboBox();
             this.channelsElement = new DevExpress.XtraBars.BarEditItem();
-            this.dataBitsRepositoryItemComboBox = new DevExpress.XtraEditors.Repository.RepositoryItemComboBox();
+            this.numberOfChannelsRepositoryItemComboBox = new DevExpress.XtraEditors.Repository.RepositoryItemComboBox();
             this.displayModeElement = new DevExpress.XtraBars.BarEditItem();
             this.displayModeRepositoryItemComboBox = new DevExpress.XtraEditors.Repository.RepositoryItemComboBox();
             this.connectButton = new DevExpress.XtraBars.BarButtonItem();
             this.startStopButton = new DevExpress.XtraBars.BarButtonItem();
             this.portStatusLabel = new DevExpress.XtraBars.BarStaticItem();
+            this.dataBitsElement = new DevExpress.XtraBars.BarEditItem();
+            this.dataBitsReporitotyItemComboBox = new DevExpress.XtraEditors.Repository.RepositoryItemComboBox();
+            this.parityElement = new DevExpress.XtraBars.BarEditItem();
+            this.parityRepositoryItemComboBox = new DevExpress.XtraEditors.Repository.RepositoryItemComboBox();
+            this.stopBitElement = new DevExpress.XtraBars.BarEditItem();
+            this.stopBitRepositoryItemComboBox = new DevExpress.XtraEditors.Repository.RepositoryItemComboBox();
+            this.readBufferSizeElement = new DevExpress.XtraBars.BarEditItem();
+            this.readBufferSizeRepositoryItemComboBox = new DevExpress.XtraEditors.Repository.RepositoryItemComboBox();
+            this.writeBufferSizeElement = new DevExpress.XtraBars.BarEditItem();
+            this.writeBufferSizeRepositoryItemComboBox = new DevExpress.XtraEditors.Repository.RepositoryItemComboBox();
+            this.rtsEnableElement = new DevExpress.XtraBars.BarEditItem();
+            this.rtsEnableRepositoryItemComboBox = new DevExpress.XtraEditors.Repository.RepositoryItemComboBox();
+            this.dtrEnableElement = new DevExpress.XtraBars.BarEditItem();
+            this.dtrEnableRepositoryItemComboBox = new DevExpress.XtraEditors.Repository.RepositoryItemComboBox();
+            this.handShakeElement = new DevExpress.XtraBars.BarEditItem();
+            this.handShakeRepositoryItemComboBox = new DevExpress.XtraEditors.Repository.RepositoryItemComboBox();
             this.measurePage = new DevExpress.XtraBars.Ribbon.RibbonPage();
-            this.ribbonPageGroup1 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
-            this.ribbonPageGroup2 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
-            this.controlPanelGroup = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
+            this.measurePortOptionsGroup = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
+            this.measureDisplayGroup = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
+            this.measureControlPanelGroup = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
+            this.portOptionsPage = new DevExpress.XtraBars.Ribbon.RibbonPage();
+            this.portBasicsGroup = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
+            this.portAdvancedsGroup = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
+            this.repositoryItemComboBox2 = new DevExpress.XtraEditors.Repository.RepositoryItemComboBox();
             this.ribbonStatusBar1 = new DevExpress.XtraBars.Ribbon.RibbonStatusBar();
             this.defaultLookAndFeel1 = new DevExpress.LookAndFeel.DefaultLookAndFeel(this.components);
             this.contentPanel = new DevExpress.XtraEditors.PanelControl();
-            this.portOptionsPage = new DevExpress.XtraBars.Ribbon.RibbonPage();
-            this.portBasicsGroup = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.serialPort1 = new System.IO.Ports.SerialPort(this.components);
-            this.advancedPortOptionsGroup = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
-            this.dataBitsEditItem = new DevExpress.XtraBars.BarEditItem();
-            this.repositoryItemComboBox1 = new DevExpress.XtraEditors.Repository.RepositoryItemComboBox();
-            this.ParityEditItem = new DevExpress.XtraBars.BarEditItem();
-            this.parityRepositoryItemComboBox = new DevExpress.XtraEditors.Repository.RepositoryItemComboBox();
-            this.repositoryItemComboBox2 = new DevExpress.XtraEditors.Repository.RepositoryItemComboBox();
-            this.stopBitEditItem = new DevExpress.XtraBars.BarEditItem();
-            this.stopBitRepositoryItemComboBox = new DevExpress.XtraEditors.Repository.RepositoryItemComboBox();
-            this.ReadBufferSizeEditItem = new DevExpress.XtraBars.BarEditItem();
-            this.ReadBufferSizeRepositoryItemComboBox = new DevExpress.XtraEditors.Repository.RepositoryItemComboBox();
-            this.WriteBufferSizeBarEditItem = new DevExpress.XtraBars.BarEditItem();
-            this.WriteBufferSizeRepositoryItemComboBox = new DevExpress.XtraEditors.Repository.RepositoryItemComboBox();
-            this.RtsEnableEditItem = new DevExpress.XtraBars.BarEditItem();
-            this.RtsEnableRepositoryItemComboBox = new DevExpress.XtraEditors.Repository.RepositoryItemComboBox();
-            this.DtrEnablebarEditItem = new DevExpress.XtraBars.BarEditItem();
-            this.DtrEnableRepositoryItemComboBox = new DevExpress.XtraEditors.Repository.RepositoryItemComboBox();
-            this.handShakebarEditItem = new DevExpress.XtraBars.BarEditItem();
-            this.handShakeRepositoryItemComboBox = new DevExpress.XtraEditors.Repository.RepositoryItemComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.ribbonControl1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.backstageViewControl1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.selectedPortRepositoryItemComboBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.baudRateRepositoryItemComboBox)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataBitsRepositoryItemComboBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numberOfChannelsRepositoryItemComboBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.displayModeRepositoryItemComboBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataBitsReporitotyItemComboBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.parityRepositoryItemComboBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.stopBitRepositoryItemComboBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.readBufferSizeRepositoryItemComboBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.writeBufferSizeRepositoryItemComboBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.rtsEnableRepositoryItemComboBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dtrEnableRepositoryItemComboBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.handShakeRepositoryItemComboBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemComboBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.contentPanel)).BeginInit();
             this.contentPanel.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemComboBox1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.parityRepositoryItemComboBox)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemComboBox2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.stopBitRepositoryItemComboBox)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ReadBufferSizeRepositoryItemComboBox)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.WriteBufferSizeRepositoryItemComboBox)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.RtsEnableRepositoryItemComboBox)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.DtrEnableRepositoryItemComboBox)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.handShakeRepositoryItemComboBox)).BeginInit();
             this.SuspendLayout();
             // 
             // ribbonControl1
@@ -107,14 +107,14 @@
             this.connectButton,
             this.startStopButton,
             this.portStatusLabel,
-            this.dataBitsEditItem,
-            this.ParityEditItem,
-            this.stopBitEditItem,
-            this.ReadBufferSizeEditItem,
-            this.WriteBufferSizeBarEditItem,
-            this.RtsEnableEditItem,
-            this.DtrEnablebarEditItem,
-            this.handShakebarEditItem});
+            this.dataBitsElement,
+            this.parityElement,
+            this.stopBitElement,
+            this.readBufferSizeElement,
+            this.writeBufferSizeElement,
+            this.rtsEnableElement,
+            this.dtrEnableElement,
+            this.handShakeElement});
             this.ribbonControl1.Location = new System.Drawing.Point(0, 0);
             this.ribbonControl1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.ribbonControl1.MaxItemId = 19;
@@ -125,16 +125,16 @@
             this.ribbonControl1.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.baudRateRepositoryItemComboBox,
             this.selectedPortRepositoryItemComboBox,
-            this.dataBitsRepositoryItemComboBox,
+            this.numberOfChannelsRepositoryItemComboBox,
             this.displayModeRepositoryItemComboBox,
-            this.repositoryItemComboBox1,
+            this.dataBitsReporitotyItemComboBox,
             this.parityRepositoryItemComboBox,
             this.repositoryItemComboBox2,
             this.stopBitRepositoryItemComboBox,
-            this.ReadBufferSizeRepositoryItemComboBox,
-            this.WriteBufferSizeRepositoryItemComboBox,
-            this.RtsEnableRepositoryItemComboBox,
-            this.DtrEnableRepositoryItemComboBox,
+            this.readBufferSizeRepositoryItemComboBox,
+            this.writeBufferSizeRepositoryItemComboBox,
+            this.rtsEnableRepositoryItemComboBox,
+            this.dtrEnableRepositoryItemComboBox,
             this.handShakeRepositoryItemComboBox});
             this.ribbonControl1.Size = new System.Drawing.Size(1198, 185);
             this.ribbonControl1.StatusBar = this.ribbonStatusBar1;
@@ -145,13 +145,14 @@
             this.backstageViewControl1.Items.Add(this.backstageViewButtonItem2);
             this.backstageViewControl1.Items.Add(this.backstageViewItemSeparator1);
             this.backstageViewControl1.Items.Add(this.backstageViewButtonItem3);
-            this.backstageViewControl1.Location = new System.Drawing.Point(28, 62);
+            this.backstageViewControl1.Location = new System.Drawing.Point(53, 53);
             this.backstageViewControl1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.backstageViewControl1.Name = "backstageViewControl1";
             this.backstageViewControl1.OwnerControl = this.ribbonControl1;
             this.backstageViewControl1.Size = new System.Drawing.Size(953, 287);
             this.backstageViewControl1.TabIndex = 0;
             this.backstageViewControl1.Text = "backstageViewControl1";
+            this.backstageViewControl1.Click += new System.EventHandler(this.backstageViewControl1_Click);
             // 
             // backstageViewButtonItem1
             // 
@@ -208,18 +209,18 @@
             // channelsElement
             // 
             this.channelsElement.Caption = "Number of Channels:";
-            this.channelsElement.Edit = this.dataBitsRepositoryItemComboBox;
+            this.channelsElement.Edit = this.numberOfChannelsRepositoryItemComboBox;
             this.channelsElement.EditHeight = 20;
             this.channelsElement.EditWidth = 100;
             this.channelsElement.Id = 3;
             this.channelsElement.Name = "channelsElement";
             // 
-            // dataBitsRepositoryItemComboBox
+            // numberOfChannelsRepositoryItemComboBox
             // 
-            this.dataBitsRepositoryItemComboBox.AutoHeight = false;
-            this.dataBitsRepositoryItemComboBox.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            this.numberOfChannelsRepositoryItemComboBox.AutoHeight = false;
+            this.numberOfChannelsRepositoryItemComboBox.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.dataBitsRepositoryItemComboBox.Name = "dataBitsRepositoryItemComboBox";
+            this.numberOfChannelsRepositoryItemComboBox.Name = "numberOfChannelsRepositoryItemComboBox";
             // 
             // displayModeElement
             // 
@@ -258,38 +259,202 @@
             this.portStatusLabel.Id = 8;
             this.portStatusLabel.Name = "portStatusLabel";
             // 
+            // dataBitsElement
+            // 
+            this.dataBitsElement.Caption = "Data Bits";
+            this.dataBitsElement.Edit = this.dataBitsReporitotyItemComboBox;
+            this.dataBitsElement.EditHeight = 20;
+            this.dataBitsElement.EditWidth = 100;
+            this.dataBitsElement.Id = 9;
+            this.dataBitsElement.Name = "dataBitsElement";
+            // 
+            // dataBitsReporitotyItemComboBox
+            // 
+            this.dataBitsReporitotyItemComboBox.AutoHeight = false;
+            this.dataBitsReporitotyItemComboBox.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.dataBitsReporitotyItemComboBox.Name = "dataBitsReporitotyItemComboBox";
+            // 
+            // parityElement
+            // 
+            this.parityElement.Caption = "Parity";
+            this.parityElement.Edit = this.parityRepositoryItemComboBox;
+            this.parityElement.EditHeight = 20;
+            this.parityElement.EditWidth = 100;
+            this.parityElement.Id = 10;
+            this.parityElement.Name = "parityElement";
+            // 
+            // parityRepositoryItemComboBox
+            // 
+            this.parityRepositoryItemComboBox.AutoHeight = false;
+            this.parityRepositoryItemComboBox.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.parityRepositoryItemComboBox.Name = "parityRepositoryItemComboBox";
+            // 
+            // stopBitElement
+            // 
+            this.stopBitElement.Caption = "Stop Bit";
+            this.stopBitElement.Edit = this.stopBitRepositoryItemComboBox;
+            this.stopBitElement.EditHeight = 20;
+            this.stopBitElement.EditWidth = 100;
+            this.stopBitElement.Id = 13;
+            this.stopBitElement.Name = "stopBitElement";
+            // 
+            // stopBitRepositoryItemComboBox
+            // 
+            this.stopBitRepositoryItemComboBox.AutoHeight = false;
+            this.stopBitRepositoryItemComboBox.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.stopBitRepositoryItemComboBox.Name = "stopBitRepositoryItemComboBox";
+            // 
+            // readBufferSizeElement
+            // 
+            this.readBufferSizeElement.Caption = "Read Buffer size";
+            this.readBufferSizeElement.Edit = this.readBufferSizeRepositoryItemComboBox;
+            this.readBufferSizeElement.EditHeight = 20;
+            this.readBufferSizeElement.EditWidth = 100;
+            this.readBufferSizeElement.Id = 14;
+            this.readBufferSizeElement.Name = "readBufferSizeElement";
+            // 
+            // readBufferSizeRepositoryItemComboBox
+            // 
+            this.readBufferSizeRepositoryItemComboBox.AutoHeight = false;
+            this.readBufferSizeRepositoryItemComboBox.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.readBufferSizeRepositoryItemComboBox.Name = "readBufferSizeRepositoryItemComboBox";
+            // 
+            // writeBufferSizeElement
+            // 
+            this.writeBufferSizeElement.Caption = "Write Buffer Size";
+            this.writeBufferSizeElement.Edit = this.writeBufferSizeRepositoryItemComboBox;
+            this.writeBufferSizeElement.EditHeight = 20;
+            this.writeBufferSizeElement.EditWidth = 100;
+            this.writeBufferSizeElement.Id = 15;
+            this.writeBufferSizeElement.Name = "writeBufferSizeElement";
+            // 
+            // writeBufferSizeRepositoryItemComboBox
+            // 
+            this.writeBufferSizeRepositoryItemComboBox.AutoHeight = false;
+            this.writeBufferSizeRepositoryItemComboBox.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.writeBufferSizeRepositoryItemComboBox.Name = "writeBufferSizeRepositoryItemComboBox";
+            // 
+            // rtsEnableElement
+            // 
+            this.rtsEnableElement.Caption = "RTS Enable";
+            this.rtsEnableElement.Edit = this.rtsEnableRepositoryItemComboBox;
+            this.rtsEnableElement.EditHeight = 20;
+            this.rtsEnableElement.EditWidth = 100;
+            this.rtsEnableElement.Id = 16;
+            this.rtsEnableElement.Name = "rtsEnableElement";
+            // 
+            // rtsEnableRepositoryItemComboBox
+            // 
+            this.rtsEnableRepositoryItemComboBox.AutoHeight = false;
+            this.rtsEnableRepositoryItemComboBox.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.rtsEnableRepositoryItemComboBox.Name = "rtsEnableRepositoryItemComboBox";
+            // 
+            // dtrEnableElement
+            // 
+            this.dtrEnableElement.Caption = "DTR Enable";
+            this.dtrEnableElement.Edit = this.dtrEnableRepositoryItemComboBox;
+            this.dtrEnableElement.EditHeight = 20;
+            this.dtrEnableElement.EditWidth = 100;
+            this.dtrEnableElement.Id = 17;
+            this.dtrEnableElement.Name = "dtrEnableElement";
+            // 
+            // dtrEnableRepositoryItemComboBox
+            // 
+            this.dtrEnableRepositoryItemComboBox.AutoHeight = false;
+            this.dtrEnableRepositoryItemComboBox.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.dtrEnableRepositoryItemComboBox.Name = "dtrEnableRepositoryItemComboBox";
+            // 
+            // handShakeElement
+            // 
+            this.handShakeElement.Caption = "Handshake";
+            this.handShakeElement.Edit = this.handShakeRepositoryItemComboBox;
+            this.handShakeElement.EditHeight = 20;
+            this.handShakeElement.EditWidth = 100;
+            this.handShakeElement.Id = 18;
+            this.handShakeElement.Name = "handShakeElement";
+            // 
+            // handShakeRepositoryItemComboBox
+            // 
+            this.handShakeRepositoryItemComboBox.AutoHeight = false;
+            this.handShakeRepositoryItemComboBox.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.handShakeRepositoryItemComboBox.Name = "handShakeRepositoryItemComboBox";
+            // 
             // measurePage
             // 
             this.measurePage.Groups.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageGroup[] {
-            this.ribbonPageGroup1,
-            this.ribbonPageGroup2,
-            this.controlPanelGroup});
+            this.measurePortOptionsGroup,
+            this.measureDisplayGroup,
+            this.measureControlPanelGroup});
             this.measurePage.Name = "measurePage";
             this.measurePage.Text = "Measure";
             // 
-            // ribbonPageGroup1
+            // measurePortOptionsGroup
             // 
-            this.ribbonPageGroup1.AllowTextClipping = false;
-            this.ribbonPageGroup1.ItemLinks.Add(this.selectedPortElement);
-            this.ribbonPageGroup1.ItemLinks.Add(this.baudRateElement);
-            this.ribbonPageGroup1.ItemLinks.Add(this.channelsElement);
-            this.ribbonPageGroup1.ItemLinks.Add(this.connectButton, true);
-            this.ribbonPageGroup1.Name = "ribbonPageGroup1";
-            this.ribbonPageGroup1.Text = "Port Options";
+            this.measurePortOptionsGroup.AllowTextClipping = false;
+            this.measurePortOptionsGroup.ItemLinks.Add(this.selectedPortElement);
+            this.measurePortOptionsGroup.ItemLinks.Add(this.baudRateElement);
+            this.measurePortOptionsGroup.ItemLinks.Add(this.channelsElement);
+            this.measurePortOptionsGroup.ItemLinks.Add(this.connectButton, true);
+            this.measurePortOptionsGroup.Name = "measurePortOptionsGroup";
+            this.measurePortOptionsGroup.Text = "Port Options";
             // 
-            // ribbonPageGroup2
+            // measureDisplayGroup
             // 
-            this.ribbonPageGroup2.AllowTextClipping = false;
-            this.ribbonPageGroup2.ItemLinks.Add(this.displayModeElement);
-            this.ribbonPageGroup2.Name = "ribbonPageGroup2";
-            this.ribbonPageGroup2.Text = "Display";
+            this.measureDisplayGroup.AllowTextClipping = false;
+            this.measureDisplayGroup.ItemLinks.Add(this.displayModeElement);
+            this.measureDisplayGroup.Name = "measureDisplayGroup";
+            this.measureDisplayGroup.Text = "Display";
             // 
-            // controlPanelGroup
+            // measureControlPanelGroup
             // 
-            this.controlPanelGroup.AllowTextClipping = false;
-            this.controlPanelGroup.ItemLinks.Add(this.startStopButton);
-            this.controlPanelGroup.Name = "controlPanelGroup";
-            this.controlPanelGroup.Text = "Control Panel";
+            this.measureControlPanelGroup.AllowTextClipping = false;
+            this.measureControlPanelGroup.ItemLinks.Add(this.startStopButton);
+            this.measureControlPanelGroup.Name = "measureControlPanelGroup";
+            this.measureControlPanelGroup.Text = "Control Panel";
+            // 
+            // portOptionsPage
+            // 
+            this.portOptionsPage.Groups.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageGroup[] {
+            this.portBasicsGroup,
+            this.portAdvancedsGroup});
+            this.portOptionsPage.Name = "portOptionsPage";
+            this.portOptionsPage.Text = "Port Options";
+            // 
+            // portBasicsGroup
+            // 
+            this.portBasicsGroup.ItemLinks.Add(this.selectedPortElement);
+            this.portBasicsGroup.ItemLinks.Add(this.baudRateElement);
+            this.portBasicsGroup.ItemLinks.Add(this.channelsElement);
+            this.portBasicsGroup.Name = "portBasicsGroup";
+            this.portBasicsGroup.Text = "Basics";
+            // 
+            // portAdvancedsGroup
+            // 
+            this.portAdvancedsGroup.ItemLinks.Add(this.dataBitsElement, true);
+            this.portAdvancedsGroup.ItemLinks.Add(this.parityElement);
+            this.portAdvancedsGroup.ItemLinks.Add(this.stopBitElement);
+            this.portAdvancedsGroup.ItemLinks.Add(this.rtsEnableElement, true);
+            this.portAdvancedsGroup.ItemLinks.Add(this.dtrEnableElement);
+            this.portAdvancedsGroup.ItemLinks.Add(this.handShakeElement);
+            this.portAdvancedsGroup.ItemLinks.Add(this.writeBufferSizeElement, true);
+            this.portAdvancedsGroup.ItemLinks.Add(this.readBufferSizeElement);
+            this.portAdvancedsGroup.Name = "portAdvancedsGroup";
+            this.portAdvancedsGroup.Text = "Advanced";
+            // 
+            // repositoryItemComboBox2
+            // 
+            this.repositoryItemComboBox2.AutoHeight = false;
+            this.repositoryItemComboBox2.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.repositoryItemComboBox2.Name = "repositoryItemComboBox2";
             // 
             // ribbonStatusBar1
             // 
@@ -314,170 +479,6 @@
             this.contentPanel.Size = new System.Drawing.Size(1198, 379);
             this.contentPanel.TabIndex = 2;
             // 
-            // portOptionsPage
-            // 
-            this.portOptionsPage.Groups.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageGroup[] {
-            this.portBasicsGroup,
-            this.advancedPortOptionsGroup});
-            this.portOptionsPage.Name = "portOptionsPage";
-            this.portOptionsPage.Text = "Port Options";
-            // 
-            // portBasicsGroup
-            // 
-            this.portBasicsGroup.ItemLinks.Add(this.selectedPortElement);
-            this.portBasicsGroup.ItemLinks.Add(this.baudRateElement);
-            this.portBasicsGroup.ItemLinks.Add(this.channelsElement);
-            this.portBasicsGroup.Name = "portBasicsGroup";
-            this.portBasicsGroup.Text = "Basics";
-            // 
-            // advancedPortOptionsGroup
-            // 
-            this.advancedPortOptionsGroup.ItemLinks.Add(this.dataBitsEditItem, true);
-            this.advancedPortOptionsGroup.ItemLinks.Add(this.ParityEditItem);
-            this.advancedPortOptionsGroup.ItemLinks.Add(this.stopBitEditItem);
-            this.advancedPortOptionsGroup.ItemLinks.Add(this.RtsEnableEditItem, true);
-            this.advancedPortOptionsGroup.ItemLinks.Add(this.DtrEnablebarEditItem);
-            this.advancedPortOptionsGroup.ItemLinks.Add(this.handShakebarEditItem);
-            this.advancedPortOptionsGroup.ItemLinks.Add(this.WriteBufferSizeBarEditItem, true);
-            this.advancedPortOptionsGroup.ItemLinks.Add(this.ReadBufferSizeEditItem);
-            this.advancedPortOptionsGroup.Name = "advancedPortOptionsGroup";
-            this.advancedPortOptionsGroup.Text = "Advanced";
-            // 
-            // dataBitsEditItem
-            // 
-            this.dataBitsEditItem.Caption = "Data Bits";
-            this.dataBitsEditItem.Edit = this.dataBitsRepositoryItemComboBox;
-            this.dataBitsEditItem.EditHeight = 20;
-            this.dataBitsEditItem.EditWidth = 100;
-            this.dataBitsEditItem.Id = 9;
-            this.dataBitsEditItem.Name = "dataBitsEditItem";
-            // 
-            // repositoryItemComboBox1
-            // 
-            this.repositoryItemComboBox1.AutoHeight = false;
-            this.repositoryItemComboBox1.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.repositoryItemComboBox1.Name = "repositoryItemComboBox1";
-            // 
-            // ParityEditItem
-            // 
-            this.ParityEditItem.Caption = "Parity";
-            this.ParityEditItem.Edit = this.parityRepositoryItemComboBox;
-            this.ParityEditItem.EditHeight = 20;
-            this.ParityEditItem.EditWidth = 100;
-            this.ParityEditItem.Id = 10;
-            this.ParityEditItem.Name = "ParityEditItem";
-            // 
-            // parityRepositoryItemComboBox
-            // 
-            this.parityRepositoryItemComboBox.AutoHeight = false;
-            this.parityRepositoryItemComboBox.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.parityRepositoryItemComboBox.Name = "parityRepositoryItemComboBox";
-            // 
-            // repositoryItemComboBox2
-            // 
-            this.repositoryItemComboBox2.AutoHeight = false;
-            this.repositoryItemComboBox2.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.repositoryItemComboBox2.Name = "repositoryItemComboBox2";
-            // 
-            // stopBitEditItem
-            // 
-            this.stopBitEditItem.Caption = "Stop Bit";
-            this.stopBitEditItem.Edit = this.stopBitRepositoryItemComboBox;
-            this.stopBitEditItem.EditHeight = 20;
-            this.stopBitEditItem.EditWidth = 100;
-            this.stopBitEditItem.Id = 13;
-            this.stopBitEditItem.Name = "stopBitEditItem";
-            // 
-            // stopBitRepositoryItemComboBox
-            // 
-            this.stopBitRepositoryItemComboBox.AutoHeight = false;
-            this.stopBitRepositoryItemComboBox.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.stopBitRepositoryItemComboBox.Name = "stopBitRepositoryItemComboBox";
-            // 
-            // ReadBufferSizeEditItem
-            // 
-            this.ReadBufferSizeEditItem.Caption = "Read Buffer size";
-            this.ReadBufferSizeEditItem.Edit = this.ReadBufferSizeRepositoryItemComboBox;
-            this.ReadBufferSizeEditItem.EditHeight = 20;
-            this.ReadBufferSizeEditItem.EditWidth = 100;
-            this.ReadBufferSizeEditItem.Id = 14;
-            this.ReadBufferSizeEditItem.Name = "ReadBufferSizeEditItem";
-            // 
-            // ReadBufferSizeRepositoryItemComboBox
-            // 
-            this.ReadBufferSizeRepositoryItemComboBox.AutoHeight = false;
-            this.ReadBufferSizeRepositoryItemComboBox.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.ReadBufferSizeRepositoryItemComboBox.Name = "ReadBufferSizeRepositoryItemComboBox";
-            // 
-            // WriteBufferSizeBarEditItem
-            // 
-            this.WriteBufferSizeBarEditItem.Caption = "Write Buffer Size";
-            this.WriteBufferSizeBarEditItem.Edit = this.WriteBufferSizeRepositoryItemComboBox;
-            this.WriteBufferSizeBarEditItem.EditHeight = 20;
-            this.WriteBufferSizeBarEditItem.EditWidth = 100;
-            this.WriteBufferSizeBarEditItem.Id = 15;
-            this.WriteBufferSizeBarEditItem.Name = "WriteBufferSizeBarEditItem";
-            // 
-            // WriteBufferSizeRepositoryItemComboBox
-            // 
-            this.WriteBufferSizeRepositoryItemComboBox.AutoHeight = false;
-            this.WriteBufferSizeRepositoryItemComboBox.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.WriteBufferSizeRepositoryItemComboBox.Name = "WriteBufferSizeRepositoryItemComboBox";
-            // 
-            // RtsEnableEditItem
-            // 
-            this.RtsEnableEditItem.Caption = "RTS Enable";
-            this.RtsEnableEditItem.Edit = this.RtsEnableRepositoryItemComboBox;
-            this.RtsEnableEditItem.EditHeight = 20;
-            this.RtsEnableEditItem.EditWidth = 100;
-            this.RtsEnableEditItem.Id = 16;
-            this.RtsEnableEditItem.Name = "RtsEnableEditItem";
-            // 
-            // RtsEnableRepositoryItemComboBox
-            // 
-            this.RtsEnableRepositoryItemComboBox.AutoHeight = false;
-            this.RtsEnableRepositoryItemComboBox.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.RtsEnableRepositoryItemComboBox.Name = "RtsEnableRepositoryItemComboBox";
-            // 
-            // DtrEnablebarEditItem
-            // 
-            this.DtrEnablebarEditItem.Caption = "DTR Enable";
-            this.DtrEnablebarEditItem.Edit = this.DtrEnableRepositoryItemComboBox;
-            this.DtrEnablebarEditItem.EditHeight = 20;
-            this.DtrEnablebarEditItem.EditWidth = 100;
-            this.DtrEnablebarEditItem.Id = 17;
-            this.DtrEnablebarEditItem.Name = "DtrEnablebarEditItem";
-            // 
-            // DtrEnableRepositoryItemComboBox
-            // 
-            this.DtrEnableRepositoryItemComboBox.AutoHeight = false;
-            this.DtrEnableRepositoryItemComboBox.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.DtrEnableRepositoryItemComboBox.Name = "DtrEnableRepositoryItemComboBox";
-            // 
-            // handShakebarEditItem
-            // 
-            this.handShakebarEditItem.Caption = "Handshake";
-            this.handShakebarEditItem.Edit = this.handShakeRepositoryItemComboBox;
-            this.handShakebarEditItem.EditHeight = 20;
-            this.handShakebarEditItem.EditWidth = 100;
-            this.handShakebarEditItem.Id = 18;
-            this.handShakebarEditItem.Name = "handShakebarEditItem";
-            // 
-            // handShakeRepositoryItemComboBox
-            // 
-            this.handShakeRepositoryItemComboBox.AutoHeight = false;
-            this.handShakeRepositoryItemComboBox.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.handShakeRepositoryItemComboBox.Name = "handShakeRepositoryItemComboBox";
-            // 
             // MainFrame
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 16F);
@@ -495,19 +496,19 @@
             ((System.ComponentModel.ISupportInitialize)(this.backstageViewControl1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.selectedPortRepositoryItemComboBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.baudRateRepositoryItemComboBox)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataBitsRepositoryItemComboBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numberOfChannelsRepositoryItemComboBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.displayModeRepositoryItemComboBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataBitsReporitotyItemComboBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.parityRepositoryItemComboBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.stopBitRepositoryItemComboBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.readBufferSizeRepositoryItemComboBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.writeBufferSizeRepositoryItemComboBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.rtsEnableRepositoryItemComboBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dtrEnableRepositoryItemComboBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.handShakeRepositoryItemComboBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemComboBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.contentPanel)).EndInit();
             this.contentPanel.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemComboBox1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.parityRepositoryItemComboBox)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemComboBox2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.stopBitRepositoryItemComboBox)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ReadBufferSizeRepositoryItemComboBox)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.WriteBufferSizeRepositoryItemComboBox)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.RtsEnableRepositoryItemComboBox)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.DtrEnableRepositoryItemComboBox)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.handShakeRepositoryItemComboBox)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -517,20 +518,20 @@
 
         private DevExpress.XtraBars.Ribbon.RibbonControl ribbonControl1;
         private DevExpress.XtraBars.Ribbon.RibbonPage measurePage;
-        private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup1;
+        private DevExpress.XtraBars.Ribbon.RibbonPageGroup measurePortOptionsGroup;
         private DevExpress.XtraBars.Ribbon.RibbonStatusBar ribbonStatusBar1;
         private DevExpress.LookAndFeel.DefaultLookAndFeel defaultLookAndFeel1;
         private DevExpress.XtraBars.BarEditItem selectedPortElement;
         private DevExpress.XtraEditors.Repository.RepositoryItemComboBox baudRateRepositoryItemComboBox;
         private DevExpress.XtraEditors.Repository.RepositoryItemComboBox selectedPortRepositoryItemComboBox;
-        private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup2;
+        private DevExpress.XtraBars.Ribbon.RibbonPageGroup measureDisplayGroup;
         private DevExpress.XtraBars.BarEditItem channelsElement;
-        private DevExpress.XtraEditors.Repository.RepositoryItemComboBox dataBitsRepositoryItemComboBox;
+        private DevExpress.XtraEditors.Repository.RepositoryItemComboBox numberOfChannelsRepositoryItemComboBox;
         private DevExpress.XtraBars.BarEditItem displayModeElement;
         private DevExpress.XtraEditors.Repository.RepositoryItemComboBox displayModeRepositoryItemComboBox;
         private DevExpress.XtraBars.BarButtonItem connectButton;
         private DevExpress.XtraBars.BarButtonItem startStopButton;
-        private DevExpress.XtraBars.Ribbon.RibbonPageGroup controlPanelGroup;
+        private DevExpress.XtraBars.Ribbon.RibbonPageGroup measureControlPanelGroup;
         private DevExpress.XtraBars.BarEditItem baudRateElement;
         private DevExpress.XtraEditors.PanelControl contentPanel;
         private DevExpress.XtraBars.BarStaticItem portStatusLabel;
@@ -540,24 +541,24 @@
         private DevExpress.XtraBars.Ribbon.BackstageViewItemSeparator backstageViewItemSeparator1;
         private DevExpress.XtraBars.Ribbon.BackstageViewButtonItem backstageViewButtonItem3;
         private DevExpress.XtraBars.Ribbon.RibbonPage portOptionsPage;
-        private DevExpress.XtraBars.BarEditItem dataBitsEditItem;
+        private DevExpress.XtraBars.BarEditItem dataBitsElement;
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup portBasicsGroup;
-        private DevExpress.XtraBars.Ribbon.RibbonPageGroup advancedPortOptionsGroup;
-        private DevExpress.XtraEditors.Repository.RepositoryItemComboBox repositoryItemComboBox1;
+        private DevExpress.XtraBars.Ribbon.RibbonPageGroup portAdvancedsGroup;
+        private DevExpress.XtraEditors.Repository.RepositoryItemComboBox dataBitsReporitotyItemComboBox;
         private System.IO.Ports.SerialPort serialPort1;
-        private DevExpress.XtraBars.BarEditItem ParityEditItem;
+        private DevExpress.XtraBars.BarEditItem parityElement;
         private DevExpress.XtraEditors.Repository.RepositoryItemComboBox parityRepositoryItemComboBox;
-        private DevExpress.XtraBars.BarEditItem stopBitEditItem;
+        private DevExpress.XtraBars.BarEditItem stopBitElement;
         private DevExpress.XtraEditors.Repository.RepositoryItemComboBox stopBitRepositoryItemComboBox;
-        private DevExpress.XtraBars.BarEditItem ReadBufferSizeEditItem;
-        private DevExpress.XtraEditors.Repository.RepositoryItemComboBox ReadBufferSizeRepositoryItemComboBox;
-        private DevExpress.XtraBars.BarEditItem WriteBufferSizeBarEditItem;
-        private DevExpress.XtraEditors.Repository.RepositoryItemComboBox WriteBufferSizeRepositoryItemComboBox;
-        private DevExpress.XtraBars.BarEditItem RtsEnableEditItem;
-        private DevExpress.XtraEditors.Repository.RepositoryItemComboBox RtsEnableRepositoryItemComboBox;
-        private DevExpress.XtraBars.BarEditItem DtrEnablebarEditItem;
-        private DevExpress.XtraEditors.Repository.RepositoryItemComboBox DtrEnableRepositoryItemComboBox;
-        private DevExpress.XtraBars.BarEditItem handShakebarEditItem;
+        private DevExpress.XtraBars.BarEditItem readBufferSizeElement;
+        private DevExpress.XtraEditors.Repository.RepositoryItemComboBox readBufferSizeRepositoryItemComboBox;
+        private DevExpress.XtraBars.BarEditItem writeBufferSizeElement;
+        private DevExpress.XtraEditors.Repository.RepositoryItemComboBox writeBufferSizeRepositoryItemComboBox;
+        private DevExpress.XtraBars.BarEditItem rtsEnableElement;
+        private DevExpress.XtraEditors.Repository.RepositoryItemComboBox rtsEnableRepositoryItemComboBox;
+        private DevExpress.XtraBars.BarEditItem dtrEnableElement;
+        private DevExpress.XtraEditors.Repository.RepositoryItemComboBox dtrEnableRepositoryItemComboBox;
+        private DevExpress.XtraBars.BarEditItem handShakeElement;
         private DevExpress.XtraEditors.Repository.RepositoryItemComboBox handShakeRepositoryItemComboBox;
         private DevExpress.XtraEditors.Repository.RepositoryItemComboBox repositoryItemComboBox2;
     }

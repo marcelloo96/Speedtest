@@ -12,19 +12,12 @@ namespace Speedtest.Controller
 {
     public static class MeasureTabController
     {
-        public static readonly int[] baudRates = new int[] { 300, 1200, 2400, 4800, 9600, 19200, 38400, 57600, 74880, 115200, 230400, 250000, 500000, 1000000, 2000000 };
-        public static readonly int[] numberOfChannels = new int[] { 1, 2, 3, 4, 5 };
+        //public static readonly int[] baudRates = new int[] { 300, 1200, 2400, 4800, 9600, 19200, 38400, 57600, 74880, 115200, 230400, 250000, 500000, 1000000, 2000000 };
+        //public static readonly int[] numberOfChannels = new int[] { 1, 2, 3, 4, 5 };
 
         internal static void FillEditors(MainFrame model)
         {
-            model.BaudRateRepositoryItemComboBox.Items.AddRange(baudRates);
-            model.SelectedPortRepositoryItemComboBox.Items.AddRange(SerialPort.GetPortNames());
-            model.NumberOfChannelsRepositoryItemComboBox.Items.AddRange(numberOfChannels);
-
-            model.BaudRateRepositoryItemComboBox.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
-            model.SelectedPortRepositoryItemComboBox.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
-            model.NumberOfChannelsRepositoryItemComboBox.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
-
+            //TODO DISPLAY
         }
 
         internal static void SetInitialState(MainFrame model)
@@ -53,8 +46,8 @@ namespace Speedtest.Controller
 
                 try
                 {
-                        CloseSerialOnExit(model.serialPort);
-                    
+                    CloseSerialOnExit(model.serialPort);
+
                 }
                 catch (Exception ex)
                 {
@@ -73,6 +66,7 @@ namespace Speedtest.Controller
                 string portName = model.SelectedPortElement.EditValue.ToString();
                 int baudRate = Int32.Parse(model.BaudRateElement.EditValue.ToString());
 
+                var a = PortController.CreatePort(model);
                 model.serialPort = new SerialPort(portName, baudRate);
                 try
                 {

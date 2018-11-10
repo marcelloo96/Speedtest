@@ -19,17 +19,42 @@ namespace Speedtest
     public partial class MainFrame : DevExpress.XtraBars.Ribbon.RibbonForm
     {
         #region fields
-        public RepositoryItemComboBox BaudRateRepositoryItemComboBox { get { return baudRateRepositoryItemComboBox; } }
+        #region ComboBoxes
         public RepositoryItemComboBox SelectedPortRepositoryItemComboBox { get { return selectedPortRepositoryItemComboBox; } }
-        public RepositoryItemComboBox NumberOfChannelsRepositoryItemComboBox { get { return dataBitsRepositoryItemComboBox; } }
+        public RepositoryItemComboBox BaudRateRepositoryItemComboBox { get { return baudRateRepositoryItemComboBox; } }
+        public RepositoryItemComboBox NumberOfChannelsRepositoryItemComboBox { get { return numberOfChannelsRepositoryItemComboBox; } }
         public RepositoryItemComboBox DisplayModeRepositoryItemComboBox { get { return displayModeRepositoryItemComboBox; } }
+        public RepositoryItemComboBox DataBitsReporitotyItemComboBox { get { return dataBitsReporitotyItemComboBox; } }
+        public RepositoryItemComboBox ParityRepositoryItemComboBox { get { return parityRepositoryItemComboBox; } }
+        public RepositoryItemComboBox StopBitRepositoryItemComboBox { get { return stopBitRepositoryItemComboBox; } }
+        public RepositoryItemComboBox ReadBufferSizeRepositoryItemComboBox { get { return readBufferSizeRepositoryItemComboBox; } }
+        public RepositoryItemComboBox WriteBufferSizeRepositoryItemComboBox { get { return writeBufferSizeRepositoryItemComboBox; } }
+        public RepositoryItemComboBox RtsEnableRepositoryItemComboBox { get { return rtsEnableRepositoryItemComboBox; } }
+        public RepositoryItemComboBox DtrEnableRepositoryItemComboBox { get { return dtrEnableRepositoryItemComboBox; } }
+        public RepositoryItemComboBox HandShakeRepositoryItemComboBox { get { return handShakeRepositoryItemComboBox; } }
+        #endregion
+        #region Elements
         public BarEditItem DisplayModeElement { get { return displayModeElement; } }
         public BarEditItem BaudRateElement { get { return baudRateElement; } }
         public BarEditItem ChannelsElement { get { return channelsElement; } }
         public BarEditItem SelectedPortElement { get { return selectedPortElement; } }
+        public BarEditItem DataBitsElement { get { return dataBitsElement; } }
+        public BarEditItem ParityElement { get { return parityElement; } }
+        public BarEditItem StopBitElement { get { return stopBitElement; } }
+        public BarEditItem RtsEnableElement { get { return rtsEnableElement; } }
+        public BarEditItem DtrEnableElement { get { return dtrEnableElement; } }
+        public BarEditItem HandShakeElement { get { return handShakeElement; } }
+        public BarEditItem ReadBufferSizeElement { get { return readBufferSizeElement; } }
+        public BarEditItem WriteBufferSizeElement { get { return writeBufferSizeElement; } }
+
+        #endregion
+        #region Buttons
         public BarButtonItem ConnectButton { get { return connectButton; } }
         public BarButtonItem StartStopButton { get { return startStopButton; } }
+        #endregion
+        #region Labels
         public BarStaticItem IsPortConnectedStatusBarLabel { get { return portStatusLabel; } set { portStatusLabel = value; } }
+        #endregion
         public SerialPort serialPort;
         public SpeedTest gearedChart;
         public bool connectedState { get; set; }
@@ -44,8 +69,10 @@ namespace Speedtest
             InitializeComponent();
 
             MeasureTabController.FillEditors(this);
+            PortOptionsTabController.FillEditors(this);
+
             MeasureTabController.SetInitialState(this);
-            
+
         }
 
         private void connectButton_ItemClick(object sender, ItemClickEventArgs e)
@@ -66,6 +93,11 @@ namespace Speedtest
             contentPanel.Controls.Add(gearedChart);
 
             gearedChart.externalStart();
+        }
+
+        private void backstageViewControl1_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
