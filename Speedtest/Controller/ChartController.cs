@@ -10,7 +10,7 @@ using LiveCharts.WinForms;
 
 namespace Speedtest.Controller
 {
-    public static class ChartController
+    public class ChartController
     {
         public static CartesianChart SetDefaultChart(CartesianChart chart, SpeedTest model)
         {

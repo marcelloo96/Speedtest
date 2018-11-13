@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainFrame));
             this.ribbonControl1 = new DevExpress.XtraBars.Ribbon.RibbonControl();
             this.backstageViewControl1 = new DevExpress.XtraBars.Ribbon.BackstageViewControl();
             this.backstageViewButtonItem1 = new DevExpress.XtraBars.Ribbon.BackstageViewButtonItem();
@@ -62,19 +63,26 @@
             this.dtrEnableRepositoryItemComboBox = new DevExpress.XtraEditors.Repository.RepositoryItemComboBox();
             this.handShakeElement = new DevExpress.XtraBars.BarEditItem();
             this.handShakeRepositoryItemComboBox = new DevExpress.XtraEditors.Repository.RepositoryItemComboBox();
+            this.zeroValueItem = new DevExpress.XtraBars.BarEditItem();
+            this.zeroValueRepositoryItem = new DevExpress.XtraEditors.Repository.RepositoryItemSpinEdit();
+            this.sensivityElement = new DevExpress.XtraBars.BarEditItem();
+            this.sensitivityRepositoryItem = new DevExpress.XtraEditors.Repository.RepositoryItemSpinEdit();
             this.measurePage = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.measurePortBasicGroup = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
+            this.connectiongGroup = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.measureDisplayGroup = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.measureControlPanelGroup = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.portOptionsPage = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.portBasicsGroup = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.portAdvancedsGroup = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
+            this.sensorOptionsPage = new DevExpress.XtraBars.Ribbon.RibbonPage();
+            this.ribbonPageGroup1 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
+            this.displayPage = new DevExpress.XtraBars.Ribbon.RibbonPage();
+            this.displayChartGroup = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.repositoryItemComboBox2 = new DevExpress.XtraEditors.Repository.RepositoryItemComboBox();
             this.ribbonStatusBar1 = new DevExpress.XtraBars.Ribbon.RibbonStatusBar();
             this.defaultLookAndFeel1 = new DevExpress.LookAndFeel.DefaultLookAndFeel(this.components);
             this.contentPanel = new DevExpress.XtraEditors.PanelControl();
-            this.serialPort1 = new System.IO.Ports.SerialPort(this.components);
-            this.connectiongGroup = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             ((System.ComponentModel.ISupportInitialize)(this.ribbonControl1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.backstageViewControl1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.selectedPortRepositoryItemComboBox)).BeginInit();
@@ -89,6 +97,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.rtsEnableRepositoryItemComboBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dtrEnableRepositoryItemComboBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.handShakeRepositoryItemComboBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.zeroValueRepositoryItem)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.sensitivityRepositoryItem)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemComboBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.contentPanel)).BeginInit();
             this.contentPanel.SuspendLayout();
@@ -115,14 +125,17 @@
             this.writeBufferSizeElement,
             this.rtsEnableElement,
             this.dtrEnableElement,
-            this.handShakeElement});
+            this.handShakeElement,
+            this.zeroValueItem,
+            this.sensivityElement});
             this.ribbonControl1.Location = new System.Drawing.Point(0, 0);
-            this.ribbonControl1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.ribbonControl1.MaxItemId = 19;
+            this.ribbonControl1.MaxItemId = 21;
             this.ribbonControl1.Name = "ribbonControl1";
             this.ribbonControl1.Pages.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPage[] {
             this.measurePage,
-            this.portOptionsPage});
+            this.portOptionsPage,
+            this.sensorOptionsPage,
+            this.displayPage});
             this.ribbonControl1.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.baudRateRepositoryItemComboBox,
             this.selectedPortRepositoryItemComboBox,
@@ -136,8 +149,10 @@
             this.writeBufferSizeRepositoryItemComboBox,
             this.rtsEnableRepositoryItemComboBox,
             this.dtrEnableRepositoryItemComboBox,
-            this.handShakeRepositoryItemComboBox});
-            this.ribbonControl1.Size = new System.Drawing.Size(1198, 185);
+            this.handShakeRepositoryItemComboBox,
+            this.zeroValueRepositoryItem,
+            this.sensitivityRepositoryItem});
+            this.ribbonControl1.Size = new System.Drawing.Size(1029, 146);
             this.ribbonControl1.StatusBar = this.ribbonStatusBar1;
             // 
             // backstageViewControl1
@@ -146,14 +161,12 @@
             this.backstageViewControl1.Items.Add(this.backstageViewButtonItem2);
             this.backstageViewControl1.Items.Add(this.backstageViewItemSeparator1);
             this.backstageViewControl1.Items.Add(this.backstageViewButtonItem3);
-            this.backstageViewControl1.Location = new System.Drawing.Point(53, 53);
-            this.backstageViewControl1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.backstageViewControl1.Location = new System.Drawing.Point(45, 43);
             this.backstageViewControl1.Name = "backstageViewControl1";
             this.backstageViewControl1.OwnerControl = this.ribbonControl1;
-            this.backstageViewControl1.Size = new System.Drawing.Size(953, 287);
+            this.backstageViewControl1.Size = new System.Drawing.Size(817, 233);
             this.backstageViewControl1.TabIndex = 0;
             this.backstageViewControl1.Text = "backstageViewControl1";
-            this.backstageViewControl1.Click += new System.EventHandler(this.backstageViewControl1_Click);
             // 
             // backstageViewButtonItem1
             // 
@@ -190,6 +203,7 @@
             this.selectedPortRepositoryItemComboBox.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.selectedPortRepositoryItemComboBox.Name = "selectedPortRepositoryItemComboBox";
+            this.selectedPortRepositoryItemComboBox.DoubleClick += new System.EventHandler(this.selectedPortRepositoryItemComboBox_DoubleClick);
             // 
             // baudRateElement
             // 
@@ -388,6 +402,38 @@
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.handShakeRepositoryItemComboBox.Name = "handShakeRepositoryItemComboBox";
             // 
+            // zeroValueItem
+            // 
+            this.zeroValueItem.Caption = "Zero Value:";
+            this.zeroValueItem.Edit = this.zeroValueRepositoryItem;
+            this.zeroValueItem.EditHeight = 20;
+            this.zeroValueItem.EditWidth = 100;
+            this.zeroValueItem.Id = 19;
+            this.zeroValueItem.Name = "zeroValueItem";
+            // 
+            // zeroValueRepositoryItem
+            // 
+            this.zeroValueRepositoryItem.AutoHeight = false;
+            this.zeroValueRepositoryItem.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.zeroValueRepositoryItem.Name = "zeroValueRepositoryItem";
+            // 
+            // sensivityElement
+            // 
+            this.sensivityElement.Caption = "Sensivity:";
+            this.sensivityElement.Edit = this.sensitivityRepositoryItem;
+            this.sensivityElement.EditHeight = 20;
+            this.sensivityElement.EditWidth = 100;
+            this.sensivityElement.Id = 20;
+            this.sensivityElement.Name = "sensivityElement";
+            // 
+            // sensitivityRepositoryItem
+            // 
+            this.sensitivityRepositoryItem.AutoHeight = false;
+            this.sensitivityRepositoryItem.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.sensitivityRepositoryItem.Name = "sensitivityRepositoryItem";
+            // 
             // measurePage
             // 
             this.measurePage.Groups.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageGroup[] {
@@ -406,6 +452,13 @@
             this.measurePortBasicGroup.ItemLinks.Add(this.channelsElement);
             this.measurePortBasicGroup.Name = "measurePortBasicGroup";
             this.measurePortBasicGroup.Text = "Port Basics";
+            // 
+            // connectiongGroup
+            // 
+            this.connectiongGroup.AllowTextClipping = false;
+            this.connectiongGroup.ItemLinks.Add(this.connectButton);
+            this.connectiongGroup.Name = "connectiongGroup";
+            this.connectiongGroup.Text = "Connecting";
             // 
             // measureDisplayGroup
             // 
@@ -427,7 +480,7 @@
             this.portBasicsGroup,
             this.portAdvancedsGroup});
             this.portOptionsPage.Name = "portOptionsPage";
-            this.portOptionsPage.Text = "Port Options";
+            this.portOptionsPage.Text = "Port";
             // 
             // portBasicsGroup
             // 
@@ -450,6 +503,32 @@
             this.portAdvancedsGroup.Name = "portAdvancedsGroup";
             this.portAdvancedsGroup.Text = "Advanced";
             // 
+            // sensorOptionsPage
+            // 
+            this.sensorOptionsPage.Groups.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageGroup[] {
+            this.ribbonPageGroup1});
+            this.sensorOptionsPage.Name = "sensorOptionsPage";
+            this.sensorOptionsPage.Text = "Sensor";
+            // 
+            // ribbonPageGroup1
+            // 
+            this.ribbonPageGroup1.ItemLinks.Add(this.zeroValueItem);
+            this.ribbonPageGroup1.ItemLinks.Add(this.sensivityElement);
+            this.ribbonPageGroup1.Name = "ribbonPageGroup1";
+            this.ribbonPageGroup1.Text = "Linearity";
+            // 
+            // displayPage
+            // 
+            this.displayPage.Groups.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageGroup[] {
+            this.displayChartGroup});
+            this.displayPage.Name = "displayPage";
+            this.displayPage.Text = "Display";
+            // 
+            // displayChartGroup
+            // 
+            this.displayChartGroup.Name = "displayChartGroup";
+            this.displayChartGroup.Text = "Chart";
+            // 
             // repositoryItemComboBox2
             // 
             this.repositoryItemComboBox2.AutoHeight = false;
@@ -460,11 +539,10 @@
             // ribbonStatusBar1
             // 
             this.ribbonStatusBar1.ItemLinks.Add(this.portStatusLabel);
-            this.ribbonStatusBar1.Location = new System.Drawing.Point(0, 564);
-            this.ribbonStatusBar1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.ribbonStatusBar1.Location = new System.Drawing.Point(0, 473);
             this.ribbonStatusBar1.Name = "ribbonStatusBar1";
             this.ribbonStatusBar1.Ribbon = this.ribbonControl1;
-            this.ribbonStatusBar1.Size = new System.Drawing.Size(1198, 28);
+            this.ribbonStatusBar1.Size = new System.Drawing.Size(1029, 21);
             // 
             // defaultLookAndFeel1
             // 
@@ -474,28 +552,21 @@
             // 
             this.contentPanel.Controls.Add(this.backstageViewControl1);
             this.contentPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.contentPanel.Location = new System.Drawing.Point(0, 185);
-            this.contentPanel.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.contentPanel.Location = new System.Drawing.Point(0, 146);
             this.contentPanel.Name = "contentPanel";
-            this.contentPanel.Size = new System.Drawing.Size(1198, 379);
+            this.contentPanel.Size = new System.Drawing.Size(1029, 327);
             this.contentPanel.TabIndex = 2;
-            // 
-            // connectiongGroup
-            // 
-            this.connectiongGroup.AllowTextClipping = false;
-            this.connectiongGroup.ItemLinks.Add(this.connectButton);
-            this.connectiongGroup.Name = "connectiongGroup";
-            this.connectiongGroup.Text = "Connecting";
             // 
             // MainFrame
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1198, 592);
+            this.ClientSize = new System.Drawing.Size(1029, 494);
             this.Controls.Add(this.contentPanel);
             this.Controls.Add(this.ribbonStatusBar1);
             this.Controls.Add(this.ribbonControl1);
-            this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MinimumSize = new System.Drawing.Size(1031, 495);
             this.Name = "MainFrame";
             this.Ribbon = this.ribbonControl1;
             this.StatusBar = this.ribbonStatusBar1;
@@ -514,6 +585,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.rtsEnableRepositoryItemComboBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dtrEnableRepositoryItemComboBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.handShakeRepositoryItemComboBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.zeroValueRepositoryItem)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.sensitivityRepositoryItem)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemComboBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.contentPanel)).EndInit();
             this.contentPanel.ResumeLayout(false);
@@ -553,7 +626,6 @@
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup portBasicsGroup;
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup portAdvancedsGroup;
         private DevExpress.XtraEditors.Repository.RepositoryItemComboBox dataBitsReporitotyItemComboBox;
-        private System.IO.Ports.SerialPort serialPort1;
         private DevExpress.XtraBars.BarEditItem parityElement;
         private DevExpress.XtraEditors.Repository.RepositoryItemComboBox parityRepositoryItemComboBox;
         private DevExpress.XtraBars.BarEditItem stopBitElement;
@@ -570,5 +642,13 @@
         private DevExpress.XtraEditors.Repository.RepositoryItemComboBox handShakeRepositoryItemComboBox;
         private DevExpress.XtraEditors.Repository.RepositoryItemComboBox repositoryItemComboBox2;
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup connectiongGroup;
+        private DevExpress.XtraBars.BarEditItem zeroValueItem;
+        private DevExpress.XtraEditors.Repository.RepositoryItemSpinEdit zeroValueRepositoryItem;
+        private DevExpress.XtraBars.BarEditItem sensivityElement;
+        private DevExpress.XtraEditors.Repository.RepositoryItemSpinEdit sensitivityRepositoryItem;
+        private DevExpress.XtraBars.Ribbon.RibbonPage sensorOptionsPage;
+        private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup1;
+        private DevExpress.XtraBars.Ribbon.RibbonPage displayPage;
+        private DevExpress.XtraBars.Ribbon.RibbonPageGroup displayChartGroup;
     }
 }

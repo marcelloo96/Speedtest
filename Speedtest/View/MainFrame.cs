@@ -2,17 +2,8 @@
 using DevExpress.XtraEditors.Repository;
 using Speedtest.Controller;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.IO.Ports;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using Speedtest.Properties;
-using DevExpress.XtraEditors;
 using DevExpress.XtraBars.Ribbon;
 
 namespace Speedtest
@@ -63,46 +54,69 @@ namespace Speedtest
         #endregion
         public SerialPort serialPort;
         public SpeedTest gearedChart;
+        public PortController portController;
         public bool connectedState { get; set; }
-        public string displayMode { get; set; }
-        public string selectedPortName { get; set; }
+        public bool isRunning { get; set; }
 
-        public string baudRate { get; set; }
+        public double tryparseTmp;
+
         #endregion
 
         public MainFrame()
         {
             InitializeComponent();
 
+            portController = new PortController(this);
+
             MeasureTabController.FillEditors(this);
             PortOptionsTabController.FillEditors(this);
-
             MeasureTabController.SetInitialState(this);
 
         }
 
-        private void connectButton_ItemClick(object sender, ItemClickEventArgs e)
+        private void connectButton_ItemClick(object sender, ItemClickEventArgs ea)
         {
-           MeasureTabController.ConnectionManager(this);
-
-        }
-
-        private void startStopButton_ItemClick(object sender, ItemClickEventArgs e)
-        {
-            int numberOfChannels = Int32.Parse(channelsElement.EditValue.ToString());
-
-            gearedChart = new SpeedTest(serialPort, numberOfChannels)
+            MeasureTabController.ConnectionManager(this);
+            if (connectedState)
             {
-                Dock = DockStyle.Fill
-            };
+                //CONNECTING
+                //the Connection Manager already swapped the 'connectedState' value
 
-            contentPanel.Controls.Add(gearedChart);
+                gearedChart = new SpeedTest(serialPort, (int)channelsElement.EditValue)
+                {
+                    Dock = DockStyle.Fill
+                };
 
-            gearedChart.externalStart();
+                contentPanel.Controls.Add(gearedChart);
+            }
+            else
+            {
+                contentPanel.Controls.Clear();
+                gearedChart.Dispose();
+            }
         }
 
-        private void backstageViewControl1_Click(object sender, EventArgs e)
+        private void startStopButton_ItemClick(object sender, ItemClickEventArgs ea)
         {
+
+            if (isRunning)
+            {
+                serialPort.DataReceived -= portController.dataFlow;
+                isRunning = false;
+            }
+            else
+            {
+                serialPort.DataReceived += portController.dataFlow;
+                isRunning = true;
+            }
+
+        }
+
+
+        private void selectedPortRepositoryItemComboBox_DoubleClick(object sender, EventArgs e)
+        {
+            SelectedPortRepositoryItemComboBox.Items.Clear();
+            SelectedPortRepositoryItemComboBox.Items.AddRange(SerialPort.GetPortNames());
 
         }
     }

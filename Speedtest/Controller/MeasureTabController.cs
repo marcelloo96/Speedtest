@@ -16,7 +16,10 @@ namespace Speedtest.Controller
         {
             //TODO DISPLAY
         }
-
+        /// <summary>
+        /// Disable all functions that need a connection
+        /// </summary>
+        /// <param name="model"></param>
         internal static void SetInitialState(MainFrame model)
         {
             model.DisplayModeElement.Enabled = false;
@@ -30,23 +33,27 @@ namespace Speedtest.Controller
             {
                 ///*Disconnecting*/
 
+                
+
                 setAllPortOptionsToRecentConnectState(model);
 
                 model.ConnectButton.ImageOptions.SvgImage = Resources.connect;
                 model.ConnectButton.Caption = StringConstants.connect;
+                
 
-                //try
-                //{
-                //    CloseSerialOnExit(model.serialPort);
+                try
+                {
+                    CloseSerialOnExit(model.serialPort);
+                    model.serialPort.Dispose();
+                    model.IsPortConnectedStatusBarLabel.Caption = StringConstants.portStatusDisconnected;
 
-                //    model.IsPortConnectedStatusBarLabel.Caption = StringConstants.portStatusDisconnected;
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
 
-                //}
-                //catch (Exception ex)
-                //{
-                //    MessageBox.Show(ex.Message);
-
-                //}
+                }
+                
                 model.connectedState = false;
             }
             else
@@ -60,9 +67,9 @@ namespace Speedtest.Controller
                 model.ConnectButton.ImageOptions.SvgImage = Resources.disconnect;
                 model.ConnectButton.Caption = StringConstants.disconnect;
 
-                PortController.CreatePort(model);
+                model.portController.CreatePort();
+                model.portController.DoTheConnection();
 
-                //PortController.DoTheConnection(model);
                 model.connectedState = true;
             }
 

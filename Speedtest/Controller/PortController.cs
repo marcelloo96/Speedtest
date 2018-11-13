@@ -1,6 +1,7 @@
 ﻿using Speedtest.Properties;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO.Ports;
 using System.Linq;
 using System.Text;
@@ -9,9 +10,15 @@ using System.Windows;
 
 namespace Speedtest.Controller
 {
-    public static class PortController
+    public class PortController
     {
-        public static void CreatePort(MainFrame model)
+        private MainFrame model;
+        public double tryparseTmp;
+        public PortController(MainFrame model) {
+            this.model = model;
+
+        }
+        public void CreatePort()
         {
 
             model.serialPort = new SerialPort()
@@ -27,8 +34,7 @@ namespace Speedtest.Controller
 
             };
         }
-
-        internal static void DoTheConnection(MainFrame model)
+        public void DoTheConnection()
         {
             try
             {
@@ -44,5 +50,26 @@ namespace Speedtest.Controller
                 MessageBox.Show(ex.Message);
             }
         }
+
+        public void dataFlow(object sender, EventArgs e)
+        {
+
+            model.gearedChart.viewModel.recivedChartValues.Clear();
+            var recived = model.serialPort.ReadLine();
+            Debug.WriteLine(recived);
+
+
+            string[] chartValues = recived.Split(' ');
+
+            for (var i = 0; i < chartValues.Length; i++)
+            {
+                double.TryParse(chartValues[i], out tryparseTmp);
+                model.gearedChart.viewModel.recivedChartValues.Add(tryparseTmp);
+            }
+
+            ChartController.RefreshChartValues(model.gearedChart.viewModel, model.gearedChart.viewModel.recivedChartValues);
+
+        }
+
     }
 }
