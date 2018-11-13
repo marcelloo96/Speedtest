@@ -5,6 +5,7 @@ using System;
 using System.IO.Ports;
 using System.Windows.Forms;
 using DevExpress.XtraBars.Ribbon;
+using DevExpress.XtraBars.Docking;
 
 namespace Speedtest
 {
@@ -87,7 +88,24 @@ namespace Speedtest
                     Dock = DockStyle.Fill
                 };
 
-                contentPanel.Controls.Add(gearedChart);
+                int height = contentPanel.Size.Height / (int)channelsElement.EditValue;
+                for (int i = 0; i < (int)channelsElement.EditValue; i++)
+                {
+
+                    DockPanel tmpPanel = new DockPanel {
+                        Text = "Chart " + i
+                    };
+                    ControlContainer tmpPanel_Container = new ControlContainer();
+
+                    tmpPanel_Container.Controls.Add(gearedChart);
+                    tmpPanel.Height = height;
+                    tmpPanel.Controls.Add(tmpPanel_Container);
+                    
+
+
+                   dockManager.AddPanel(DockingStyle.Top, tmpPanel);
+
+                }
             }
             else
             {
