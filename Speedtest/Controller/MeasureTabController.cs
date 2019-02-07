@@ -1,4 +1,5 @@
-﻿using Speedtest.Properties;
+﻿using Speedtest.Model;
+using Speedtest.Properties;
 using System;
 using System.Collections.Generic;
 using System.IO.Ports;
@@ -27,25 +28,22 @@ namespace Speedtest.Controller
             //   model.DisplayModeRepositoryItemComboBox.ReadOnly = true;
         }
 
-        internal static void ConnectionManager(MainFrame model)
+        internal static void ConnectionManager(MainFrame mainFrameModel)
         {
-            if (model.connectedState)
+            if (mainFrameModel.connectedState)
             {
-                ///*Disconnecting*/
+                ///*Disconnecting*/                
 
-                
+                setAllPortOptionsToRecentConnectState(mainFrameModel);
 
-                setAllPortOptionsToRecentConnectState(model);
-
-                model.ConnectButton.ImageOptions.SvgImage = Resources.connect;
-                model.ConnectButton.Caption = StringConstants.connect;
-                
+                mainFrameModel.ConnectButton.ImageOptions.SvgImage = Resources.connect;
+                mainFrameModel.ConnectButton.Caption = StringConstants.connect;                
 
                 try
                 {
-                    CloseSerialOnExit(model.serialPort);
-                    model.serialPort.Dispose();
-                    model.IsPortConnectedStatusBarLabel.Caption = StringConstants.portStatusDisconnected;
+                    CloseSerialOnExit(mainFrameModel.serialPort);
+                    mainFrameModel.serialPort.Dispose();
+                    mainFrameModel.IsPortConnectedStatusBarLabel.Caption = StringConstants.portStatusDisconnected;
 
                 }
                 catch (Exception ex)
@@ -54,7 +52,7 @@ namespace Speedtest.Controller
 
                 }
                 
-                model.connectedState = false;
+                mainFrameModel.connectedState = false;
             }
             else
             {
@@ -62,15 +60,16 @@ namespace Speedtest.Controller
 
                 //TODO: Check the editors
 
-                setAllPortOptionsToRecentConnectState(model);
+                setAllPortOptionsToRecentConnectState(mainFrameModel);
 
-                model.ConnectButton.ImageOptions.SvgImage = Resources.disconnect;
-                model.ConnectButton.Caption = StringConstants.disconnect;
+                mainFrameModel.ConnectButton.ImageOptions.SvgImage = Resources.disconnect;
+                mainFrameModel.ConnectButton.Caption = StringConstants.disconnect;
 
-                model.portController.CreatePort();
-                model.portController.DoTheConnection();
+                //model.portController.CreatePort();
+                mainFrameModel.serialPort = new PortModel(mainFrameModel);
+                mainFrameModel.portController.DoTheConnection();
 
-                model.connectedState = true;
+                mainFrameModel.connectedState = true;
             }
 
 
@@ -81,9 +80,9 @@ namespace Speedtest.Controller
         /// <param name="model"></param>
         private static void setAllPortOptionsToRecentConnectState(MainFrame model)
         {
-            model.MeasurePortBasicGroup.Enabled = model.connectedState;
-            model.PortAdvancedsGroup.Enabled = model.connectedState;
-            model.PortBasicsGroup.Enabled = model.connectedState;
+            //model.MeasurePortBasicGroup.Enabled = model.connectedState;
+            //model.PortAdvancedsGroup.Enabled = model.connectedState;
+            //model.PortBasicsGroup.Enabled = model.connectedState;
 
             model.DisplayModeElement.Enabled = !model.connectedState;
             model.StartStopButton.Enabled = !model.connectedState;

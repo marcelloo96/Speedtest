@@ -1,4 +1,5 @@
-﻿using Speedtest.Properties;
+﻿using Speedtest.Model;
+using Speedtest.Properties;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -12,36 +13,24 @@ namespace Speedtest.Controller
 {
     public class PortController
     {
-        private MainFrame model;
+        private MainFrame mainFrameModel;
         public double tryparseTmp;
         public PortController(MainFrame model) {
-            this.model = model;
+            this.mainFrameModel = model;
 
         }
         public void CreatePort()
         {
-
-            model.serialPort = new SerialPort()
-            {
-                PortName = (string)model.SelectedPortElement.EditValue,
-                BaudRate=(int)model.BaudRateElement.EditValue,
-                DataBits=(int)model.DataBitsElement.EditValue,
-                Parity=(Parity)model.ParityElement.EditValue,
-                StopBits=(StopBits)model.StopBitElement.EditValue,
-                RtsEnable=(bool)model.RtsEnableElement.EditValue,
-                DtrEnable=(bool)model.DtrEnableElement.EditValue,
-                Handshake=(Handshake)model.HandShakeElement.EditValue
-
-            };
+            mainFrameModel.serialPort = new PortModel(mainFrameModel);
         }
         public void DoTheConnection()
         {
             try
             {
-                model.serialPort.Open();
-                if (model.serialPort.IsOpen)
+                mainFrameModel.serialPort.Open();
+                if (mainFrameModel.serialPort.IsOpen)
                 {
-                    model.IsPortConnectedStatusBarLabel.Caption = StringConstants.portStatusConnected;
+                    mainFrameModel.IsPortConnectedStatusBarLabel.Caption = StringConstants.portStatusConnected;
 
                 }
             }
@@ -54,8 +43,8 @@ namespace Speedtest.Controller
         public void dataFlow(object sender, EventArgs e)
         {
 
-            model.gearedChart.viewModel.recivedChartValues.Clear();
-            var recived = model.serialPort.ReadLine();
+            mainFrameModel.gearedChart.viewModel.recivedChartValues.Clear();
+            var recived = mainFrameModel.serialPort.ReadLine();
             Debug.WriteLine(recived);
 
 
@@ -64,10 +53,10 @@ namespace Speedtest.Controller
             for (var i = 0; i < chartValues.Length; i++)
             {
                 double.TryParse(chartValues[i], out tryparseTmp);
-                model.gearedChart.viewModel.recivedChartValues.Add(tryparseTmp);
+                mainFrameModel.gearedChart.viewModel.recivedChartValues.Add(tryparseTmp);
             }
 
-            ChartController.RefreshChartValues(model.gearedChart.viewModel, model.gearedChart.viewModel.recivedChartValues);
+            ChartController.RefreshChartValues(mainFrameModel.gearedChart.viewModel, mainFrameModel.gearedChart.viewModel.recivedChartValues);
 
         }
 

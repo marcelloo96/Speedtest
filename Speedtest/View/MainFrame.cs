@@ -25,6 +25,7 @@ namespace Speedtest
         public RepositoryItemComboBox RtsEnableRepositoryItemComboBox { get { return rtsEnableRepositoryItemComboBox; } }
         public RepositoryItemComboBox DtrEnableRepositoryItemComboBox { get { return dtrEnableRepositoryItemComboBox; } }
         public RepositoryItemComboBox HandShakeRepositoryItemComboBox { get { return handShakeRepositoryItemComboBox; } }
+        public RepositoryItemTextEdit DelimeterRepositoryItemTextBox { get { return delimeterRepositoryItemTextBox; } }
         #endregion
         #region Elements
         public BarEditItem DisplayModeElement { get { return displayModeElement; } }
@@ -39,6 +40,7 @@ namespace Speedtest
         public BarEditItem HandShakeElement { get { return handShakeElement; } }
         public BarEditItem ReadBufferSizeElement { get { return readBufferSizeElement; } }
         public BarEditItem WriteBufferSizeElement { get { return writeBufferSizeElement; } }
+        public BarEditItem DelimeterElement { get { return delimeterElement; } }
 
         #endregion
         #region Groups
@@ -58,7 +60,6 @@ namespace Speedtest
         public PortController portController;
         public bool connectedState { get; set; }
         public bool isRunning { get; set; }
-
         public double tryparseTmp;
 
         #endregion
@@ -66,9 +67,7 @@ namespace Speedtest
         public MainFrame()
         {
             InitializeComponent();
-
             portController = new PortController(this);
-
             MeasureTabController.FillEditors(this);
             PortOptionsTabController.FillEditors(this);
             MeasureTabController.SetInitialState(this);
@@ -99,11 +98,9 @@ namespace Speedtest
 
                     tmpPanel_Container.Controls.Add(gearedChart);
                     tmpPanel.Height = height;
-                    tmpPanel.Controls.Add(tmpPanel_Container);
+                    tmpPanel.Controls.Add(tmpPanel_Container);                 
                     
-
-
-                   dockManager.AddPanel(DockingStyle.Top, tmpPanel);
+                    dockManager.AddPanel(DockingStyle.Top, tmpPanel);
 
                 }
             }
@@ -116,7 +113,6 @@ namespace Speedtest
 
         private void startStopButton_ItemClick(object sender, ItemClickEventArgs ea)
         {
-
             if (isRunning)
             {
                 serialPort.DataReceived -= portController.dataFlow;
@@ -130,12 +126,97 @@ namespace Speedtest
 
         }
 
-
         private void selectedPortRepositoryItemComboBox_DoubleClick(object sender, EventArgs e)
         {
             SelectedPortRepositoryItemComboBox.Items.Clear();
             SelectedPortRepositoryItemComboBox.Items.AddRange(SerialPort.GetPortNames());
 
+        }
+        private void baudRateElement_EditValueChanged(object sender, EventArgs e)
+        {
+            if (serialPort != null)
+            {
+                serialPort.BaudRate = (int)baudRateElement.EditValue;
+            }
+        }
+
+        private void dataBitsElement_EditValueChanged(object sender, EventArgs e)
+        {
+            if (serialPort != null) {
+                serialPort.DataBits = (int)dataBitsElement.EditValue;
+            } 
+        }
+
+        private void parityElement_EditValueChanged(object sender, EventArgs e)
+        {
+            if (serialPort != null) {
+                serialPort.Parity = (Parity)parityElement.EditValue;
+            }
+        }
+
+        private void stopBitElement_EditValueChanged(object sender, EventArgs e)
+        {
+            if (serialPort != null) {
+                serialPort.StopBits = (StopBits)stopBitElement.EditValue;
+            }
+        }
+
+        private void rtsEnableElement_EditValueChanged(object sender, EventArgs e)
+        {
+            if (serialPort != null)
+            {
+                serialPort.RtsEnable = (bool)rtsEnableElement.EditValue;
+            }
+        }
+
+        private void dtrEnableElement_EditValueChanged(object sender, EventArgs e)
+        {
+            if (serialPort != null)
+            {
+                serialPort.DtrEnable = (bool)dtrEnableElement.EditValue;
+            }
+        }
+
+        private void handShakeElement_EditValueChanged(object sender, EventArgs e)
+        {
+            if (serialPort != null)
+            {
+                serialPort.Handshake = (Handshake)handShakeElement.EditValue;
+            }
+        }
+
+        private void writeBufferSizeElement_EditValueChanged(object sender, EventArgs e)
+        {
+            if (serialPort != null)
+            {
+                serialPort.WriteBufferSize = (int)writeBufferSizeElement.EditValue;
+            }
+        }
+
+        private void readBufferSizeElement_EditValueChanged(object sender, EventArgs e)
+        {
+            if (serialPort != null)
+            {
+                serialPort.ReadBufferSize = (int)readBufferSizeElement.EditValue;
+            }
+        }
+
+        private void delimeterElement_EditValueChanged(object sender, EventArgs e)
+        {
+            if (serialPort != null)
+            {
+                if ((string)delimeterElement.EditValue == "" || (string)delimeterElement.EditValue == PortOptionsTabController.defaultDelimeter)
+                {
+                    serialPort.NewLine = "\n";
+                } else{
+                    serialPort.NewLine = delimeterElement.EditValue.ToString().Replace("\\n", "\n").Replace("\\t","\t");
+                }
+
+                if ((string)delimeterElement.EditValue == "") {
+                    DelimeterElement.EditValue = PortOptionsTabController.defaultDelimeter;
+                }
+                
+            }
         }
     }
 }

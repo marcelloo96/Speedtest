@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainFrame));
             this.ribbonControl1 = new DevExpress.XtraBars.Ribbon.RibbonControl();
             this.backstageViewControl1 = new DevExpress.XtraBars.Ribbon.BackstageViewControl();
@@ -66,6 +67,8 @@
             this.zeroValueRepositoryItem = new DevExpress.XtraEditors.Repository.RepositoryItemSpinEdit();
             this.sensivityElement = new DevExpress.XtraBars.BarEditItem();
             this.sensitivityRepositoryItem = new DevExpress.XtraEditors.Repository.RepositoryItemSpinEdit();
+            this.delimeterElement = new DevExpress.XtraBars.BarEditItem();
+            this.delimeterRepositoryItemTextBox = new DevExpress.XtraEditors.Repository.RepositoryItemTextEdit();
             this.measurePage = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.measurePortBasicGroup = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.connectiongGroup = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
@@ -79,10 +82,11 @@
             this.displayPage = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.displayChartGroup = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.repositoryItemComboBox2 = new DevExpress.XtraEditors.Repository.RepositoryItemComboBox();
+            this.delimeterRepositoryItemComboBox = new DevExpress.XtraEditors.Repository.RepositoryItemComboBox();
             this.ribbonStatusBar1 = new DevExpress.XtraBars.Ribbon.RibbonStatusBar();
-            this.defaultLookAndFeel1 = new DevExpress.LookAndFeel.DefaultLookAndFeel();
+            this.defaultLookAndFeel1 = new DevExpress.LookAndFeel.DefaultLookAndFeel(this.components);
             this.contentPanel = new DevExpress.XtraEditors.PanelControl();
-            this.dockManager = new DevExpress.XtraBars.Docking.DockManager();
+            this.dockManager = new DevExpress.XtraBars.Docking.DockManager(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.ribbonControl1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.backstageViewControl1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.selectedPortRepositoryItemComboBox)).BeginInit();
@@ -99,7 +103,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.handShakeRepositoryItemComboBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.zeroValueRepositoryItem)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.sensitivityRepositoryItem)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.delimeterRepositoryItemTextBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemComboBox2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.delimeterRepositoryItemComboBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.contentPanel)).BeginInit();
             this.contentPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dockManager)).BeginInit();
@@ -128,9 +134,11 @@
             this.dtrEnableElement,
             this.handShakeElement,
             this.zeroValueItem,
-            this.sensivityElement});
+            this.sensivityElement,
+            this.delimeterElement});
             this.ribbonControl1.Location = new System.Drawing.Point(0, 0);
-            this.ribbonControl1.MaxItemId = 21;
+            this.ribbonControl1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.ribbonControl1.MaxItemId = 23;
             this.ribbonControl1.Name = "ribbonControl1";
             this.ribbonControl1.Pages.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPage[] {
             this.measurePage,
@@ -152,8 +160,10 @@
             this.dtrEnableRepositoryItemComboBox,
             this.handShakeRepositoryItemComboBox,
             this.zeroValueRepositoryItem,
-            this.sensitivityRepositoryItem});
-            this.ribbonControl1.Size = new System.Drawing.Size(1029, 146);
+            this.sensitivityRepositoryItem,
+            this.delimeterRepositoryItemComboBox,
+            this.delimeterRepositoryItemTextBox});
+            this.ribbonControl1.Size = new System.Drawing.Size(1210, 185);
             this.ribbonControl1.StatusBar = this.ribbonStatusBar1;
             // 
             // backstageViewControl1
@@ -162,10 +172,11 @@
             this.backstageViewControl1.Items.Add(this.backstageViewButtonItem2);
             this.backstageViewControl1.Items.Add(this.backstageViewItemSeparator1);
             this.backstageViewControl1.Items.Add(this.backstageViewButtonItem3);
-            this.backstageViewControl1.Location = new System.Drawing.Point(45, 43);
+            this.backstageViewControl1.Location = new System.Drawing.Point(52, 53);
+            this.backstageViewControl1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.backstageViewControl1.Name = "backstageViewControl1";
             this.backstageViewControl1.OwnerControl = this.ribbonControl1;
-            this.backstageViewControl1.Size = new System.Drawing.Size(817, 233);
+            this.backstageViewControl1.Size = new System.Drawing.Size(953, 287);
             this.backstageViewControl1.TabIndex = 0;
             this.backstageViewControl1.Text = "backstageViewControl1";
             // 
@@ -214,6 +225,7 @@
             this.baudRateElement.EditWidth = 100;
             this.baudRateElement.Id = 2;
             this.baudRateElement.Name = "baudRateElement";
+            this.baudRateElement.EditValueChanged += new System.EventHandler(this.baudRateElement_EditValueChanged);
             // 
             // baudRateRepositoryItemComboBox
             // 
@@ -283,6 +295,7 @@
             this.dataBitsElement.EditWidth = 100;
             this.dataBitsElement.Id = 9;
             this.dataBitsElement.Name = "dataBitsElement";
+            this.dataBitsElement.EditValueChanged += new System.EventHandler(this.dataBitsElement_EditValueChanged);
             // 
             // dataBitsReporitotyItemComboBox
             // 
@@ -299,6 +312,7 @@
             this.parityElement.EditWidth = 100;
             this.parityElement.Id = 10;
             this.parityElement.Name = "parityElement";
+            this.parityElement.EditValueChanged += new System.EventHandler(this.parityElement_EditValueChanged);
             // 
             // parityRepositoryItemComboBox
             // 
@@ -315,6 +329,7 @@
             this.stopBitElement.EditWidth = 100;
             this.stopBitElement.Id = 13;
             this.stopBitElement.Name = "stopBitElement";
+            this.stopBitElement.EditValueChanged += new System.EventHandler(this.stopBitElement_EditValueChanged);
             // 
             // stopBitRepositoryItemComboBox
             // 
@@ -331,6 +346,7 @@
             this.readBufferSizeElement.EditWidth = 100;
             this.readBufferSizeElement.Id = 14;
             this.readBufferSizeElement.Name = "readBufferSizeElement";
+            this.readBufferSizeElement.EditValueChanged += new System.EventHandler(this.readBufferSizeElement_EditValueChanged);
             // 
             // readBufferSizeRepositoryItemComboBox
             // 
@@ -347,6 +363,7 @@
             this.writeBufferSizeElement.EditWidth = 100;
             this.writeBufferSizeElement.Id = 15;
             this.writeBufferSizeElement.Name = "writeBufferSizeElement";
+            this.writeBufferSizeElement.EditValueChanged += new System.EventHandler(this.writeBufferSizeElement_EditValueChanged);
             // 
             // writeBufferSizeRepositoryItemComboBox
             // 
@@ -363,6 +380,7 @@
             this.rtsEnableElement.EditWidth = 100;
             this.rtsEnableElement.Id = 16;
             this.rtsEnableElement.Name = "rtsEnableElement";
+            this.rtsEnableElement.EditValueChanged += new System.EventHandler(this.rtsEnableElement_EditValueChanged);
             // 
             // rtsEnableRepositoryItemComboBox
             // 
@@ -379,6 +397,7 @@
             this.dtrEnableElement.EditWidth = 100;
             this.dtrEnableElement.Id = 17;
             this.dtrEnableElement.Name = "dtrEnableElement";
+            this.dtrEnableElement.EditValueChanged += new System.EventHandler(this.dtrEnableElement_EditValueChanged);
             // 
             // dtrEnableRepositoryItemComboBox
             // 
@@ -395,6 +414,7 @@
             this.handShakeElement.EditWidth = 100;
             this.handShakeElement.Id = 18;
             this.handShakeElement.Name = "handShakeElement";
+            this.handShakeElement.EditValueChanged += new System.EventHandler(this.handShakeElement_EditValueChanged);
             // 
             // handShakeRepositoryItemComboBox
             // 
@@ -434,6 +454,21 @@
             this.sensitivityRepositoryItem.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.sensitivityRepositoryItem.Name = "sensitivityRepositoryItem";
+            // 
+            // delimeterElement
+            // 
+            this.delimeterElement.Caption = "Delimeter:";
+            this.delimeterElement.Edit = this.delimeterRepositoryItemTextBox;
+            this.delimeterElement.EditHeight = 20;
+            this.delimeterElement.EditWidth = 100;
+            this.delimeterElement.Id = 22;
+            this.delimeterElement.Name = "delimeterElement";
+            this.delimeterElement.EditValueChanged += new System.EventHandler(this.delimeterElement_EditValueChanged);
+            // 
+            // delimeterRepositoryItemTextBox
+            // 
+            this.delimeterRepositoryItemTextBox.AutoHeight = false;
+            this.delimeterRepositoryItemTextBox.Name = "delimeterRepositoryItemTextBox";
             // 
             // measurePage
             // 
@@ -501,6 +536,7 @@
             this.portAdvancedsGroup.ItemLinks.Add(this.handShakeElement);
             this.portAdvancedsGroup.ItemLinks.Add(this.writeBufferSizeElement, true);
             this.portAdvancedsGroup.ItemLinks.Add(this.readBufferSizeElement);
+            this.portAdvancedsGroup.ItemLinks.Add(this.delimeterElement);
             this.portAdvancedsGroup.Name = "portAdvancedsGroup";
             this.portAdvancedsGroup.Text = "Advanced";
             // 
@@ -537,13 +573,21 @@
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.repositoryItemComboBox2.Name = "repositoryItemComboBox2";
             // 
+            // delimeterRepositoryItemComboBox
+            // 
+            this.delimeterRepositoryItemComboBox.AutoHeight = false;
+            this.delimeterRepositoryItemComboBox.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.delimeterRepositoryItemComboBox.Name = "delimeterRepositoryItemComboBox";
+            // 
             // ribbonStatusBar1
             // 
             this.ribbonStatusBar1.ItemLinks.Add(this.portStatusLabel);
-            this.ribbonStatusBar1.Location = new System.Drawing.Point(0, 473);
+            this.ribbonStatusBar1.Location = new System.Drawing.Point(0, 580);
+            this.ribbonStatusBar1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.ribbonStatusBar1.Name = "ribbonStatusBar1";
             this.ribbonStatusBar1.Ribbon = this.ribbonControl1;
-            this.ribbonStatusBar1.Size = new System.Drawing.Size(1029, 21);
+            this.ribbonStatusBar1.Size = new System.Drawing.Size(1210, 28);
             // 
             // defaultLookAndFeel1
             // 
@@ -553,9 +597,10 @@
             // 
             this.contentPanel.Controls.Add(this.backstageViewControl1);
             this.contentPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.contentPanel.Location = new System.Drawing.Point(0, 146);
+            this.contentPanel.Location = new System.Drawing.Point(0, 185);
+            this.contentPanel.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.contentPanel.Name = "contentPanel";
-            this.contentPanel.Size = new System.Drawing.Size(1029, 327);
+            this.contentPanel.Size = new System.Drawing.Size(1210, 395);
             this.contentPanel.TabIndex = 2;
             // 
             // dockManager
@@ -575,13 +620,14 @@
             // 
             // MainFrame
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1029, 494);
+            this.ClientSize = new System.Drawing.Size(1210, 608);
             this.Controls.Add(this.contentPanel);
             this.Controls.Add(this.ribbonStatusBar1);
             this.Controls.Add(this.ribbonControl1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.MinimumSize = new System.Drawing.Size(1031, 495);
             this.Name = "MainFrame";
             this.Ribbon = this.ribbonControl1;
@@ -603,7 +649,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.handShakeRepositoryItemComboBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.zeroValueRepositoryItem)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.sensitivityRepositoryItem)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.delimeterRepositoryItemTextBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemComboBox2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.delimeterRepositoryItemComboBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.contentPanel)).EndInit();
             this.contentPanel.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dockManager)).EndInit();
@@ -668,5 +716,8 @@
         private DevExpress.XtraBars.Ribbon.RibbonPage displayPage;
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup displayChartGroup;
         private DevExpress.XtraBars.Docking.DockManager dockManager;
+        private DevExpress.XtraEditors.Repository.RepositoryItemComboBox delimeterRepositoryItemComboBox;
+        private DevExpress.XtraBars.BarEditItem delimeterElement;
+        private DevExpress.XtraEditors.Repository.RepositoryItemTextEdit delimeterRepositoryItemTextBox;
     }
 }
