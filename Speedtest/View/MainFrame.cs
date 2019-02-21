@@ -6,6 +6,7 @@ using System.IO.Ports;
 using System.Windows.Forms;
 using DevExpress.XtraBars.Ribbon;
 using DevExpress.XtraBars.Docking;
+using System.Collections.Generic;
 
 namespace Speedtest
 {
@@ -57,10 +58,12 @@ namespace Speedtest
         #endregion
         public SerialPort serialPort;
         public SpeedTest gearedChart;
+        public List<SpeedTest> gearedCharts;
         public PortController portController;
         public bool connectedState { get; set; }
         public bool isRunning { get; set; }
         public double tryparseTmp;
+       
 
         #endregion
 
@@ -71,21 +74,33 @@ namespace Speedtest
             MeasureTabController.FillEditors(this);
             PortOptionsTabController.FillEditors(this);
             MeasureTabController.SetInitialState(this);
+            gearedCharts = new List<SpeedTest>();
+            
 
         }
 
+        private void createCharts() {
+            for (int i = 0; i < (int)channelsElement.EditValue; i++) {
+                gearedChart = new SpeedTest(serialPort, (int)channelsElement.EditValue)
+                {
+                    Dock = DockStyle.Fill
+                };
+                gearedCharts.Add(gearedChart);
+            }
+        }
         private void connectButton_ItemClick(object sender, ItemClickEventArgs ea)
         {
             MeasureTabController.ConnectionManager(this);
+            createCharts();
             if (connectedState)
             {
                 //CONNECTING
                 //the Connection Manager already swapped the 'connectedState' value
 
-                gearedChart = new SpeedTest(serialPort, (int)channelsElement.EditValue)
-                {
-                    Dock = DockStyle.Fill
-                };
+                //gearedChart = new SpeedTest(serialPort, (int)channelsElement.EditValue)
+                //{
+                //    Dock = DockStyle.Fill
+                //};
 
                 int height = contentPanel.Size.Height / (int)channelsElement.EditValue;
                 for (int i = 0; i < (int)channelsElement.EditValue; i++)
@@ -96,7 +111,7 @@ namespace Speedtest
                     };
                     ControlContainer tmpPanel_Container = new ControlContainer();
 
-                    tmpPanel_Container.Controls.Add(gearedChart);
+                    tmpPanel_Container.Controls.Add(gearedCharts[i]);
                     tmpPanel.Height = height;
                     tmpPanel.Controls.Add(tmpPanel_Container);                 
                     
@@ -107,7 +122,9 @@ namespace Speedtest
             else
             {
                 contentPanel.Controls.Clear();
-                gearedChart.Dispose();
+                gearedCharts.ForEach(p => p.Dispose());
+                dockManager.Clear();
+                //gearedChart.Dispose();
             }
         }
 
@@ -208,9 +225,8 @@ namespace Speedtest
                 if ((string)delimeterElement.EditValue == "" || (string)delimeterElement.EditValue == PortOptionsTabController.defaultDelimeter)
                 {
                     serialPort.NewLine = "\n";
-                } else{
-                    serialPort.NewLine = delimeterElement.EditValue.ToString().Replace("\\n", "\n").Replace("\\t","\t");
-                }
+                } 
+                //TODO különböző delimetereket tudjon megkülönböztetni
 
                 if ((string)delimeterElement.EditValue == "") {
                     DelimeterElement.EditValue = PortOptionsTabController.defaultDelimeter;

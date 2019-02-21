@@ -20,6 +20,8 @@ namespace Speedtest.Controller
             chart.DataTooltip = null;
             chart.Zoom = ZoomingOptions.X;
             chart.DisableAnimations = true;
+            chart.AutoSize = true;
+            
 
             var transparent = (Brush)new BrushConverter().ConvertFromString("#00FFFFFF");
 
@@ -38,15 +40,15 @@ namespace Speedtest.Controller
         }
 
 
-        internal static void RefreshChartValues(SpeedTestVm model, List<double> current)
+        internal static void RefreshChartValues(SpeedTestVm speedTestModel, List<double> current)
         {
             int index = 0;
-            foreach (var i in model.listOfCharts) {
-                if (index < model.listOfCharts.Count() && index<current.Count()) {
+            foreach (var i in speedTestModel.listOfCharts) {
+                if (index < speedTestModel.listOfCharts.Count() && index<current.Count()) {
 
                     var first = i.DefaultIfEmpty(0).FirstOrDefault();
-                    if (i.Count > model.keepRecords - 1) i.Remove(first);
-                    if (i.Count < model.keepRecords) i.Add(current[index]);
+                    if (i.Count > speedTestModel.keepRecords - 1) i.Remove(first);
+                    if (i.Count < speedTestModel.keepRecords) i.Add(current[index]);
 
                     index++;
                 }
@@ -54,8 +56,8 @@ namespace Speedtest.Controller
 
             }
 
-            model.IsHot = current[0] > 0;
-            model.CurrentLecture = current[0];
+            //speedTestModel.IsHot = current[0] > 0;
+            speedTestModel.CurrentLecture = current[0];
 
         }
 

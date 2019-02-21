@@ -42,21 +42,31 @@ namespace Speedtest.Controller
 
         public void dataFlow(object sender, EventArgs e)
         {
+            //foreach (var i in mainFrameModel.gearedCharts) {
+            //    i.viewModel.recivedChartValues.Clear();
+            //}
+            mainFrameModel.gearedCharts.ForEach(p => p.viewModel.recivedChartValues.Clear());
 
-            mainFrameModel.gearedChart.viewModel.recivedChartValues.Clear();
             var recived = mainFrameModel.serialPort.ReadLine();
             Debug.WriteLine(recived);
-
-
+            
             string[] chartValues = recived.Split(' ');
 
-            for (var i = 0; i < chartValues.Length; i++)
-            {
-                double.TryParse(chartValues[i], out tryparseTmp);
-                mainFrameModel.gearedChart.viewModel.recivedChartValues.Add(tryparseTmp);
-            }
+            //We cant add more channel to the panel than the number of the incoming data
+            int maxNumberChannels = Math.Min((int)mainFrameModel.ChannelsElement.EditValue, chartValues.Length);
 
-            ChartController.RefreshChartValues(mainFrameModel.gearedChart.viewModel, mainFrameModel.gearedChart.viewModel.recivedChartValues);
+            if (chartValues.Length > (int)mainFrameModel.ChannelsElement.EditValue) {
+                for (var i = 0; i < (int)mainFrameModel.ChannelsElement.EditValue; i++)
+                {
+                    double.TryParse(chartValues[i], out tryparseTmp);
+                    //mainFrameModel.gearedChart.viewModel.recivedChartValues.Add(tryparseTmp);
+                    mainFrameModel.gearedCharts[i].viewModel.recivedChartValues.Add(tryparseTmp);
+                    ChartController.RefreshChartValues(mainFrameModel.gearedCharts[i].viewModel, mainFrameModel.gearedCharts[i].viewModel.recivedChartValues);
+                }
+            }
+            
+
+            
 
         }
 

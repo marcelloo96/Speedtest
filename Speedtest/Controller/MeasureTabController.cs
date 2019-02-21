@@ -16,6 +16,8 @@ namespace Speedtest.Controller
         internal static void FillEditors(MainFrame model)
         {
             //TODO DISPLAY
+            model.ChannelsElement.EditValue = 2;
+            model.SelectedPortElement.EditValue = "COM3";
         }
         /// <summary>
         /// Disable all functions that need a connection
