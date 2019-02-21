@@ -42,33 +42,32 @@ namespace Speedtest.Controller
 
         public void dataFlow(object sender, EventArgs e)
         {
-            //foreach (var i in mainFrameModel.gearedCharts) {
-            //    i.viewModel.recivedChartValues.Clear();
-            //}
             mainFrameModel.gearedCharts.ForEach(p => p.viewModel.recivedChartValues.Clear());
 
-            var recived = mainFrameModel.serialPort.ReadLine();
-            Debug.WriteLine(recived);
+            var recived = mainFrameModel.serialPort.ReadExisting();
+            string[] chartValues = recived.Split('\n');
+            int a = chartValues.Length;
+            Debug.WriteLine(a);
+
+            string[] importantValues = chartValues[5].Split(' ');
             
-            string[] chartValues = recived.Split(' ');
-
             //We cant add more channel to the panel than the number of the incoming data
-            int maxNumberChannels = Math.Min((int)mainFrameModel.ChannelsElement.EditValue, chartValues.Length);
+            int maxNumberChannels = Math.Min((int)mainFrameModel.ChannelsElement.EditValue, importantValues.Length);
+                      
 
-            if (chartValues.Length > (int)mainFrameModel.ChannelsElement.EditValue) {
+            if (importantValues.Length > (int)mainFrameModel.ChannelsElement.EditValue)
+            {
                 for (var i = 0; i < (int)mainFrameModel.ChannelsElement.EditValue; i++)
                 {
-                    double.TryParse(chartValues[i], out tryparseTmp);
+                    double.TryParse(importantValues[i], out tryparseTmp);
                     //mainFrameModel.gearedChart.viewModel.recivedChartValues.Add(tryparseTmp);
                     mainFrameModel.gearedCharts[i].viewModel.recivedChartValues.Add(tryparseTmp);
                     ChartController.RefreshChartValues(mainFrameModel.gearedCharts[i].viewModel, mainFrameModel.gearedCharts[i].viewModel.recivedChartValues);
                 }
             }
             
-
-            
-
+            System.Threading.Thread.Sleep(1000);
         }
-
+        
     }
 }
