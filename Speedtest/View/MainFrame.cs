@@ -91,10 +91,11 @@ namespace Speedtest
         private void connectButton_ItemClick(object sender, ItemClickEventArgs ea)
         {
             MeasureTabController.ConnectionManager(this);
-            createCharts();
+            
             if (connectedState)
             {
                 //CONNECTING
+                createCharts();
                 //the Connection Manager already swapped the 'connectedState' value
 
                 //gearedChart = new SpeedTest(serialPort, (int)channelsElement.EditValue)
@@ -122,9 +123,8 @@ namespace Speedtest
             else
             {
                 contentPanel.Controls.Clear();
-                gearedCharts.ForEach(p => p.Dispose());
+                gearedCharts.Clear();
                 dockManager.Clear();
-                //gearedChart.Dispose();
             }
         }
 
