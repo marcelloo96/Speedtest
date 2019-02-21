@@ -137,7 +137,6 @@
             this.sensivityElement,
             this.delimeterElement});
             this.ribbonControl1.Location = new System.Drawing.Point(0, 0);
-            this.ribbonControl1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.ribbonControl1.MaxItemId = 23;
             this.ribbonControl1.Name = "ribbonControl1";
             this.ribbonControl1.Pages.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPage[] {
@@ -163,7 +162,7 @@
             this.sensitivityRepositoryItem,
             this.delimeterRepositoryItemComboBox,
             this.delimeterRepositoryItemTextBox});
-            this.ribbonControl1.Size = new System.Drawing.Size(1210, 185);
+            this.ribbonControl1.Size = new System.Drawing.Size(1037, 146);
             this.ribbonControl1.StatusBar = this.ribbonStatusBar1;
             // 
             // backstageViewControl1
@@ -172,11 +171,10 @@
             this.backstageViewControl1.Items.Add(this.backstageViewButtonItem2);
             this.backstageViewControl1.Items.Add(this.backstageViewItemSeparator1);
             this.backstageViewControl1.Items.Add(this.backstageViewButtonItem3);
-            this.backstageViewControl1.Location = new System.Drawing.Point(52, 53);
-            this.backstageViewControl1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.backstageViewControl1.Location = new System.Drawing.Point(45, 43);
             this.backstageViewControl1.Name = "backstageViewControl1";
             this.backstageViewControl1.OwnerControl = this.ribbonControl1;
-            this.backstageViewControl1.Size = new System.Drawing.Size(953, 287);
+            this.backstageViewControl1.Size = new System.Drawing.Size(817, 233);
             this.backstageViewControl1.TabIndex = 0;
             this.backstageViewControl1.Text = "backstageViewControl1";
             // 
@@ -208,6 +206,7 @@
             this.selectedPortElement.EditWidth = 100;
             this.selectedPortElement.Id = 1;
             this.selectedPortElement.Name = "selectedPortElement";
+            this.selectedPortElement.EditValueChanged += new System.EventHandler(this.selectedPortElement_EditValueChanged);
             // 
             // selectedPortRepositoryItemComboBox
             // 
@@ -583,11 +582,10 @@
             // ribbonStatusBar1
             // 
             this.ribbonStatusBar1.ItemLinks.Add(this.portStatusLabel);
-            this.ribbonStatusBar1.Location = new System.Drawing.Point(0, 580);
-            this.ribbonStatusBar1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.ribbonStatusBar1.Location = new System.Drawing.Point(0, 473);
             this.ribbonStatusBar1.Name = "ribbonStatusBar1";
             this.ribbonStatusBar1.Ribbon = this.ribbonControl1;
-            this.ribbonStatusBar1.Size = new System.Drawing.Size(1210, 28);
+            this.ribbonStatusBar1.Size = new System.Drawing.Size(1037, 21);
             // 
             // defaultLookAndFeel1
             // 
@@ -597,10 +595,9 @@
             // 
             this.contentPanel.Controls.Add(this.backstageViewControl1);
             this.contentPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.contentPanel.Location = new System.Drawing.Point(0, 185);
-            this.contentPanel.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.contentPanel.Location = new System.Drawing.Point(0, 146);
             this.contentPanel.Name = "contentPanel";
-            this.contentPanel.Size = new System.Drawing.Size(1210, 395);
+            this.contentPanel.Size = new System.Drawing.Size(1037, 327);
             this.contentPanel.TabIndex = 2;
             // 
             // dockManager
@@ -620,14 +617,13 @@
             // 
             // MainFrame
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1210, 608);
+            this.ClientSize = new System.Drawing.Size(1037, 494);
             this.Controls.Add(this.contentPanel);
             this.Controls.Add(this.ribbonStatusBar1);
             this.Controls.Add(this.ribbonControl1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.MinimumSize = new System.Drawing.Size(1031, 495);
             this.Name = "MainFrame";
             this.Ribbon = this.ribbonControl1;

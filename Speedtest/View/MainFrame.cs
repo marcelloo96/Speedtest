@@ -63,7 +63,7 @@ namespace Speedtest
         public bool connectedState { get; set; }
         public bool isRunning { get; set; }
         public double tryparseTmp;
-       
+
 
         #endregion
 
@@ -75,12 +75,16 @@ namespace Speedtest
             PortOptionsTabController.FillEditors(this);
             MeasureTabController.SetInitialState(this);
             gearedCharts = new List<SpeedTest>();
-            
+
+            testConnect();
+
 
         }
 
-        private void createCharts() {
-            for (int i = 0; i < (int)channelsElement.EditValue; i++) {
+        private void createCharts()
+        {
+            for (int i = 0; i < (int)channelsElement.EditValue; i++)
+            {
                 gearedChart = new SpeedTest(serialPort, (int)channelsElement.EditValue)
                 {
                     Dock = DockStyle.Fill
@@ -90,42 +94,66 @@ namespace Speedtest
         }
         private void connectButton_ItemClick(object sender, ItemClickEventArgs ea)
         {
-            MeasureTabController.ConnectionManager(this);
-            
-            if (connectedState)
+
+            if (String.IsNullOrWhiteSpace((string)this.selectedPortElement.EditValue))
             {
-                //CONNECTING
-                createCharts();
-                //the Connection Manager already swapped the 'connectedState' value
+                MessageBox.Show(Strings.Global_Error_NoPortSelected);
+            }
+            else {
+                testConnect();
+            }
+        }
 
-                //gearedChart = new SpeedTest(serialPort, (int)channelsElement.EditValue)
-                //{
-                //    Dock = DockStyle.Fill
-                //};
-
-                int height = contentPanel.Size.Height / (int)channelsElement.EditValue;
-                for (int i = 0; i < (int)channelsElement.EditValue; i++)
+        public void testConnect()
+        {
+            if (!String.IsNullOrWhiteSpace((string)this.selectedPortElement.EditValue))
+            {
+                try
                 {
+                    MeasureTabController.ConnectionManager(this);
 
-                    DockPanel tmpPanel = new DockPanel {
-                        Text = "Chart " + i
-                    };
-                    ControlContainer tmpPanel_Container = new ControlContainer();
+                    if (connectedState)
+                    {
+                        //CONNECTING
+                        createCharts();
+                        //the Connection Manager already swapped the 'connectedState' value
 
-                    tmpPanel_Container.Controls.Add(gearedCharts[i]);
-                    tmpPanel.Height = height;
-                    tmpPanel.Controls.Add(tmpPanel_Container);                 
-                    
-                    dockManager.AddPanel(DockingStyle.Top, tmpPanel);
+                        //gearedChart = new SpeedTest(serialPort, (int)channelsElement.EditValue)
+                        //{
+                        //    Dock = DockStyle.Fill
+                        //};
 
+                        int height = contentPanel.Size.Height / (int)channelsElement.EditValue;
+                        for (int i = 0; i < (int)channelsElement.EditValue; i++)
+                        {
+
+                            DockPanel tmpPanel = new DockPanel
+                            {
+                                Text = "Chart " + i
+                            };
+                            ControlContainer tmpPanel_Container = new ControlContainer();
+
+                            tmpPanel_Container.Controls.Add(gearedCharts[i]);
+                            tmpPanel.Height = height;
+                            tmpPanel.Controls.Add(tmpPanel_Container);
+
+                            dockManager.AddPanel(DockingStyle.Top, tmpPanel);
+
+                        }
+                    }
+                    else
+                    {
+                        contentPanel.Controls.Clear();
+                        gearedCharts.Clear();
+                        dockManager.Clear();
+                    }
+                }
+                catch (Exception e)
+                {
+                    MessageBox.Show(e.Message);
                 }
             }
-            else
-            {
-                contentPanel.Controls.Clear();
-                gearedCharts.Clear();
-                dockManager.Clear();
-            }
+
         }
 
         private void startStopButton_ItemClick(object sender, ItemClickEventArgs ea)
@@ -159,21 +187,24 @@ namespace Speedtest
 
         private void dataBitsElement_EditValueChanged(object sender, EventArgs e)
         {
-            if (serialPort != null) {
+            if (serialPort != null)
+            {
                 serialPort.DataBits = (int)dataBitsElement.EditValue;
-            } 
+            }
         }
 
         private void parityElement_EditValueChanged(object sender, EventArgs e)
         {
-            if (serialPort != null) {
+            if (serialPort != null)
+            {
                 serialPort.Parity = (Parity)parityElement.EditValue;
             }
         }
 
         private void stopBitElement_EditValueChanged(object sender, EventArgs e)
         {
-            if (serialPort != null) {
+            if (serialPort != null)
+            {
                 serialPort.StopBits = (StopBits)stopBitElement.EditValue;
             }
         }
@@ -225,14 +256,20 @@ namespace Speedtest
                 if ((string)delimeterElement.EditValue == "" || (string)delimeterElement.EditValue == PortOptionsTabController.defaultDelimeter)
                 {
                     serialPort.NewLine = "\n";
-                } 
+                }
                 //TODO különböző delimetereket tudjon megkülönböztetni
 
-                if ((string)delimeterElement.EditValue == "") {
+                if ((string)delimeterElement.EditValue == "")
+                {
                     DelimeterElement.EditValue = PortOptionsTabController.defaultDelimeter;
                 }
-                
+
             }
+        }
+
+        private void selectedPortElement_EditValueChanged(object sender, EventArgs e)
+        {
+            testConnect();
         }
     }
 }
