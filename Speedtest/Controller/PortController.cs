@@ -45,15 +45,31 @@ namespace Speedtest.Controller
             mainFrameModel.gearedCharts.ForEach(p => p.viewModel.recivedChartValues.Clear());
 
             var recived = mainFrameModel.serialPort.ReadExisting();
-            string[] chartValues = recived.Split('\n');
-            int a = chartValues.Length;
-            Debug.WriteLine(a);
 
-            string[] importantValues = chartValues[5].Split(' ');
-            
-            //We cant add more channel to the panel than the number of the incoming data
+            string[] chartValues = recivedValueFormatter(recived);
+            int numberOfFormattedRecivedCharValues = chartValues.Length;
+            Debug.WriteLine(numberOfFormattedRecivedCharValues);
+            string[] importantValues;
+            if (numberOfFormattedRecivedCharValues < 0)
+            {
+                importantValues = new string[] { };
+            }
+            else {
+                if (numberOfFormattedRecivedCharValues > 100)
+                {
+                    //If the sampling frequency greater than 100Hz, then the first datasets may damaged or deficient.
+                    importantValues = chartValues[10].Split(' ');
+                }
+                else {
+                    importantValues = chartValues[0].Split(' ');
+                }
+
+            }
+                                   
+
+            //We cant add more channel to the panel than the number of the incoming datas we have
             int maxNumberChannels = Math.Min((int)mainFrameModel.ChannelsElement.EditValue, importantValues.Length);
-                      
+
 
             if (importantValues.Length > (int)mainFrameModel.ChannelsElement.EditValue)
             {
@@ -65,9 +81,19 @@ namespace Speedtest.Controller
                     ChartController.RefreshChartValues(mainFrameModel.gearedCharts[i].viewModel, mainFrameModel.gearedCharts[i].viewModel.recivedChartValues);
                 }
             }
-            
+
             System.Threading.Thread.Sleep(1000);
         }
-        
+
+        public string[] recivedValueFormatter(string recived) {
+            if (String.IsNullOrWhiteSpace(recived))
+            {
+                return new string[] { };
+            }
+            else {
+                return recived.Split('\n');
+            }
+            
+        }
     }
 }
