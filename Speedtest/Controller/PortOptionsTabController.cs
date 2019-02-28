@@ -18,6 +18,7 @@ namespace Speedtest.Controller
         public static readonly Handshake[] handshakeOptionList = new Handshake[] { Handshake.None, Handshake.RequestToSend, Handshake.RequestToSendXOnXOff, Handshake.XOnXOff };
         public static readonly String defaultDelimeter = ("\\n");
 
+
         internal static void FillEditors(MainFrame model)
         {
             //Basic
@@ -35,7 +36,7 @@ namespace Speedtest.Controller
             //model.DelimeterRepositoryItemComboBox.Items.Add("\\r\\n");
 
             //SETTING DEFAULT VALUES
-            model.BaudRateElement.EditValue = baudRateOptionsList[4]; //9600
+            model.BaudRateElement.EditValue = baudRateOptionsList[11]; //250000
             model.DataBitsElement.EditValue = dataBitsOptionList[3]; //8
             model.ParityElement.EditValue = paritiesOptionList[0]; //None
             model.StopBitElement.EditValue = stopBitsOptionList[1]; //One

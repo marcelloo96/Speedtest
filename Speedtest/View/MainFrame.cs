@@ -7,6 +7,8 @@ using System.Windows.Forms;
 using DevExpress.XtraBars.Ribbon;
 using DevExpress.XtraBars.Docking;
 using System.Collections.Generic;
+using Speedtest.View.MeasureWindow;
+using System.Threading;
 
 namespace Speedtest
 {
@@ -60,6 +62,7 @@ namespace Speedtest
         public SpeedTest gearedChart;
         public List<SpeedTest> gearedCharts;
         public PortController portController;
+        public MainMeasureWindow mmw;
         public bool connectedState { get; set; }
         public bool isRunning { get; set; }
         public double tryparseTmp;
@@ -75,7 +78,6 @@ namespace Speedtest
             PortOptionsTabController.FillEditors(this);
             MeasureTabController.SetInitialState(this);
             gearedCharts = new List<SpeedTest>();
-
             testConnect();
 
 
@@ -99,13 +101,15 @@ namespace Speedtest
             {
                 MessageBox.Show(Strings.Global_Error_NoPortSelected);
             }
-            else {
+            else
+            {
                 testConnect();
             }
         }
 
         public void testConnect()
         {
+            /*
             if (!String.IsNullOrWhiteSpace((string)this.selectedPortElement.EditValue))
             {
                 try
@@ -117,11 +121,6 @@ namespace Speedtest
                         //CONNECTING
                         createCharts();
                         //the Connection Manager already swapped the 'connectedState' value
-
-                        //gearedChart = new SpeedTest(serialPort, (int)channelsElement.EditValue)
-                        //{
-                        //    Dock = DockStyle.Fill
-                        //};
 
                         int height = contentPanel.Size.Height / (int)channelsElement.EditValue;
                         for (int i = 0; i < (int)channelsElement.EditValue; i++)
@@ -146,6 +145,31 @@ namespace Speedtest
                         contentPanel.Controls.Clear();
                         gearedCharts.Clear();
                         dockManager.Clear();
+                    }
+                }
+                catch (Exception e)
+                {
+                    MessageBox.Show(e.Message);
+                }
+            }
+            */
+            if (!String.IsNullOrWhiteSpace((string)this.selectedPortElement.EditValue))
+            {
+                try
+                {
+                    MeasureTabController.ConnectionManager(this);
+
+                    if (connectedState)
+                    {
+                        mmw = new MainMeasureWindow(this);
+                        mmw.Dock = DockStyle.Fill;
+                        contentPanel.Controls.Add(mmw);
+                    }
+                    else {
+
+                        contentPanel.Controls.Clear();
+                        mmw.deleteControls();
+                        
                     }
                 }
                 catch (Exception e)

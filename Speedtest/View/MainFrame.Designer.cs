@@ -31,11 +31,6 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainFrame));
             this.ribbonControl1 = new DevExpress.XtraBars.Ribbon.RibbonControl();
-            this.backstageViewControl1 = new DevExpress.XtraBars.Ribbon.BackstageViewControl();
-            this.backstageViewButtonItem1 = new DevExpress.XtraBars.Ribbon.BackstageViewButtonItem();
-            this.backstageViewButtonItem2 = new DevExpress.XtraBars.Ribbon.BackstageViewButtonItem();
-            this.backstageViewItemSeparator1 = new DevExpress.XtraBars.Ribbon.BackstageViewItemSeparator();
-            this.backstageViewButtonItem3 = new DevExpress.XtraBars.Ribbon.BackstageViewButtonItem();
             this.selectedPortElement = new DevExpress.XtraBars.BarEditItem();
             this.selectedPortRepositoryItemComboBox = new DevExpress.XtraEditors.Repository.RepositoryItemComboBox();
             this.baudRateElement = new DevExpress.XtraBars.BarEditItem();
@@ -88,7 +83,6 @@
             this.contentPanel = new DevExpress.XtraEditors.PanelControl();
             this.dockManager = new DevExpress.XtraBars.Docking.DockManager(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.ribbonControl1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.backstageViewControl1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.selectedPortRepositoryItemComboBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.baudRateRepositoryItemComboBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numberOfChannelsRepositoryItemComboBox)).BeginInit();
@@ -107,13 +101,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemComboBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.delimeterRepositoryItemComboBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.contentPanel)).BeginInit();
-            this.contentPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dockManager)).BeginInit();
             this.SuspendLayout();
             // 
             // ribbonControl1
             // 
-            this.ribbonControl1.ApplicationButtonDropDownControl = this.backstageViewControl1;
             this.ribbonControl1.AutoSizeItems = true;
             this.ribbonControl1.ExpandCollapseItem.Id = 0;
             this.ribbonControl1.Items.AddRange(new DevExpress.XtraBars.BarItem[] {
@@ -164,38 +156,6 @@
             this.delimeterRepositoryItemTextBox});
             this.ribbonControl1.Size = new System.Drawing.Size(1037, 146);
             this.ribbonControl1.StatusBar = this.ribbonStatusBar1;
-            // 
-            // backstageViewControl1
-            // 
-            this.backstageViewControl1.Items.Add(this.backstageViewButtonItem1);
-            this.backstageViewControl1.Items.Add(this.backstageViewButtonItem2);
-            this.backstageViewControl1.Items.Add(this.backstageViewItemSeparator1);
-            this.backstageViewControl1.Items.Add(this.backstageViewButtonItem3);
-            this.backstageViewControl1.Location = new System.Drawing.Point(45, 43);
-            this.backstageViewControl1.Name = "backstageViewControl1";
-            this.backstageViewControl1.OwnerControl = this.ribbonControl1;
-            this.backstageViewControl1.Size = new System.Drawing.Size(817, 233);
-            this.backstageViewControl1.TabIndex = 0;
-            this.backstageViewControl1.Text = "backstageViewControl1";
-            // 
-            // backstageViewButtonItem1
-            // 
-            this.backstageViewButtonItem1.Caption = "backstageViewButtonItem1";
-            this.backstageViewButtonItem1.Name = "backstageViewButtonItem1";
-            // 
-            // backstageViewButtonItem2
-            // 
-            this.backstageViewButtonItem2.Caption = "backstageViewButtonItem2";
-            this.backstageViewButtonItem2.Name = "backstageViewButtonItem2";
-            // 
-            // backstageViewItemSeparator1
-            // 
-            this.backstageViewItemSeparator1.Name = "backstageViewItemSeparator1";
-            // 
-            // backstageViewButtonItem3
-            // 
-            this.backstageViewButtonItem3.Caption = "backstageViewButtonItem3";
-            this.backstageViewButtonItem3.Name = "backstageViewButtonItem3";
             // 
             // selectedPortElement
             // 
@@ -593,7 +553,6 @@
             // 
             // contentPanel
             // 
-            this.contentPanel.Controls.Add(this.backstageViewControl1);
             this.contentPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.contentPanel.Location = new System.Drawing.Point(0, 146);
             this.contentPanel.Name = "contentPanel";
@@ -630,7 +589,6 @@
             this.StatusBar = this.ribbonStatusBar1;
             this.Text = "Form1";
             ((System.ComponentModel.ISupportInitialize)(this.ribbonControl1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.backstageViewControl1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.selectedPortRepositoryItemComboBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.baudRateRepositoryItemComboBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numberOfChannelsRepositoryItemComboBox)).EndInit();
@@ -649,7 +607,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemComboBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.delimeterRepositoryItemComboBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.contentPanel)).EndInit();
-            this.contentPanel.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dockManager)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -677,11 +634,6 @@
         private DevExpress.XtraBars.BarEditItem baudRateElement;
         private DevExpress.XtraEditors.PanelControl contentPanel;
         private DevExpress.XtraBars.BarStaticItem portStatusLabel;
-        private DevExpress.XtraBars.Ribbon.BackstageViewControl backstageViewControl1;
-        private DevExpress.XtraBars.Ribbon.BackstageViewButtonItem backstageViewButtonItem1;
-        private DevExpress.XtraBars.Ribbon.BackstageViewButtonItem backstageViewButtonItem2;
-        private DevExpress.XtraBars.Ribbon.BackstageViewItemSeparator backstageViewItemSeparator1;
-        private DevExpress.XtraBars.Ribbon.BackstageViewButtonItem backstageViewButtonItem3;
         private DevExpress.XtraBars.Ribbon.RibbonPage portOptionsPage;
         private DevExpress.XtraBars.BarEditItem dataBitsElement;
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup portBasicsGroup;
