@@ -633,7 +633,6 @@
         private DevExpress.XtraBars.BarButtonItem startStopButton;
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup measureControlPanelGroup;
         private DevExpress.XtraBars.BarEditItem baudRateElement;
-        private DevExpress.XtraEditors.PanelControl contentPanel;
         private DevExpress.XtraBars.BarStaticItem portStatusLabel;
         private DevExpress.XtraBars.Ribbon.RibbonPage portOptionsPage;
         private DevExpress.XtraBars.BarEditItem dataBitsElement;
@@ -668,5 +667,6 @@
         private DevExpress.XtraEditors.Repository.RepositoryItemComboBox delimeterRepositoryItemComboBox;
         private DevExpress.XtraBars.BarEditItem delimeterElement;
         private DevExpress.XtraEditors.Repository.RepositoryItemTextEdit delimeterRepositoryItemTextBox;
+        public DevExpress.XtraEditors.PanelControl contentPanel;
     }
 }

@@ -255,7 +255,7 @@ namespace Speedtest
 
         private void MainFrame_Resize(object sender, EventArgs e)
         {
-            mmw.resizeControls(contentPanel.Height);
+            mmw.resizeControls(contentPanel.Height, contentPanel.Width);
         }
     }
 }

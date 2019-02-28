@@ -30,33 +30,33 @@ namespace Speedtest.View.MeasureWindow
         /// </summary>
         private void InitializeComponent()
         {
-            this.splitContainerControl1 = new DevExpress.XtraEditors.SplitContainerControl();
+            this.splitContainerControl = new DevExpress.XtraEditors.SplitContainerControl();
             this.gearedChartUserControl = new Speedtest.View.MeasureWindow.GearedChartUserControl();
             this.chartSettingsUserControl = new Speedtest.View.MeasureWindow.ChartSettingsUserControl();
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl1)).BeginInit();
-            this.splitContainerControl1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl)).BeginInit();
+            this.splitContainerControl.SuspendLayout();
             this.SuspendLayout();
             // 
-            // splitContainerControl1
+            // splitContainerControl
             // 
-            this.splitContainerControl1.CollapsePanel = DevExpress.XtraEditors.SplitCollapsePanel.Panel2;
-            this.splitContainerControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainerControl1.Location = new System.Drawing.Point(0, 0);
-            this.splitContainerControl1.Name = "splitContainerControl1";
-            this.splitContainerControl1.Panel1.Controls.Add(this.gearedChartUserControl);
-            this.splitContainerControl1.Panel1.Text = "Panel1";
-            this.splitContainerControl1.Panel2.Controls.Add(this.chartSettingsUserControl);
-            this.splitContainerControl1.Panel2.Text = "Panel2";
-            this.splitContainerControl1.Size = new System.Drawing.Size(976, 461);
-            this.splitContainerControl1.SplitterPosition = 651;
-            this.splitContainerControl1.TabIndex = 0;
+            this.splitContainerControl.CollapsePanel = DevExpress.XtraEditors.SplitCollapsePanel.Panel2;
+            this.splitContainerControl.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainerControl.Location = new System.Drawing.Point(0, 0);
+            this.splitContainerControl.Name = "splitContainerControl";
+            this.splitContainerControl.Panel1.Controls.Add(this.gearedChartUserControl);
+            this.splitContainerControl.Panel1.Text = "Panel1";
+            this.splitContainerControl.Panel2.Controls.Add(this.chartSettingsUserControl);
+            this.splitContainerControl.Panel2.Text = "Panel2";
+            this.splitContainerControl.Size = new System.Drawing.Size(976, 461);
+            this.splitContainerControl.SplitterPosition = 695;
+            this.splitContainerControl.TabIndex = 0;
             // 
             // gearedChartUserControl
             // 
             this.gearedChartUserControl.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gearedChartUserControl.Location = new System.Drawing.Point(0, 0);
             this.gearedChartUserControl.Name = "gearedChartUserControl";
-            this.gearedChartUserControl.Size = new System.Drawing.Size(651, 461);
+            this.gearedChartUserControl.Size = new System.Drawing.Size(695, 461);
             this.gearedChartUserControl.TabIndex = 0;
             // 
             // chartSettingsUserControl
@@ -64,25 +64,25 @@ namespace Speedtest.View.MeasureWindow
             this.chartSettingsUserControl.Dock = System.Windows.Forms.DockStyle.Fill;
             this.chartSettingsUserControl.Location = new System.Drawing.Point(0, 0);
             this.chartSettingsUserControl.Name = "chartSettingsUserControl";
-            this.chartSettingsUserControl.Size = new System.Drawing.Size(313, 461);
+            this.chartSettingsUserControl.Size = new System.Drawing.Size(269, 461);
             this.chartSettingsUserControl.TabIndex = 0;
             // 
             // MainMeasureWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.splitContainerControl1);
+            this.Controls.Add(this.splitContainerControl);
             this.Name = "MainMeasureWindow";
             this.Size = new System.Drawing.Size(976, 461);
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl1)).EndInit();
-            this.splitContainerControl1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl)).EndInit();
+            this.splitContainerControl.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private SplitContainerControl splitContainerControl1;
+        private SplitContainerControl splitContainerControl;
         private GearedChartUserControl gearedChartUserControl;
         private ChartSettingsUserControl chartSettingsUserControl;
     }

@@ -45,6 +45,7 @@ namespace Speedtest.View.MeasureWindow
                         //the Connection Manager already swapped the 'connectedState' value
 
                         int height = this.Size.Height / numberOfPanelsDisplayed;
+                        gearedChartUserControl.Width = mainFrameModel.contentPanel.Width * 3 / 4;
                         for (int i = 0; i < numberOfPanelsDisplayed; i++)
                         {
 
@@ -96,10 +97,13 @@ namespace Speedtest.View.MeasureWindow
 
         }
 
-        internal void resizeControls(int height)
+        internal void resizeControls(int height, int width)
         {
             var newHeight = height / numberOfPanelsDisplayed;
             var panels = gearedChartUserControl.dockManager.Panels;
+            splitContainerControl.SplitterPosition = width * 3 / 4;
+
+            
             for (int i = 0; i < panels.Count(); i++) {
                 panels[i].Height = newHeight;
             }
