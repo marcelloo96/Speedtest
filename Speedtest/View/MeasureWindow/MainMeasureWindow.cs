@@ -18,6 +18,7 @@ namespace Speedtest.View.MeasureWindow
         public SpeedTest gearedChart;
         public List<SpeedTest> gearedCharts;
         public SerialPort serialPort;
+        public int numberOfPanelsDisplayed;
 
         public MainMeasureWindow(MainFrame model)
         {
@@ -25,6 +26,7 @@ namespace Speedtest.View.MeasureWindow
             mainFrameModel = model;
             gearedChart = model.gearedChart;
             gearedCharts = model.gearedCharts;
+            numberOfPanelsDisplayed= (int)mainFrameModel.ChannelsElement.EditValue;
             InitializeComponent();
             InitialState();
         }
@@ -42,13 +44,14 @@ namespace Speedtest.View.MeasureWindow
                         createCharts();
                         //the Connection Manager already swapped the 'connectedState' value
 
-                        int height = this.Size.Height / (int)mainFrameModel.ChannelsElement.EditValue;
-                        for (int i = 0; i < (int)mainFrameModel.ChannelsElement.EditValue; i++)
+                        int height = this.Size.Height / numberOfPanelsDisplayed;
+                        for (int i = 0; i < numberOfPanelsDisplayed; i++)
                         {
 
                             DockPanel tmpPanel = new DockPanel
                             {
-                                Text = "Chart " + i
+                                Text = "Chart " + i,
+                                AutoScaleMode=AutoScaleMode.Inherit
                             };
                             ControlContainer tmpPanel_Container = new ControlContainer();
 
@@ -76,9 +79,9 @@ namespace Speedtest.View.MeasureWindow
 
         private void createCharts()
         {
-            for (int i = 0; i < (int)mainFrameModel.ChannelsElement.EditValue; i++)
+            for (int i = 0; i < numberOfPanelsDisplayed; i++)
             {
-                gearedChart = new SpeedTest(serialPort, (int)mainFrameModel.ChannelsElement.EditValue)
+                gearedChart = new SpeedTest(serialPort, numberOfPanelsDisplayed)
                 {
                     Dock = DockStyle.Fill
                 };
@@ -91,6 +94,15 @@ namespace Speedtest.View.MeasureWindow
             gearedCharts.Clear();
             gearedChartUserControl.dockManager.Clear();
 
+        }
+
+        internal void resizeControls(int height)
+        {
+            var newHeight = height / numberOfPanelsDisplayed;
+            var panels = gearedChartUserControl.dockManager.Panels;
+            for (int i = 0; i < panels.Count(); i++) {
+                panels[i].Height = newHeight;
+            }
         }
     }
 

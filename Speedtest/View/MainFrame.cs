@@ -66,6 +66,7 @@ namespace Speedtest
         public bool connectedState { get; set; }
         public bool isRunning { get; set; }
         public double tryparseTmp;
+        public readonly bool firstConnect = true;
 
 
         #endregion
@@ -78,7 +79,7 @@ namespace Speedtest
             PortOptionsTabController.FillEditors(this);
             MeasureTabController.SetInitialState(this);
             gearedCharts = new List<SpeedTest>();
-            testConnect();
+            //testConnect();
 
 
         }
@@ -109,50 +110,6 @@ namespace Speedtest
 
         public void testConnect()
         {
-            /*
-            if (!String.IsNullOrWhiteSpace((string)this.selectedPortElement.EditValue))
-            {
-                try
-                {
-                    MeasureTabController.ConnectionManager(this);
-
-                    if (connectedState)
-                    {
-                        //CONNECTING
-                        createCharts();
-                        //the Connection Manager already swapped the 'connectedState' value
-
-                        int height = contentPanel.Size.Height / (int)channelsElement.EditValue;
-                        for (int i = 0; i < (int)channelsElement.EditValue; i++)
-                        {
-
-                            DockPanel tmpPanel = new DockPanel
-                            {
-                                Text = "Chart " + i
-                            };
-                            ControlContainer tmpPanel_Container = new ControlContainer();
-
-                            tmpPanel_Container.Controls.Add(gearedCharts[i]);
-                            tmpPanel.Height = height;
-                            tmpPanel.Controls.Add(tmpPanel_Container);
-
-                            dockManager.AddPanel(DockingStyle.Top, tmpPanel);
-
-                        }
-                    }
-                    else
-                    {
-                        contentPanel.Controls.Clear();
-                        gearedCharts.Clear();
-                        dockManager.Clear();
-                    }
-                }
-                catch (Exception e)
-                {
-                    MessageBox.Show(e.Message);
-                }
-            }
-            */
             if (!String.IsNullOrWhiteSpace((string)this.selectedPortElement.EditValue))
             {
                 try
@@ -294,6 +251,11 @@ namespace Speedtest
         private void selectedPortElement_EditValueChanged(object sender, EventArgs e)
         {
             testConnect();
+        }
+
+        private void MainFrame_Resize(object sender, EventArgs e)
+        {
+            mmw.resizeControls(contentPanel.Height);
         }
     }
 }
