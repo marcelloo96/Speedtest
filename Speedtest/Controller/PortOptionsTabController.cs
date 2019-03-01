@@ -13,7 +13,7 @@ namespace Speedtest.Controller
         public static readonly int[] dataBitsOptionList = new int[] { 5, 6, 7, 8 };
         public static readonly int[] numberOfChannelsOptionList = new int[] { 1, 2, 3, 4, 5 };
         public static readonly Parity[] paritiesOptionList = new Parity[] { Parity.None, Parity.Even, Parity.Odd, Parity.Mark, Parity.Space };
-        public static readonly StopBits[] stopBitsOptionList = new StopBits[] { /*StopBits.None,*/ StopBits.One, StopBits.OnePointFive, StopBits.Two };
+        public static readonly StopBits[] stopBitsOptionList = new StopBits[] { StopBits.One, StopBits.OnePointFive, StopBits.Two };
         public static readonly bool[] boolOptions = new bool[] { true, false };
         public static readonly Handshake[] handshakeOptionList = new Handshake[] { Handshake.None, Handshake.RequestToSend, Handshake.RequestToSendXOnXOff, Handshake.XOnXOff };
         public static readonly String defaultDelimeter = ("\\n");
@@ -39,7 +39,7 @@ namespace Speedtest.Controller
             model.BaudRateElement.EditValue = baudRateOptionsList[11]; //250000
             model.DataBitsElement.EditValue = dataBitsOptionList[3]; //8
             model.ParityElement.EditValue = paritiesOptionList[0]; //None
-            model.StopBitElement.EditValue = stopBitsOptionList[1]; //One
+            model.StopBitElement.EditValue = stopBitsOptionList[0]; //One
             model.HandShakeElement.EditValue = handshakeOptionList[0]; //None
             model.RtsEnableElement.EditValue = false;
             model.DtrEnableElement.EditValue = false;

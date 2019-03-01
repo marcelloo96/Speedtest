@@ -75,14 +75,12 @@ namespace Speedtest
         public MainFrame()
         {
             InitializeComponent();
-            portController = new PortController(this);
             MeasureTabController.FillEditors(this);
             PortOptionsTabController.FillEditors(this);
             MeasureTabController.SetInitialState(this);
+            portController = new PortController(this);
             gearedCharts = new List<SpeedTest>();
-            //testConnect();
-
-
+            
         }
 
         private void createCharts()

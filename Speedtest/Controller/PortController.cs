@@ -6,6 +6,7 @@ using System.Diagnostics;
 using System.IO.Ports;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
@@ -17,12 +18,15 @@ namespace Speedtest.Controller
         private MainFrame mainFrameModel;
         public double tryparseTmp;
         public int deltaTime;
+        public Regex regex;
+        public int minNumberOfIncomingData;
 
         public PortController(MainFrame model)
         {
             this.mainFrameModel = model;
             deltaTime = 1;
-            
+            regex = new Regex(@"-?[0-9]*(\s|\\r)");
+            minNumberOfIncomingData = (int)mainFrameModel.ChannelsElement.EditValue;
 
         }
         public void CreatePort()
@@ -51,42 +55,23 @@ namespace Speedtest.Controller
             if (mainFrameModel.isRunning /*&& deltaTime != 0*/)
             {
                 mainFrameModel.gearedCharts.ForEach(p => p.viewModel.recivedChartValues.Clear());
-
-                var recived = mainFrameModel.serialPort.ReadExisting();
-                string[] chartValues = recivedValueFormatter(recived);
-
+                string[] chartValues = recivedValueFormatter(mainFrameModel.serialPort.ReadExisting());
                 int numberOfFormattedRecivedCharValues = chartValues.Length;
                 Debug.WriteLine(numberOfFormattedRecivedCharValues);
-                string[] importantValues;
-                if (numberOfFormattedRecivedCharValues < 0)
-                {
-                    importantValues = new string[] { };
-                }
-                else
-                {
-                    if (numberOfFormattedRecivedCharValues > 50)
-                    {
-                        //If the sampling frequency greater than 100Hz, then the first datasets may damaged or deficient.
-                        importantValues = chartValues[10].Split(' ');
-                    }
-                    else
-                    {
-                        importantValues = chartValues[0].Split(' ');
-                    }
 
-                }
+                string match = recognisedChartValues(chartValues);
+                string[] importantValues = match.Split(' ');
 
                 ChartController.printChartMonitor(mainFrameModel.mmw.chartMonitor, importantValues);
                 //We cant add more channel to the panel than the number of the incoming datas we have
-                int maxNumberChannels = Math.Min((int)mainFrameModel.ChannelsElement.EditValue, importantValues.Length);
+                int maxNumberChannels = Math.Min(minNumberOfIncomingData, importantValues.Length);
 
 
-                if (importantValues.Length > (int)mainFrameModel.ChannelsElement.EditValue)
+                if (importantValues.Length > minNumberOfIncomingData)
                 {
-                    for (var i = 0; i < (int)mainFrameModel.ChannelsElement.EditValue; i++)
+                    for (var i = 0; i < minNumberOfIncomingData; i++)
                     {
                         double.TryParse(importantValues[i], out tryparseTmp);
-                        //mainFrameModel.gearedChart.viewModel.recivedChartValues.Add(tryparseTmp);
                         mainFrameModel.gearedCharts[i].viewModel.recivedChartValues.Add(tryparseTmp);
                         ChartController.RefreshChartValues(mainFrameModel.gearedCharts[i].viewModel, mainFrameModel.gearedCharts[i].viewModel.recivedChartValues);
                     }
@@ -110,6 +95,18 @@ namespace Speedtest.Controller
                 return recived.Split('\n');
             }
 
+        }
+
+        public string recognisedChartValues(string [] chartValues) {
+            foreach (var i in chartValues)
+            {
+                if (regex.Matches(i).Count >= minNumberOfIncomingData)
+                {
+                    return i;
+
+                }
+            }
+            return "";
         }
 
     }
