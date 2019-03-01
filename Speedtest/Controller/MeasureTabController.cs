@@ -18,6 +18,8 @@ namespace Speedtest.Controller
             //TODO DISPLAY
             model.ChannelsElement.EditValue = 2;
             //model.SelectedPortElement.EditValue = "COM3";
+            model.DisplayModeElement.EditValue = Strings.MeasureTab_ChartDisplayMode;
+            model.DisplayModeRepositoryItemComboBox.Items.AddRange(new string[] {Strings.MeasureTab_ChartDisplayMode, Strings.MeasureTab_MonitorDisplayMode});
         }
         /// <summary>
         /// Disable all functions that need a connection
@@ -25,9 +27,9 @@ namespace Speedtest.Controller
         /// <param name="model"></param>
         internal static void SetInitialState(MainFrame model)
         {
-            model.DisplayModeElement.Enabled = false;
+            //model.DisplayModeElement.Enabled = false;
             model.StartStopButton.Enabled = false;
-            //   model.DisplayModeRepositoryItemComboBox.ReadOnly = true;
+            //model.DisplayModeRepositoryItemComboBox.ReadOnly = true;
         }
 
         internal static void ConnectionManager(MainFrame mainFrameModel)

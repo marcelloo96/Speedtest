@@ -55,14 +55,17 @@ namespace Speedtest.View.MeasureWindow
                                 AutoScaleMode=AutoScaleMode.Inherit
                             };
                             ControlContainer tmpPanel_Container = new ControlContainer();
-
-                            tmpPanel_Container.Controls.Add(gearedCharts[i]);
+                            var currentChart = gearedCharts[i];
+                            tmpPanel_Container.Controls.Add(currentChart);
+                            
                             tmpPanel.Height = height;
                             tmpPanel.Controls.Add(tmpPanel_Container);
+                            tmpPanel.Click += (s, e) => { dockPanelClicked(currentChart, tmpPanel); };
 
                             gearedChartUserControl.dockManager.AddPanel(DockingStyle.Top, tmpPanel);
 
                         }
+                        resizeControls(mainFrameModel.contentPanel.Height, mainFrameModel.contentPanel.Width);
                     }
                     else
                     {
@@ -107,6 +110,10 @@ namespace Speedtest.View.MeasureWindow
             for (int i = 0; i < panels.Count(); i++) {
                 panels[i].Height = newHeight;
             }
+        }
+
+        public void dockPanelClicked(SpeedTest chart, DockPanel panel) {
+            chartSettingsUserControl.propertyGridControl.SelectedObjects = new object[] { chart, panel};
         }
     }
 

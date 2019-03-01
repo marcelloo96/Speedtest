@@ -38,13 +38,14 @@
             this.dockManager1 = new DevExpress.XtraBars.Docking.DockManager(this.components);
             this.dockPanel1 = new DevExpress.XtraBars.Docking.DockPanel();
             this.dockPanel1_Container = new DevExpress.XtraBars.Docking.ControlContainer();
-            this.splitContainerControl1 = new DevExpress.XtraEditors.SplitContainerControl();
-            this.chartSettings1 = new Speedtest.View.MeasureWindow.ChartSettingsUserControl();
+            this.dockPanel2 = new DevExpress.XtraBars.Docking.DockPanel();
+            this.dockPanel2_Container = new DevExpress.XtraBars.Docking.ControlContainer();
+            this.speedTest1 = new Speedtest.SpeedTest();
             ((System.ComponentModel.ISupportInitialize)(this.ribbonControl1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dockManager1)).BeginInit();
             this.dockPanel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl1)).BeginInit();
-            this.splitContainerControl1.SuspendLayout();
+            this.dockPanel2.SuspendLayout();
+            this.dockPanel2_Container.SuspendLayout();
             this.SuspendLayout();
             // 
             // ribbonControl1
@@ -88,6 +89,8 @@
             this.dockManager1.Form = this;
             this.dockManager1.HiddenPanels.AddRange(new DevExpress.XtraBars.Docking.DockPanel[] {
             this.dockPanel1});
+            this.dockManager1.RootPanels.AddRange(new DevExpress.XtraBars.Docking.DockPanel[] {
+            this.dockPanel2});
             this.dockManager1.TopZIndexControls.AddRange(new string[] {
             "DevExpress.XtraBars.BarDockControl",
             "DevExpress.XtraBars.StandaloneBarDockControl",
@@ -110,6 +113,7 @@
             this.dockPanel1.OriginalSize = new System.Drawing.Size(200, 200);
             this.dockPanel1.SavedDock = DevExpress.XtraBars.Docking.DockingStyle.Top;
             this.dockPanel1.SavedIndex = 0;
+            this.dockPanel1.SavedSizeFactor = 1D;
             this.dockPanel1.Size = new System.Drawing.Size(800, 200);
             this.dockPanel1.Text = "dockPanel1";
             this.dockPanel1.Visibility = DevExpress.XtraBars.Docking.DockVisibility.Hidden;
@@ -121,34 +125,43 @@
             this.dockPanel1_Container.Size = new System.Drawing.Size(792, 157);
             this.dockPanel1_Container.TabIndex = 0;
             // 
-            // splitContainerControl1
+            // dockPanel2
             // 
-            this.splitContainerControl1.Collapsed = true;
-            this.splitContainerControl1.CollapsePanel = DevExpress.XtraEditors.SplitCollapsePanel.Panel2;
-            this.splitContainerControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainerControl1.Location = new System.Drawing.Point(0, 146);
-            this.splitContainerControl1.Name = "splitContainerControl1";
-            this.splitContainerControl1.Panel1.Text = "Panel1";
-            this.splitContainerControl1.Panel2.Controls.Add(this.chartSettings1);
-            this.splitContainerControl1.Panel2.Text = "Panel2";
-            this.splitContainerControl1.Size = new System.Drawing.Size(800, 283);
-            this.splitContainerControl1.SplitterPosition = 511;
-            this.splitContainerControl1.TabIndex = 3;
+            this.dockPanel2.Controls.Add(this.dockPanel2_Container);
+            this.dockPanel2.Dock = DevExpress.XtraBars.Docking.DockingStyle.Top;
+            this.dockPanel2.ID = new System.Guid("eb251792-ded5-461d-a5d9-2ee877b04263");
+            this.dockPanel2.Location = new System.Drawing.Point(0, 146);
+            this.dockPanel2.Name = "dockPanel2";
+            this.dockPanel2.OriginalSize = new System.Drawing.Size(200, 200);
+            this.dockPanel2.SavedSizeFactor = 0D;
+            this.dockPanel2.Size = new System.Drawing.Size(800, 200);
+            this.dockPanel2.Text = "dockPanel2";
+            this.dockPanel2.MouseClick += new System.Windows.Forms.MouseEventHandler(this.dockPanel2_MouseClick);
             // 
-            // chartSettings1
+            // dockPanel2_Container
             // 
-            this.chartSettings1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.chartSettings1.Location = new System.Drawing.Point(0, 0);
-            this.chartSettings1.Name = "chartSettings1";
-            this.chartSettings1.Size = new System.Drawing.Size(0, 0);
-            this.chartSettings1.TabIndex = 0;
+            this.dockPanel2_Container.Controls.Add(this.speedTest1);
+            this.dockPanel2_Container.Location = new System.Drawing.Point(4, 38);
+            this.dockPanel2_Container.Name = "dockPanel2_Container";
+            this.dockPanel2_Container.Size = new System.Drawing.Size(792, 157);
+            this.dockPanel2_Container.TabIndex = 0;
+            this.dockPanel2_Container.Click += new System.EventHandler(this.dockPanel2_Container_Click);
+            // 
+            // speedTest1
+            // 
+            this.speedTest1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.speedTest1.Location = new System.Drawing.Point(0, 0);
+            this.speedTest1.Name = "speedTest1";
+            this.speedTest1.Size = new System.Drawing.Size(792, 157);
+            this.speedTest1.TabIndex = 0;
+            this.speedTest1.Click += new System.EventHandler(this.speedTest1_Click_1);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.splitContainerControl1);
+            this.Controls.Add(this.dockPanel2);
             this.Controls.Add(this.ribbonStatusBar1);
             this.Controls.Add(this.ribbonControl1);
             this.Name = "Form1";
@@ -158,8 +171,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.ribbonControl1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dockManager1)).EndInit();
             this.dockPanel1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl1)).EndInit();
-            this.splitContainerControl1.ResumeLayout(false);
+            this.dockPanel2.ResumeLayout(false);
+            this.dockPanel2_Container.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -176,7 +189,8 @@
         private DevExpress.XtraBars.Docking.DockManager dockManager1;
         private DevExpress.XtraBars.Docking.DockPanel dockPanel1;
         private DevExpress.XtraBars.Docking.ControlContainer dockPanel1_Container;
-        private DevExpress.XtraEditors.SplitContainerControl splitContainerControl1;
-        private MeasureWindow.ChartSettingsUserControl chartSettings1;
+        private DevExpress.XtraBars.Docking.DockPanel dockPanel2;
+        private DevExpress.XtraBars.Docking.ControlContainer dockPanel2_Container;
+        private SpeedTest speedTest1;
     }
 }

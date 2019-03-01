@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using System.Windows.Media;
 using LiveCharts;
 using LiveCharts.Geared;
 using LiveCharts.WinForms;
+using Speedtest.View.MeasureWindow;
 
 namespace Speedtest.Controller
 {
@@ -59,6 +61,20 @@ namespace Speedtest.Controller
             //speedTestModel.IsHot = current[0] > 0;
             speedTestModel.CurrentLecture = current[0];
 
+        }
+        internal static void printChartMonitor(ChartMonitor chartMonitorModel, string[] values)
+        {
+            var textbox = chartMonitorModel.TextBox;
+            if (textbox.InvokeRequired)
+            {
+                textbox.Invoke((MethodInvoker)delegate ()
+                {
+                    printChartMonitor(chartMonitorModel, values);
+                });
+            }
+            else {
+                textbox.AppendText(String.Join(" ", values));
+            }
         }
 
         /// <summary>

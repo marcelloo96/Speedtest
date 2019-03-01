@@ -64,6 +64,8 @@
             this.sensitivityRepositoryItem = new DevExpress.XtraEditors.Repository.RepositoryItemSpinEdit();
             this.delimeterElement = new DevExpress.XtraBars.BarEditItem();
             this.delimeterRepositoryItemTextBox = new DevExpress.XtraEditors.Repository.RepositoryItemTextEdit();
+            this.samplingRateElement = new DevExpress.XtraBars.BarEditItem();
+            this.SamplingRepositoryRateItemTextEdit = new DevExpress.XtraEditors.Repository.RepositoryItemTextEdit();
             this.measurePage = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.measurePortBasicGroup = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.connectiongGroup = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
@@ -78,6 +80,7 @@
             this.displayChartGroup = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.repositoryItemComboBox2 = new DevExpress.XtraEditors.Repository.RepositoryItemComboBox();
             this.delimeterRepositoryItemComboBox = new DevExpress.XtraEditors.Repository.RepositoryItemComboBox();
+            this.samplingRateRepositoryItem = new DevExpress.XtraEditors.Repository.RepositoryItemSpinEdit();
             this.ribbonStatusBar1 = new DevExpress.XtraBars.Ribbon.RibbonStatusBar();
             this.defaultLookAndFeel1 = new DevExpress.LookAndFeel.DefaultLookAndFeel(this.components);
             this.contentPanel = new DevExpress.XtraEditors.PanelControl();
@@ -98,8 +101,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.zeroValueRepositoryItem)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.sensitivityRepositoryItem)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.delimeterRepositoryItemTextBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.SamplingRepositoryRateItemTextEdit)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemComboBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.delimeterRepositoryItemComboBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.samplingRateRepositoryItem)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.contentPanel)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dockManager)).BeginInit();
             this.SuspendLayout();
@@ -127,9 +132,10 @@
             this.handShakeElement,
             this.zeroValueItem,
             this.sensivityElement,
-            this.delimeterElement});
+            this.delimeterElement,
+            this.samplingRateElement});
             this.ribbonControl1.Location = new System.Drawing.Point(0, 0);
-            this.ribbonControl1.MaxItemId = 23;
+            this.ribbonControl1.MaxItemId = 25;
             this.ribbonControl1.Name = "ribbonControl1";
             this.ribbonControl1.Pages.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPage[] {
             this.measurePage,
@@ -153,7 +159,9 @@
             this.zeroValueRepositoryItem,
             this.sensitivityRepositoryItem,
             this.delimeterRepositoryItemComboBox,
-            this.delimeterRepositoryItemTextBox});
+            this.delimeterRepositoryItemTextBox,
+            this.samplingRateRepositoryItem,
+            this.SamplingRepositoryRateItemTextEdit});
             this.ribbonControl1.Size = new System.Drawing.Size(1037, 146);
             this.ribbonControl1.StatusBar = this.ribbonStatusBar1;
             // 
@@ -217,6 +225,7 @@
             this.displayModeElement.Hint = "To select display mode, you have to connect to the selected Serial Port.";
             this.displayModeElement.Id = 5;
             this.displayModeElement.Name = "displayModeElement";
+            this.displayModeElement.EditValueChanged += new System.EventHandler(this.displayModeElement_EditValueChanged);
             // 
             // displayModeRepositoryItemComboBox
             // 
@@ -429,6 +438,23 @@
             this.delimeterRepositoryItemTextBox.AutoHeight = false;
             this.delimeterRepositoryItemTextBox.Name = "delimeterRepositoryItemTextBox";
             // 
+            // samplingRateElement
+            // 
+            this.samplingRateElement.Caption = "Sampling Rate";
+            this.samplingRateElement.Edit = this.SamplingRepositoryRateItemTextEdit;
+            this.samplingRateElement.EditHeight = 20;
+            this.samplingRateElement.EditWidth = 100;
+            this.samplingRateElement.Id = 24;
+            this.samplingRateElement.Name = "samplingRateElement";
+            this.samplingRateElement.EditValueChanged += new System.EventHandler(this.samplingRateElement_EditValueChanged);
+            // 
+            // SamplingRepositoryRateItemTextEdit
+            // 
+            this.SamplingRepositoryRateItemTextEdit.AutoHeight = false;
+            this.SamplingRepositoryRateItemTextEdit.Mask.EditMask = "[0-9]*";
+            this.SamplingRepositoryRateItemTextEdit.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.RegEx;
+            this.SamplingRepositoryRateItemTextEdit.Name = "SamplingRepositoryRateItemTextEdit";
+            // 
             // measurePage
             // 
             this.measurePage.Groups.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageGroup[] {
@@ -459,6 +485,7 @@
             // 
             this.measureDisplayGroup.AllowTextClipping = false;
             this.measureDisplayGroup.ItemLinks.Add(this.displayModeElement);
+            this.measureDisplayGroup.ItemLinks.Add(this.samplingRateElement);
             this.measureDisplayGroup.Name = "measureDisplayGroup";
             this.measureDisplayGroup.Text = "Display";
             // 
@@ -539,6 +566,13 @@
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.delimeterRepositoryItemComboBox.Name = "delimeterRepositoryItemComboBox";
             // 
+            // samplingRateRepositoryItem
+            // 
+            this.samplingRateRepositoryItem.AutoHeight = false;
+            this.samplingRateRepositoryItem.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.samplingRateRepositoryItem.Name = "samplingRateRepositoryItem";
+            // 
             // ribbonStatusBar1
             // 
             this.ribbonStatusBar1.ItemLinks.Add(this.portStatusLabel);
@@ -605,8 +639,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.zeroValueRepositoryItem)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.sensitivityRepositoryItem)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.delimeterRepositoryItemTextBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.SamplingRepositoryRateItemTextEdit)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemComboBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.delimeterRepositoryItemComboBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.samplingRateRepositoryItem)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.contentPanel)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dockManager)).EndInit();
             this.ResumeLayout(false);
@@ -668,5 +704,8 @@
         private DevExpress.XtraBars.BarEditItem delimeterElement;
         private DevExpress.XtraEditors.Repository.RepositoryItemTextEdit delimeterRepositoryItemTextBox;
         public DevExpress.XtraEditors.PanelControl contentPanel;
+        private DevExpress.XtraEditors.Repository.RepositoryItemSpinEdit samplingRateRepositoryItem;
+        private DevExpress.XtraBars.BarEditItem samplingRateElement;
+        private DevExpress.XtraEditors.Repository.RepositoryItemTextEdit SamplingRepositoryRateItemTextEdit;
     }
 }

@@ -33,6 +33,7 @@ namespace Speedtest.View.MeasureWindow
             this.splitContainerControl = new DevExpress.XtraEditors.SplitContainerControl();
             this.gearedChartUserControl = new Speedtest.View.MeasureWindow.GearedChartUserControl();
             this.chartSettingsUserControl = new Speedtest.View.MeasureWindow.ChartSettingsUserControl();
+            this.chartMonitor = new Speedtest.View.MeasureWindow.ChartMonitor();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl)).BeginInit();
             this.splitContainerControl.SuspendLayout();
             this.SuspendLayout();
@@ -67,11 +68,20 @@ namespace Speedtest.View.MeasureWindow
             this.chartSettingsUserControl.Size = new System.Drawing.Size(269, 461);
             this.chartSettingsUserControl.TabIndex = 0;
             // 
+            // chartMonitor
+            // 
+            this.chartMonitor.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.chartMonitor.Location = new System.Drawing.Point(0, 0);
+            this.chartMonitor.Name = "chartMonitor";
+            this.chartMonitor.Size = new System.Drawing.Size(976, 461);
+            this.chartMonitor.TabIndex = 1;
+            // 
             // MainMeasureWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.splitContainerControl);
+            this.Controls.Add(this.chartMonitor);
             this.Name = "MainMeasureWindow";
             this.Size = new System.Drawing.Size(976, 461);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl)).EndInit();
@@ -85,5 +95,6 @@ namespace Speedtest.View.MeasureWindow
         private SplitContainerControl splitContainerControl;
         private GearedChartUserControl gearedChartUserControl;
         private ChartSettingsUserControl chartSettingsUserControl;
+        public ChartMonitor chartMonitor;
     }
 }

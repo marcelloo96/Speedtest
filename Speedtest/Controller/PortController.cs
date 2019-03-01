@@ -6,6 +6,7 @@ using System.Diagnostics;
 using System.IO.Ports;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 
@@ -15,8 +16,13 @@ namespace Speedtest.Controller
     {
         private MainFrame mainFrameModel;
         public double tryparseTmp;
-        public PortController(MainFrame model) {
+        public int deltaTime;
+
+        public PortController(MainFrame model)
+        {
             this.mainFrameModel = model;
+            deltaTime = 1;
+            
 
         }
         public void CreatePort()
@@ -42,12 +48,13 @@ namespace Speedtest.Controller
 
         public void dataFlow(object sender, EventArgs e)
         {
-            if (mainFrameModel.isRunning) {
+            if (mainFrameModel.isRunning /*&& deltaTime != 0*/)
+            {
                 mainFrameModel.gearedCharts.ForEach(p => p.viewModel.recivedChartValues.Clear());
 
                 var recived = mainFrameModel.serialPort.ReadExisting();
-
                 string[] chartValues = recivedValueFormatter(recived);
+
                 int numberOfFormattedRecivedCharValues = chartValues.Length;
                 Debug.WriteLine(numberOfFormattedRecivedCharValues);
                 string[] importantValues;
@@ -57,7 +64,7 @@ namespace Speedtest.Controller
                 }
                 else
                 {
-                    if (numberOfFormattedRecivedCharValues > 100)
+                    if (numberOfFormattedRecivedCharValues > 50)
                     {
                         //If the sampling frequency greater than 100Hz, then the first datasets may damaged or deficient.
                         importantValues = chartValues[10].Split(' ');
@@ -69,7 +76,7 @@ namespace Speedtest.Controller
 
                 }
 
-
+                ChartController.printChartMonitor(mainFrameModel.mmw.chartMonitor, importantValues);
                 //We cant add more channel to the panel than the number of the incoming datas we have
                 int maxNumberChannels = Math.Min((int)mainFrameModel.ChannelsElement.EditValue, importantValues.Length);
 
@@ -89,18 +96,21 @@ namespace Speedtest.Controller
 
 
             }
-            
+
         }
 
-        public string[] recivedValueFormatter(string recived) {
+        public string[] recivedValueFormatter(string recived)
+        {
             if (String.IsNullOrWhiteSpace(recived))
             {
                 return new string[] { };
             }
-            else {
+            else
+            {
                 return recived.Split('\n');
             }
-            
+
         }
+
     }
 }

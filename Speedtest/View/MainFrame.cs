@@ -44,6 +44,7 @@ namespace Speedtest
         public BarEditItem ReadBufferSizeElement { get { return readBufferSizeElement; } }
         public BarEditItem WriteBufferSizeElement { get { return writeBufferSizeElement; } }
         public BarEditItem DelimeterElement { get { return delimeterElement; } }
+        public BarEditItem SamplingRateElement { get { return samplingRateElement; } }
 
         #endregion
         #region Groups
@@ -122,11 +123,12 @@ namespace Speedtest
                         mmw.Dock = DockStyle.Fill;
                         contentPanel.Controls.Add(mmw);
                     }
-                    else {
+                    else
+                    {
 
                         contentPanel.Controls.Clear();
                         mmw.deleteControls();
-                        
+
                     }
                 }
                 catch (Exception e)
@@ -255,7 +257,36 @@ namespace Speedtest
 
         private void MainFrame_Resize(object sender, EventArgs e)
         {
-            mmw.resizeControls(contentPanel.Height, contentPanel.Width);
+            if (mmw != null)
+            {
+                mmw.resizeControls(contentPanel.Height, contentPanel.Width);
+            }
+
+        }
+
+        private void samplingRateElement_EditValueChanged(object sender, EventArgs e)
+        {
+            //Hz given, and we need millisec
+            //so 1/f*1000 -> 1000/f
+            portController.deltaTime = 1000 / Int32.Parse((string)samplingRateElement.EditValue);
+        }
+
+        private void displayModeElement_EditValueChanged(object sender, EventArgs e)
+        {
+            string editValue = (string)displayModeElement.EditValue;
+
+            if (mmw != null)
+            {
+                if (editValue == Strings.MeasureTab_ChartDisplayMode)
+                {
+                    mmw.chartMonitor.SendToBack();
+                }
+                else if (editValue == Strings.MeasureTab_MonitorDisplayMode)
+                {
+                    mmw.chartMonitor.BringToFront();
+                }
+            }
+
         }
     }
 }

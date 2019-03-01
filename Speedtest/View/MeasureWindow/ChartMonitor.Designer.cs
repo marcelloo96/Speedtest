@@ -1,6 +1,6 @@
 ﻿namespace Speedtest.View.MeasureWindow
 {
-    partial class ChartSettingsUserControl
+    partial class ChartMonitor
     {
         /// <summary> 
         /// Required designer variable.
@@ -28,34 +28,34 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.propertyGridControl = new DevExpress.XtraVerticalGrid.PropertyGridControl();
-            ((System.ComponentModel.ISupportInitialize)(this.propertyGridControl)).BeginInit();
+            this.TextBox = new System.Windows.Forms.RichTextBox();
             this.SuspendLayout();
             // 
-            // propertyGridControl
+            // TextBox
             // 
-            this.propertyGridControl.AccessibleRole = System.Windows.Forms.AccessibleRole.None;
-            this.propertyGridControl.ActiveViewType = DevExpress.XtraVerticalGrid.PropertyGridView.Office;
-            this.propertyGridControl.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.propertyGridControl.Location = new System.Drawing.Point(0, 0);
-            this.propertyGridControl.Name = "propertyGridControl";
-            this.propertyGridControl.Size = new System.Drawing.Size(548, 437);
-            this.propertyGridControl.TabIndex = 0;
+            this.TextBox.BackColor = System.Drawing.SystemColors.Control;
+            this.TextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.TextBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.TextBox.Location = new System.Drawing.Point(0, 0);
+            this.TextBox.Name = "TextBox";
+            this.TextBox.Size = new System.Drawing.Size(917, 434);
+            this.TextBox.TabIndex = 0;
+            this.TextBox.Text = "";
+            this.TextBox.TextChanged += new System.EventHandler(this.TextBox_TextChanged);
             // 
-            // ChartSettingsUserControl
+            // ChartMonitor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.propertyGridControl);
-            this.Name = "ChartSettingsUserControl";
-            this.Size = new System.Drawing.Size(548, 437);
-            ((System.ComponentModel.ISupportInitialize)(this.propertyGridControl)).EndInit();
+            this.Controls.Add(this.TextBox);
+            this.Name = "ChartMonitor";
+            this.Size = new System.Drawing.Size(917, 434);
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        public DevExpress.XtraVerticalGrid.PropertyGridControl propertyGridControl;
+        public System.Windows.Forms.RichTextBox TextBox;
     }
 }

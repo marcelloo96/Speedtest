@@ -68,5 +68,23 @@ namespace Speedtest {
                 return ResourceManager.GetString("Global_Error_NoPortSelected", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Chart.
+        /// </summary>
+        internal static string MeasureTab_ChartDisplayMode {
+            get {
+                return ResourceManager.GetString("MeasureTab_ChartDisplayMode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Monitor.
+        /// </summary>
+        internal static string MeasureTab_MonitorDisplayMode {
+            get {
+                return ResourceManager.GetString("MeasureTab_MonitorDisplayMode", resourceCulture);
+            }
+        }
     }
 }
