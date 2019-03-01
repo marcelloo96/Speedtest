@@ -80,7 +80,7 @@ namespace Speedtest
             MeasureTabController.SetInitialState(this);
             portController = new PortController(this);
             gearedCharts = new List<SpeedTest>();
-            
+
         }
 
         private void createCharts()
@@ -255,7 +255,13 @@ namespace Speedtest
 
         private void MainFrame_Resize(object sender, EventArgs e)
         {
-            if (mmw != null)
+            if ((this.WindowState == FormWindowState.Maximized || this.WindowState == FormWindowState.Minimized) && mmw != null)
+            {
+
+                mmw.resizeControls(contentPanel.Height, contentPanel.Width);
+
+            }
+            else if (mmw != null)
             {
                 mmw.resizeControls(contentPanel.Height, contentPanel.Width);
             }
@@ -286,5 +292,6 @@ namespace Speedtest
             }
 
         }
+
     }
 }

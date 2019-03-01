@@ -56,6 +56,7 @@ namespace Speedtest.View.MeasureWindow
             // 
             this.gearedChartUserControl.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gearedChartUserControl.Location = new System.Drawing.Point(0, 0);
+            this.gearedChartUserControl.Margin = new System.Windows.Forms.Padding(0);
             this.gearedChartUserControl.Name = "gearedChartUserControl";
             this.gearedChartUserControl.Size = new System.Drawing.Size(695, 461);
             this.gearedChartUserControl.TabIndex = 0;
