@@ -277,7 +277,9 @@ namespace Speedtest
         {
             //Hz given, and we need millisec
             //so 1/f*1000 -> 1000/f
-            portController.deltaTime = 1000 / Int32.Parse((string)samplingRateElement.EditValue);
+            if (portController != null) {
+                portController.deltaTime = 1000 / Int32.Parse((string)samplingRateElement.EditValue);
+            }
         }
 
         private void displayModeElement_EditValueChanged(object sender, EventArgs e)

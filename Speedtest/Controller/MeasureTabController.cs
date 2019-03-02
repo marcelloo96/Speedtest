@@ -18,6 +18,7 @@ namespace Speedtest.Controller
             //TODO DISPLAY
             model.ChannelsElement.EditValue = 2;
             //model.SelectedPortElement.EditValue = "COM3";
+            model.SamplingRateElement.EditValue = 1;
             model.DisplayModeElement.EditValue = Strings.MeasureTab_ChartDisplayMode;
             model.DisplayModeRepositoryItemComboBox.Items.AddRange(new string[] {Strings.MeasureTab_ChartDisplayMode, Strings.MeasureTab_MonitorDisplayMode});
         }

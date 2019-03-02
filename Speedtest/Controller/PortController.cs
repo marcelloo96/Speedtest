@@ -20,12 +20,14 @@ namespace Speedtest.Controller
         public int deltaTime;
         public Regex regex;
         public int numberOfPanelsDisplayed;
+        Stopwatch timer;
 
         public PortController(MainFrame model)
         {
             this.mainFrameModel = model;
-            deltaTime = 1;
+            deltaTime = 1000;
             regex = new Regex(@"-?[0-9]*(\s|\\r)");
+            timer = new System.Diagnostics.Stopwatch();
 
         }
         public void CreatePort()
@@ -52,7 +54,16 @@ namespace Speedtest.Controller
 
         public void dataFlow(object sender, EventArgs e)
         {
-            if (mainFrameModel.isRunning /*&& deltaTime != 0*/)
+            if (timer.IsRunning)
+            {
+                while (timer.ElapsedMilliseconds < deltaTime)
+                {
+                    //Wait
+                }
+                timer.Stop();
+                timer.Reset();
+            }
+            if (mainFrameModel.isRunning)
             {
                 mainFrameModel.gearedCharts.ForEach(p => p.viewModel.recivedChartValues.Clear());
                 string[] chartValues = recivedValueFormatter(mainFrameModel.serialPort.ReadExisting());
@@ -73,14 +84,7 @@ namespace Speedtest.Controller
                         ChartController.RefreshChartValues(mainFrameModel.gearedCharts[i].viewModel, mainFrameModel.gearedCharts[i].viewModel.recivedChartValues);
                     }
                 }
-                else {
-                    MessageBox.Show(Strings.PortController_GreaterIncomingDataError,Strings.Global_Error);
-                    mainFrameModel.isRunning = false;
-                }
-                
-
-                System.Threading.Thread.Sleep(1000);
-
+                timer.Start();
 
             }
 
@@ -99,7 +103,8 @@ namespace Speedtest.Controller
 
         }
 
-        public string recognisedChartValues(string [] chartValues) {
+        public string recognisedChartValues(string[] chartValues)
+        {
             foreach (var i in chartValues)
             {
                 if (regex.Matches(i).Count >= numberOfPanelsDisplayed)
