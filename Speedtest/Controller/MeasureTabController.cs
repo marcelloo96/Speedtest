@@ -84,11 +84,7 @@ namespace Speedtest.Controller
         /// <param name="model"></param>
         private static void setAllPortOptionsToRecentConnectState(MainFrame model)
         {
-            //model.MeasurePortBasicGroup.Enabled = model.connectedState;
-            //model.PortAdvancedsGroup.Enabled = model.connectedState;
-            //model.PortBasicsGroup.Enabled = model.connectedState;
-
-            model.DisplayModeElement.Enabled = !model.connectedState;
+            model.ChannelsElement.Enabled = model.connectedState;
             model.StartStopButton.Enabled = !model.connectedState;
         }
 

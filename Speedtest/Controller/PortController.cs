@@ -74,7 +74,8 @@ namespace Speedtest.Controller
                     }
                 }
                 else {
-                    MessageBox.Show("Több a panel, mint a bejövő adat");
+                    MessageBox.Show(Strings.PortController_GreaterIncomingDataError,Strings.Global_Error);
+                    mainFrameModel.isRunning = false;
                 }
                 
 

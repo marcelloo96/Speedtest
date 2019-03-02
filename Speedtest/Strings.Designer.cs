@@ -61,6 +61,15 @@ namespace Speedtest {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Error!.
+        /// </summary>
+        internal static string Global_Error {
+            get {
+                return ResourceManager.GetString("Global_Error", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to No port selected!.
         /// </summary>
         internal static string Global_Error_NoPortSelected {
@@ -84,6 +93,15 @@ namespace Speedtest {
         internal static string MeasureTab_MonitorDisplayMode {
             get {
                 return ResourceManager.GetString("MeasureTab_MonitorDisplayMode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The number panels are greater than the incoming datas..
+        /// </summary>
+        internal static string PortController_GreaterIncomingDataError {
+            get {
+                return ResourceManager.GetString("PortController_GreaterIncomingDataError", resourceCulture);
             }
         }
     }
