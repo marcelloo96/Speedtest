@@ -230,6 +230,11 @@ namespace Speedtest
             }
         }
 
+        private void channelsElement_EditValueChanged(object sender, EventArgs e)
+        {
+
+        }
+
         private void delimeterElement_EditValueChanged(object sender, EventArgs e)
         {
             if (serialPort != null)
@@ -292,6 +297,7 @@ namespace Speedtest
             }
 
         }
+
 
     }
 }

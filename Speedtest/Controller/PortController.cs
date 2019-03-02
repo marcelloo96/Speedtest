@@ -19,14 +19,13 @@ namespace Speedtest.Controller
         public double tryparseTmp;
         public int deltaTime;
         public Regex regex;
-        public int minNumberOfIncomingData;
+        public int numberOfPanelsDisplayed;
 
         public PortController(MainFrame model)
         {
             this.mainFrameModel = model;
             deltaTime = 1;
             regex = new Regex(@"-?[0-9]*(\s|\\r)");
-            minNumberOfIncomingData = (int)mainFrameModel.ChannelsElement.EditValue;
 
         }
         public void CreatePort()
@@ -40,6 +39,7 @@ namespace Speedtest.Controller
                 mainFrameModel.serialPort.Open();
                 if (mainFrameModel.serialPort.IsOpen)
                 {
+                    numberOfPanelsDisplayed = (int)mainFrameModel.ChannelsElement.EditValue;
                     mainFrameModel.IsPortConnectedStatusBarLabel.Caption = StringConstants.portStatusConnected;
 
                 }
@@ -63,19 +63,20 @@ namespace Speedtest.Controller
                 string[] importantValues = match.Split(' ');
 
                 ChartController.printChartMonitor(mainFrameModel.mmw.chartMonitor, importantValues);
-                //We cant add more channel to the panel than the number of the incoming datas we have
-                int maxNumberChannels = Math.Min(minNumberOfIncomingData, importantValues.Length);
 
-
-                if (importantValues.Length > minNumberOfIncomingData)
+                if (importantValues.Length >= numberOfPanelsDisplayed)
                 {
-                    for (var i = 0; i < minNumberOfIncomingData; i++)
+                    for (var i = 0; i < numberOfPanelsDisplayed; i++)
                     {
                         double.TryParse(importantValues[i], out tryparseTmp);
                         mainFrameModel.gearedCharts[i].viewModel.recivedChartValues.Add(tryparseTmp);
                         ChartController.RefreshChartValues(mainFrameModel.gearedCharts[i].viewModel, mainFrameModel.gearedCharts[i].viewModel.recivedChartValues);
                     }
                 }
+                else {
+                    MessageBox.Show("Több a panel, mint a bejövő adat");
+                }
+                
 
                 System.Threading.Thread.Sleep(1000);
 
@@ -100,7 +101,7 @@ namespace Speedtest.Controller
         public string recognisedChartValues(string [] chartValues) {
             foreach (var i in chartValues)
             {
-                if (regex.Matches(i).Count >= minNumberOfIncomingData)
+                if (regex.Matches(i).Count >= numberOfPanelsDisplayed)
                 {
                     return i;
 

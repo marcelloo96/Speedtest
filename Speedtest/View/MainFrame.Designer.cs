@@ -209,6 +209,7 @@
             this.channelsElement.EditWidth = 100;
             this.channelsElement.Id = 3;
             this.channelsElement.Name = "channelsElement";
+            this.channelsElement.EditValueChanged += new System.EventHandler(this.channelsElement_EditValueChanged);
             // 
             // numberOfChannelsRepositoryItemComboBox
             // 
