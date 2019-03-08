@@ -14,6 +14,7 @@ namespace Speedtest.Controller
 {
     public class ChartController
     {
+        public static double tryparseTmp;
         public static CartesianChart SetDefaultChart(CartesianChart chart, SpeedTest model)
         {
             model.viewModel = new SpeedTestVm(model.numOfSeries, model.serialPort);
@@ -23,17 +24,18 @@ namespace Speedtest.Controller
             chart.Zoom = ZoomingOptions.X;
             chart.DisableAnimations = true;
             chart.AutoSize = true;
-            
 
             var transparent = (Brush)new BrushConverter().ConvertFromString("#00FFFFFF");
 
-            for (int i = 0; i < model.numOfSeries; i++) {
+            for (int i = 0; i < model.numOfSeries; i++)
+            {
                 chart.Series.Add(new GLineSeries
                 {
                     Values = model.viewModel.listOfCharts[i],
+
                     DataLabels = false,
                     Fill = transparent,
-                    LineSmoothness = 0
+                    LineSmoothness = 0,
                 });
             }
 
@@ -41,16 +43,33 @@ namespace Speedtest.Controller
 
         }
 
+        public static string[] getlofasz()
+        {
+            string[] kurvaanyad = new string[300];
+            for (int i = 0; i < kurvaanyad.Length; i++)
+            {
+                kurvaanyad[i] = i.ToString();
+            }
 
+            return kurvaanyad;
+        }
         internal static void RefreshChartValues(SpeedTestVm speedTestModel, List<double> current)
         {
             int index = 0;
-            foreach (var i in speedTestModel.listOfCharts) {
-                if (index < speedTestModel.listOfCharts.Count() && index<current.Count()) {
+            foreach (var i in speedTestModel.listOfCharts)
+            {
+                if (index < speedTestModel.listOfCharts.Count() && index < current.Count())
+                {
 
                     var first = i.DefaultIfEmpty(0).FirstOrDefault();
-                    if (i.Count > speedTestModel.keepRecords - 1) i.Remove(first);
-                    if (i.Count < speedTestModel.keepRecords) i.Add(current[index]);
+                    if (i.Count > speedTestModel.keepRecords - 1)
+                    {
+                        i.Remove(first);
+                    }
+                    if (i.Count < speedTestModel.keepRecords)
+                    {
+                        i.Add(current[index]);
+                    }
 
                     index++;
                 }
@@ -72,8 +91,33 @@ namespace Speedtest.Controller
                     printChartMonitor(chartMonitorModel, values);
                 });
             }
-            else {
-                textbox.AppendText(String.Join(" ", values));
+            else
+            {
+                if (values != null)
+                {
+                    textbox.AppendText(String.Join(" ", values));
+                }
+            }
+        }
+
+        internal static void printChart(string[] importantValues, int numberOfPanelsDisplayed, MainFrame mainFrameModel)
+        {
+            if (importantValues != null && importantValues.Length >= numberOfPanelsDisplayed)
+            {
+                for (var i = 0; i < numberOfPanelsDisplayed; i++)
+                {
+                    double.TryParse(importantValues[i], out tryparseTmp);
+                    mainFrameModel.gearedCharts[i].viewModel.recivedChartValues.Add(tryparseTmp);
+                    ChartController.RefreshChartValues(mainFrameModel.gearedCharts[i].viewModel, mainFrameModel.gearedCharts[i].viewModel.recivedChartValues);
+                }
+            }
+            else
+            {
+                for (var i = 0; i < numberOfPanelsDisplayed; i++)
+                {
+                    mainFrameModel.gearedCharts[i].viewModel.recivedChartValues.Add(double.NaN);
+                    ChartController.RefreshChartValues(mainFrameModel.gearedCharts[i].viewModel, mainFrameModel.gearedCharts[i].viewModel.recivedChartValues);
+                }
             }
         }
 

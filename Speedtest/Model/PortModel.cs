@@ -23,6 +23,7 @@ namespace Speedtest.Model
             RtsEnable = (bool)mainFrameModel.RtsEnableElement.EditValue;
             DtrEnable = (bool)mainFrameModel.DtrEnableElement.EditValue;
             Handshake = (Handshake)mainFrameModel.HandShakeElement.EditValue;
+            ReceivedBytesThreshold = 500000;
 
         }
     }

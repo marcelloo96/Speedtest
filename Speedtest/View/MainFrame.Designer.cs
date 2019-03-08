@@ -58,18 +58,19 @@
             this.dtrEnableRepositoryItemComboBox = new DevExpress.XtraEditors.Repository.RepositoryItemComboBox();
             this.handShakeElement = new DevExpress.XtraBars.BarEditItem();
             this.handShakeRepositoryItemComboBox = new DevExpress.XtraEditors.Repository.RepositoryItemComboBox();
-            this.zeroValueItem = new DevExpress.XtraBars.BarEditItem();
-            this.zeroValueRepositoryItem = new DevExpress.XtraEditors.Repository.RepositoryItemSpinEdit();
+            this.zeroValueElement = new DevExpress.XtraBars.BarEditItem();
+            this.zeroValueRepositoryItemSpinEdit = new DevExpress.XtraEditors.Repository.RepositoryItemSpinEdit();
             this.sensivityElement = new DevExpress.XtraBars.BarEditItem();
             this.sensitivityRepositoryItem = new DevExpress.XtraEditors.Repository.RepositoryItemSpinEdit();
             this.delimeterElement = new DevExpress.XtraBars.BarEditItem();
             this.delimeterRepositoryItemTextBox = new DevExpress.XtraEditors.Repository.RepositoryItemTextEdit();
             this.samplingRateElement = new DevExpress.XtraBars.BarEditItem();
             this.SamplingRepositoryRateItemTextEdit = new DevExpress.XtraEditors.Repository.RepositoryItemTextEdit();
+            this.numberOfIncomingDataElement = new DevExpress.XtraBars.BarEditItem();
+            this.numberOfIncomingDataRepositoryItemTextBox = new DevExpress.XtraEditors.Repository.RepositoryItemTextEdit();
             this.measurePage = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.measurePortBasicGroup = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.connectiongGroup = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
-            this.measureDisplayGroup = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.measureControlPanelGroup = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.portOptionsPage = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.portBasicsGroup = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
@@ -81,10 +82,15 @@
             this.repositoryItemComboBox2 = new DevExpress.XtraEditors.Repository.RepositoryItemComboBox();
             this.delimeterRepositoryItemComboBox = new DevExpress.XtraEditors.Repository.RepositoryItemComboBox();
             this.samplingRateRepositoryItem = new DevExpress.XtraEditors.Repository.RepositoryItemSpinEdit();
+            this.repositoryItemTextEdit1 = new DevExpress.XtraEditors.Repository.RepositoryItemTextEdit();
             this.ribbonStatusBar1 = new DevExpress.XtraBars.Ribbon.RibbonStatusBar();
             this.defaultLookAndFeel1 = new DevExpress.LookAndFeel.DefaultLookAndFeel(this.components);
             this.contentPanel = new DevExpress.XtraEditors.PanelControl();
             this.dockManager = new DevExpress.XtraBars.Docking.DockManager(this.components);
+            this.displayGroup = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
+            this.keepRecordsRepositoryItemTrackBar = new DevExpress.XtraEditors.Repository.RepositoryItemTrackBar();
+            this.keepRecordsElement = new DevExpress.XtraBars.BarEditItem();
+            this.keepRecordsRepositoryItemTextBox = new DevExpress.XtraEditors.Repository.RepositoryItemTextEdit();
             ((System.ComponentModel.ISupportInitialize)(this.ribbonControl1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.selectedPortRepositoryItemComboBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.baudRateRepositoryItemComboBox)).BeginInit();
@@ -98,15 +104,19 @@
             ((System.ComponentModel.ISupportInitialize)(this.rtsEnableRepositoryItemComboBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dtrEnableRepositoryItemComboBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.handShakeRepositoryItemComboBox)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.zeroValueRepositoryItem)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.zeroValueRepositoryItemSpinEdit)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.sensitivityRepositoryItem)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.delimeterRepositoryItemTextBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.SamplingRepositoryRateItemTextEdit)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numberOfIncomingDataRepositoryItemTextBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemComboBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.delimeterRepositoryItemComboBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.samplingRateRepositoryItem)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemTextEdit1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.contentPanel)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dockManager)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.keepRecordsRepositoryItemTrackBar)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.keepRecordsRepositoryItemTextBox)).BeginInit();
             this.SuspendLayout();
             // 
             // ribbonControl1
@@ -130,12 +140,14 @@
             this.rtsEnableElement,
             this.dtrEnableElement,
             this.handShakeElement,
-            this.zeroValueItem,
+            this.zeroValueElement,
             this.sensivityElement,
             this.delimeterElement,
-            this.samplingRateElement});
+            this.samplingRateElement,
+            this.numberOfIncomingDataElement,
+            this.keepRecordsElement});
             this.ribbonControl1.Location = new System.Drawing.Point(0, 0);
-            this.ribbonControl1.MaxItemId = 25;
+            this.ribbonControl1.MaxItemId = 29;
             this.ribbonControl1.Name = "ribbonControl1";
             this.ribbonControl1.Pages.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPage[] {
             this.measurePage,
@@ -156,12 +168,16 @@
             this.rtsEnableRepositoryItemComboBox,
             this.dtrEnableRepositoryItemComboBox,
             this.handShakeRepositoryItemComboBox,
-            this.zeroValueRepositoryItem,
+            this.zeroValueRepositoryItemSpinEdit,
             this.sensitivityRepositoryItem,
             this.delimeterRepositoryItemComboBox,
             this.delimeterRepositoryItemTextBox,
             this.samplingRateRepositoryItem,
-            this.SamplingRepositoryRateItemTextEdit});
+            this.SamplingRepositoryRateItemTextEdit,
+            this.repositoryItemTextEdit1,
+            this.numberOfIncomingDataRepositoryItemTextBox,
+            this.keepRecordsRepositoryItemTrackBar,
+            this.keepRecordsRepositoryItemTextBox});
             this.ribbonControl1.Size = new System.Drawing.Size(1037, 146);
             this.ribbonControl1.StatusBar = this.ribbonStatusBar1;
             // 
@@ -392,21 +408,21 @@
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.handShakeRepositoryItemComboBox.Name = "handShakeRepositoryItemComboBox";
             // 
-            // zeroValueItem
+            // zeroValueElement
             // 
-            this.zeroValueItem.Caption = "Zero Value:";
-            this.zeroValueItem.Edit = this.zeroValueRepositoryItem;
-            this.zeroValueItem.EditHeight = 20;
-            this.zeroValueItem.EditWidth = 100;
-            this.zeroValueItem.Id = 19;
-            this.zeroValueItem.Name = "zeroValueItem";
+            this.zeroValueElement.Caption = "Zero Value:";
+            this.zeroValueElement.Edit = this.zeroValueRepositoryItemSpinEdit;
+            this.zeroValueElement.EditHeight = 20;
+            this.zeroValueElement.EditWidth = 100;
+            this.zeroValueElement.Id = 19;
+            this.zeroValueElement.Name = "zeroValueElement";
             // 
-            // zeroValueRepositoryItem
+            // zeroValueRepositoryItemSpinEdit
             // 
-            this.zeroValueRepositoryItem.AutoHeight = false;
-            this.zeroValueRepositoryItem.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            this.zeroValueRepositoryItemSpinEdit.AutoHeight = false;
+            this.zeroValueRepositoryItemSpinEdit.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.zeroValueRepositoryItem.Name = "zeroValueRepositoryItem";
+            this.zeroValueRepositoryItemSpinEdit.Name = "zeroValueRepositoryItemSpinEdit";
             // 
             // sensivityElement
             // 
@@ -441,7 +457,7 @@
             // 
             // samplingRateElement
             // 
-            this.samplingRateElement.Caption = "Sampling Rate";
+            this.samplingRateElement.Caption = "Sampling Rate:";
             this.samplingRateElement.Edit = this.SamplingRepositoryRateItemTextEdit;
             this.samplingRateElement.EditHeight = 20;
             this.samplingRateElement.EditWidth = 100;
@@ -456,12 +472,27 @@
             this.SamplingRepositoryRateItemTextEdit.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.RegEx;
             this.SamplingRepositoryRateItemTextEdit.Name = "SamplingRepositoryRateItemTextEdit";
             // 
+            // numberOfIncomingDataElement
+            // 
+            this.numberOfIncomingDataElement.Caption = "Number of Incoming Data:";
+            this.numberOfIncomingDataElement.Edit = this.numberOfIncomingDataRepositoryItemTextBox;
+            this.numberOfIncomingDataElement.Id = 26;
+            this.numberOfIncomingDataElement.Name = "numberOfIncomingDataElement";
+            this.numberOfIncomingDataElement.EditValueChanged += new System.EventHandler(this.numberOfIncomingDataElement_EditValueChanged);
+            // 
+            // numberOfIncomingDataRepositoryItemTextBox
+            // 
+            this.numberOfIncomingDataRepositoryItemTextBox.AutoHeight = false;
+            this.numberOfIncomingDataRepositoryItemTextBox.Mask.EditMask = "[0-9]*";
+            this.numberOfIncomingDataRepositoryItemTextBox.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.RegEx;
+            this.numberOfIncomingDataRepositoryItemTextBox.Name = "numberOfIncomingDataRepositoryItemTextBox";
+            // 
             // measurePage
             // 
             this.measurePage.Groups.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageGroup[] {
             this.measurePortBasicGroup,
+            this.displayGroup,
             this.connectiongGroup,
-            this.measureDisplayGroup,
             this.measureControlPanelGroup});
             this.measurePage.Name = "measurePage";
             this.measurePage.Text = "Measure";
@@ -472,8 +503,10 @@
             this.measurePortBasicGroup.ItemLinks.Add(this.selectedPortElement);
             this.measurePortBasicGroup.ItemLinks.Add(this.baudRateElement);
             this.measurePortBasicGroup.ItemLinks.Add(this.channelsElement);
+            this.measurePortBasicGroup.ItemLinks.Add(this.numberOfIncomingDataElement);
+            this.measurePortBasicGroup.ItemLinks.Add(this.samplingRateElement);
             this.measurePortBasicGroup.Name = "measurePortBasicGroup";
-            this.measurePortBasicGroup.Text = "Port Basics";
+            this.measurePortBasicGroup.Text = "Basics";
             // 
             // connectiongGroup
             // 
@@ -481,14 +514,6 @@
             this.connectiongGroup.ItemLinks.Add(this.connectButton);
             this.connectiongGroup.Name = "connectiongGroup";
             this.connectiongGroup.Text = "Connecting";
-            // 
-            // measureDisplayGroup
-            // 
-            this.measureDisplayGroup.AllowTextClipping = false;
-            this.measureDisplayGroup.ItemLinks.Add(this.displayModeElement);
-            this.measureDisplayGroup.ItemLinks.Add(this.samplingRateElement);
-            this.measureDisplayGroup.Name = "measureDisplayGroup";
-            this.measureDisplayGroup.Text = "Display";
             // 
             // measureControlPanelGroup
             // 
@@ -536,7 +561,7 @@
             // 
             // ribbonPageGroup1
             // 
-            this.ribbonPageGroup1.ItemLinks.Add(this.zeroValueItem);
+            this.ribbonPageGroup1.ItemLinks.Add(this.zeroValueElement);
             this.ribbonPageGroup1.ItemLinks.Add(this.sensivityElement);
             this.ribbonPageGroup1.Name = "ribbonPageGroup1";
             this.ribbonPageGroup1.Text = "Linearity";
@@ -574,6 +599,11 @@
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.samplingRateRepositoryItem.Name = "samplingRateRepositoryItem";
             // 
+            // repositoryItemTextEdit1
+            // 
+            this.repositoryItemTextEdit1.AutoHeight = false;
+            this.repositoryItemTextEdit1.Name = "repositoryItemTextEdit1";
+            // 
             // ribbonStatusBar1
             // 
             this.ribbonStatusBar1.ItemLinks.Add(this.portStatusLabel);
@@ -609,6 +639,38 @@
             "DevExpress.XtraBars.Navigation.TileNavPane",
             "DevExpress.XtraBars.TabFormControl"});
             // 
+            // displayGroup
+            // 
+            this.displayGroup.ItemLinks.Add(this.displayModeElement);
+            this.displayGroup.ItemLinks.Add(this.keepRecordsElement);
+            this.displayGroup.Name = "displayGroup";
+            this.displayGroup.Text = "Display";
+            // 
+            // keepRecordsRepositoryItemTrackBar
+            // 
+            this.keepRecordsRepositoryItemTrackBar.LabelAppearance.Options.UseTextOptions = true;
+            this.keepRecordsRepositoryItemTrackBar.LabelAppearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.keepRecordsRepositoryItemTrackBar.Maximum = 1000;
+            this.keepRecordsRepositoryItemTrackBar.Minimum = 1;
+            this.keepRecordsRepositoryItemTrackBar.Name = "keepRecordsRepositoryItemTrackBar";
+            // 
+            // keepRecordsElement
+            // 
+            this.keepRecordsElement.Caption = "Keeping Records:";
+            this.keepRecordsElement.Edit = this.keepRecordsRepositoryItemTextBox;
+            this.keepRecordsElement.EditHeight = 20;
+            this.keepRecordsElement.EditWidth = 100;
+            this.keepRecordsElement.Id = 28;
+            this.keepRecordsElement.Name = "keepRecordsElement";
+            this.keepRecordsElement.EditValueChanged += new System.EventHandler(this.keepRecordsElement_EditValueChanged);
+            // 
+            // keepRecordsRepositoryItemTextBox
+            // 
+            this.keepRecordsRepositoryItemTextBox.AutoHeight = false;
+            this.keepRecordsRepositoryItemTextBox.Mask.EditMask = "[0-9]*";
+            this.keepRecordsRepositoryItemTextBox.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.RegEx;
+            this.keepRecordsRepositoryItemTextBox.Name = "keepRecordsRepositoryItemTextBox";
+            // 
             // MainFrame
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -637,15 +699,19 @@
             ((System.ComponentModel.ISupportInitialize)(this.rtsEnableRepositoryItemComboBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dtrEnableRepositoryItemComboBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.handShakeRepositoryItemComboBox)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.zeroValueRepositoryItem)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.zeroValueRepositoryItemSpinEdit)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.sensitivityRepositoryItem)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.delimeterRepositoryItemTextBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.SamplingRepositoryRateItemTextEdit)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numberOfIncomingDataRepositoryItemTextBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemComboBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.delimeterRepositoryItemComboBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.samplingRateRepositoryItem)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemTextEdit1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.contentPanel)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dockManager)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.keepRecordsRepositoryItemTrackBar)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.keepRecordsRepositoryItemTextBox)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -661,7 +727,6 @@
         private DevExpress.XtraBars.BarEditItem selectedPortElement;
         private DevExpress.XtraEditors.Repository.RepositoryItemComboBox baudRateRepositoryItemComboBox;
         private DevExpress.XtraEditors.Repository.RepositoryItemComboBox selectedPortRepositoryItemComboBox;
-        private DevExpress.XtraBars.Ribbon.RibbonPageGroup measureDisplayGroup;
         private DevExpress.XtraBars.BarEditItem channelsElement;
         private DevExpress.XtraEditors.Repository.RepositoryItemComboBox numberOfChannelsRepositoryItemComboBox;
         private DevExpress.XtraBars.BarEditItem displayModeElement;
@@ -692,8 +757,8 @@
         private DevExpress.XtraEditors.Repository.RepositoryItemComboBox handShakeRepositoryItemComboBox;
         private DevExpress.XtraEditors.Repository.RepositoryItemComboBox repositoryItemComboBox2;
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup connectiongGroup;
-        private DevExpress.XtraBars.BarEditItem zeroValueItem;
-        private DevExpress.XtraEditors.Repository.RepositoryItemSpinEdit zeroValueRepositoryItem;
+        private DevExpress.XtraBars.BarEditItem zeroValueElement;
+        private DevExpress.XtraEditors.Repository.RepositoryItemSpinEdit zeroValueRepositoryItemSpinEdit;
         private DevExpress.XtraBars.BarEditItem sensivityElement;
         private DevExpress.XtraEditors.Repository.RepositoryItemSpinEdit sensitivityRepositoryItem;
         private DevExpress.XtraBars.Ribbon.RibbonPage sensorOptionsPage;
@@ -708,5 +773,12 @@
         private DevExpress.XtraEditors.Repository.RepositoryItemSpinEdit samplingRateRepositoryItem;
         private DevExpress.XtraBars.BarEditItem samplingRateElement;
         private DevExpress.XtraEditors.Repository.RepositoryItemTextEdit SamplingRepositoryRateItemTextEdit;
+        private DevExpress.XtraBars.BarEditItem numberOfIncomingDataElement;
+        private DevExpress.XtraEditors.Repository.RepositoryItemTextEdit numberOfIncomingDataRepositoryItemTextBox;
+        private DevExpress.XtraEditors.Repository.RepositoryItemTextEdit repositoryItemTextEdit1;
+        private DevExpress.XtraEditors.Repository.RepositoryItemTrackBar keepRecordsRepositoryItemTrackBar;
+        private DevExpress.XtraBars.Ribbon.RibbonPageGroup displayGroup;
+        private DevExpress.XtraBars.BarEditItem keepRecordsElement;
+        private DevExpress.XtraEditors.Repository.RepositoryItemTextEdit keepRecordsRepositoryItemTextBox;
     }
 }

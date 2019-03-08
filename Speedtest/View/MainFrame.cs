@@ -29,6 +29,8 @@ namespace Speedtest
         public RepositoryItemComboBox DtrEnableRepositoryItemComboBox { get { return dtrEnableRepositoryItemComboBox; } }
         public RepositoryItemComboBox HandShakeRepositoryItemComboBox { get { return handShakeRepositoryItemComboBox; } }
         public RepositoryItemTextEdit DelimeterRepositoryItemTextBox { get { return delimeterRepositoryItemTextBox; } }
+        public RepositoryItemTextEdit NumberOfIncomingDataRepositoryItemTextBox { get { return numberOfIncomingDataRepositoryItemTextBox; } }
+        public RepositoryItemTextEdit KeepRecordsRepositoryItemTextEdit { get { return keepRecordsRepositoryItemTextBox; } }
         #endregion
         #region Elements
         public BarEditItem DisplayModeElement { get { return displayModeElement; } }
@@ -45,6 +47,8 @@ namespace Speedtest
         public BarEditItem WriteBufferSizeElement { get { return writeBufferSizeElement; } }
         public BarEditItem DelimeterElement { get { return delimeterElement; } }
         public BarEditItem SamplingRateElement { get { return samplingRateElement; } }
+        public BarEditItem NumberOfIncomingDataElement { get { return numberOfIncomingDataElement; } }
+        public BarEditItem KeepRecordsElement { get { return keepRecordsElement; } }
 
         #endregion
         #region Groups
@@ -96,7 +100,6 @@ namespace Speedtest
         }
         private void connectButton_ItemClick(object sender, ItemClickEventArgs ea)
         {
-
             if (String.IsNullOrWhiteSpace((string)this.selectedPortElement.EditValue))
             {
                 MessageBox.Show(Strings.Global_Error_NoPortSelected);
@@ -141,13 +144,18 @@ namespace Speedtest
         {
             if (isRunning)
             {
-                serialPort.DataReceived -= portController.dataFlow;
+                //serialPort.DataReceived -= portController.dataFlow;
                 isRunning = false;
+                connectiongGroup.Enabled = false;
             }
             else
             {
-                serialPort.DataReceived += portController.dataFlow;
+                //serialPort.DataReceived += portController.dataFlow;
                 isRunning = true;
+                (new Thread(() => {
+                    portController.dataflowExtra();
+                })).Start();
+                connectiongGroup.Enabled = true;
             }
 
         }
@@ -226,7 +234,7 @@ namespace Speedtest
         {
             if (serialPort != null)
             {
-                serialPort.ReadBufferSize = (int)readBufferSizeElement.EditValue;
+                serialPort.ReadBufferSize = (int)((double)readBufferSizeElement.EditValue);
             }
         }
 
@@ -277,7 +285,8 @@ namespace Speedtest
         {
             //Hz given, and we need millisec
             //so 1/f*1000 -> 1000/f
-            if (portController != null) {
+            if (portController != null)
+            {
                 portController.deltaTime = 1000 / Int32.Parse((string)samplingRateElement.EditValue);
             }
         }
@@ -300,6 +309,40 @@ namespace Speedtest
 
         }
 
+        private void numberOfIncomingDataElement_EditValueChanged(object sender, EventArgs e)
+        {
+            if (portController != null)
+            {
+                portController.numberOfIncomingData = Int32.Parse((string)NumberOfIncomingDataElement.EditValue);
+            }
+        }
 
+        private void keepRecordsElement_EditValueChanged(object sender, EventArgs e)
+        {
+            if (keepRecordsElement.EditValue != null)
+            {
+                var editvalue = Int32.Parse(keepRecordsElement.EditValue.ToString());
+                if (editvalue < 1)
+                {
+                    editvalue = 1;
+                }
+                else if (editvalue > 1000)
+                {
+                    editvalue = 1000;
+                }
+                keepRecordsElement.EditValue = editvalue;
+                if (mmw != null)
+                {
+                    foreach (var i in mmw.gearedCharts)
+                    {
+                        i.viewModel.keepRecords = editvalue;
+                    }
+                }
+            }
+
+
+
+
+        }
     }
 }

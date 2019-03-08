@@ -20,19 +20,26 @@ namespace Speedtest.Controller
         public int deltaTime;
         public Regex regex;
         public int numberOfPanelsDisplayed;
+        public int numberOfIncomingData;
+        public SerialPort serialPort;
         Stopwatch timer;
+        public string[] importantValues;
+        public List<string> buffer;
+        public int bytesToRead;
 
         public PortController(MainFrame model)
         {
             this.mainFrameModel = model;
+            numberOfIncomingData = 1;
             deltaTime = 1000;
             regex = new Regex(@"-?[0-9]*(\s|\\r)");
-            timer = new System.Diagnostics.Stopwatch();
-
+            timer = new Stopwatch();
+            buffer = new List<string>();
         }
         public void CreatePort()
         {
             mainFrameModel.serialPort = new PortModel(mainFrameModel);
+            serialPort = mainFrameModel.serialPort;
         }
         public void DoTheConnection()
         {
@@ -54,40 +61,31 @@ namespace Speedtest.Controller
 
         public void dataFlow(object sender, EventArgs e)
         {
-            if (timer.IsRunning)
+            timer.Start();
+
+            while (timer.ElapsedMilliseconds < deltaTime)
             {
-                while (timer.ElapsedMilliseconds < deltaTime)
-                {
-                    //Wait
-                }
-                timer.Stop();
-                timer.Reset();
+                //Wait
             }
+            timer.Stop();
+
+
             if (mainFrameModel.isRunning)
             {
                 mainFrameModel.gearedCharts.ForEach(p => p.viewModel.recivedChartValues.Clear());
-                string[] chartValues = recivedValueFormatter(mainFrameModel.serialPort.ReadExisting());
-                int numberOfFormattedRecivedCharValues = chartValues.Length;
-                Debug.WriteLine(numberOfFormattedRecivedCharValues);
+                string[] recivedSeparatedChartValues = recivedValueFormatter(serialPort.ReadExisting());
 
-                string match = recognisedChartValues(chartValues);
+                string match = recognisedChartValues(recivedSeparatedChartValues);
+                Debug.WriteLine(timer.ElapsedMilliseconds + " -> " + match);
                 string[] importantValues = match.Split(' ');
 
                 ChartController.printChartMonitor(mainFrameModel.mmw.chartMonitor, importantValues);
+                ChartController.printChart(importantValues, numberOfPanelsDisplayed, mainFrameModel);
 
-                if (importantValues.Length >= numberOfPanelsDisplayed)
-                {
-                    for (var i = 0; i < numberOfPanelsDisplayed; i++)
-                    {
-                        double.TryParse(importantValues[i], out tryparseTmp);
-                        mainFrameModel.gearedCharts[i].viewModel.recivedChartValues.Add(tryparseTmp);
-                        ChartController.RefreshChartValues(mainFrameModel.gearedCharts[i].viewModel, mainFrameModel.gearedCharts[i].viewModel.recivedChartValues);
-                    }
-                }
-                timer.Start();
 
             }
-
+            serialPort.DiscardInBuffer();
+            timer.Reset();
         }
 
         public string[] recivedValueFormatter(string recived)
@@ -107,14 +105,64 @@ namespace Speedtest.Controller
         {
             foreach (var i in chartValues)
             {
-                if (regex.Matches(i).Count >= numberOfPanelsDisplayed)
+                if (regex.Matches(i).Count == numberOfIncomingData)
                 {
                     return i;
 
                 }
             }
+
+            //for (var i = chartValues.Length - 1; i > 0; i--) {
+            //    if (regex.Matches(chartValues[i]).Count==numberOfIncomingData) {
+            //        return chartValues[i];
+            //    }
+            //}
             return "";
         }
 
+        internal void dataflowExtra()
+        {
+            while (mainFrameModel.isRunning && serialPort.IsOpen)
+            {
+                //timer.Start();
+                //buffer.Clear();
+                //  while (timer.ElapsedMilliseconds < deltaTime) {
+
+                if (serialPort.IsOpen)
+                {
+                    if (serialPort.BytesToRead != 0)
+                    {
+                        if (serialPort.IsOpen)
+                        {
+                            importantValues = serialPort.ReadLine().Split(' ');
+
+                        }
+
+                    }
+                }
+
+                //if (serialPort.BytesToRead != 0)
+                //{
+                //    var bytesToRead = serialPort.BytesToRead;
+                //    byte[] temp = new byte[bytesToRead];
+                //    serialPort.Read(temp, 0, bytesToRead);
+                //    var important = System.Text.Encoding.Default.GetString(temp);
+                //    Debug.WriteLine(important);
+                //    buffer.Add(important);
+                //    importantValues = important.Split(' ');
+                //}
+
+                mainFrameModel.gearedCharts.ForEach(p => p.viewModel.recivedChartValues.Clear());
+                ChartController.printChartMonitor(mainFrameModel.mmw.chartMonitor, importantValues);
+                ChartController.printChart(importantValues, numberOfPanelsDisplayed, mainFrameModel);
+            }
+
+            // timer.Reset();
+
+
+            // }
+        }
+
     }
+
 }

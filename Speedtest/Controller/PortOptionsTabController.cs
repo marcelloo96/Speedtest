@@ -17,6 +17,7 @@ namespace Speedtest.Controller
         public static readonly bool[] boolOptions = new bool[] { true, false };
         public static readonly Handshake[] handshakeOptionList = new Handshake[] { Handshake.None, Handshake.RequestToSend, Handshake.RequestToSendXOnXOff, Handshake.XOnXOff };
         public static readonly String defaultDelimeter = ("\\n");
+        public static readonly double[] readBufferSizeOptionList = getListOf2Exponents();
 
 
         internal static void FillEditors(MainFrame model)
@@ -33,6 +34,7 @@ namespace Speedtest.Controller
             model.RtsEnableRepositoryItemComboBox.Items.AddRange(boolOptions);
             model.DtrEnableRepositoryItemComboBox.Items.AddRange(boolOptions);
             model.HandShakeRepositoryItemComboBox.Items.AddRange(handshakeOptionList);
+            model.ReadBufferSizeRepositoryItemComboBox.Items.AddRange(readBufferSizeOptionList);
             //model.DelimeterRepositoryItemComboBox.Items.Add("\\r\\n");
 
             //SETTING DEFAULT VALUES
@@ -41,6 +43,7 @@ namespace Speedtest.Controller
             model.ParityElement.EditValue = paritiesOptionList[0]; //None
             model.StopBitElement.EditValue = stopBitsOptionList[0]; //One
             model.HandShakeElement.EditValue = handshakeOptionList[0]; //None
+            model.ReadBufferSizeElement.EditValue = readBufferSizeOptionList[readBufferSizeOptionList.Length - 1];
             model.RtsEnableElement.EditValue = false;
             model.DtrEnableElement.EditValue = false;
             model.DelimeterElement.EditValue = defaultDelimeter;
@@ -56,6 +59,14 @@ namespace Speedtest.Controller
             model.DtrEnableRepositoryItemComboBox.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
             model.HandShakeRepositoryItemComboBox.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
             #endregion
+        }
+
+        public static double[] getListOf2Exponents() {
+            double[] list = new double[19];
+            for (int i = 12; i < 31; i++) {
+                list[i - 12] = Math.Pow(2,i);
+            }
+            return list;
         }
     }
 }

@@ -16,6 +16,7 @@ namespace Speedtest
 
         /// <summary>
         /// revicedChartValue is the values that given by the 'Datarecived' action listener
+        /// The number of elements this list got represent the number of points we Draw each deltatime
         /// </summary>
         public List<double> recivedChartValues;
         public int keepRecords = 300;

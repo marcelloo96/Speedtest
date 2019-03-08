@@ -19,8 +19,10 @@ namespace Speedtest.Controller
             model.ChannelsElement.EditValue = 2;
             //model.SelectedPortElement.EditValue = "COM3";
             model.SamplingRateElement.EditValue = 1;
+            model.KeepRecordsElement.EditValue = 300;
             model.DisplayModeElement.EditValue = Strings.MeasureTab_ChartDisplayMode;
             model.DisplayModeRepositoryItemComboBox.Items.AddRange(new string[] {Strings.MeasureTab_ChartDisplayMode, Strings.MeasureTab_MonitorDisplayMode});
+
         }
         /// <summary>
         /// Disable all functions that need a connection
@@ -71,7 +73,7 @@ namespace Speedtest.Controller
                 mainFrameModel.ConnectButton.Caption = StringConstants.disconnect;
 
                 //model.portController.CreatePort();
-                mainFrameModel.serialPort = new PortModel(mainFrameModel);
+                mainFrameModel.portController.CreatePort();
                 mainFrameModel.portController.DoTheConnection();
 
                 mainFrameModel.connectedState = true;
@@ -86,6 +88,7 @@ namespace Speedtest.Controller
         private static void setAllPortOptionsToRecentConnectState(MainFrame model)
         {
             model.ChannelsElement.Enabled = model.connectedState;
+            model.PortAdvancedsGroup.Enabled = model.connectedState;
             model.StartStopButton.Enabled = !model.connectedState;
         }
 
