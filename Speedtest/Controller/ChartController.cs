@@ -84,41 +84,54 @@ namespace Speedtest.Controller
         internal static void printChartMonitor(ChartMonitor chartMonitorModel, string[] values)
         {
             var textbox = chartMonitorModel.TextBox;
-            if (textbox.InvokeRequired)
+            try
             {
-                textbox.Invoke((MethodInvoker)delegate ()
+                if (textbox.InvokeRequired)
                 {
-                    printChartMonitor(chartMonitorModel, values);
-                });
-            }
-            else
-            {
-                if (values != null)
-                {
-                    textbox.AppendText(String.Join(" ", values));
+                    textbox.Invoke((MethodInvoker)delegate ()
+                    {
+                        printChartMonitor(chartMonitorModel, values);
+                    });
                 }
+                else
+                {
+                    if (values != null)
+                    {
+                        textbox.AppendText(String.Join(" ", values));
+                    }
+                }
+            }
+            catch (Exception ex) {
             }
         }
 
         internal static void printChart(string[] importantValues, int numberOfPanelsDisplayed, MainFrame mainFrameModel)
         {
-            if (importantValues != null && importantValues.Length >= numberOfPanelsDisplayed)
+            try
             {
-                for (var i = 0; i < numberOfPanelsDisplayed; i++)
+                if (importantValues != null && importantValues.Length >= numberOfPanelsDisplayed)
                 {
-                    double.TryParse(importantValues[i], out tryparseTmp);
-                    mainFrameModel.gearedCharts[i].viewModel.recivedChartValues.Add(tryparseTmp);
-                    ChartController.RefreshChartValues(mainFrameModel.gearedCharts[i].viewModel, mainFrameModel.gearedCharts[i].viewModel.recivedChartValues);
+                    for (var i = 0; i < numberOfPanelsDisplayed; i++)
+                    {
+                        double.TryParse(importantValues[i], out tryparseTmp);
+                        mainFrameModel.gearedCharts[i].viewModel.recivedChartValues.Add(tryparseTmp);
+                        ChartController.RefreshChartValues(mainFrameModel.gearedCharts[i].viewModel, mainFrameModel.gearedCharts[i].viewModel.recivedChartValues);
+                    }
+                }
+                else
+                {
+                    for (var i = 0; i < numberOfPanelsDisplayed; i++)
+                    {
+                        mainFrameModel.gearedCharts[i].viewModel.recivedChartValues.Add(double.NaN);
+                        ChartController.RefreshChartValues(mainFrameModel.gearedCharts[i].viewModel, mainFrameModel.gearedCharts[i].viewModel.recivedChartValues);
+                    }
                 }
             }
-            else
+            catch (Exception ex)
             {
-                for (var i = 0; i < numberOfPanelsDisplayed; i++)
-                {
-                    mainFrameModel.gearedCharts[i].viewModel.recivedChartValues.Add(double.NaN);
-                    ChartController.RefreshChartValues(mainFrameModel.gearedCharts[i].viewModel, mainFrameModel.gearedCharts[i].viewModel.recivedChartValues);
-                }
+
             }
+
         }
 
         /// <summary>

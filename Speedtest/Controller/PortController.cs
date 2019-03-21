@@ -26,6 +26,7 @@ namespace Speedtest.Controller
         public string[] importantValues;
         public List<string> buffer;
         public int bytesToRead;
+        public string[] sendingData;
 
         public PortController(MainFrame model)
         {
@@ -38,8 +39,18 @@ namespace Speedtest.Controller
         }
         public void CreatePort()
         {
-            mainFrameModel.serialPort = new PortModel(mainFrameModel);
+            //mainFrameModel.serialPort = new PortModel(mainFrameModel);
+            mainFrameModel.serialPort.PortName = (string)mainFrameModel.SelectedPortElement.EditValue;
+            mainFrameModel.serialPort.BaudRate = (int)mainFrameModel.BaudRateElement.EditValue;
+            mainFrameModel.serialPort.DataBits = (int)mainFrameModel.DataBitsElement.EditValue;
+            mainFrameModel.serialPort.Parity = (Parity)mainFrameModel.ParityElement.EditValue;
+            mainFrameModel.serialPort.StopBits = (StopBits)mainFrameModel.StopBitElement.EditValue;
+            mainFrameModel.serialPort.RtsEnable = (bool)mainFrameModel.RtsEnableElement.EditValue;
+            mainFrameModel.serialPort.DtrEnable = (bool)mainFrameModel.DtrEnableElement.EditValue;
+            mainFrameModel.serialPort.Handshake = (Handshake)mainFrameModel.HandShakeElement.EditValue;
+
             serialPort = mainFrameModel.serialPort;
+
         }
         public void DoTheConnection()
         {
@@ -122,45 +133,30 @@ namespace Speedtest.Controller
 
         internal void dataflowExtra()
         {
+            Stopwatch dataComingDeltaT = new Stopwatch();
             while (mainFrameModel.isRunning && serialPort.IsOpen)
             {
-                //timer.Start();
-                //buffer.Clear();
-                //  while (timer.ElapsedMilliseconds < deltaTime) {
-
-                if (serialPort.IsOpen)
+                dataComingDeltaT.Start();
+                if (serialPort.BytesToRead != 0)
                 {
-                    if (serialPort.BytesToRead != 0)
-                    {
-                        if (serialPort.IsOpen)
-                        {
-                            importantValues = serialPort.ReadLine().Split(' ');
 
-                        }
-
-                    }
+                    importantValues = serialPort.ReadLine().Split(' ');
+                    Debug.WriteLine(dataComingDeltaT.ElapsedMilliseconds);
+                    dataComingDeltaT.Reset();
                 }
+                
+                
 
-                //if (serialPort.BytesToRead != 0)
-                //{
-                //    var bytesToRead = serialPort.BytesToRead;
-                //    byte[] temp = new byte[bytesToRead];
-                //    serialPort.Read(temp, 0, bytesToRead);
-                //    var important = System.Text.Encoding.Default.GetString(temp);
-                //    Debug.WriteLine(important);
-                //    buffer.Add(important);
-                //    importantValues = important.Split(' ');
-                //}
 
+
+                sendingData = importantValues;
                 mainFrameModel.gearedCharts.ForEach(p => p.viewModel.recivedChartValues.Clear());
-                ChartController.printChartMonitor(mainFrameModel.mmw.chartMonitor, importantValues);
-                ChartController.printChart(importantValues, numberOfPanelsDisplayed, mainFrameModel);
+                ChartController.printChartMonitor(mainFrameModel.mmw.chartMonitor, sendingData);
+                ChartController.printChart(sendingData, numberOfPanelsDisplayed, mainFrameModel);
+
+
             }
 
-            // timer.Reset();
-
-
-            // }
         }
 
     }

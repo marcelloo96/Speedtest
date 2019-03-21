@@ -20,6 +20,7 @@ namespace Speedtest.Controller
             //model.SelectedPortElement.EditValue = "COM3";
             model.SamplingRateElement.EditValue = 1;
             model.KeepRecordsElement.EditValue = 300;
+            model.NumberOfIncomingDataElement.EditValue = 3;
             model.DisplayModeElement.EditValue = Strings.MeasureTab_ChartDisplayMode;
             model.DisplayModeRepositoryItemComboBox.Items.AddRange(new string[] {Strings.MeasureTab_ChartDisplayMode, Strings.MeasureTab_MonitorDisplayMode});
 

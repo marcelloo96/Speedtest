@@ -9,6 +9,7 @@ using DevExpress.XtraBars.Docking;
 using System.Collections.Generic;
 using Speedtest.View.MeasureWindow;
 using System.Threading;
+using System.Diagnostics;
 
 namespace Speedtest
 {
@@ -63,7 +64,7 @@ namespace Speedtest
         #region Labels
         public BarStaticItem IsPortConnectedStatusBarLabel { get { return portStatusLabel; } set { portStatusLabel = value; } }
         #endregion
-        public SerialPort serialPort;
+        //public SerialPort serialPort;
         public SpeedTest gearedChart;
         public List<SpeedTest> gearedCharts;
         public PortController portController;
@@ -72,7 +73,12 @@ namespace Speedtest
         public bool isRunning { get; set; }
         public double tryparseTmp;
         public readonly bool firstConnect = true;
-
+        public List<string[]> myPortBuffer;
+        public Stopwatch timer;
+        public Int32 deltaTime;
+        public string[] sendingData;
+        int incomingData;
+        int numberOfPanels;
 
         #endregion
 
@@ -84,6 +90,10 @@ namespace Speedtest
             MeasureTabController.SetInitialState(this);
             portController = new PortController(this);
             gearedCharts = new List<SpeedTest>();
+            myPortBuffer = new List<string[]>();
+            timer = new Stopwatch();
+            incomingData = Int32.Parse(NumberOfIncomingDataElement.EditValue.ToString());
+            numberOfPanels = (int)ChannelsElement.EditValue;
 
         }
 
@@ -142,6 +152,7 @@ namespace Speedtest
 
         private void startStopButton_ItemClick(object sender, ItemClickEventArgs ea)
         {
+            deltaTime = 1000 / Int32.Parse(samplingRateElement.EditValue.ToString());
             if (isRunning)
             {
                 //serialPort.DataReceived -= portController.dataFlow;
@@ -152,11 +163,58 @@ namespace Speedtest
             {
                 //serialPort.DataReceived += portController.dataFlow;
                 isRunning = true;
-                (new Thread(() => {
-                    portController.dataflowExtra();
-                })).Start();
+                //(new Thread(() => {
+                //    portController.dataflowExtra();
+                //})).Start();
+
                 connectiongGroup.Enabled = true;
             }
+
+            (new Thread(() =>
+            {
+                while (isRunning)
+                {
+                    timer.Start();
+                    //ellapsedMilliseconds < deltatime
+
+                    if (timer.ElapsedMilliseconds < deltaTime)
+                    {
+                        //wait
+                    }
+                    else if (timer.ElapsedMilliseconds == deltaTime)
+                    {
+                        var a = myPortBuffer;
+                        Debug.WriteLine(a.Count);
+
+                        if (a.Count == 0)
+                        {
+                            sendingData = null;
+                        }
+                        else
+                        {
+                            foreach (var i in a)
+                            {
+                                if (i.Length == incomingData)
+                                {
+                                    sendingData = i;
+                                    break;
+                                }
+                            }
+                        }
+
+                        gearedCharts.ForEach(p => p.viewModel.recivedChartValues.Clear());
+                        ChartController.printChartMonitor(mmw.chartMonitor, sendingData);
+                        ChartController.printChart(sendingData, numberOfPanels, this);
+                        myPortBuffer.Clear();
+                    }
+                    else
+                    {
+                        timer.Reset();
+
+                    }
+
+                }
+            })).Start();
 
         }
 
@@ -288,6 +346,7 @@ namespace Speedtest
             if (portController != null)
             {
                 portController.deltaTime = 1000 / Int32.Parse((string)samplingRateElement.EditValue);
+                deltaTime = 1000 / Int32.Parse((string)samplingRateElement.EditValue);
             }
         }
 
@@ -343,6 +402,19 @@ namespace Speedtest
 
 
 
+        }
+
+        private void serialPort_DataReceived(object sender, SerialDataReceivedEventArgs e)
+        {
+            if (isRunning)
+            {
+                string currentlyArrived = serialPort.ReadLine();
+                if (!String.IsNullOrWhiteSpace(currentlyArrived))
+                {
+                    myPortBuffer.Add(currentlyArrived.Split(' '));
+                }
+            }
+            //serialPort.DiscardInBuffer();
         }
     }
 }
