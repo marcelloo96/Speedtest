@@ -67,6 +67,7 @@ namespace Speedtest.Controller
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
+                MessageBox.Show("Do The Connection");
             }
         }
 

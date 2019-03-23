@@ -19,14 +19,14 @@ namespace Speedtest.Controller
         {
             model.viewModel = new SpeedTestVm(model.numOfSeries, model.serialPort);
 
-            chart.Hoverable = false;
-            chart.DataTooltip = null;
+            //chart.Hoverable = true;
+            //chart.DataTooltip = null;
             chart.Zoom = ZoomingOptions.X;
             chart.DisableAnimations = true;
             chart.AutoSize = true;
 
             var transparent = (Brush)new BrushConverter().ConvertFromString("#00FFFFFF");
-
+            
             for (int i = 0; i < model.numOfSeries; i++)
             {
                 chart.Series.Add(new GLineSeries
@@ -36,6 +36,7 @@ namespace Speedtest.Controller
                     DataLabels = false,
                     Fill = transparent,
                     LineSmoothness = 0,
+                     
                 });
             }
 
@@ -102,6 +103,7 @@ namespace Speedtest.Controller
                 }
             }
             catch (Exception ex) {
+                MessageBox.Show("Chartcontroller / Print Chart Monitor");
             }
         }
 
@@ -129,7 +131,7 @@ namespace Speedtest.Controller
             }
             catch (Exception ex)
             {
-
+                MessageBox.Show("Chartcontroller / Print Chart");
             }
 
         }

@@ -90,6 +90,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controller\ChartController.cs" />
+    <Compile Include="Controller\DataCollector.cs" />
     <Compile Include="Controller\MeasureTabController.cs" />
     <Compile Include="Controller\PortController.cs" />
     <Compile Include="Controller\PortOptionsTabController.cs" />

@@ -10,6 +10,8 @@ using System.Collections.Generic;
 using Speedtest.View.MeasureWindow;
 using System.Threading;
 using System.Diagnostics;
+using System.Linq;
+using System.Text;
 
 namespace Speedtest
 {
@@ -79,7 +81,10 @@ namespace Speedtest
         public string[] sendingData;
         int incomingData;
         int numberOfPanels;
-
+        //List<byte> Data = new List<byte>();
+        //private const int SizeOfMeasurement = 4;
+        private string comingDataBuffer;
+        char[] charSeparators = new char[] { '\n' };
         #endregion
 
         public MainFrame()
@@ -161,6 +166,7 @@ namespace Speedtest
             }
             else
             {
+                serialPort.DiscardInBuffer();
                 //serialPort.DataReceived += portController.dataFlow;
                 isRunning = true;
                 //(new Thread(() => {
@@ -168,53 +174,81 @@ namespace Speedtest
                 //})).Start();
 
                 connectiongGroup.Enabled = true;
+                //    new Thread(() =>
+                //    {
+                //        while (isRunning && serialPort.IsOpen)
+                //        {
+                //            string myBuffer = String.Empty;
+                //            if (serialPort.BytesToRead != 0)
+                //            {
+
+                //                var a = serialPort.ReadExisting();
+                //                if (!a.Contains("\n"))
+                //                {
+                //                    myBuffer = a;
+
+                //                }
+                //                else
+                //                {
+                //                    Debug.WriteLine(myBuffer + a);
+                //                    myBuffer = String.Empty;
+                //                }
+
+
+                //            }
+
+
+                //        }
+
+                //    }).Start();
+                //}
+
+                //(new Thread(() =>
+                //{
+                //    while (isRunning)
+                //    {
+                //        timer.Start();
+                //        //ellapsedMilliseconds < deltatime
+
+                //        if (timer.ElapsedMilliseconds < deltaTime)
+                //        {
+                //            //wait
+                //        }
+                //        else if (timer.ElapsedMilliseconds == deltaTime)
+                //        {
+                //            var a = myPortBuffer;
+                //            Debug.WriteLine(a.Count);
+
+                //            if (a.Count == 0)
+                //            {
+                //                sendingData = null;
+                //            }
+                //            else
+                //            {
+                //                foreach (var i in a)
+                //                {
+                //                    if (i.Length == incomingData)
+                //                    {
+                //                        sendingData = i;
+                //                        break;
+                //                    }
+                //                }
+                //            }
+
+                //            gearedCharts.ForEach(p => p.viewModel.recivedChartValues.Clear());
+                //            ChartController.printChartMonitor(mmw.chartMonitor, sendingData);
+                //            ChartController.printChart(sendingData, numberOfPanels, this);
+                //            myPortBuffer.Clear();
+                //        }
+                //        else
+                //        {
+                //            timer.Reset();
+
+                //        }
+
+                //    }
+                //})).Start();
             }
-
-            (new Thread(() =>
-            {
-                while (isRunning)
-                {
-                    timer.Start();
-                    //ellapsedMilliseconds < deltatime
-
-                    if (timer.ElapsedMilliseconds < deltaTime)
-                    {
-                        //wait
-                    }
-                    else if (timer.ElapsedMilliseconds == deltaTime)
-                    {
-                        var a = myPortBuffer;
-                        Debug.WriteLine(a.Count);
-
-                        if (a.Count == 0)
-                        {
-                            sendingData = null;
-                        }
-                        else
-                        {
-                            foreach (var i in a)
-                            {
-                                if (i.Length == incomingData)
-                                {
-                                    sendingData = i;
-                                    break;
-                                }
-                            }
-                        }
-
-                        gearedCharts.ForEach(p => p.viewModel.recivedChartValues.Clear());
-                        ChartController.printChartMonitor(mmw.chartMonitor, sendingData);
-                        ChartController.printChart(sendingData, numberOfPanels, this);
-                        myPortBuffer.Clear();
-                    }
-                    else
-                    {
-                        timer.Reset();
-
-                    }
-
-                }
-            })).Start();
 
         }
 
@@ -298,7 +332,7 @@ namespace Speedtest
 
         private void channelsElement_EditValueChanged(object sender, EventArgs e)
         {
-
+            numberOfPanels = Int32.Parse(channelsElement.EditValue.ToString());
         }
 
         private void delimeterElement_EditValueChanged(object sender, EventArgs e)
@@ -406,15 +440,60 @@ namespace Speedtest
 
         private void serialPort_DataReceived(object sender, SerialDataReceivedEventArgs e)
         {
-            if (isRunning)
-            {
-                string currentlyArrived = serialPort.ReadLine();
-                if (!String.IsNullOrWhiteSpace(currentlyArrived))
+            if (isRunning) {
+                while (serialPort.BytesToRead > 0)
                 {
-                    myPortBuffer.Add(currentlyArrived.Split(' '));
+                    var count = serialPort.BytesToRead;
+                    var bytes = new byte[count];
+                    serialPort.Read(bytes, 0, count);
+                    AddBytes(Encoding.UTF8.GetString(bytes));
                 }
             }
-            //serialPort.DiscardInBuffer();
+        }
+
+        private void AddBytes(string arrivedString)
+        {
+            comingDataBuffer += arrivedString;
+
+            var SampleList = comingDataBuffer.Split('\n').Where(p=>p!="\r" && p!=String.Empty ).ToList();
+
+            comingDataBuffer = String.Join("", SampleList);
+            for (int i = 0; i < SampleList.Count; i++) {
+                if (SampleList[i].Contains("\r"))
+                {
+                    comingDataBuffer=comingDataBuffer.Remove(0, SampleList[i].Length);
+                    Debug.WriteLine(SampleList[i]);
+                }
+                else {
+                    break;
+                }
+            }
+
+           
+        }
+
+        private void printAll(List<byte> measurementData) {
+            gearedCharts.ForEach(p => p.viewModel.recivedChartValues.Clear());
+            ChartController.printChartMonitor(mmw.chartMonitor, sendingData);
+            ChartController.printChart(sendingData, numberOfPanels, this);
+        }
+
+
+
+        private void asd(string currentlyArrived)
+        {
+            new Thread(() =>
+            {
+                if (!String.IsNullOrWhiteSpace(currentlyArrived))
+                {
+                    //myPortBuffer.Add(currentlyArrived.Split(' '));
+                    sendingData = currentlyArrived.Split(' ');
+                    gearedCharts.ForEach(p => p.viewModel.recivedChartValues.Clear());
+                    ChartController.printChartMonitor(mmw.chartMonitor, sendingData);
+                    ChartController.printChart(sendingData, numberOfPanels, this);
+                }
+
+            }).Start();
         }
     }
 }

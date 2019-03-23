@@ -16,11 +16,11 @@ namespace Speedtest.Controller
         internal static void FillEditors(MainFrame model)
         {
             //TODO DISPLAY
-            model.ChannelsElement.EditValue = 2;
+            model.ChannelsElement.EditValue = 1;
             //model.SelectedPortElement.EditValue = "COM3";
             model.SamplingRateElement.EditValue = 1;
             model.KeepRecordsElement.EditValue = 300;
-            model.NumberOfIncomingDataElement.EditValue = 3;
+            model.NumberOfIncomingDataElement.EditValue = 1;
             model.DisplayModeElement.EditValue = Strings.MeasureTab_ChartDisplayMode;
             model.DisplayModeRepositoryItemComboBox.Items.AddRange(new string[] {Strings.MeasureTab_ChartDisplayMode, Strings.MeasureTab_MonitorDisplayMode});
 
@@ -108,6 +108,7 @@ namespace Speedtest.Controller
                 catch (Exception ex)
                 {
                     MessageBox.Show(ex.Message);
+                    MessageBox.Show("MeasureTabController CloseSerialOnExit");
 
                 }
             }
