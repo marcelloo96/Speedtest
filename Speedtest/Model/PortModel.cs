@@ -15,14 +15,14 @@ namespace Speedtest.Model
         /// <param name="mainFrameModel"></param>
         public PortModel(MainFrame mainFrameModel)
         {
-            PortName = (string)mainFrameModel.SelectedPortElement.EditValue;
-            BaudRate = mainFrameModel.BaudRateElement;
-            DataBits = (int)mainFrameModel.DataBitsElement.EditValue;
-            Parity = (Parity)mainFrameModel.ParityElement.EditValue;
-            StopBits = (StopBits)mainFrameModel.StopBitElement.EditValue;
-            RtsEnable = (bool)mainFrameModel.RtsEnableElement.EditValue;
-            DtrEnable = (bool)mainFrameModel.DtrEnableElement.EditValue;
-            Handshake = (Handshake)mainFrameModel.HandShakeElement.EditValue;
+            PortName = mainFrameModel.selectedPortElementValue;
+            BaudRate = mainFrameModel.baudRateFromElementValue;
+            DataBits = mainFrameModel.dataBitsElementValue;
+            Parity = mainFrameModel.parityElementValue;
+            StopBits = mainFrameModel.stopBitElementValue;
+            RtsEnable = mainFrameModel.rtsEnableElementValue;
+            DtrEnable = mainFrameModel.dtrEnableElementValue;
+            Handshake = mainFrameModel.handShakeElementValue;
             ReceivedBytesThreshold = 500000;
 
         }

@@ -44,16 +44,6 @@ namespace Speedtest.Controller
 
         }
 
-        public static string[] getlofasz()
-        {
-            string[] kurvaanyad = new string[300];
-            for (int i = 0; i < kurvaanyad.Length; i++)
-            {
-                kurvaanyad[i] = i.ToString();
-            }
-
-            return kurvaanyad;
-        }
         internal static void RefreshChartValues(SpeedTestVm speedTestModel, List<double> current)
         {
             int index = 0;

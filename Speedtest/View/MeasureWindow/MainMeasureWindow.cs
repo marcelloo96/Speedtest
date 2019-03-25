@@ -26,13 +26,13 @@ namespace Speedtest.View.MeasureWindow
             mainFrameModel = model;
             gearedChart = model.gearedChart;
             gearedCharts = model.gearedCharts;
-            numberOfPanelsDisplayed= (int)mainFrameModel.ChannelsElement.EditValue;
+            numberOfPanelsDisplayed= mainFrameModel.numberOfChannelsFromElementValue;
             InitializeComponent();
             InitialState();
         }
 
         public void InitialState() {
-            if (!String.IsNullOrWhiteSpace((string)mainFrameModel.SelectedPortElement.EditValue))
+            if (!String.IsNullOrWhiteSpace(mainFrameModel.selectedPortElementValue))
             {
                 try
                 {

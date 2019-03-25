@@ -40,14 +40,14 @@ namespace Speedtest.Controller
         public void CreatePort()
         {
             //mainFrameModel.serialPort = new PortModel(mainFrameModel);
-            mainFrameModel.serialPort.PortName = (string)mainFrameModel.SelectedPortElement.EditValue;
-            mainFrameModel.serialPort.BaudRate = mainFrameModel.BaudRateElement;
-            mainFrameModel.serialPort.DataBits = (int)mainFrameModel.DataBitsElement.EditValue;
-            mainFrameModel.serialPort.Parity = (Parity)mainFrameModel.ParityElement.EditValue;
-            mainFrameModel.serialPort.StopBits = (StopBits)mainFrameModel.StopBitElement.EditValue;
-            mainFrameModel.serialPort.RtsEnable = (bool)mainFrameModel.RtsEnableElement.EditValue;
-            mainFrameModel.serialPort.DtrEnable = (bool)mainFrameModel.DtrEnableElement.EditValue;
-            mainFrameModel.serialPort.Handshake = (Handshake)mainFrameModel.HandShakeElement.EditValue;
+            mainFrameModel.serialPort.PortName = mainFrameModel.selectedPortElementValue;
+            mainFrameModel.serialPort.BaudRate = mainFrameModel.baudRateFromElementValue;
+            mainFrameModel.serialPort.DataBits = mainFrameModel.dataBitsElementValue;
+            mainFrameModel.serialPort.Parity = mainFrameModel.parityElementValue;
+            mainFrameModel.serialPort.StopBits = mainFrameModel.stopBitElementValue;
+            mainFrameModel.serialPort.RtsEnable = mainFrameModel.rtsEnableElementValue;
+            mainFrameModel.serialPort.DtrEnable = mainFrameModel.dtrEnableElementValue;
+            mainFrameModel.serialPort.Handshake = mainFrameModel.handShakeElementValue;
 
             serialPort = mainFrameModel.serialPort;
 
@@ -59,7 +59,7 @@ namespace Speedtest.Controller
                 mainFrameModel.serialPort.Open();
                 if (mainFrameModel.serialPort.IsOpen)
                 {
-                    numberOfPanelsDisplayed = (int)mainFrameModel.ChannelsElement.EditValue;
+                    numberOfPanelsDisplayed = mainFrameModel.numberOfChannelsFromElementValue;
                     mainFrameModel.IsPortConnectedStatusBarLabel.Caption = StringConstants.portStatusConnected;
 
                 }

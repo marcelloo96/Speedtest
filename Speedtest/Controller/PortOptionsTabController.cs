@@ -17,7 +17,7 @@ namespace Speedtest.Controller
         public static readonly bool[] boolOptions = new bool[] { true, false };
         public static readonly Handshake[] handshakeOptionList = new Handshake[] { Handshake.None, Handshake.RequestToSend, Handshake.RequestToSendXOnXOff, Handshake.XOnXOff };
         public static readonly String defaultDelimeter = ("\\n");
-        public static readonly double[] readBufferSizeOptionList = getListOf2Exponents();
+        public static readonly int[] readBufferSizeOptionList = getListOf2Exponents();
 
 
         internal static void FillEditors(MainFrame model)
@@ -38,15 +38,15 @@ namespace Speedtest.Controller
             //model.DelimeterRepositoryItemComboBox.Items.Add("\\r\\n");
 
             //SETTING DEFAULT VALUES
-            model.BaudRateElement = baudRateOptionsList[11]; //115200
-            model.DataBitsElement.EditValue = dataBitsOptionList[3]; //8
-            model.ParityElement.EditValue = Parity.None;
-            model.StopBitElement.EditValue = StopBits.One;
-            model.HandShakeElement.EditValue = Handshake.None;
-            model.ReadBufferSizeElement.EditValue = readBufferSizeOptionList[0];
-            model.RtsEnableElement.EditValue = false;
-            model.DtrEnableElement.EditValue = false;
-            model.DelimeterElement.EditValue = defaultDelimeter;
+            model.baudRateFromElementValue = baudRateOptionsList[11]; //115200
+            model.dataBitsElementValue = dataBitsOptionList[3]; //8
+            model.parityElementValue = Parity.None;
+            model.stopBitElementValue = StopBits.One;
+            model.handShakeElementValue = Handshake.None;
+            model.readBufferSizeElementValue = readBufferSizeOptionList[0];
+            model.rtsEnableElementValue = false;
+            model.dtrEnableElementValue = false;
+            model.delimeterElementValue = defaultDelimeter;
 
             #region DisableEditingOnComboBoxes
             model.BaudRateRepositoryItemComboBox.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
@@ -61,10 +61,10 @@ namespace Speedtest.Controller
             #endregion
         }
 
-        public static double[] getListOf2Exponents() {
-            double[] list = new double[19];
+        public static int[] getListOf2Exponents() {
+            int[] list = new int[19];
             for (int i = 12; i < 31; i++) {
-                list[i - 12] = Math.Pow(2,i);
+                list[i - 12] = Convert.ToInt32(Math.Pow(2,i));
             }
             return list;
         }

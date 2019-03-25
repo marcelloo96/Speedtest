@@ -15,60 +15,10 @@ using System.Text;
 
 namespace Speedtest
 {
-    public partial class MainFrame : DevExpress.XtraBars.Ribbon.RibbonForm
+    public partial class MainFrame : RibbonForm
     {
         #region fields
-        #region ComboBoxes
-        public RepositoryItemComboBox SelectedPortRepositoryItemComboBox { get { return selectedPortRepositoryItemComboBox; } }
-        public RepositoryItemComboBox BaudRateRepositoryItemComboBox { get { return baudRateRepositoryItemComboBox; } }
-        public RepositoryItemComboBox NumberOfChannelsRepositoryItemComboBox { get { return numberOfChannelsRepositoryItemComboBox; } }
-        public RepositoryItemComboBox DisplayModeRepositoryItemComboBox { get { return displayModeRepositoryItemComboBox; } }
-        public RepositoryItemComboBox DataBitsReporitotyItemComboBox { get { return dataBitsReporitotyItemComboBox; } }
-        public RepositoryItemComboBox ParityRepositoryItemComboBox { get { return parityRepositoryItemComboBox; } }
-        public RepositoryItemComboBox StopBitRepositoryItemComboBox { get { return stopBitRepositoryItemComboBox; } }
-        public RepositoryItemComboBox ReadBufferSizeRepositoryItemComboBox { get { return readBufferSizeRepositoryItemComboBox; } }
-        public RepositoryItemComboBox WriteBufferSizeRepositoryItemComboBox { get { return writeBufferSizeRepositoryItemComboBox; } }
-        public RepositoryItemComboBox RtsEnableRepositoryItemComboBox { get { return rtsEnableRepositoryItemComboBox; } }
-        public RepositoryItemComboBox DtrEnableRepositoryItemComboBox { get { return dtrEnableRepositoryItemComboBox; } }
-        public RepositoryItemComboBox HandShakeRepositoryItemComboBox { get { return handShakeRepositoryItemComboBox; } }
-        public RepositoryItemTextEdit DelimeterRepositoryItemTextBox { get { return delimeterRepositoryItemTextBox; } }
-        public RepositoryItemTextEdit NumberOfIncomingDataRepositoryItemTextBox { get { return numberOfIncomingDataRepositoryItemTextBox; } }
-        public RepositoryItemTextEdit KeepRecordsRepositoryItemTextEdit { get { return keepRecordsRepositoryItemTextBox; } }
-        #endregion
-        #region Elements
-        public BarEditItem DisplayModeElement { get { return displayModeElement; } }
-        public int BaudRateElement {
-            get { return (int)baudRateElement.EditValue; }
-            set { baudRateElement.EditValue = value; }
-        }
-        public BarEditItem ChannelsElement { get { return channelsElement; } }
-        public BarEditItem SelectedPortElement { get { return selectedPortElement; } }
-        public BarEditItem DataBitsElement { get { return dataBitsElement; } }
-        public BarEditItem ParityElement { get { return parityElement; } }
-        public BarEditItem StopBitElement { get { return stopBitElement; } }
-        public BarEditItem RtsEnableElement { get { return rtsEnableElement; } }
-        public BarEditItem DtrEnableElement { get { return dtrEnableElement; } }
-        public BarEditItem HandShakeElement { get { return handShakeElement; } }
-        public BarEditItem ReadBufferSizeElement { get { return readBufferSizeElement; } }
-        public BarEditItem WriteBufferSizeElement { get { return writeBufferSizeElement; } }
-        public BarEditItem DelimeterElement { get { return delimeterElement; } }
-        public BarEditItem SamplingRateElement { get { return samplingRateElement; } }
-        public BarEditItem NumberOfIncomingDataElement { get { return numberOfIncomingDataElement; } }
-        public BarEditItem KeepRecordsElement { get { return keepRecordsElement; } }
 
-        #endregion
-        #region Groups
-        public RibbonPageGroup PortBasicsGroup { get { return portBasicsGroup; } }
-        public RibbonPageGroup PortAdvancedsGroup { get { return portAdvancedsGroup; } }
-        public RibbonPageGroup MeasurePortBasicGroup { get { return measurePortBasicGroup; } }
-        #endregion
-        #region Buttons
-        public BarButtonItem ConnectButton { get { return connectButton; } }
-        public BarButtonItem StartStopButton { get { return startStopButton; } }
-        #endregion
-        #region Labels
-        public BarStaticItem IsPortConnectedStatusBarLabel { get { return portStatusLabel; } set { portStatusLabel = value; } }
-        #endregion
         //public SerialPort serialPort;
         public SpeedTest gearedChart;
         public List<SpeedTest> gearedCharts;
@@ -101,7 +51,7 @@ namespace Speedtest
             myPortBuffer = new List<string[]>();
             timer = new Stopwatch();
             incomingData = Int32.Parse(NumberOfIncomingDataElement.EditValue.ToString());
-            numberOfPanels = (int)ChannelsElement.EditValue;
+            numberOfPanels = numberOfChannelsFromElementValue;
 
         }
 
@@ -329,7 +279,7 @@ namespace Speedtest
         {
             if (serialPort != null)
             {
-                serialPort.ReadBufferSize = (int)((double)readBufferSizeElement.EditValue);
+                serialPort.ReadBufferSize = readBufferSizeElementValue;
             }
         }
 
@@ -350,7 +300,7 @@ namespace Speedtest
 
                 if ((string)delimeterElement.EditValue == "")
                 {
-                    DelimeterElement.EditValue = PortOptionsTabController.defaultDelimeter;
+                    delimeterElementValue = PortOptionsTabController.defaultDelimeter;
                 }
 
             }
