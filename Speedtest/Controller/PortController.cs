@@ -41,7 +41,7 @@ namespace Speedtest.Controller
         {
             //mainFrameModel.serialPort = new PortModel(mainFrameModel);
             mainFrameModel.serialPort.PortName = (string)mainFrameModel.SelectedPortElement.EditValue;
-            mainFrameModel.serialPort.BaudRate = (int)mainFrameModel.BaudRateElement.EditValue;
+            mainFrameModel.serialPort.BaudRate = mainFrameModel.BaudRateElement;
             mainFrameModel.serialPort.DataBits = (int)mainFrameModel.DataBitsElement.EditValue;
             mainFrameModel.serialPort.Parity = (Parity)mainFrameModel.ParityElement.EditValue;
             mainFrameModel.serialPort.StopBits = (StopBits)mainFrameModel.StopBitElement.EditValue;

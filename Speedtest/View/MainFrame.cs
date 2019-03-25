@@ -37,7 +37,10 @@ namespace Speedtest
         #endregion
         #region Elements
         public BarEditItem DisplayModeElement { get { return displayModeElement; } }
-        public BarEditItem BaudRateElement { get { return baudRateElement; } }
+        public int BaudRateElement {
+            get { return (int)baudRateElement.EditValue; }
+            set { baudRateElement.EditValue = value; }
+        }
         public BarEditItem ChannelsElement { get { return channelsElement; } }
         public BarEditItem SelectedPortElement { get { return selectedPortElement; } }
         public BarEditItem DataBitsElement { get { return dataBitsElement; } }

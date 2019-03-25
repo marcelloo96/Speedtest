@@ -16,7 +16,7 @@ namespace Speedtest.Model
         public PortModel(MainFrame mainFrameModel)
         {
             PortName = (string)mainFrameModel.SelectedPortElement.EditValue;
-            BaudRate = (int)mainFrameModel.BaudRateElement.EditValue;
+            BaudRate = mainFrameModel.BaudRateElement;
             DataBits = (int)mainFrameModel.DataBitsElement.EditValue;
             Parity = (Parity)mainFrameModel.ParityElement.EditValue;
             StopBits = (StopBits)mainFrameModel.StopBitElement.EditValue;

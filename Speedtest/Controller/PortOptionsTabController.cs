@@ -38,7 +38,7 @@ namespace Speedtest.Controller
             //model.DelimeterRepositoryItemComboBox.Items.Add("\\r\\n");
 
             //SETTING DEFAULT VALUES
-            model.BaudRateElement.EditValue = baudRateOptionsList[11]; //115200
+            model.BaudRateElement = baudRateOptionsList[11]; //115200
             model.DataBitsElement.EditValue = dataBitsOptionList[3]; //8
             model.ParityElement.EditValue = Parity.None;
             model.StopBitElement.EditValue = StopBits.One;
