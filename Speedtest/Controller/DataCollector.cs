@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO.Ports;
 using System.Linq;
 using System.Text;
@@ -7,42 +8,79 @@ using System.Threading.Tasks;
 
 namespace Speedtest.Controller
 {
-    class DataCollector
+    class DataCollector : IDisposable
     {
-        private readonly Action<List<byte>> _processMeasurement;
-        private readonly string _port;
-        private SerialPort _serialPort;
+        private readonly Action<string> _processMeasurement;
+        private SerialPort serialPort;
         private const int SizeOfMeasurement = 4;
         List<byte> Data = new List<byte>();
+        private string comingDataBuffer;
+        private bool disposed = false;
 
-        public DataCollector(string port, Action<List<byte>> processMeasurement)
+        public DataCollector(SerialPort port , Action<string> processMeasurement)
         {
             _processMeasurement = processMeasurement;
-            _serialPort = new SerialPort(port);
-            _serialPort.DataReceived += SerialPortDataReceived;
+            serialPort = port;
+            serialPort.DataReceived += SerialPortDataReceived;
         }
 
         private void SerialPortDataReceived(object sender, SerialDataReceivedEventArgs e)
         {
-            while (_serialPort.BytesToRead > 0)
+            while (serialPort.BytesToRead > 0)
             {
-                var count = _serialPort.BytesToRead;
+                var count = serialPort.BytesToRead;
                 var bytes = new byte[count];
-                _serialPort.Read(bytes, 0, count);
-                AddBytes(bytes);
+                serialPort.Read(bytes, 0, count);
+                AddBytes(Encoding.UTF8.GetString(bytes));
+            }
+        }
+        
+        private void AddBytes(string arrivedString)
+        {
+            comingDataBuffer += arrivedString;
+
+            var SampleList = comingDataBuffer.Split('\n').Where(p => p != "\r" && p != String.Empty).ToList();
+
+            comingDataBuffer = String.Join("", SampleList);
+            for (int i = 0; i < SampleList.Count; i++)
+            {
+                if (SampleList[i].Contains("\r"))
+                {
+                    comingDataBuffer = comingDataBuffer.Remove(0, SampleList[i].Length);
+                    //Debug.WriteLine(SampleList[i]);
+                    //printAll(SampleList[i]);
+                    _processMeasurement?.Invoke(SampleList[i]);
+
+
+                }
+                else
+                {
+                    break;
+                }
+            }
+
+
+        }
+
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        protected void Dispose(bool disposing) {
+            if (!disposed) {
+                if (disposing) {
+                    //Cleanup managed objects
+                }
+                //to clean up unmanaged objects
+                disposed = true;
             }
         }
 
-        private void AddBytes(byte[] bytes)
-        {
-            Data.AddRange(bytes);
-            while (Data.Count > SizeOfMeasurement)
-            {
-                var measurementData = Data.GetRange(0, SizeOfMeasurement);
-                Data.RemoveRange(0, SizeOfMeasurement);
-                if (_processMeasurement != null) _processMeasurement(measurementData);
-            }
-
+        ~DataCollector() {
+            Dispose(false);
+            Debug.WriteLine("DC destructor");
         }
     }
 }

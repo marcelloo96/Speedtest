@@ -12,6 +12,7 @@ using System.Threading;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace Speedtest
 {
@@ -34,8 +35,7 @@ namespace Speedtest
         public string[] sendingData;
         int incomingData;
         int numberOfPanels;
-        //List<byte> Data = new List<byte>();
-        //private const int SizeOfMeasurement = 4;
+        DataCollector dc;
         private string comingDataBuffer;
         char[] charSeparators = new char[] { '\n' };
         #endregion
@@ -113,340 +113,35 @@ namespace Speedtest
             deltaTime = 1000 / Int32.Parse(samplingRateElement.EditValue.ToString());
             if (isRunning)
             {
-                //serialPort.DataReceived -= portController.dataFlow;
                 isRunning = false;
+                
                 connectiongGroup.Enabled = false;
             }
             else
             {
                 serialPort.DiscardInBuffer();
-                //serialPort.DataReceived += portController.dataFlow;
                 isRunning = true;
-                //(new Thread(() => {
-                //    portController.dataflowExtra();
-                //})).Start();
-
+                dc = new DataCollector(serialPort,printasd);
                 connectiongGroup.Enabled = true;
-                //    new Thread(() =>
-                //    {
-                //        while (isRunning && serialPort.IsOpen)
-                //        {
-                //            string myBuffer = String.Empty;
-                //            if (serialPort.BytesToRead != 0)
-                //            {
-
-                //                var a = serialPort.ReadExisting();
-                //                if (!a.Contains("\n"))
-                //                {
-                //                    myBuffer = a;
-
-                //                }
-                //                else
-                //                {
-                //                    Debug.WriteLine(myBuffer + a);
-                //                    myBuffer = String.Empty;
-                //                }
-
-
-                //            }
-
-
-                //        }
-
-                //    }).Start();
-                //}
-
-                //(new Thread(() =>
-                //{
-                //    while (isRunning)
-                //    {
-                //        timer.Start();
-                //        //ellapsedMilliseconds < deltatime
-
-                //        if (timer.ElapsedMilliseconds < deltaTime)
-                //        {
-                //            //wait
-                //        }
-                //        else if (timer.ElapsedMilliseconds == deltaTime)
-                //        {
-                //            var a = myPortBuffer;
-                //            Debug.WriteLine(a.Count);
-
-                //            if (a.Count == 0)
-                //            {
-                //                sendingData = null;
-                //            }
-                //            else
-                //            {
-                //                foreach (var i in a)
-                //                {
-                //                    if (i.Length == incomingData)
-                //                    {
-                //                        sendingData = i;
-                //                        break;
-                //                    }
-                //                }
-                //            }
-
-                //            gearedCharts.ForEach(p => p.viewModel.recivedChartValues.Clear());
-                //            ChartController.printChartMonitor(mmw.chartMonitor, sendingData);
-                //            ChartController.printChart(sendingData, numberOfPanels, this);
-                //            myPortBuffer.Clear();
-                //        }
-                //        else
-                //        {
-                //            timer.Reset();
-
-                //        }
-
-                //    }
-                //})).Start();
             }
 
         }
 
-        private void selectedPortRepositoryItemComboBox_DoubleClick(object sender, EventArgs e)
+        Action<string> printasd = delegate (string a)
         {
-            SelectedPortRepositoryItemComboBox.Items.Clear();
-            SelectedPortRepositoryItemComboBox.Items.AddRange(SerialPort.GetPortNames());
+            Debug.WriteLine(a);
+        };
 
-        }
-        private void baudRateElement_EditValueChanged(object sender, EventArgs e)
+        private void printAll(string currentlyArrived)
         {
-            if (serialPort != null)
+
             {
-                serialPort.BaudRate = (int)baudRateElement.EditValue;
-            }
-        }
-
-        private void dataBitsElement_EditValueChanged(object sender, EventArgs e)
-        {
-            if (serialPort != null)
-            {
-                serialPort.DataBits = (int)dataBitsElement.EditValue;
-            }
-        }
-
-        private void parityElement_EditValueChanged(object sender, EventArgs e)
-        {
-            if (serialPort != null)
-            {
-                serialPort.Parity = (Parity)parityElement.EditValue;
-            }
-        }
-
-        private void stopBitElement_EditValueChanged(object sender, EventArgs e)
-        {
-            if (serialPort != null)
-            {
-                serialPort.StopBits = (StopBits)stopBitElement.EditValue;
-            }
-        }
-
-        private void rtsEnableElement_EditValueChanged(object sender, EventArgs e)
-        {
-            if (serialPort != null)
-            {
-                serialPort.RtsEnable = (bool)rtsEnableElement.EditValue;
-            }
-        }
-
-        private void dtrEnableElement_EditValueChanged(object sender, EventArgs e)
-        {
-            if (serialPort != null)
-            {
-                serialPort.DtrEnable = (bool)dtrEnableElement.EditValue;
-            }
-        }
-
-        private void handShakeElement_EditValueChanged(object sender, EventArgs e)
-        {
-            if (serialPort != null)
-            {
-                serialPort.Handshake = (Handshake)handShakeElement.EditValue;
-            }
-        }
-
-        private void writeBufferSizeElement_EditValueChanged(object sender, EventArgs e)
-        {
-            if (serialPort != null)
-            {
-                serialPort.WriteBufferSize = (int)writeBufferSizeElement.EditValue;
-            }
-        }
-
-        private void readBufferSizeElement_EditValueChanged(object sender, EventArgs e)
-        {
-            if (serialPort != null)
-            {
-                serialPort.ReadBufferSize = readBufferSizeElementValue;
-            }
-        }
-
-        private void channelsElement_EditValueChanged(object sender, EventArgs e)
-        {
-            numberOfPanels = Int32.Parse(channelsElement.EditValue.ToString());
-        }
-
-        private void delimeterElement_EditValueChanged(object sender, EventArgs e)
-        {
-            if (serialPort != null)
-            {
-                if ((string)delimeterElement.EditValue == "" || (string)delimeterElement.EditValue == PortOptionsTabController.defaultDelimeter)
-                {
-                    serialPort.NewLine = "\n";
-                }
-                //TODO különböző delimetereket tudjon megkülönböztetni
-
-                if ((string)delimeterElement.EditValue == "")
-                {
-                    delimeterElementValue = PortOptionsTabController.defaultDelimeter;
-                }
+                sendingData = currentlyArrived.Split(' ');
+                gearedCharts.ForEach(p => p.viewModel.recivedChartValues.Clear());
+                ChartController.printChartMonitor(mmw.chartMonitor, sendingData);
+                ChartController.printChart(sendingData, numberOfPanels, this);
 
             }
-        }
-
-        private void selectedPortElement_EditValueChanged(object sender, EventArgs e)
-        {
-            testConnect();
-        }
-
-        private void MainFrame_Resize(object sender, EventArgs e)
-        {
-            if ((this.WindowState == FormWindowState.Maximized || this.WindowState == FormWindowState.Minimized) && mmw != null)
-            {
-
-                mmw.resizeControls(contentPanel.Height, contentPanel.Width);
-
-            }
-            else if (mmw != null)
-            {
-                mmw.resizeControls(contentPanel.Height, contentPanel.Width);
-            }
-
-        }
-
-        private void samplingRateElement_EditValueChanged(object sender, EventArgs e)
-        {
-            //Hz given, and we need millisec
-            //so 1/f*1000 -> 1000/f
-            if (portController != null)
-            {
-                portController.deltaTime = 1000 / Int32.Parse((string)samplingRateElement.EditValue);
-                deltaTime = 1000 / Int32.Parse((string)samplingRateElement.EditValue);
-            }
-        }
-
-        private void displayModeElement_EditValueChanged(object sender, EventArgs e)
-        {
-            string editValue = (string)displayModeElement.EditValue;
-
-            if (mmw != null)
-            {
-                if (editValue == Strings.MeasureTab_ChartDisplayMode)
-                {
-                    mmw.chartMonitor.SendToBack();
-                }
-                else if (editValue == Strings.MeasureTab_MonitorDisplayMode)
-                {
-                    mmw.chartMonitor.BringToFront();
-                }
-            }
-
-        }
-
-        private void numberOfIncomingDataElement_EditValueChanged(object sender, EventArgs e)
-        {
-            if (portController != null)
-            {
-                portController.numberOfIncomingData = Int32.Parse((string)NumberOfIncomingDataElement.EditValue);
-            }
-        }
-
-        private void keepRecordsElement_EditValueChanged(object sender, EventArgs e)
-        {
-            if (keepRecordsElement.EditValue != null)
-            {
-                var editvalue = Int32.Parse(keepRecordsElement.EditValue.ToString());
-                if (editvalue < 1)
-                {
-                    editvalue = 1;
-                }
-                else if (editvalue > 1000)
-                {
-                    editvalue = 1000;
-                }
-                keepRecordsElement.EditValue = editvalue;
-                if (mmw != null)
-                {
-                    foreach (var i in mmw.gearedCharts)
-                    {
-                        i.viewModel.keepRecords = editvalue;
-                    }
-                }
-            }
-
-
-
-
-        }
-
-        private void serialPort_DataReceived(object sender, SerialDataReceivedEventArgs e)
-        {
-            if (isRunning) {
-                while (serialPort.BytesToRead > 0)
-                {
-                    var count = serialPort.BytesToRead;
-                    var bytes = new byte[count];
-                    serialPort.Read(bytes, 0, count);
-                    AddBytes(Encoding.UTF8.GetString(bytes));
-                }
-            }
-        }
-
-        private void AddBytes(string arrivedString)
-        {
-            comingDataBuffer += arrivedString;
-
-            var SampleList = comingDataBuffer.Split('\n').Where(p=>p!="\r" && p!=String.Empty ).ToList();
-
-            comingDataBuffer = String.Join("", SampleList);
-            for (int i = 0; i < SampleList.Count; i++) {
-                if (SampleList[i].Contains("\r"))
-                {
-                    comingDataBuffer=comingDataBuffer.Remove(0, SampleList[i].Length);
-                    Debug.WriteLine(SampleList[i]);
-                }
-                else {
-                    break;
-                }
-            }
-
-           
-        }
-
-        private void printAll(List<byte> measurementData) {
-            gearedCharts.ForEach(p => p.viewModel.recivedChartValues.Clear());
-            ChartController.printChartMonitor(mmw.chartMonitor, sendingData);
-            ChartController.printChart(sendingData, numberOfPanels, this);
-        }
-
-
-
-        private void asd(string currentlyArrived)
-        {
-            new Thread(() =>
-            {
-                if (!String.IsNullOrWhiteSpace(currentlyArrived))
-                {
-                    //myPortBuffer.Add(currentlyArrived.Split(' '));
-                    sendingData = currentlyArrived.Split(' ');
-                    gearedCharts.ForEach(p => p.viewModel.recivedChartValues.Clear());
-                    ChartController.printChartMonitor(mmw.chartMonitor, sendingData);
-                    ChartController.printChart(sendingData, numberOfPanels, this);
-                }
-
-            }).Start();
         }
     }
 }
