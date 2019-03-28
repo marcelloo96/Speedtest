@@ -39,7 +39,9 @@ namespace Speedtest.Controller
         }
         public void CreatePort()
         {
-            //mainFrameModel.serialPort = new PortModel(mainFrameModel);
+            if (mainFrameModel.serialPort == null) {
+                mainFrameModel.serialPort = new SerialPort();
+            }
             mainFrameModel.serialPort.PortName = mainFrameModel.selectedPortElementValue;
             mainFrameModel.serialPort.BaudRate = mainFrameModel.baudRateFromElementValue;
             mainFrameModel.serialPort.DataBits = mainFrameModel.dataBitsElementValue;

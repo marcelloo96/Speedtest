@@ -111,7 +111,10 @@ namespace Speedtest
         public BarEditItem DisplayModeElement { get { return displayModeElement; } }
         public BarEditItem NumberOfIncomingDataElement { get { return numberOfIncomingDataElement; } }
 
-
+        public string DisplayModeElementValue {
+            get { return (string) displayModeElement.EditValue; }
+            set { displayModeElement.EditValue = value; }
+        }
         #endregion
         #region Groups
         public RibbonPageGroup PortBasicsGroup { get { return portBasicsGroup; } }
@@ -308,6 +311,17 @@ namespace Speedtest
                         i.viewModel.keepRecords = keepRecordsElementValue;
                     }
                 }
+            }
+        }
+        private void connectButton_ItemClick(object sender, ItemClickEventArgs ea)
+        {
+            if (String.IsNullOrWhiteSpace((string)this.selectedPortElement.EditValue))
+            {
+                MessageBox.Show(Strings.Global_Error_NoPortSelected);
+            }
+            else
+            {
+                testConnect();
             }
         }
     }

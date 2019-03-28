@@ -4,7 +4,7 @@ using System.Diagnostics;
 using System.IO.Ports;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
+
 
 namespace Speedtest.Controller
 {
@@ -69,14 +69,19 @@ namespace Speedtest.Controller
         }
 
         protected void Dispose(bool disposing) {
+
+            //TODO do it in a better way
             if (!disposed) {
                 if (disposing) {
-                    //Cleanup managed objects
+                    serialPort.Dispose();
+                   
                 }
                 //to clean up unmanaged objects
                 disposed = true;
             }
         }
+
+
 
         ~DataCollector() {
             Dispose(false);

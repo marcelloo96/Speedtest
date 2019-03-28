@@ -19,7 +19,6 @@ namespace Speedtest
     public partial class MainFrame : RibbonForm
     {
         #region fields
-
         //public SerialPort serialPort;
         public SpeedTest gearedChart;
         public List<SpeedTest> gearedCharts;
@@ -36,8 +35,9 @@ namespace Speedtest
         int incomingData;
         int numberOfPanels;
         DataCollector dc;
-        private string comingDataBuffer;
         char[] charSeparators = new char[] { '\n' };
+        //public Dictionary<string, Action> displayActions;
+
         #endregion
 
         public MainFrame()
@@ -52,30 +52,9 @@ namespace Speedtest
             timer = new Stopwatch();
             incomingData = Int32.Parse(NumberOfIncomingDataElement.EditValue.ToString());
             numberOfPanels = numberOfChannelsFromElementValue;
-
-        }
-
-        private void createCharts()
-        {
-            for (int i = 0; i < (int)channelsElement.EditValue; i++)
-            {
-                gearedChart = new SpeedTest(serialPort, (int)channelsElement.EditValue)
-                {
-                    Dock = DockStyle.Fill
-                };
-                gearedCharts.Add(gearedChart);
-            }
-        }
-        private void connectButton_ItemClick(object sender, ItemClickEventArgs ea)
-        {
-            if (String.IsNullOrWhiteSpace((string)this.selectedPortElement.EditValue))
-            {
-                MessageBox.Show(Strings.Global_Error_NoPortSelected);
-            }
-            else
-            {
-                testConnect();
-            }
+            //displayActions = new Dictionary<string, Action> {
+            //    {Strings.MeasureTab_MonitorDisplayMode, ()=>printAll() }
+            //};
         }
 
         public void testConnect()
@@ -114,34 +93,41 @@ namespace Speedtest
             if (isRunning)
             {
                 isRunning = false;
-                
+                dc.Dispose();
                 connectiongGroup.Enabled = false;
             }
             else
             {
-                serialPort.DiscardInBuffer();
                 isRunning = true;
-                dc = new DataCollector(serialPort,printasd);
+                if (serialPort == null)
+                {
+                    portController.CreatePort();
+
+                }
+                if (!serialPort.IsOpen)
+                {
+                    portController.DoTheConnection();
+                }
+                dc = new DataCollector(serialPort, printAll);
+                serialPort.DiscardInBuffer();
                 connectiongGroup.Enabled = true;
             }
 
+           
+
         }
-
-        Action<string> printasd = delegate (string a)
-        {
-            Debug.WriteLine(a);
-        };
-
         private void printAll(string currentlyArrived)
         {
+            Debug.WriteLine(currentlyArrived);
+            sendingData = currentlyArrived.Split(' ');
+            gearedCharts.ForEach(p => p.viewModel.recivedChartValues.Clear());
 
-            {
-                sendingData = currentlyArrived.Split(' ');
-                gearedCharts.ForEach(p => p.viewModel.recivedChartValues.Clear());
-                ChartController.printChartMonitor(mmw.chartMonitor, sendingData);
-                ChartController.printChart(sendingData, numberOfPanels, this);
+            ChartController.printChartMonitor(mmw.chartMonitor, sendingData);
+            ChartController.printChart(sendingData, numberOfPanels, this);
 
-            }
+
         }
+
     }
+
 }
