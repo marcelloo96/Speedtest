@@ -19,7 +19,7 @@ namespace Speedtest.Model
             xyChartList = new List<GearedValues<XYPoint>>();
         }
     }
-    class XYPoint{
+    public class XYPoint{
         public double x;
         public double y;
 
