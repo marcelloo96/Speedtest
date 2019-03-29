@@ -20,9 +20,9 @@ namespace Speedtest
             get { return (int)baudRateElement.EditValue; }
             set { baudRateElement.EditValue = value; }
         }
-        public int numberOfChannelsFromElementValue
+        public int numberOfChannelsElementValue
         {
-            get { return (int)channelsElement.EditValue; }
+            get { return Int32.Parse(channelsElement.EditValue.ToString()); }
             set { channelsElement.EditValue = value; }
         }
         public string selectedPortElementValue
@@ -77,7 +77,7 @@ namespace Speedtest
         }
         public int samplingRateElementValue
         {
-            get { return (int)samplingRateElement.EditValue; }
+            get { return Int32.Parse(samplingRateElement.EditValue.ToString()); }
             set { samplingRateElement.EditValue = value; }
         }
         public int keepRecordsElementValue
@@ -313,16 +313,6 @@ namespace Speedtest
                 }
             }
         }
-        private void connectButton_ItemClick(object sender, ItemClickEventArgs ea)
-        {
-            if (String.IsNullOrWhiteSpace((string)this.selectedPortElement.EditValue))
-            {
-                MessageBox.Show(Strings.Global_Error_NoPortSelected);
-            }
-            else
-            {
-                testConnect();
-            }
-        }
+
     }
 }

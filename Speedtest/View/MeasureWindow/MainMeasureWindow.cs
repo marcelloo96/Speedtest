@@ -20,13 +20,13 @@ namespace Speedtest.View.MeasureWindow
         public SerialPort serialPort;
         public int numberOfPanelsDisplayed;
 
-        public MainMeasureWindow(MainFrame model)
+        public MainMeasureWindow(MainFrame mainFrameModel)
         {
-            serialPort = model.serialPort;
-            mainFrameModel = model;
-            gearedChart = model.gearedChart;
-            gearedCharts = model.gearedCharts;
-            numberOfPanelsDisplayed= mainFrameModel.numberOfChannelsFromElementValue;
+            serialPort = mainFrameModel.serialPort;
+            this.mainFrameModel = mainFrameModel;
+            gearedChart = mainFrameModel.gearedChart;
+            gearedCharts = mainFrameModel.gearedCharts;
+            numberOfPanelsDisplayed = this.mainFrameModel.numberOfChannelsElementValue;
             InitializeComponent();
             InitialState();
         }

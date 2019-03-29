@@ -54,112 +54,52 @@ namespace Speedtest.Controller
             serialPort = mainFrameModel.serialPort;
 
         }
-        public void DoTheConnection()
+
+        /// <summary>
+        /// Returns true if the serialport is succesfully connected
+        /// </summary>
+        /// <returns></returns>
+        public bool OpenThePort()
         {
             try
             {
                 mainFrameModel.serialPort.Open();
-                if (mainFrameModel.serialPort.IsOpen)
-                {
-                    numberOfPanelsDisplayed = mainFrameModel.numberOfChannelsFromElementValue;
-                    mainFrameModel.IsPortConnectedStatusBarLabel.Caption = StringConstants.portStatusConnected;
-
-                }
+              
+                return true;
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
                 MessageBox.Show("Do The Connection");
             }
+            return false;
         }
-
-        public void dataFlow(object sender, EventArgs e)
+        /// <summary>
+        /// Returns true if the serialport is successfully closed
+        /// </summary>
+        /// <param name="serialPort"></param>
+        /// <returns></returns>
+        public static bool CloseSerialOnExit(SerialPort serialPort)
         {
-            timer.Start();
-
-            while (timer.ElapsedMilliseconds < deltaTime)
+            if (serialPort.IsOpen)
             {
-                //Wait
-            }
-            timer.Stop();
-
-
-            if (mainFrameModel.isRunning)
-            {
-                mainFrameModel.gearedCharts.ForEach(p => p.viewModel.recivedChartValues.Clear());
-                string[] recivedSeparatedChartValues = recivedValueFormatter(serialPort.ReadExisting());
-
-                string match = recognisedChartValues(recivedSeparatedChartValues);
-                Debug.WriteLine(timer.ElapsedMilliseconds + " -> " + match);
-                string[] importantValues = match.Split(' ');
-
-                ChartController.printChartMonitor(mainFrameModel.mmw.chartMonitor, importantValues);
-                ChartController.printChart(importantValues, numberOfPanelsDisplayed, mainFrameModel);
-
-
-            }
-            serialPort.DiscardInBuffer();
-            timer.Reset();
-        }
-
-        public string[] recivedValueFormatter(string recived)
-        {
-            if (String.IsNullOrWhiteSpace(recived))
-            {
-                return new string[] { };
-            }
-            else
-            {
-                return recived.Split('\n');
-            }
-
-        }
-
-        public string recognisedChartValues(string[] chartValues)
-        {
-            foreach (var i in chartValues)
-            {
-                if (regex.Matches(i).Count == numberOfIncomingData)
+                try
                 {
-                    return i;
+                    serialPort.DtrEnable = false;
+                    serialPort.RtsEnable = false;
+                    serialPort.DiscardInBuffer();
+                    serialPort.DiscardOutBuffer();
+                    serialPort.Close();
+                    return true;
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                    MessageBox.Show("MeasureTabController CloseSerialOnExit");
 
                 }
             }
-
-            //for (var i = chartValues.Length - 1; i > 0; i--) {
-            //    if (regex.Matches(chartValues[i]).Count==numberOfIncomingData) {
-            //        return chartValues[i];
-            //    }
-            //}
-            return "";
-        }
-
-        internal void dataflowExtra()
-        {
-            Stopwatch dataComingDeltaT = new Stopwatch();
-            while (mainFrameModel.isRunning && serialPort.IsOpen)
-            {
-                dataComingDeltaT.Start();
-                if (serialPort.BytesToRead != 0)
-                {
-
-                    importantValues = serialPort.ReadLine().Split(' ');
-                    Debug.WriteLine(dataComingDeltaT.ElapsedMilliseconds);
-                    dataComingDeltaT.Reset();
-                }
-                
-                
-
-
-
-                sendingData = importantValues;
-                mainFrameModel.gearedCharts.ForEach(p => p.viewModel.recivedChartValues.Clear());
-                ChartController.printChartMonitor(mainFrameModel.mmw.chartMonitor, sendingData);
-                ChartController.printChart(sendingData, numberOfPanelsDisplayed, mainFrameModel);
-
-
-            }
-
+            return false;
         }
 
     }

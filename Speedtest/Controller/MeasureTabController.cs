@@ -16,7 +16,7 @@ namespace Speedtest.Controller
         internal static void FillEditors(MainFrame model)
         {
             //TODO DISPLAY
-            model.numberOfChannelsFromElementValue = 1;
+            model.numberOfChannelsElementValue = 1;
             //model.SelectedPortElement.EditValue = "COM3";
             model.samplingRateElementValue = 1;
             model.keepRecordsElementValue = 300;
@@ -43,15 +43,22 @@ namespace Speedtest.Controller
                 ///*Disconnecting*/                
 
                 setAllPortOptionsToRecentConnectState(mainFrameModel);
-
-                mainFrameModel.ConnectButton.ImageOptions.SvgImage = Resources.connect;
-                mainFrameModel.ConnectButton.Caption = StringConstants.connect;                
-
+                
                 try
                 {
-                    CloseSerialOnExit(mainFrameModel.serialPort);
+                    var succesfullyClosed = PortController.CloseSerialOnExit(mainFrameModel.serialPort);
+                    if (succesfullyClosed)
+                    {
+                        mainFrameModel.connectedState = false;
+                    }
+                    else {
+                        mainFrameModel.connectedState = true;
+                    }
+
                     mainFrameModel.serialPort.Dispose();
                     mainFrameModel.IsPortConnectedStatusBarLabel.Caption = StringConstants.portStatusDisconnected;
+                    mainFrameModel.ConnectButton.ImageOptions.SvgImage = Resources.connect;
+                    mainFrameModel.ConnectButton.Caption = StringConstants.connect;
 
                 }
                 catch (Exception ex)
@@ -60,7 +67,7 @@ namespace Speedtest.Controller
 
                 }
                 
-                mainFrameModel.connectedState = false;
+                
             }
             else
             {
@@ -75,7 +82,13 @@ namespace Speedtest.Controller
 
                 //model.portController.CreatePort();
                 mainFrameModel.portController.CreatePort();
-                mainFrameModel.portController.DoTheConnection();
+                var portOpened = mainFrameModel.portController.OpenThePort();
+
+                if (portOpened) {
+                       // mainFrameModel.numberOfPanelsDisplayed = mainFrameModel.numberOfChannelsFromElementValue;
+                        mainFrameModel.IsPortConnectedStatusBarLabel.Caption = StringConstants.portStatusConnected;
+                                       
+                }
 
                 mainFrameModel.connectedState = true;
             }
@@ -92,29 +105,6 @@ namespace Speedtest.Controller
             model.PortAdvancedsGroup.Enabled = model.connectedState;
             model.StartStopButton.Enabled = !model.connectedState;
         }
-
-        private static void CloseSerialOnExit(SerialPort serialPort)
-        {
-            if (serialPort.IsOpen)
-            {
-                try
-                {
-                    serialPort.DtrEnable = false;
-                    serialPort.RtsEnable = false;
-                    serialPort.DiscardInBuffer();
-                    serialPort.DiscardOutBuffer();
-                    serialPort.Close();
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message);
-                    MessageBox.Show("MeasureTabController CloseSerialOnExit");
-
-                }
-            }
-
-        }
-
 
     }
 }

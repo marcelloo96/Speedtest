@@ -37,6 +37,7 @@ namespace Speedtest
         DataCollector dc;
         char[] charSeparators = new char[] { '\n' };
         //public Dictionary<string, Action> displayActions;
+        public static string currentlyStaticArrived;
 
         #endregion
 
@@ -51,7 +52,7 @@ namespace Speedtest
             myPortBuffer = new List<string[]>();
             timer = new Stopwatch();
             incomingData = Int32.Parse(NumberOfIncomingDataElement.EditValue.ToString());
-            numberOfPanels = numberOfChannelsFromElementValue;
+            numberOfPanels = numberOfChannelsElementValue;
             //displayActions = new Dictionary<string, Action> {
             //    {Strings.MeasureTab_MonitorDisplayMode, ()=>printAll() }
             //};
@@ -59,7 +60,7 @@ namespace Speedtest
 
         public void testConnect()
         {
-            if (!String.IsNullOrWhiteSpace((string)this.selectedPortElement.EditValue))
+            if (!String.IsNullOrWhiteSpace(selectedPortElementValue))
             {
                 try
                 {
@@ -87,14 +88,45 @@ namespace Speedtest
 
         }
 
+        private void connectButton_ItemClick(object sender, ItemClickEventArgs ea)
+        {
+            if (connectedState)
+            {
+                //Disconnecting
+                contentPanel.Controls.Clear();
+                mmw.deleteControls();
+                mmw.Dispose();
+                PortController.CloseSerialOnExit(serialPort);
+                serialPort.Dispose();
+                connectedState = false;
+                measureControlPanelGroup.Enabled = false;
+                
+            }
+            else {
+                //Connecting
+                if (String.IsNullOrWhiteSpace(selectedPortElementValue))
+                {
+                    MessageBox.Show(Strings.Global_Error_NoPortSelected);
+                }
+                else
+                {
+                    testConnect();
+                }
+                connectedState = true;
+                isRunning = false;
+                measureControlPanelGroup.Enabled = true;
+            }
+            
+        }
+
         private void startStopButton_ItemClick(object sender, ItemClickEventArgs ea)
         {
-            deltaTime = 1000 / Int32.Parse(samplingRateElement.EditValue.ToString());
+            deltaTime = 1000 / samplingRateElementValue;
             if (isRunning)
             {
                 isRunning = false;
                 dc.Dispose();
-                connectiongGroup.Enabled = false;
+                connectiongGroup.Enabled = true;
             }
             else
             {
@@ -106,27 +138,34 @@ namespace Speedtest
                 }
                 if (!serialPort.IsOpen)
                 {
-                    portController.DoTheConnection();
+                    portController.OpenThePort();
                 }
-                dc = new DataCollector(serialPort, printAll);
+                dc = new DataCollector(serialPort, printTo);
                 serialPort.DiscardInBuffer();
-                connectiongGroup.Enabled = true;
+                connectiongGroup.Enabled = false;
+
+
             }
 
-           
+
 
         }
-        private void printAll(string currentlyArrived)
+        private void printTo(string currentlyArrived)
         {
             Debug.WriteLine(currentlyArrived);
             sendingData = currentlyArrived.Split(' ');
             gearedCharts.ForEach(p => p.viewModel.recivedChartValues.Clear());
 
-            ChartController.printChartMonitor(mmw.chartMonitor, sendingData);
-            ChartController.printChart(sendingData, numberOfPanels, this);
-
+            if (DisplayModeElementValue == Strings.MeasureTab_ChartDisplayMode)
+            {
+                ChartController.printChart(sendingData, numberOfPanels, this);
+            }
+            else if (DisplayModeElementValue == Strings.MeasureTab_MonitorDisplayMode) {
+                ChartController.printChartMonitor(mmw.chartMonitor, sendingData);
+            }
 
         }
+
 
     }
 

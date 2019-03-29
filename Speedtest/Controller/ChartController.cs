@@ -121,7 +121,7 @@ namespace Speedtest.Controller
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Chartcontroller / Print Chart");
+               // MessageBox.Show("Chartcontroller / Print Chart");
             }
 
         }
