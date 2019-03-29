@@ -166,6 +166,28 @@ namespace Speedtest
 
         }
 
+        private void displayModeElement_EditValueChanged(object sender, EventArgs e)
+        {
+            string editValue = (string)displayModeElement.EditValue;
+
+            if (mmw != null)
+            {
+                if (editValue == Strings.MeasureTab_ChartDisplayMode)
+                {
+                    mmw.chartMonitor.SendToBack();
+                    ChartController.RemoveMonitorText(mmw.chartMonitor);
+                                        
+                }
+                else if (editValue == Strings.MeasureTab_MonitorDisplayMode)
+                {
+                    mmw.chartMonitor.BringToFront();
+                    ChartController.RemoveAllPointsFromCharts(gearedCharts);
+                    
+                }
+            }
+
+        }
+
 
     }
 

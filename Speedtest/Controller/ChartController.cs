@@ -72,6 +72,20 @@ namespace Speedtest.Controller
             speedTestModel.CurrentLecture = current[0];
 
         }
+        internal static void RemoveAllPointsFromCharts(List<SpeedTest> gearedCharts) {
+            foreach (var gearedChart in gearedCharts) {
+                foreach (var singleChartList in gearedChart.viewModel.listOfCharts)
+                {
+                    singleChartList.Clear();
+                }
+            }
+            
+        }
+
+        internal static void RemoveMonitorText(ChartMonitor chartMonitor) {
+            chartMonitor.TextBox.Clear();
+
+        }
         internal static void printChartMonitor(ChartMonitor chartMonitorModel, string[] values)
         {
             var textbox = chartMonitorModel.TextBox;

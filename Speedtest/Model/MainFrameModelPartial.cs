@@ -265,24 +265,6 @@ namespace Speedtest
             }
         }
 
-        private void displayModeElement_EditValueChanged(object sender, EventArgs e)
-        {
-            string editValue = (string)displayModeElement.EditValue;
-
-            if (mmw != null)
-            {
-                if (editValue == Strings.MeasureTab_ChartDisplayMode)
-                {
-                    mmw.chartMonitor.SendToBack();
-                }
-                else if (editValue == Strings.MeasureTab_MonitorDisplayMode)
-                {
-                    mmw.chartMonitor.BringToFront();
-                }
-            }
-
-        }
-
         private void numberOfIncomingDataElement_EditValueChanged(object sender, EventArgs e)
         {
             if (portController != null)

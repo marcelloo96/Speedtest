@@ -94,8 +94,8 @@ namespace Speedtest.View.MeasureWindow
         #endregion
 
         private SplitContainerControl splitContainerControl;
-        private GearedChartUserControl gearedChartUserControl;
         private ChartSettingsUserControl chartSettingsUserControl;
         public ChartMonitor chartMonitor;
+        public GearedChartUserControl gearedChartUserControl;
     }
 }
