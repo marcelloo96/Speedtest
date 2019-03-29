@@ -1,6 +1,6 @@
 ﻿namespace Speedtest.View.MeasureWindow
 {
-    partial class ChartMonitor
+    partial class XYChartUserControl
     {
         /// <summary> 
         /// Required designer variable.
@@ -28,34 +28,31 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.TextBox = new System.Windows.Forms.RichTextBox();
+            this.XYChart = new LiveCharts.WinForms.CartesianChart();
             this.SuspendLayout();
             // 
-            // TextBox
+            // XYChart
             // 
-            this.TextBox.BackColor = System.Drawing.SystemColors.Control;
-            this.TextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.TextBox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.TextBox.Location = new System.Drawing.Point(0, 0);
-            this.TextBox.Name = "TextBox";
-            this.TextBox.Size = new System.Drawing.Size(917, 434);
-            this.TextBox.TabIndex = 0;
-            this.TextBox.Text = "";
-            this.TextBox.TextChanged += new System.EventHandler(this.TextBox_TextChanged);
+            this.XYChart.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.XYChart.Location = new System.Drawing.Point(0, 0);
+            this.XYChart.Name = "XYChart";
+            this.XYChart.Size = new System.Drawing.Size(829, 429);
+            this.XYChart.TabIndex = 0;
+            this.XYChart.Text = "cartesianChart1";
             // 
-            // ChartMonitor
+            // XYChartUserControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.TextBox);
-            this.Name = "ChartMonitor";
-            this.Size = new System.Drawing.Size(917, 434);
+            this.Controls.Add(this.XYChart);
+            this.Name = "XYChartUserControl";
+            this.Size = new System.Drawing.Size(829, 429);
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        public System.Windows.Forms.RichTextBox TextBox;
+        public LiveCharts.WinForms.CartesianChart XYChart;
     }
 }

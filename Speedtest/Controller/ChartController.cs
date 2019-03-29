@@ -6,8 +6,11 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows.Media;
 using LiveCharts;
+using LiveCharts.Defaults;
 using LiveCharts.Geared;
+using LiveCharts.Helpers;
 using LiveCharts.WinForms;
+using Speedtest.Model;
 using Speedtest.View.MeasureWindow;
 
 namespace Speedtest.Controller
@@ -26,7 +29,7 @@ namespace Speedtest.Controller
             chart.AutoSize = true;
 
             var transparent = (Brush)new BrushConverter().ConvertFromString("#00FFFFFF");
-            
+
             for (int i = 0; i < model.numOfSeries; i++)
             {
                 chart.Series.Add(new GLineSeries
@@ -36,12 +39,35 @@ namespace Speedtest.Controller
                     DataLabels = false,
                     Fill = transparent,
                     LineSmoothness = 0,
-                     
+
                 });
             }
 
             return chart;
+        }
 
+        internal static CartesianChart InitializeXYChart(CartesianChart chart, XYChartUserControl model)
+        {
+            model.viewModel = new XYViewModel();
+
+            chart.Zoom = ZoomingOptions.X;
+            chart.DisableAnimations = true;
+            chart.AutoSize = true;
+
+            var transparent = (Brush)new BrushConverter().ConvertFromString("#00FFFFFF");
+
+
+            chart.Series.Add(new GLineSeries
+            {
+                Values = model.viewModel.xyChartList.AsChartValues(),
+                DataLabels = false,
+                Fill = transparent,
+                LineSmoothness = 0,
+
+            });
+
+
+            return chart;
         }
 
         internal static void RefreshChartValues(SpeedTestVm speedTestModel, List<double> current)
@@ -72,21 +98,23 @@ namespace Speedtest.Controller
             speedTestModel.CurrentLecture = current[0];
 
         }
-        internal static void RemoveAllPointsFromCharts(List<SpeedTest> gearedCharts) {
-            foreach (var gearedChart in gearedCharts) {
+        internal static void RemoveAllPoints(List<SpeedTest> gearedCharts)
+        {
+            foreach (var gearedChart in gearedCharts)
+            {
                 foreach (var singleChartList in gearedChart.viewModel.listOfCharts)
                 {
                     singleChartList.Clear();
                 }
             }
-            
-        }
-
-        internal static void RemoveMonitorText(ChartMonitor chartMonitor) {
-            chartMonitor.TextBox.Clear();
 
         }
-        internal static void printChartMonitor(ChartMonitor chartMonitorModel, string[] values)
+
+        internal static void RemoveMonitorText(MainFrame mainFrame)
+        {
+            mainFrame.mmw.chartMonitor.TextBox.Clear();
+        }
+        internal static void printChartMonitor(ChartMonitorUserControl chartMonitorModel, string[] values)
         {
             var textbox = chartMonitorModel.TextBox;
             try
@@ -106,12 +134,13 @@ namespace Speedtest.Controller
                     }
                 }
             }
-            catch (Exception ex) {
-                MessageBox.Show("Chartcontroller / Print Chart Monitor");
+            catch (Exception ex)
+            {
+                MessageBox.Show("Chartcontroller / Print Chart Monitor" + ex.Message);
             }
         }
 
-        internal static void printChart(string[] importantValues, int numberOfPanelsDisplayed, MainFrame mainFrameModel)
+        internal static void printGearedChart(string[] importantValues, int numberOfPanelsDisplayed, MainFrame mainFrameModel)
         {
             try
             {
@@ -135,7 +164,7 @@ namespace Speedtest.Controller
             }
             catch (Exception ex)
             {
-               // MessageBox.Show("Chartcontroller / Print Chart");
+                MessageBox.Show("Chartcontroller / Print Chart" + ex.Message);
             }
 
         }
@@ -151,6 +180,11 @@ namespace Speedtest.Controller
             {
                 model.listOfCharts.Add(new GearedValues<double>().WithQuality(Quality.High));
             }
+        }
+
+        internal static void printXYChart(XYChartUserControl xyChartUserControl, string[] sendingData)
+        {
+            //xyChartUserControl.XYChart.Series.Chart.add
         }
     }
 }

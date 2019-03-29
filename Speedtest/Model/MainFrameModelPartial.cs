@@ -20,7 +20,7 @@ namespace Speedtest
             get { return (int)baudRateElement.EditValue; }
             set { baudRateElement.EditValue = value; }
         }
-        public int numberOfChannelsElementValue
+        public int numberOfChannelsFromElementValue
         {
             get { return Int32.Parse(channelsElement.EditValue.ToString()); }
             set { channelsElement.EditValue = value; }

@@ -52,7 +52,7 @@ namespace Speedtest
             myPortBuffer = new List<string[]>();
             timer = new Stopwatch();
             incomingData = Int32.Parse(NumberOfIncomingDataElement.EditValue.ToString());
-            numberOfPanels = numberOfChannelsElementValue;
+            numberOfPanels = numberOfChannelsFromElementValue;
             //displayActions = new Dictionary<string, Action> {
             //    {Strings.MeasureTab_MonitorDisplayMode, ()=>printAll() }
             //};
@@ -100,9 +100,10 @@ namespace Speedtest
                 serialPort.Dispose();
                 connectedState = false;
                 measureControlPanelGroup.Enabled = false;
-                
+
             }
-            else {
+            else
+            {
                 //Connecting
                 if (String.IsNullOrWhiteSpace(selectedPortElementValue))
                 {
@@ -116,7 +117,54 @@ namespace Speedtest
                 isRunning = false;
                 measureControlPanelGroup.Enabled = true;
             }
-            
+
+        }
+        private void displayModeElement_EditValueChanged(object sender, EventArgs e)
+        {
+
+
+            if (mmw != null)
+            {
+                if (DisplayModeElementValue == Strings.MeasureTab_DisplayMode_Chart)
+                {
+                    mmw.splitContainerControl.Dock = DockStyle.Fill;
+                    mmw.splitContainerControl.BringToFront();
+
+                    mmw.chartMonitor.Dock = DockStyle.None;
+                    mmw.chartMonitor.SendToBack();
+                    mmw.xyChartUserControl.Dock = DockStyle.None;
+                    mmw.xyChartUserControl.SendToBack();
+
+                    ChartController.RemoveMonitorText(this);
+                }
+                else if (DisplayModeElementValue == Strings.MeasureTab_DisplayMode_Monitor)
+                {
+                    mmw.chartMonitor.Dock = DockStyle.Fill;
+                    mmw.chartMonitor.BringToFront();
+
+                    mmw.splitContainerControl.Dock = DockStyle.None;
+                    mmw.splitContainerControl.SendToBack();
+                    mmw.xyChartUserControl.Dock = DockStyle.None;
+                    mmw.xyChartUserControl.SendToBack();
+
+                    ChartController.RemoveAllPoints(gearedCharts);
+                }
+                else if (DisplayModeElementValue == Strings.MeasureTab_DisplayMode_XY)
+                {
+                    mmw.xyChartUserControl.Dock = DockStyle.Fill;
+                    mmw.xyChartUserControl.BringToFront();
+
+                    mmw.chartMonitor.SendToBack();
+                    mmw.chartMonitor.Dock = DockStyle.None;
+                    mmw.splitContainerControl.Dock = DockStyle.None;
+                    mmw.splitContainerControl.SendToBack();
+
+                    ChartController.RemoveMonitorText(this);
+                    ChartController.RemoveAllPoints(gearedCharts);
+
+                }
+            }
+
         }
 
         private void startStopButton_ItemClick(object sender, ItemClickEventArgs ea)
@@ -156,37 +204,21 @@ namespace Speedtest
             sendingData = currentlyArrived.Split(' ');
             gearedCharts.ForEach(p => p.viewModel.recivedChartValues.Clear());
 
-            if (DisplayModeElementValue == Strings.MeasureTab_ChartDisplayMode)
+            if (DisplayModeElementValue == Strings.MeasureTab_DisplayMode_Chart)
             {
-                ChartController.printChart(sendingData, numberOfPanels, this);
+                ChartController.printGearedChart(sendingData, numberOfPanels, this);
             }
-            else if (DisplayModeElementValue == Strings.MeasureTab_MonitorDisplayMode) {
+            else if (DisplayModeElementValue == Strings.MeasureTab_DisplayMode_Monitor)
+            {
                 ChartController.printChartMonitor(mmw.chartMonitor, sendingData);
             }
-
-        }
-
-        private void displayModeElement_EditValueChanged(object sender, EventArgs e)
-        {
-            string editValue = (string)displayModeElement.EditValue;
-
-            if (mmw != null)
+            else if (DisplayModeElementValue == Strings.MeasureTab_DisplayMode_XY)
             {
-                if (editValue == Strings.MeasureTab_ChartDisplayMode)
-                {
-                    mmw.chartMonitor.SendToBack();
-                    ChartController.RemoveMonitorText(mmw.chartMonitor);
-                                        
-                }
-                else if (editValue == Strings.MeasureTab_MonitorDisplayMode)
-                {
-                    mmw.chartMonitor.BringToFront();
-                    ChartController.RemoveAllPointsFromCharts(gearedCharts);
-                    
-                }
+                ChartController.printXYChart(mmw.xyChartUserControl,sendingData);
             }
 
         }
+
 
 
     }

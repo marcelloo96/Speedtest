@@ -81,18 +81,27 @@ namespace Speedtest {
         /// <summary>
         ///   Looks up a localized string similar to Chart.
         /// </summary>
-        internal static string MeasureTab_ChartDisplayMode {
+        internal static string MeasureTab_DisplayMode_Chart {
             get {
-                return ResourceManager.GetString("MeasureTab_ChartDisplayMode", resourceCulture);
+                return ResourceManager.GetString("MeasureTab_DisplayMode_Chart", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Monitor.
         /// </summary>
-        internal static string MeasureTab_MonitorDisplayMode {
+        internal static string MeasureTab_DisplayMode_Monitor {
             get {
-                return ResourceManager.GetString("MeasureTab_MonitorDisplayMode", resourceCulture);
+                return ResourceManager.GetString("MeasureTab_DisplayMode_Monitor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to XY .
+        /// </summary>
+        internal static string MeasureTab_DisplayMode_XY {
+            get {
+                return ResourceManager.GetString("MeasureTab_DisplayMode_XY", resourceCulture);
             }
         }
         

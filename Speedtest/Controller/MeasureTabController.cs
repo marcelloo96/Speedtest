@@ -16,13 +16,18 @@ namespace Speedtest.Controller
         internal static void FillEditors(MainFrame model)
         {
             //TODO DISPLAY
-            model.numberOfChannelsElementValue = 1;
+            model.numberOfChannelsFromElementValue = 1;
             //model.SelectedPortElement.EditValue = "COM3";
             model.samplingRateElementValue = 1;
             model.keepRecordsElementValue = 300;
             model.NumberOfIncomingDataElement.EditValue = 1;
-            model.DisplayModeElement.EditValue = Strings.MeasureTab_ChartDisplayMode;
-            model.DisplayModeRepositoryItemComboBox.Items.AddRange(new string[] {Strings.MeasureTab_ChartDisplayMode, Strings.MeasureTab_MonitorDisplayMode});
+            model.DisplayModeElement.EditValue = Strings.MeasureTab_DisplayMode_Chart;
+            model.DisplayModeRepositoryItemComboBox.Items.AddRange(new string[] {
+                Strings.MeasureTab_DisplayMode_Chart,
+                Strings.MeasureTab_DisplayMode_Monitor,
+                Strings.MeasureTab_DisplayMode_XY
+            }
+            );
 
         }
         /// <summary>
@@ -43,7 +48,7 @@ namespace Speedtest.Controller
                 ///*Disconnecting*/                
 
                 setAllPortOptionsToRecentConnectState(mainFrameModel);
-                
+
                 try
                 {
                     var succesfullyClosed = PortController.CloseSerialOnExit(mainFrameModel.serialPort);
@@ -51,7 +56,8 @@ namespace Speedtest.Controller
                     {
                         mainFrameModel.connectedState = false;
                     }
-                    else {
+                    else
+                    {
                         mainFrameModel.connectedState = true;
                     }
 
@@ -66,8 +72,8 @@ namespace Speedtest.Controller
                     MessageBox.Show(ex.Message);
 
                 }
-                
-                
+
+
             }
             else
             {
@@ -84,10 +90,11 @@ namespace Speedtest.Controller
                 mainFrameModel.portController.CreatePort();
                 var portOpened = mainFrameModel.portController.OpenThePort();
 
-                if (portOpened) {
-                       // mainFrameModel.numberOfPanelsDisplayed = mainFrameModel.numberOfChannelsFromElementValue;
-                        mainFrameModel.IsPortConnectedStatusBarLabel.Caption = StringConstants.portStatusConnected;
-                                       
+                if (portOpened)
+                {
+                    // mainFrameModel.numberOfPanelsDisplayed = mainFrameModel.numberOfChannelsFromElementValue;
+                    mainFrameModel.IsPortConnectedStatusBarLabel.Caption = StringConstants.portStatusConnected;
+
                 }
 
                 mainFrameModel.connectedState = true;

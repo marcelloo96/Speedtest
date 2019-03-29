@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace Speedtest.View.MeasureWindow
 {
-    public partial class ChartMonitor : UserControl
+    public partial class ChartMonitorUserControl : UserControl
     {
-        public ChartMonitor()
+        public ChartMonitorUserControl()
         {
             InitializeComponent();
         }

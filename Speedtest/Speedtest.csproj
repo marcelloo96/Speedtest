@@ -100,6 +100,7 @@
     <Compile Include="Model\PortModel.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Model\XYViewModel.cs" />
     <Compile Include="Strings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -116,11 +117,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>StringConstants.resx</DependentUpon>
     </Compile>
-    <Compile Include="View\MeasureWindow\ChartMonitor.cs">
+    <Compile Include="View\MeasureWindow\ChartMonitorUserControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="View\MeasureWindow\ChartMonitor.Designer.cs">
-      <DependentUpon>ChartMonitor.cs</DependentUpon>
+    <Compile Include="View\MeasureWindow\ChartMonitorUserControl.Designer.cs">
+      <DependentUpon>ChartMonitorUserControl.cs</DependentUpon>
     </Compile>
     <Compile Include="View\MeasureWindow\ChartSettingsUserControl.cs">
       <SubType>UserControl</SubType>
@@ -140,10 +141,16 @@
     <Compile Include="View\MeasureWindow\MainMeasureWindow.Designer.cs">
       <DependentUpon>MainMeasureWindow.cs</DependentUpon>
     </Compile>
-    <Compile Include="View\SpeedTest.cs">
+    <Compile Include="View\MeasureWindow\XYChartUserControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="View\SpeedTest.Designer.cs">
+    <Compile Include="View\MeasureWindow\XYChartUserControl.Designer.cs">
+      <DependentUpon>XYChartUserControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\MeasureWindow\SpeedTest.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="View\MeasureWindow\SpeedTest.Designer.cs">
       <DependentUpon>SpeedTest.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
@@ -161,8 +168,8 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>StringConstants.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="View\MeasureWindow\ChartMonitor.resx">
-      <DependentUpon>ChartMonitor.cs</DependentUpon>
+    <EmbeddedResource Include="View\MeasureWindow\ChartMonitorUserControl.resx">
+      <DependentUpon>ChartMonitorUserControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="View\MeasureWindow\ChartSettingsUserControl.resx">
       <DependentUpon>ChartSettingsUserControl.cs</DependentUpon>
@@ -173,7 +180,10 @@
     <EmbeddedResource Include="View\MeasureWindow\MainMeasureWindow.resx">
       <DependentUpon>MainMeasureWindow.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="View\SpeedTest.resx">
+    <EmbeddedResource Include="View\MeasureWindow\XYChartUserControl.resx">
+      <DependentUpon>XYChartUserControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\MeasureWindow\SpeedTest.resx">
       <DependentUpon>SpeedTest.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
