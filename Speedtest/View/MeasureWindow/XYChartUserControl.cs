@@ -17,7 +17,7 @@ namespace Speedtest.View.MeasureWindow
 {
     public partial class XYChartUserControl : UserControl
     {
-        public XYViewModel viewModel;
+        public XYViewModel viewModel { get; set; }
         public XYChartUserControl()
         {
             

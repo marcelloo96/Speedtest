@@ -12,12 +12,14 @@ using LiveCharts.Helpers;
 using LiveCharts.WinForms;
 using Speedtest.Model;
 using Speedtest.View.MeasureWindow;
+using LiveCharts.Helpers;
 
 namespace Speedtest.Controller
 {
     public class ChartController
     {
         public static double tryparseTmp;
+        public static double x = 0, y = 0;
         public static CartesianChart SetDefaultChart(CartesianChart chart, SpeedTest model)
         {
             model.viewModel = new SpeedTestVm(model.numOfSeries, model.serialPort);
@@ -59,7 +61,7 @@ namespace Speedtest.Controller
 
             chart.Series.Add(new GLineSeries
             {
-                Values = model.viewModel.xyChartList.AsChartValues(),
+                Values = model.viewModel.xyChartList,
                 DataLabels = false,
                 Fill = transparent,
                 LineSmoothness = 0,
@@ -184,7 +186,29 @@ namespace Speedtest.Controller
 
         internal static void printXYChart(XYChartUserControl xyChartUserControl, string[] sendingData)
         {
-            //xyChartUserControl.XYChart.Series.Chart.add
+            
+            //try
+            //{
+            //    if (sendingData != null && sendingData.Length < 2)
+            //    {
+            //        x = double.NaN;
+            //        y = double.NaN;
+            //    }
+            //    else
+            //    {
+            //        x = sendingData[0] == null ? 0 : Double.Parse(sendingData[0]);
+            //        y = sendingData[1] == null ? 0 : Double.Parse(sendingData[1]);
+
+            //    }
+            //}
+            //catch (Exception)
+            //{
+
+            //    MessageBox.Show("Chartcontroller/XY");
+            //}
+
+
+            xyChartUserControl.viewModel.xyChartList.Add(new ObservablePoint(x++, y++));
         }
     }
 }

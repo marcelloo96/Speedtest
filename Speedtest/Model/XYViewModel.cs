@@ -11,12 +11,12 @@ namespace Speedtest.Model
 {
     public class XYViewModel
     {
-        public List<GearedValues<XYPoint>> xyChartList { get; set; }
+        public GearedValues<ObservablePoint> xyChartList { get; set; }
 
 
         public XYViewModel()
         {
-            xyChartList = new List<GearedValues<XYPoint>>();
+            xyChartList = new GearedValues<ObservablePoint>();
         }
     }
     public class XYPoint{
