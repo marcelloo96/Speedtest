@@ -55,7 +55,7 @@ namespace Speedtest
             myPortBuffer = new List<string[]>();
             timer = new Stopwatch();
             incomingData = Int32.Parse(NumberOfIncomingDataElement.EditValue.ToString());
-            numberOfPanels = numberOfChannelsFromElementValue;
+            numberOfPanels = numberOfChannelsElementValue;
             //displayActions = new Dictionary<string, Action> {
             //    {Strings.MeasureTab_MonitorDisplayMode, ()=>printAll() }
             //};
@@ -67,7 +67,7 @@ namespace Speedtest
             {
                 try
                 {
-                    MeasureTabController.ConnectionManager(this);
+                    MeasureTabController.SetGroupsAndIconsToCurrentState(this);
 
                     if (connectedState)
                     {
@@ -96,13 +96,16 @@ namespace Speedtest
             if (connectedState)
             {
                 //Disconnecting
+                
                 contentPanel.Controls.Clear();
                 mmw.deleteControls();
                 mmw.Dispose();
                 PortController.CloseSerialOnExit(serialPort);
                 serialPort.Dispose();
+                MeasureTabController.SetGroupsAndIconsToCurrentState(this);
                 connectedState = false;
                 measureControlPanelGroup.Enabled = false;
+                
 
             }
             else
@@ -222,14 +225,15 @@ namespace Speedtest
             }
             else if (DisplayModeElementValue == Strings.MeasureTab_DisplayMode_XY)
             {
-                //ChartController.printXYChart(mmw.xyChartUserControl,sendingData);
+                ChartController.printXYChart(mmw.xyChartUserControl,sendingData,numberOfIncomingDataEditValue);
+                //ChartController.printGearedChart(sendingData, numberOfPanels, this);
             }
 
         }
 
         private double[] calculateLinearValue(double[] sendingData, double sensitivity, double zeroValue)
         {
-            for (int i = 0; i < sendingData.Length - 1; i++)
+            for (int i = 0; i < sendingData.Length; i++)
             {
                 sendingData[i] = sendingData[i] * sensitivity + zeroValue;
             }

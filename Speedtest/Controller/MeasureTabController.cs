@@ -16,7 +16,7 @@ namespace Speedtest.Controller
         internal static void FillEditors(MainFrame model)
         {
             //TODO DISPLAY
-            model.numberOfChannelsFromElementValue = 1;
+            model.numberOfChannelsElementValue = 1;
             //model.SelectedPortElement.EditValue = "COM3";
             model.samplingRateElementValue = 1;
             model.keepRecordsElementValue = 300;
@@ -41,7 +41,7 @@ namespace Speedtest.Controller
             //model.DisplayModeRepositoryItemComboBox.ReadOnly = true;
         }
 
-        internal static void ConnectionManager(MainFrame mainFrameModel)
+        internal static void SetGroupsAndIconsToCurrentState(MainFrame mainFrameModel)
         {
             if (mainFrameModel.connectedState)
             {

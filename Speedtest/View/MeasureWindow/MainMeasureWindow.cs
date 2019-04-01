@@ -26,7 +26,7 @@ namespace Speedtest.View.MeasureWindow
             mainFrameModel = model;
             gearedChart = model.gearedChart;
             gearedCharts = model.gearedCharts;
-            numberOfPanelsDisplayed= mainFrameModel.numberOfChannelsFromElementValue;
+            numberOfPanelsDisplayed= mainFrameModel.numberOfChannelsElementValue;
             InitializeComponent();
             InitialState();
         }

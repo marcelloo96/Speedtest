@@ -12,11 +12,12 @@ namespace Speedtest.Model
     public class XYViewModel
     {
         public GearedValues<ObservablePoint> xyChartList { get; set; }
+        public int keepRecords = 300;
 
 
         public XYViewModel()
         {
-            xyChartList = new GearedValues<ObservablePoint>();
+            xyChartList = new GearedValues<ObservablePoint>().WithQuality(Quality.High);
         }
     }
     public class XYPoint{

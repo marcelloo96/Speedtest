@@ -20,7 +20,7 @@ namespace Speedtest
             get { return (int)baudRateElement.EditValue; }
             set { baudRateElement.EditValue = value; }
         }
-        public int numberOfChannelsFromElementValue
+        public int numberOfChannelsElementValue
         {
             get { return Int32.Parse(channelsElement.EditValue.ToString()); }
             set { channelsElement.EditValue = value; }
@@ -100,6 +100,11 @@ namespace Speedtest
             get { return (bool)useLinearityElement.EditValue; }
             set { useLinearityElement.EditValue = value; }
         }
+
+        public int numberOfIncomingDataEditValue {
+            get { return Int32.Parse(numberOfIncomingDataElement.EditValue.ToString()); }
+            set { numberOfIncomingDataElement.EditValue = value; }
+        }
         #endregion
         public BarEditItem ChannelsElement
         {
@@ -158,7 +163,7 @@ namespace Speedtest
         {
             if (serialPort != null)
             {
-                serialPort.BaudRate = (int)baudRateElement.EditValue;
+                serialPort.BaudRate = baudRateFromElementValue;
             }
         }
 
@@ -166,7 +171,7 @@ namespace Speedtest
         {
             if (serialPort != null)
             {
-                serialPort.DataBits = (int)dataBitsElement.EditValue;
+                serialPort.DataBits = dataBitsElementValue;
             }
         }
 
@@ -174,7 +179,7 @@ namespace Speedtest
         {
             if (serialPort != null)
             {
-                serialPort.Parity = (Parity)parityElement.EditValue;
+                serialPort.Parity = parityElementValue;
             }
         }
 
@@ -182,7 +187,7 @@ namespace Speedtest
         {
             if (serialPort != null)
             {
-                serialPort.StopBits = (StopBits)stopBitElement.EditValue;
+                serialPort.StopBits = stopBitElementValue;
             }
         }
 
@@ -190,7 +195,7 @@ namespace Speedtest
         {
             if (serialPort != null)
             {
-                serialPort.RtsEnable = (bool)rtsEnableElement.EditValue;
+                serialPort.RtsEnable = rtsEnableElementValue;
             }
         }
 
@@ -198,7 +203,7 @@ namespace Speedtest
         {
             if (serialPort != null)
             {
-                serialPort.DtrEnable = (bool)dtrEnableElement.EditValue;
+                serialPort.DtrEnable = dtrEnableElementValue;
             }
         }
 
@@ -206,7 +211,7 @@ namespace Speedtest
         {
             if (serialPort != null)
             {
-                serialPort.Handshake = (Handshake)handShakeElement.EditValue;
+                serialPort.Handshake = handShakeElementValue;
             }
         }
 
@@ -214,7 +219,7 @@ namespace Speedtest
         {
             if (serialPort != null)
             {
-                serialPort.WriteBufferSize = (int)writeBufferSizeElement.EditValue;
+                serialPort.WriteBufferSize = writeBufferSizeElementValue;
             }
         }
 
@@ -275,8 +280,8 @@ namespace Speedtest
             //so 1/f*1000 -> 1000/f
             if (portController != null)
             {
-                portController.deltaTime = 1000 / Int32.Parse((string)samplingRateElement.EditValue);
-                deltaTime = 1000 / Int32.Parse((string)samplingRateElement.EditValue);
+                portController.deltaTime = 1000 / samplingRateElementValue;
+                deltaTime = 1000 / samplingRateElementValue;
             }
         }
 
@@ -284,7 +289,7 @@ namespace Speedtest
         {
             if (portController != null)
             {
-                portController.numberOfIncomingData = Int32.Parse((string)NumberOfIncomingDataElement.EditValue);
+                portController.numberOfIncomingData = numberOfIncomingDataEditValue;
             }
         }
 
@@ -318,7 +323,7 @@ namespace Speedtest
 
         private void zeroValueElement_EditValueChanged(object sender, EventArgs e)
         {
-            zeroValue = zeroValueElementValue;
+            zeroValue=zeroValueElementValue;
         }
 
         private void useLinearityElement_EditValueChanged(object sender, EventArgs e)

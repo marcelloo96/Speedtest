@@ -28,7 +28,6 @@ namespace Speedtest
         /// The number of element this chart must equal the sum of the ports
         /// </summary>
         public List<GearedValues<double>> listOfCharts { get; set; }
-        public double CurrentLecture { get; set; }
         public bool IsHot { get; set; }
 
         #endregion

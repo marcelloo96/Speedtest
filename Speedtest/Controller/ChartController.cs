@@ -19,7 +19,6 @@ namespace Speedtest.Controller
     public class ChartController
     {
         public static double tryparseTmp;
-        public static double x = 0, y = 0;
         public static CartesianChart SetDefaultChart(CartesianChart chart, SpeedTest model)
         {
             model.viewModel = new SpeedTestVm(model.numOfSeries, model.serialPort);
@@ -74,30 +73,61 @@ namespace Speedtest.Controller
 
         internal static void RefreshChartValues(SpeedTestVm speedTestModel, List<double> current)
         {
-            int index = 0;
-            foreach (var i in speedTestModel.listOfCharts)
+            try
             {
-                if (index < speedTestModel.listOfCharts.Count() && index < current.Count())
+                int index = 0;
+                foreach (var i in speedTestModel.listOfCharts)
                 {
-
-                    var first = i.DefaultIfEmpty(0).FirstOrDefault();
-                    if (i.Count > speedTestModel.keepRecords - 1)
+                    if (index < speedTestModel.listOfCharts.Count() && index < current.Count())
                     {
-                        i.Remove(first);
-                    }
-                    if (i.Count < speedTestModel.keepRecords)
-                    {
-                        i.Add(current[index]);
+
+                        var first = i.DefaultIfEmpty(0).FirstOrDefault();
+                        if (i.Count > speedTestModel.keepRecords - 1)
+                        {
+                            i.Remove(first);
+                        }
+                        if (i.Count < speedTestModel.keepRecords)
+                        {
+                            i.Add(current[index]);
+                        }
+
+                        index++;
                     }
 
-                    index++;
                 }
+            }
+            catch (Exception e)
+            {
 
-
+                MessageBox.Show("refresh chartvalues" + e.Message);
             }
 
-            //speedTestModel.IsHot = current[0] > 0;
-            speedTestModel.CurrentLecture = current[0];
+
+        }
+
+        internal static void RefreshXYChartValues(XYViewModel viewModel, ObservablePoint current)
+        {
+            try
+            {
+                var i = viewModel.xyChartList;
+
+                if (i.Count > viewModel.keepRecords - 1)
+                {
+                    var first = i.FirstOrDefault();
+                    i.Remove(first);
+                }
+                if (i.Count < viewModel.keepRecords)
+                {
+                    i.Add(current);
+                }
+
+            }
+            catch (Exception e)
+            {
+
+                MessageBox.Show("refresh chartvalues" + e.Message);
+            }
+
 
         }
         internal static void RemoveAllPoints(List<SpeedTest> gearedCharts)
@@ -126,14 +156,14 @@ namespace Speedtest.Controller
                     textbox.Invoke((MethodInvoker)delegate ()
                     {
                         //printChartMonitor(chartMonitorModel, values);
-                        textbox.AppendText(String.Join(" ", values)+Environment.NewLine);
+                        textbox.AppendText(String.Join(" ", values) + Environment.NewLine);
                     });
                 }
                 else
                 {
                     if (values != null)
                     {
-                        textbox.AppendText(String.Join(" ", values)+Environment.NewLine);
+                        textbox.AppendText(String.Join(" ", values) + Environment.NewLine);
                     }
                 }
             }
@@ -184,31 +214,31 @@ namespace Speedtest.Controller
             }
         }
 
-        internal static void printXYChart(XYChartUserControl xyChartUserControl, string[] sendingData)
+        internal static void printXYChart(XYChartUserControl xyChartUserControl, double[] sendingData, int numberOfIncomingData, int choosenXChannel = 0, int choosenYChannel = 0)
         {
-            
-            //try
-            //{
-            //    if (sendingData != null && sendingData.Length < 2)
-            //    {
-            //        x = double.NaN;
-            //        y = double.NaN;
-            //    }
-            //    else
-            //    {
-            //        x = sendingData[0] == null ? 0 : Double.Parse(sendingData[0]);
-            //        y = sendingData[1] == null ? 0 : Double.Parse(sendingData[1]);
-
-            //    }
-            //}
-            //catch (Exception)
-            //{
-
-            //    MessageBox.Show("Chartcontroller/XY");
-            //}
+            try
+            {
+                ObservablePoint point;
+                if (sendingData.Length == numberOfIncomingData && Math.Max(choosenXChannel, choosenYChannel) < sendingData.Length && Math.Min(choosenXChannel, choosenYChannel) >= 0)
+                {
+                    point = new ObservablePoint(sendingData[choosenXChannel], sendingData[choosenYChannel]);
+                }
+                else
+                {
+                    point = new ObservablePoint(double.NaN, double.NaN);
+                }
 
 
-            xyChartUserControl.viewModel.xyChartList.Add(new ObservablePoint(x++, y++));
+                //xyChartUserControl.viewModel.xyChartList.Add(new ObservablePoint(x, y));
+                ChartController.RefreshXYChartValues(xyChartUserControl.viewModel,point);
+            }
+            catch (Exception e)
+            {
+
+                MessageBox.Show("XY" + e.Message);
+            }
+
+
         }
     }
 }
