@@ -116,7 +116,7 @@ namespace Speedtest.Controller
         {
             mainFrame.mmw.chartMonitor.TextBox.Clear();
         }
-        internal static void printChartMonitor(ChartMonitorUserControl chartMonitorModel, string[] values)
+        internal static void printChartMonitor(ChartMonitorUserControl chartMonitorModel, double[] values)
         {
             var textbox = chartMonitorModel.TextBox;
             try
@@ -125,14 +125,15 @@ namespace Speedtest.Controller
                 {
                     textbox.Invoke((MethodInvoker)delegate ()
                     {
-                        printChartMonitor(chartMonitorModel, values);
+                        //printChartMonitor(chartMonitorModel, values);
+                        textbox.AppendText(String.Join(" ", values)+Environment.NewLine);
                     });
                 }
                 else
                 {
                     if (values != null)
                     {
-                        textbox.AppendText(String.Join(" ", values));
+                        textbox.AppendText(String.Join(" ", values)+Environment.NewLine);
                     }
                 }
             }
@@ -142,7 +143,7 @@ namespace Speedtest.Controller
             }
         }
 
-        internal static void printGearedChart(string[] importantValues, int numberOfPanelsDisplayed, MainFrame mainFrameModel)
+        internal static void printGearedChart(double[] importantValues, int numberOfPanelsDisplayed, MainFrame mainFrameModel)
         {
             try
             {
@@ -150,8 +151,7 @@ namespace Speedtest.Controller
                 {
                     for (var i = 0; i < numberOfPanelsDisplayed; i++)
                     {
-                        double.TryParse(importantValues[i], out tryparseTmp);
-                        mainFrameModel.gearedCharts[i].viewModel.recivedChartValues.Add(tryparseTmp);
+                        mainFrameModel.gearedCharts[i].viewModel.recivedChartValues.Add(importantValues[i]);
                         ChartController.RefreshChartValues(mainFrameModel.gearedCharts[i].viewModel, mainFrameModel.gearedCharts[i].viewModel.recivedChartValues);
                     }
                 }

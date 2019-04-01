@@ -85,6 +85,21 @@ namespace Speedtest
             get { return Int32.Parse(keepRecordsElement.EditValue.ToString()); }
             set { keepRecordsElement.EditValue = value; }
         }
+
+        public double sensitivityElementValue {
+            get { return Double.Parse(sensitivityElement.EditValue.ToString()); }
+            set { sensitivityElement.EditValue = value; }
+        }
+        public double zeroValueElementValue
+        {
+            get { return Double.Parse(zeroValueElement.EditValue.ToString()); }
+            set { zeroValueElement.EditValue = value; }
+        }
+
+        public bool useLinearityEditValue {
+            get { return (bool)useLinearityElement.EditValue; }
+            set { useLinearityElement.EditValue = value; }
+        }
         #endregion
         public BarEditItem ChannelsElement
         {
@@ -296,5 +311,19 @@ namespace Speedtest
             }
         }
 
+        private void sensitivityElement_EditValueChanged(object sender, EventArgs e)
+        {
+            sensitivity = sensitivityElementValue;
+        }
+
+        private void zeroValueElement_EditValueChanged(object sender, EventArgs e)
+        {
+            zeroValue = zeroValueElementValue;
+        }
+
+        private void useLinearityElement_EditValueChanged(object sender, EventArgs e)
+        {
+            useLinearity = useLinearityEditValue;
+        }
     }
 }

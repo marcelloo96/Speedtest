@@ -31,13 +31,16 @@ namespace Speedtest
         public List<string[]> myPortBuffer;
         public Stopwatch timer;
         public Int32 deltaTime;
-        public string[] sendingData;
+        public double[] sendingData;
         int incomingData;
         int numberOfPanels;
         DataCollector dc;
         char[] charSeparators = new char[] { '\n' };
         //public Dictionary<string, Action> displayActions;
         public static string currentlyStaticArrived;
+        public static bool useLinearity = false;
+        public static double sensitivity = 1;
+        public static double zeroValue = 1;
 
         #endregion
 
@@ -201,7 +204,12 @@ namespace Speedtest
         private void printTo(string currentlyArrived)
         {
             Debug.WriteLine(currentlyArrived);
-            sendingData = currentlyArrived.Split(' ');
+            //sendingData = currentlyArrived.Split(' ');
+            sendingData = Array.ConvertAll(currentlyArrived.Split(' '), Double.Parse);
+            if (useLinearity)
+            {
+                sendingData = calculateLinearValue(sendingData, sensitivity, zeroValue);
+            }
             gearedCharts.ForEach(p => p.viewModel.recivedChartValues.Clear());
 
             if (DisplayModeElementValue == Strings.MeasureTab_DisplayMode_Chart)
@@ -214,13 +222,19 @@ namespace Speedtest
             }
             else if (DisplayModeElementValue == Strings.MeasureTab_DisplayMode_XY)
             {
-                ChartController.printXYChart(mmw.xyChartUserControl,sendingData);
+                //ChartController.printXYChart(mmw.xyChartUserControl,sendingData);
             }
 
         }
 
-
-
+        private double[] calculateLinearValue(double[] sendingData, double sensitivity, double zeroValue)
+        {
+            for (int i = 0; i < sendingData.Length - 1; i++)
+            {
+                sendingData[i] = sendingData[i] * sensitivity + zeroValue;
+            }
+            return sendingData;
+        }
     }
 
 }
