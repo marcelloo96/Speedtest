@@ -260,6 +260,11 @@ namespace Speedtest
            
             return sendingData;
         }
+
+        private void calculateLinearityButton_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            sensitivityElementValue = (double)((double)voltageReferenceEditValue / (double)adcMaxEditValue);
+        }
     }
 
 }

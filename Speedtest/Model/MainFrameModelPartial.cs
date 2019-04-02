@@ -78,8 +78,10 @@ namespace Speedtest
         public int samplingRateElementValue
         {
             get { return Int32.Parse(samplingRateElement.EditValue.ToString()); }
-            set { samplingRateElement.EditValue = value;
-                  deltaTime = 1 / (double)value;
+            set
+            {
+                samplingRateElement.EditValue = value;
+                deltaTime = 1 / (double)value;
             }
         }
         public int keepRecordsElementValue
@@ -88,7 +90,8 @@ namespace Speedtest
             set { keepRecordsElement.EditValue = value; }
         }
 
-        public double sensitivityElementValue {
+        public double sensitivityElementValue
+        {
             get { return Double.Parse(sensitivityElement.EditValue.ToString()); }
             set { sensitivityElement.EditValue = value; }
         }
@@ -98,15 +101,29 @@ namespace Speedtest
             set { zeroValueElement.EditValue = value; }
         }
 
-        public bool useLinearityEditValue {
+        public bool useLinearityEditValue
+        {
             get { return (bool)useLinearityElement.EditValue; }
             set { useLinearityElement.EditValue = value; }
         }
 
-        public int numberOfIncomingDataEditValue {
+        public int numberOfIncomingDataEditValue
+        {
             get { return Int32.Parse(numberOfIncomingDataElement.EditValue.ToString()); }
             set { numberOfIncomingDataElement.EditValue = value; }
         }
+
+        public int adcMaxEditValue
+        {
+            get { return Int32.Parse(adcMaxValueElement.EditValue.ToString()); }
+            set { adcMaxValueElement.EditValue = value; }
+        }
+
+        public int voltageReferenceEditValue {
+            get { return Int32.Parse(voltageReferenceElement.EditValue.ToString()); }
+            set { voltageReferenceElement.EditValue = value; }
+        }
+
         #endregion
         public BarEditItem ChannelsElement
         {
@@ -133,8 +150,9 @@ namespace Speedtest
         public BarEditItem DisplayModeElement { get { return displayModeElement; } }
         public BarEditItem NumberOfIncomingDataElement { get { return numberOfIncomingDataElement; } }
 
-        public string DisplayModeElementValue {
-            get { return (string) displayModeElement.EditValue; }
+        public string DisplayModeElementValue
+        {
+            get { return (string)displayModeElement.EditValue; }
             set { displayModeElement.EditValue = value; }
         }
         #endregion
@@ -325,7 +343,7 @@ namespace Speedtest
 
         private void zeroValueElement_EditValueChanged(object sender, EventArgs e)
         {
-            zeroValue=zeroValueElementValue;
+            zeroValue = zeroValueElementValue;
         }
 
         private void useLinearityElement_EditValueChanged(object sender, EventArgs e)

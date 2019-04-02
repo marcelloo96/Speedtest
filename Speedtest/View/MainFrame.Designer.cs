@@ -72,6 +72,11 @@
             this.sensitivityRepositoryItemTextEdit = new DevExpress.XtraEditors.Repository.RepositoryItemTextEdit();
             this.useLinearityElement = new DevExpress.XtraBars.BarEditItem();
             this.useLinearityRepositoryItemToggleSwitch = new DevExpress.XtraEditors.Repository.RepositoryItemToggleSwitch();
+            this.calculateLinearityButton = new DevExpress.XtraBars.BarButtonItem();
+            this.adcMaxValueElement = new DevExpress.XtraBars.BarEditItem();
+            this.adcMaxValueRepositoryItemTextEdit = new DevExpress.XtraEditors.Repository.RepositoryItemTextEdit();
+            this.voltageReferenceElement = new DevExpress.XtraBars.BarEditItem();
+            this.voltageReferenceRepositoryItemTextEdit = new DevExpress.XtraEditors.Repository.RepositoryItemTextEdit();
             this.measurePage = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.measurePortBasicGroup = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.displayGroup = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
@@ -82,6 +87,7 @@
             this.portAdvancedsGroup = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.sensorOptionsPage = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.ribbonPageGroup1 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
+            this.calculatelinearityGroup = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.displayPage = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.displayChartGroup = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.repositoryItemComboBox2 = new DevExpress.XtraEditors.Repository.RepositoryItemComboBox();
@@ -119,6 +125,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.zeroValueRepositoryItemTextEdit)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.sensitivityRepositoryItemTextEdit)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.useLinearityRepositoryItemToggleSwitch)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.adcMaxValueRepositoryItemTextEdit)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.voltageReferenceRepositoryItemTextEdit)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemComboBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.zeroValueRepositoryItemSpinEdit)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.sensitivityRepositoryItem)).BeginInit();
@@ -160,9 +168,12 @@
             this.keepRecordsElement,
             this.zeroValueElement,
             this.sensitivityElement,
-            this.useLinearityElement});
+            this.useLinearityElement,
+            this.calculateLinearityButton,
+            this.adcMaxValueElement,
+            this.voltageReferenceElement});
             this.ribbonControl1.Location = new System.Drawing.Point(0, 0);
-            this.ribbonControl1.MaxItemId = 35;
+            this.ribbonControl1.MaxItemId = 38;
             this.ribbonControl1.Name = "ribbonControl1";
             this.ribbonControl1.Pages.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPage[] {
             this.measurePage,
@@ -198,7 +209,9 @@
             this.repositoryItemRadioGroup1,
             this.zeroValueRepositoryItemTextEdit,
             this.sensitivityRepositoryItemTextEdit,
-            this.useLinearityRepositoryItemToggleSwitch});
+            this.useLinearityRepositoryItemToggleSwitch,
+            this.adcMaxValueRepositoryItemTextEdit,
+            this.voltageReferenceRepositoryItemTextEdit});
             this.ribbonControl1.Size = new System.Drawing.Size(1037, 146);
             this.ribbonControl1.StatusBar = this.ribbonStatusBar1;
             // 
@@ -498,7 +511,7 @@
             this.zeroValueElement.Caption = "Zero Value";
             this.zeroValueElement.Edit = this.zeroValueRepositoryItemTextEdit;
             this.zeroValueElement.EditHeight = 20;
-            this.zeroValueElement.EditValue = 1D;
+            this.zeroValueElement.EditValue = 0D;
             this.zeroValueElement.EditWidth = 100;
             this.zeroValueElement.Id = 32;
             this.zeroValueElement.Name = "zeroValueElement";
@@ -545,6 +558,43 @@
             this.useLinearityRepositoryItemToggleSwitch.Name = "useLinearityRepositoryItemToggleSwitch";
             this.useLinearityRepositoryItemToggleSwitch.OffText = "Off";
             this.useLinearityRepositoryItemToggleSwitch.OnText = "On";
+            // 
+            // calculateLinearityButton
+            // 
+            this.calculateLinearityButton.Caption = "Calculate Linearity";
+            this.calculateLinearityButton.Id = 35;
+            this.calculateLinearityButton.Name = "calculateLinearityButton";
+            this.calculateLinearityButton.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.calculateLinearityButton_ItemClick);
+            // 
+            // adcMaxValueElement
+            // 
+            this.adcMaxValueElement.Caption = "ADC Max Value";
+            this.adcMaxValueElement.Edit = this.adcMaxValueRepositoryItemTextEdit;
+            this.adcMaxValueElement.EditHeight = 20;
+            this.adcMaxValueElement.EditWidth = 100;
+            this.adcMaxValueElement.Id = 36;
+            this.adcMaxValueElement.Name = "adcMaxValueElement";
+            // 
+            // adcMaxValueRepositoryItemTextEdit
+            // 
+            this.adcMaxValueRepositoryItemTextEdit.AutoHeight = false;
+            this.adcMaxValueRepositoryItemTextEdit.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric;
+            this.adcMaxValueRepositoryItemTextEdit.Name = "adcMaxValueRepositoryItemTextEdit";
+            // 
+            // voltageReferenceElement
+            // 
+            this.voltageReferenceElement.Caption = "Voltage Reference";
+            this.voltageReferenceElement.Edit = this.voltageReferenceRepositoryItemTextEdit;
+            this.voltageReferenceElement.EditHeight = 20;
+            this.voltageReferenceElement.EditWidth = 100;
+            this.voltageReferenceElement.Id = 37;
+            this.voltageReferenceElement.Name = "voltageReferenceElement";
+            // 
+            // voltageReferenceRepositoryItemTextEdit
+            // 
+            this.voltageReferenceRepositoryItemTextEdit.AutoHeight = false;
+            this.voltageReferenceRepositoryItemTextEdit.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric;
+            this.voltageReferenceRepositoryItemTextEdit.Name = "voltageReferenceRepositoryItemTextEdit";
             // 
             // measurePage
             // 
@@ -620,7 +670,8 @@
             // sensorOptionsPage
             // 
             this.sensorOptionsPage.Groups.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageGroup[] {
-            this.ribbonPageGroup1});
+            this.ribbonPageGroup1,
+            this.calculatelinearityGroup});
             this.sensorOptionsPage.Name = "sensorOptionsPage";
             this.sensorOptionsPage.Text = "Sensor";
             // 
@@ -631,6 +682,14 @@
             this.ribbonPageGroup1.ItemLinks.Add(this.useLinearityElement);
             this.ribbonPageGroup1.Name = "ribbonPageGroup1";
             this.ribbonPageGroup1.Text = "Linearity";
+            // 
+            // calculatelinearityGroup
+            // 
+            this.calculatelinearityGroup.ItemLinks.Add(this.adcMaxValueElement);
+            this.calculatelinearityGroup.ItemLinks.Add(this.voltageReferenceElement);
+            this.calculatelinearityGroup.ItemLinks.Add(this.calculateLinearityButton);
+            this.calculatelinearityGroup.Name = "calculatelinearityGroup";
+            this.calculatelinearityGroup.Text = "Calculate Linearity";
             // 
             // displayPage
             // 
@@ -779,6 +838,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.zeroValueRepositoryItemTextEdit)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.sensitivityRepositoryItemTextEdit)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.useLinearityRepositoryItemToggleSwitch)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.adcMaxValueRepositoryItemTextEdit)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.voltageReferenceRepositoryItemTextEdit)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemComboBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.zeroValueRepositoryItemSpinEdit)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.sensitivityRepositoryItem)).EndInit();
@@ -867,5 +928,11 @@
         private DevExpress.XtraEditors.Repository.RepositoryItemRadioGroup repositoryItemRadioGroup1;
         private DevExpress.XtraBars.BarEditItem useLinearityElement;
         private DevExpress.XtraEditors.Repository.RepositoryItemToggleSwitch useLinearityRepositoryItemToggleSwitch;
+        private DevExpress.XtraBars.BarButtonItem calculateLinearityButton;
+        private DevExpress.XtraBars.BarEditItem adcMaxValueElement;
+        private DevExpress.XtraEditors.Repository.RepositoryItemTextEdit adcMaxValueRepositoryItemTextEdit;
+        private DevExpress.XtraBars.BarEditItem voltageReferenceElement;
+        private DevExpress.XtraEditors.Repository.RepositoryItemTextEdit voltageReferenceRepositoryItemTextEdit;
+        private DevExpress.XtraBars.Ribbon.RibbonPageGroup calculatelinearityGroup;
     }
 }
