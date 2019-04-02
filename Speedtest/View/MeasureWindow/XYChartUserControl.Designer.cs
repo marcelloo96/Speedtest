@@ -48,6 +48,7 @@
             this.Name = "XYChartUserControl";
             this.Size = new System.Drawing.Size(829, 429);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 

@@ -12,7 +12,7 @@ namespace Speedtest.Model
     public class XYViewModel
     {
         public GearedValues<ObservablePoint> xyChartList { get; set; }
-        public int keepRecords = 300;
+        public int keepRecords = 100;
 
 
         public XYViewModel()

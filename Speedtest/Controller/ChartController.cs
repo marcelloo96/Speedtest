@@ -25,7 +25,7 @@ namespace Speedtest.Controller
 
             //chart.Hoverable = true;
             //chart.DataTooltip = null;
-            chart.Zoom = ZoomingOptions.X;
+            //chart.Zoom = ZoomingOptions.X;
             chart.DisableAnimations = true;
             chart.AutoSize = true;
 
@@ -51,10 +51,9 @@ namespace Speedtest.Controller
         {
             model.viewModel = new XYViewModel();
 
-            chart.Zoom = ZoomingOptions.X;
+            //chart.Zoom = ZoomingOptions.X;
             chart.DisableAnimations = true;
             chart.AutoSize = true;
-
             var transparent = (Brush)new BrushConverter().ConvertFromString("#00FFFFFF");
 
 
@@ -63,10 +62,10 @@ namespace Speedtest.Controller
                 Values = model.viewModel.xyChartList,
                 DataLabels = false,
                 Fill = transparent,
-                LineSmoothness = 0,
+                LineSmoothness = 0,               
 
             });
-
+                       
 
             return chart;
         }
@@ -118,6 +117,14 @@ namespace Speedtest.Controller
                 }
                 if (i.Count < viewModel.keepRecords)
                 {
+                    var removable = viewModel.xyChartList.Where(p => p.X == current.X || p.Y == current.Y).ToList();
+                    if (removable != null && removable.Count > 0) {
+                        foreach (var removablePoint in removable)
+                        {
+                            i.Remove(removablePoint);
+                        }
+                    }
+                    
                     i.Add(current);
                 }
 
@@ -130,7 +137,7 @@ namespace Speedtest.Controller
 
 
         }
-        internal static void RemoveAllPoints(List<SpeedTest> gearedCharts)
+        internal static void RemoveAllPointsFromGeared(List<SpeedTest> gearedCharts)
         {
             foreach (var gearedChart in gearedCharts)
             {
@@ -219,7 +226,7 @@ namespace Speedtest.Controller
             try
             {
                 ObservablePoint point;
-                if (sendingData.Length == numberOfIncomingData && Math.Max(choosenXChannel, choosenYChannel) < sendingData.Length && Math.Min(choosenXChannel, choosenYChannel) >= 0)
+                if (sendingData != null && sendingData.Length == numberOfIncomingData && Math.Max(choosenXChannel, choosenYChannel) < sendingData.Length && Math.Min(choosenXChannel, choosenYChannel) >= 0)
                 {
                     point = new ObservablePoint(sendingData[choosenXChannel], sendingData[choosenYChannel]);
                 }

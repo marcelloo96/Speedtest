@@ -19,28 +19,20 @@ namespace Speedtest
     public partial class MainFrame : RibbonForm
     {
         #region fields
-        //public SerialPort serialPort;
         public SpeedTest gearedChart;
         public List<SpeedTest> gearedCharts;
         public PortController portController;
         public MainMeasureWindow mmw;
         public bool connectedState { get; set; }
         public bool isRunning { get; set; }
-        public double tryparseTmp;
-        public readonly bool firstConnect = true;
         public List<string[]> myPortBuffer;
-        public Stopwatch timer;
         public Int32 deltaTime;
         public double[] sendingData;
-        int incomingData;
-        int numberOfPanels;
         DataCollector dc;
-        char[] charSeparators = new char[] { '\n' };
-        //public Dictionary<string, Action> displayActions;
-        public static string currentlyStaticArrived;
         public static bool useLinearity = false;
         public static double sensitivity = 1;
         public static double zeroValue = 1;
+        public static int numberOfPanels=1;
 
         #endregion
 
@@ -53,12 +45,7 @@ namespace Speedtest
             portController = new PortController(this);
             gearedCharts = new List<SpeedTest>();
             myPortBuffer = new List<string[]>();
-            timer = new Stopwatch();
-            incomingData = Int32.Parse(NumberOfIncomingDataElement.EditValue.ToString());
-            numberOfPanels = numberOfChannelsElementValue;
-            //displayActions = new Dictionary<string, Action> {
-            //    {Strings.MeasureTab_MonitorDisplayMode, ()=>printAll() }
-            //};
+
         }
 
         public void testConnect()
@@ -128,115 +115,149 @@ namespace Speedtest
         private void displayModeElement_EditValueChanged(object sender, EventArgs e)
         {
 
-
-            if (mmw != null)
+            try
             {
-                if (DisplayModeElementValue == Strings.MeasureTab_DisplayMode_Chart)
+                if (mmw != null)
                 {
-                    mmw.splitContainerControl.Dock = DockStyle.Fill;
-                    mmw.splitContainerControl.BringToFront();
+                    if (DisplayModeElementValue == Strings.MeasureTab_DisplayMode_Chart)
+                    {
+                        mmw.splitContainerControl.Dock = DockStyle.Fill;
+                        mmw.splitContainerControl.BringToFront();
 
-                    mmw.chartMonitor.Dock = DockStyle.None;
-                    mmw.chartMonitor.SendToBack();
-                    mmw.xyChartUserControl.Dock = DockStyle.None;
-                    mmw.xyChartUserControl.SendToBack();
+                        mmw.chartMonitor.Dock = DockStyle.None;
+                        mmw.chartMonitor.SendToBack();
+                        mmw.xyChartUserControl.Dock = DockStyle.None;
+                        mmw.xyChartUserControl.SendToBack();
 
-                    ChartController.RemoveMonitorText(this);
-                }
-                else if (DisplayModeElementValue == Strings.MeasureTab_DisplayMode_Monitor)
-                {
-                    mmw.chartMonitor.Dock = DockStyle.Fill;
-                    mmw.chartMonitor.BringToFront();
+                        ChartController.RemoveMonitorText(this);
+                    }
+                    else if (DisplayModeElementValue == Strings.MeasureTab_DisplayMode_Monitor)
+                    {
+                        mmw.chartMonitor.Dock = DockStyle.Fill;
+                        mmw.chartMonitor.BringToFront();
 
-                    mmw.splitContainerControl.Dock = DockStyle.None;
-                    mmw.splitContainerControl.SendToBack();
-                    mmw.xyChartUserControl.Dock = DockStyle.None;
-                    mmw.xyChartUserControl.SendToBack();
+                        mmw.splitContainerControl.Dock = DockStyle.None;
+                        mmw.splitContainerControl.SendToBack();
+                        mmw.xyChartUserControl.Dock = DockStyle.None;
+                        mmw.xyChartUserControl.SendToBack();
 
-                    ChartController.RemoveAllPoints(gearedCharts);
-                }
-                else if (DisplayModeElementValue == Strings.MeasureTab_DisplayMode_XY)
-                {
-                    mmw.xyChartUserControl.Dock = DockStyle.Fill;
-                    mmw.xyChartUserControl.BringToFront();
+                        ChartController.RemoveAllPointsFromGeared(gearedCharts);
+                    }
+                    else if (DisplayModeElementValue == Strings.MeasureTab_DisplayMode_XY)
+                    {
+                        mmw.xyChartUserControl.Dock = DockStyle.Fill;
+                        mmw.xyChartUserControl.BringToFront();
 
-                    mmw.chartMonitor.SendToBack();
-                    mmw.chartMonitor.Dock = DockStyle.None;
-                    mmw.splitContainerControl.Dock = DockStyle.None;
-                    mmw.splitContainerControl.SendToBack();
+                        mmw.chartMonitor.SendToBack();
+                        mmw.chartMonitor.Dock = DockStyle.None;
+                        mmw.splitContainerControl.Dock = DockStyle.None;
+                        mmw.splitContainerControl.SendToBack();
 
-                    ChartController.RemoveMonitorText(this);
-                    ChartController.RemoveAllPoints(gearedCharts);
+                        ChartController.RemoveMonitorText(this);
+                        ChartController.RemoveAllPointsFromGeared(gearedCharts);
 
+                    }
                 }
             }
+            catch (Exception )
+            {
+
+                MessageBox.Show("displayModeElement_EditValueChanged");
+            }
+            
 
         }
 
         private void startStopButton_ItemClick(object sender, ItemClickEventArgs ea)
         {
-            deltaTime = 1000 / samplingRateElementValue;
-            if (isRunning)
+            try
             {
-                isRunning = false;
-                dc.Dispose();
-                connectiongGroup.Enabled = true;
-            }
-            else
-            {
-                isRunning = true;
-                if (serialPort == null)
+                deltaTime = 1000 / samplingRateElementValue;
+                if (isRunning)
                 {
-                    portController.CreatePort();
+                    isRunning = false;
+                    dc.Dispose();
+                    connectiongGroup.Enabled = true;
+                }
+                else
+                {
+                    isRunning = true;
+                    if (serialPort == null)
+                    {
+                        portController.CreatePort();
+
+                    }
+                    if (!serialPort.IsOpen)
+                    {
+                        portController.OpenThePort();
+                    }
+                    dc = new DataCollector(serialPort, printTo);
+                    serialPort.DiscardInBuffer();
+                    connectiongGroup.Enabled = false;
+
 
                 }
-                if (!serialPort.IsOpen)
-                {
-                    portController.OpenThePort();
-                }
-                dc = new DataCollector(serialPort, printTo);
-                serialPort.DiscardInBuffer();
-                connectiongGroup.Enabled = false;
-
-
             }
+            catch (Exception e)
+            {
+
+                MessageBox.Show("startStopButton_ItemClick");
+            }
+           
 
 
 
         }
         private void printTo(string currentlyArrived)
         {
-            Debug.WriteLine(currentlyArrived);
-            //sendingData = currentlyArrived.Split(' ');
-            sendingData = Array.ConvertAll(currentlyArrived.Split(' '), Double.Parse);
-            if (useLinearity)
+            try
             {
-                sendingData = calculateLinearValue(sendingData, sensitivity, zeroValue);
-            }
-            gearedCharts.ForEach(p => p.viewModel.recivedChartValues.Clear());
+                Debug.WriteLine(currentlyArrived);
+                sendingData = Array.ConvertAll(currentlyArrived.Split(' '), Double.Parse);
+                if (useLinearity)
+                {
+                    sendingData = calculateLinearValue(sendingData, sensitivity, zeroValue);
+                }
+                gearedCharts.ForEach(p => p.viewModel.recivedChartValues.Clear());
 
-            if (DisplayModeElementValue == Strings.MeasureTab_DisplayMode_Chart)
-            {
-                ChartController.printGearedChart(sendingData, numberOfPanels, this);
+                if (DisplayModeElementValue == Strings.MeasureTab_DisplayMode_Chart)
+                {
+                    ChartController.printGearedChart(sendingData, numberOfPanels, this);
+                }
+                else if (DisplayModeElementValue == Strings.MeasureTab_DisplayMode_Monitor)
+                {
+                    ChartController.printChartMonitor(mmw.chartMonitor, sendingData);
+                }
+                else if (DisplayModeElementValue == Strings.MeasureTab_DisplayMode_XY)
+                {
+                    ChartController.printXYChart(mmw.xyChartUserControl, sendingData, numberOfIncomingDataEditValue);
+                    //ChartController.printGearedChart(sendingData, numberOfPanels, this);
+                }
             }
-            else if (DisplayModeElementValue == Strings.MeasureTab_DisplayMode_Monitor)
+            catch (Exception e)
             {
-                ChartController.printChartMonitor(mmw.chartMonitor, sendingData);
+
+                MessageBox.Show("printto"+e.Message);
             }
-            else if (DisplayModeElementValue == Strings.MeasureTab_DisplayMode_XY)
-            {
-                ChartController.printXYChart(mmw.xyChartUserControl,sendingData,numberOfIncomingDataEditValue);
-                //ChartController.printGearedChart(sendingData, numberOfPanels, this);
-            }
+           
 
         }
 
         private double[] calculateLinearValue(double[] sendingData, double sensitivity, double zeroValue)
         {
-            for (int i = 0; i < sendingData.Length; i++)
+            try
             {
-                sendingData[i] = sendingData[i] * sensitivity + zeroValue;
+                for (int i = 0; i < sendingData.Length; i++)
+                {
+                    sendingData[i] = sendingData[i] * sensitivity + zeroValue;
+                }
             }
+            catch (Exception e )
+            {
+
+                MessageBox.Show("calculateLinearValue"+e.Message);
+            }
+           
             return sendingData;
         }
     }
