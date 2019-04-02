@@ -78,7 +78,9 @@ namespace Speedtest
         public int samplingRateElementValue
         {
             get { return Int32.Parse(samplingRateElement.EditValue.ToString()); }
-            set { samplingRateElement.EditValue = value; }
+            set { samplingRateElement.EditValue = value;
+                  deltaTime = 1 / (double)value;
+            }
         }
         public int keepRecordsElementValue
         {
@@ -280,8 +282,8 @@ namespace Speedtest
             //so 1/f*1000 -> 1000/f
             if (portController != null)
             {
-                portController.deltaTime = 1000 / samplingRateElementValue;
-                deltaTime = 1000 / samplingRateElementValue;
+                portController.deltaTime = 1 / samplingRateElementValue;
+                deltaTime = 1 / (double)samplingRateElementValue;
             }
         }
 

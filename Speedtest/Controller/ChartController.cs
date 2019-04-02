@@ -13,19 +13,21 @@ using LiveCharts.WinForms;
 using Speedtest.Model;
 using Speedtest.View.MeasureWindow;
 using LiveCharts.Helpers;
+using System.Diagnostics;
 
 namespace Speedtest.Controller
 {
     public class ChartController
     {
         public static double tryparseTmp;
+        public static int lastInsertedXYValue = 0;
         public static CartesianChart SetDefaultChart(CartesianChart chart, SpeedTest model)
         {
             model.viewModel = new SpeedTestVm(model.numOfSeries, model.serialPort);
 
             //chart.Hoverable = true;
             //chart.DataTooltip = null;
-            //chart.Zoom = ZoomingOptions.X;
+            chart.Zoom = ZoomingOptions.X;
             chart.DisableAnimations = true;
             chart.AutoSize = true;
 
@@ -49,9 +51,9 @@ namespace Speedtest.Controller
 
         internal static CartesianChart InitializeXYChart(CartesianChart chart, XYChartUserControl model)
         {
-            model.viewModel = new XYViewModel();
-
-            //chart.Zoom = ZoomingOptions.X;
+            model.viewModel = new XYViewModel(model.deltaT, model.keepRecords);
+            chart.Hoverable = true;
+            chart.Zoom = ZoomingOptions.X;
             chart.DisableAnimations = true;
             chart.AutoSize = true;
             var transparent = (Brush)new BrushConverter().ConvertFromString("#00FFFFFF");
@@ -62,10 +64,10 @@ namespace Speedtest.Controller
                 Values = model.viewModel.xyChartList,
                 DataLabels = false,
                 Fill = transparent,
-                LineSmoothness = 0,               
+                LineSmoothness = 0,
 
             });
-                       
+
 
             return chart;
         }
@@ -118,13 +120,14 @@ namespace Speedtest.Controller
                 if (i.Count < viewModel.keepRecords)
                 {
                     var removable = viewModel.xyChartList.Where(p => p.X == current.X || p.Y == current.Y).ToList();
-                    if (removable != null && removable.Count > 0) {
+                    if (removable != null && removable.Count > 0)
+                    {
                         foreach (var removablePoint in removable)
                         {
                             i.Remove(removablePoint);
                         }
                     }
-                    
+
                     i.Add(current);
                 }
 
@@ -225,19 +228,24 @@ namespace Speedtest.Controller
         {
             try
             {
-                ObservablePoint point;
-                if (sendingData != null && sendingData.Length == numberOfIncomingData && Math.Max(choosenXChannel, choosenYChannel) < sendingData.Length && Math.Min(choosenXChannel, choosenYChannel) >= 0)
+                //ObservablePoint point;
+                //if (sendingData != null && sendingData.Length == numberOfIncomingData && Math.Max(choosenXChannel, choosenYChannel) < sendingData.Length && Math.Min(choosenXChannel, choosenYChannel) >= 0)
+                //{
+                //    point = new ObservablePoint(sendingData[choosenXChannel], sendingData[choosenYChannel]);
+                //}
+                //else
+                //{
+                //    point = new ObservablePoint(double.NaN, double.NaN);
+                //}
+                double _tmpval = 0;
+                if (sendingData != null && sendingData.Length >= numberOfIncomingData && Math.Max(choosenXChannel, choosenYChannel) < sendingData.Length && Math.Min(choosenXChannel, choosenYChannel) >= 0)
                 {
-                    point = new ObservablePoint(sendingData[choosenXChannel], sendingData[choosenYChannel]);
-                }
-                else
-                {
-                    point = new ObservablePoint(double.NaN, double.NaN);
+                    _tmpval = sendingData[0];
                 }
 
-
+                Debug.WriteLine(_tmpval);
                 //xyChartUserControl.viewModel.xyChartList.Add(new ObservablePoint(x, y));
-                ChartController.RefreshXYChartValues(xyChartUserControl.viewModel,point);
+                ChartController.RefreshXYChartValues(xyChartUserControl.viewModel, _tmpval);
             }
             catch (Exception e)
             {
@@ -247,5 +255,34 @@ namespace Speedtest.Controller
 
 
         }
+
+        private static void RefreshXYChartValues(XYViewModel viewModel, double tmpval)
+        {
+            var i = viewModel.xyChartList;
+            if (lastInsertedXYValue < viewModel.keepRecords)
+            {
+                i[lastInsertedXYValue++].Y = tmpval;
+            }
+            else
+            {
+                i = shiftListToTheLeft(i, viewModel);
+                i[lastInsertedXYValue - 1].Y = tmpval;
+            }
+
+        }
+
+        private static GearedValues<ObservablePoint> shiftListToTheLeft(GearedValues<ObservablePoint> list, XYViewModel viewModel)
+        {
+            list.Remove(list.First());
+            list.Add(new ObservablePoint(Double.NaN, Double.NaN));
+            double T = 0;
+            for(int i=0; i<list.Count;i++)
+            {
+                list[i].X = (double) T;
+                T += viewModel.deltaTime;
+            }
+            return list;
+        }
+
     }
 }

@@ -29,6 +29,9 @@ namespace Speedtest.View.MeasureWindow
             numberOfPanelsDisplayed= mainFrameModel.numberOfChannelsElementValue;
             InitializeComponent();
             InitialState();
+            xyChartUserControl.keepRecords = model.keepRecordsElementValue;
+            xyChartUserControl.deltaT = model.deltaTime;
+            xyChartUserControl.Initialize();
         }
 
         public void InitialState() {

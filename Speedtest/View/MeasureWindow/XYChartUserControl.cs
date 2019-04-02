@@ -18,11 +18,18 @@ namespace Speedtest.View.MeasureWindow
     public partial class XYChartUserControl : UserControl
     {
         public XYViewModel viewModel { get; set; }
+        /// <summary>
+        /// Constructor of MMW change the values below
+        /// </summary>
+        public int keepRecords { get; set; }
+        public double deltaT { get; set; }
         public XYChartUserControl()
         {
-            
             InitializeComponent();
-            XYChart=ChartController.InitializeXYChart(XYChart,this);
+            
+        }
+        public void Initialize() {
+            XYChart = ChartController.InitializeXYChart(XYChart, this);
         }
     }
 }

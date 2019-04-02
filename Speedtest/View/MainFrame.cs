@@ -26,7 +26,7 @@ namespace Speedtest
         public bool connectedState { get; set; }
         public bool isRunning { get; set; }
         public List<string[]> myPortBuffer;
-        public Int32 deltaTime;
+        public double deltaTime;
         public double[] sendingData;
         DataCollector dc;
         public static bool useLinearity = false;
@@ -172,7 +172,7 @@ namespace Speedtest
         {
             try
             {
-                deltaTime = 1000 / samplingRateElementValue;
+                deltaTime = 1 / samplingRateElementValue;
                 if (isRunning)
                 {
                     isRunning = false;
@@ -212,7 +212,7 @@ namespace Speedtest
         {
             try
             {
-                Debug.WriteLine(currentlyArrived);
+                //Debug.WriteLine(currentlyArrived);
                 sendingData = Array.ConvertAll(currentlyArrived.Split(' '), Double.Parse);
                 if (useLinearity)
                 {

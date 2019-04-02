@@ -13,14 +13,25 @@ namespace Speedtest.Model
     {
         public GearedValues<ObservablePoint> xyChartList { get; set; }
         public int keepRecords = 100;
+        public double deltaTime = 1;
 
 
-        public XYViewModel()
+        public XYViewModel(double deltaT, int keepRecords)
         {
             xyChartList = new GearedValues<ObservablePoint>().WithQuality(Quality.High);
+            double previousDeltaT = 0;
+            this.keepRecords = keepRecords;
+            this.deltaTime = deltaT;
+            for (int i = 0; i < keepRecords; i++)
+            {
+                xyChartList.Add(new ObservablePoint((double)(previousDeltaT + deltaT), Double.NaN));
+                previousDeltaT += deltaT;
+            }
+
         }
     }
-    public class XYPoint{
+    public class XYPoint
+    {
         public double x;
         public double y;
 
