@@ -144,7 +144,14 @@ namespace Speedtest
             }
             set { voltageReferenceElement.EditValue = value; }
         }
-
+        public string exportingFileFormatEditValue {
+            get { return exportingFileFormatElement.EditValue.ToString(); }
+            set { exportingFileFormatElement.EditValue = value; }
+        }
+        public string fileDestinationButtonCaption{
+            get { return fileDestinationButtonElement.Caption; }
+            set { fileDestinationButtonElement.Caption = value; }
+        }
         #endregion
         public BarEditItem ChannelsElement
         {
@@ -166,6 +173,7 @@ namespace Speedtest
         public RepositoryItemTextEdit DelimeterRepositoryItemTextBox { get { return delimeterRepositoryItemTextBox; } }
         public RepositoryItemTextEdit NumberOfIncomingDataRepositoryItemTextBox { get { return numberOfIncomingDataRepositoryItemTextBox; } }
         public RepositoryItemTextEdit KeepRecordsRepositoryItemTextEdit { get { return keepRecordsRepositoryItemTextBox; } }
+        public RepositoryItemComboBox ExportingFileFormatRepositoryItemComboBox { get { return exportingFileFormatRepositoryItemComboBox; } }
         #endregion
         #region Elements
         public BarEditItem DisplayModeElement { get { return displayModeElement; } }

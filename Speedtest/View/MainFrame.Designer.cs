@@ -84,8 +84,8 @@
             this.recordingWholeMeasurementRepositoryItemToggleSwitch = new DevExpress.XtraEditors.Repository.RepositoryItemToggleSwitch();
             this.barEditItem1 = new DevExpress.XtraBars.BarEditItem();
             this.repositoryItemBreadCrumbEdit2 = new DevExpress.XtraEditors.Repository.RepositoryItemBreadCrumbEdit();
-            this.repositoryItemButtonEdit2 = new DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit();
-            this.recordingCategory = new DevExpress.XtraBars.Ribbon.RibbonPageCategory();
+            this.skinRibbonGallery = new DevExpress.XtraBars.SkinRibbonGalleryBarItem();
+            this.fileDestinationButtonElement = new DevExpress.XtraBars.BarButtonItem();
             this.recordingPage = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.RecordTabStatStopButtonPageGroup = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.recordRibbonPageGroup = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
@@ -102,6 +102,7 @@
             this.calculatelinearityGroup = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.displayPage = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.displayChartGroup = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
+            this.skinPageGroup = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.repositoryItemComboBox2 = new DevExpress.XtraEditors.Repository.RepositoryItemComboBox();
             this.zeroValueRepositoryItemSpinEdit = new DevExpress.XtraEditors.Repository.RepositoryItemSpinEdit();
             this.sensitivityRepositoryItem = new DevExpress.XtraEditors.Repository.RepositoryItemSpinEdit();
@@ -113,15 +114,13 @@
             this.repositoryItemToggleSwitch1 = new DevExpress.XtraEditors.Repository.RepositoryItemToggleSwitch();
             this.repositoryItemRadioGroup1 = new DevExpress.XtraEditors.Repository.RepositoryItemRadioGroup();
             this.repositoryItemBreadCrumbEdit1 = new DevExpress.XtraEditors.Repository.RepositoryItemBreadCrumbEdit();
+            this.repositoryItemButtonEdit2 = new DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit();
+            this.fileLocationBreadCrumbElementEepositoryItemBreadCrumbEdit = new DevExpress.XtraEditors.Repository.RepositoryItemBreadCrumbEdit();
             this.ribbonStatusBar1 = new DevExpress.XtraBars.Ribbon.RibbonStatusBar();
             this.defaultLookAndFeel1 = new DevExpress.LookAndFeel.DefaultLookAndFeel(this.components);
             this.contentPanel = new DevExpress.XtraEditors.PanelControl();
             this.dockManager = new DevExpress.XtraBars.Docking.DockManager(this.components);
             this.serialPort = new System.IO.Ports.SerialPort(this.components);
-            this.skinRibbonGalleryBarItem1 = new DevExpress.XtraBars.SkinRibbonGalleryBarItem();
-            this.skinPageGroup = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
-            this.skinRibbonGalleryBarItem2 = new DevExpress.XtraBars.SkinRibbonGalleryBarItem();
-            this.ribbonGalleryBarItem1 = new DevExpress.XtraBars.RibbonGalleryBarItem();
             ((System.ComponentModel.ISupportInitialize)(this.ribbonControl1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.selectedPortRepositoryItemComboBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.baudRateRepositoryItemComboBox)).BeginInit();
@@ -147,7 +146,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.exportingFileFormatRepositoryItemComboBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.recordingWholeMeasurementRepositoryItemToggleSwitch)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemBreadCrumbEdit2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemButtonEdit2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemComboBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.zeroValueRepositoryItemSpinEdit)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.sensitivityRepositoryItem)).BeginInit();
@@ -159,6 +157,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemToggleSwitch1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemRadioGroup1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemBreadCrumbEdit1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemButtonEdit2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.fileLocationBreadCrumbElementEepositoryItemBreadCrumbEdit)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.contentPanel)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dockManager)).BeginInit();
             this.SuspendLayout();
@@ -198,19 +198,17 @@
             this.exportingFileFormatElement,
             this.recordingWholeMeasurementElement,
             this.barEditItem1,
-            this.skinRibbonGalleryBarItem1,
-            this.skinRibbonGalleryBarItem2,
-            this.ribbonGalleryBarItem1});
+            this.skinRibbonGallery,
+            this.fileDestinationButtonElement});
             this.ribbonControl1.Location = new System.Drawing.Point(0, 0);
-            this.ribbonControl1.MaxItemId = 11;
+            this.ribbonControl1.MaxItemId = 16;
             this.ribbonControl1.Name = "ribbonControl1";
-            this.ribbonControl1.PageCategories.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageCategory[] {
-            this.recordingCategory});
             this.ribbonControl1.Pages.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPage[] {
             this.measurePage,
             this.portOptionsPage,
             this.sensorOptionsPage,
-            this.displayPage});
+            this.displayPage,
+            this.recordingPage});
             this.ribbonControl1.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.baudRateRepositoryItemComboBox,
             this.selectedPortRepositoryItemComboBox,
@@ -247,7 +245,8 @@
             this.recordingWholeMeasurementRepositoryItemToggleSwitch,
             this.repositoryItemBreadCrumbEdit1,
             this.repositoryItemBreadCrumbEdit2,
-            this.repositoryItemButtonEdit2});
+            this.repositoryItemButtonEdit2,
+            this.fileLocationBreadCrumbElementEepositoryItemBreadCrumbEdit});
             this.ribbonControl1.Size = new System.Drawing.Size(1037, 146);
             this.ribbonControl1.StatusBar = this.ribbonStatusBar1;
             // 
@@ -687,20 +686,19 @@
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.repositoryItemBreadCrumbEdit2.Name = "repositoryItemBreadCrumbEdit2";
             // 
-            // repositoryItemButtonEdit2
+            // skinRibbonGallery
             // 
-            this.repositoryItemButtonEdit2.AutoHeight = false;
-            this.repositoryItemButtonEdit2.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton()});
-            this.repositoryItemButtonEdit2.Name = "repositoryItemButtonEdit2";
+            this.skinRibbonGallery.Caption = "Skin";
+            this.skinRibbonGallery.Id = 9;
+            this.skinRibbonGallery.Name = "skinRibbonGallery";
             // 
-            // recordingCategory
+            // fileDestinationButtonElement
             // 
-            this.recordingCategory.Color = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
-            this.recordingCategory.Name = "recordingCategory";
-            this.recordingCategory.Pages.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPage[] {
-            this.recordingPage});
-            this.recordingCategory.Text = "Recording";
+            this.fileDestinationButtonElement.Caption = "File Destination";
+            this.fileDestinationButtonElement.Id = 12;
+            this.fileDestinationButtonElement.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("fileDestinationButtonElement.ImageOptions.SvgImage")));
+            this.fileDestinationButtonElement.Name = "fileDestinationButtonElement";
+            this.fileDestinationButtonElement.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.fileDestinationButtonElement_ItemClick);
             // 
             // recordingPage
             // 
@@ -722,7 +720,7 @@
             this.recordRibbonPageGroup.ItemLinks.Add(this.recordButton);
             this.recordRibbonPageGroup.ItemLinks.Add(this.exportingFileFormatElement, true);
             this.recordRibbonPageGroup.ItemLinks.Add(this.recordingWholeMeasurementElement);
-            this.recordRibbonPageGroup.ItemLinks.Add(this.ribbonGalleryBarItem1);
+            this.recordRibbonPageGroup.ItemLinks.Add(this.fileDestinationButtonElement, true);
             this.recordRibbonPageGroup.Name = "recordRibbonPageGroup";
             this.recordRibbonPageGroup.Text = "Recording";
             // 
@@ -834,6 +832,13 @@
             this.displayChartGroup.Name = "displayChartGroup";
             this.displayChartGroup.Text = "Chart";
             // 
+            // skinPageGroup
+            // 
+            this.skinPageGroup.AllowTextClipping = false;
+            this.skinPageGroup.ItemLinks.Add(this.skinRibbonGallery);
+            this.skinPageGroup.Name = "skinPageGroup";
+            this.skinPageGroup.Text = "Skin";
+            // 
             // repositoryItemComboBox2
             // 
             this.repositoryItemComboBox2.AutoHeight = false;
@@ -907,6 +912,20 @@
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.repositoryItemBreadCrumbEdit1.Name = "repositoryItemBreadCrumbEdit1";
             // 
+            // repositoryItemButtonEdit2
+            // 
+            this.repositoryItemButtonEdit2.AutoHeight = false;
+            this.repositoryItemButtonEdit2.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton()});
+            this.repositoryItemButtonEdit2.Name = "repositoryItemButtonEdit2";
+            // 
+            // fileLocationBreadCrumbElementEepositoryItemBreadCrumbEdit
+            // 
+            this.fileLocationBreadCrumbElementEepositoryItemBreadCrumbEdit.AutoHeight = false;
+            this.fileLocationBreadCrumbElementEepositoryItemBreadCrumbEdit.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.fileLocationBreadCrumbElementEepositoryItemBreadCrumbEdit.Name = "fileLocationBreadCrumbElementEepositoryItemBreadCrumbEdit";
+            // 
             // ribbonStatusBar1
             // 
             this.ribbonStatusBar1.ItemLinks.Add(this.portStatusLabel);
@@ -941,36 +960,6 @@
             "DevExpress.XtraBars.Navigation.OfficeNavigationBar",
             "DevExpress.XtraBars.Navigation.TileNavPane",
             "DevExpress.XtraBars.TabFormControl"});
-            // 
-            // skinRibbonGalleryBarItem1
-            // 
-            this.skinRibbonGalleryBarItem1.Caption = "skinRibbonGalleryBarItem1";
-            // 
-            // 
-            // 
-            this.skinRibbonGalleryBarItem1.Gallery.ImageSize = new System.Drawing.Size(200, 200);
-            this.skinRibbonGalleryBarItem1.Gallery.ItemSize = new System.Drawing.Size(200, 0);
-            this.skinRibbonGalleryBarItem1.Id = 8;
-            this.skinRibbonGalleryBarItem1.Name = "skinRibbonGalleryBarItem1";
-            // 
-            // skinPageGroup
-            // 
-            this.skinPageGroup.AllowTextClipping = false;
-            this.skinPageGroup.ItemLinks.Add(this.skinRibbonGalleryBarItem2);
-            this.skinPageGroup.Name = "skinPageGroup";
-            this.skinPageGroup.Text = "Skin";
-            // 
-            // skinRibbonGalleryBarItem2
-            // 
-            this.skinRibbonGalleryBarItem2.Caption = "skinRibbonGalleryBarItem2";
-            this.skinRibbonGalleryBarItem2.Id = 9;
-            this.skinRibbonGalleryBarItem2.Name = "skinRibbonGalleryBarItem2";
-            // 
-            // ribbonGalleryBarItem1
-            // 
-            this.ribbonGalleryBarItem1.Caption = "ribbonGalleryBarItem1";
-            this.ribbonGalleryBarItem1.Id = 10;
-            this.ribbonGalleryBarItem1.Name = "ribbonGalleryBarItem1";
             // 
             // MainFrame
             // 
@@ -1011,7 +1000,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.exportingFileFormatRepositoryItemComboBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.recordingWholeMeasurementRepositoryItemToggleSwitch)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemBreadCrumbEdit2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemButtonEdit2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemComboBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.zeroValueRepositoryItemSpinEdit)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.sensitivityRepositoryItem)).EndInit();
@@ -1023,6 +1011,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemToggleSwitch1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemRadioGroup1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemBreadCrumbEdit1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemButtonEdit2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.fileLocationBreadCrumbElementEepositoryItemBreadCrumbEdit)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.contentPanel)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dockManager)).EndInit();
             this.ResumeLayout(false);
@@ -1107,7 +1097,6 @@
         private DevExpress.XtraBars.BarEditItem voltageReferenceElement;
         private DevExpress.XtraEditors.Repository.RepositoryItemTextEdit voltageReferenceRepositoryItemTextEdit;
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup calculatelinearityGroup;
-        private DevExpress.XtraBars.Ribbon.RibbonPageCategory recordingCategory;
         private DevExpress.XtraBars.Ribbon.RibbonPage recordingPage;
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup RecordTabStatStopButtonPageGroup;
         private DevExpress.XtraBars.BarButtonItem recordButton;
@@ -1120,9 +1109,9 @@
         private DevExpress.XtraBars.BarEditItem barEditItem1;
         private DevExpress.XtraEditors.Repository.RepositoryItemBreadCrumbEdit repositoryItemBreadCrumbEdit2;
         private DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit repositoryItemButtonEdit2;
-        private DevExpress.XtraBars.SkinRibbonGalleryBarItem skinRibbonGalleryBarItem1;
-        private DevExpress.XtraBars.SkinRibbonGalleryBarItem skinRibbonGalleryBarItem2;
+        private DevExpress.XtraBars.SkinRibbonGalleryBarItem skinRibbonGallery;
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup skinPageGroup;
-        private DevExpress.XtraBars.RibbonGalleryBarItem ribbonGalleryBarItem1;
+        private DevExpress.XtraBars.BarButtonItem fileDestinationButtonElement;
+        private DevExpress.XtraEditors.Repository.RepositoryItemBreadCrumbEdit fileLocationBreadCrumbElementEepositoryItemBreadCrumbEdit;
     }
 }

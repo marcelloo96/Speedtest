@@ -114,6 +114,7 @@
     <Compile Include="Controller\MeasureTabController.cs" />
     <Compile Include="Controller\PortController.cs" />
     <Compile Include="Controller\PortOptionsTabController.cs" />
+    <Compile Include="Controller\RecordingTabController.cs" />
     <Compile Include="Model\CSVModel.cs" />
     <Compile Include="Model\MainFrameModelPartial.cs">
       <SubType>Form</SubType>

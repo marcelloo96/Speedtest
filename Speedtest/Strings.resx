@@ -141,6 +141,15 @@
   <data name="PortController_GreaterIncomingDataError" xml:space="preserve">
     <value>The number panels are greater than the incoming datas.</value>
   </data>
+  <data name="Recording_ExportinFileFormat_CSV" xml:space="preserve">
+    <value>.csv</value>
+  </data>
+  <data name="Recording_ExportinFileFormat_TXT" xml:space="preserve">
+    <value>.txt</value>
+  </data>
+  <data name="Recording_FileDestinationButton" xml:space="preserve">
+    <value>File Destination</value>
+  </data>
   <data name="Recording_Start" xml:space="preserve">
     <value>Start Recording</value>
   </data>

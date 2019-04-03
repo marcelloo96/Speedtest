@@ -133,6 +133,33 @@ namespace Speedtest {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to .csv.
+        /// </summary>
+        internal static string Recording_ExportinFileFormat_CSV {
+            get {
+                return ResourceManager.GetString("Recording_ExportinFileFormat_CSV", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .txt.
+        /// </summary>
+        internal static string Recording_ExportinFileFormat_TXT {
+            get {
+                return ResourceManager.GetString("Recording_ExportinFileFormat_TXT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to File Destination.
+        /// </summary>
+        internal static string Recording_FileDestinationButton {
+            get {
+                return ResourceManager.GetString("Recording_FileDestinationButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Start Recording.
         /// </summary>
         internal static string Recording_Start {

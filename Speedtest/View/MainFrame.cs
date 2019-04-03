@@ -35,8 +35,9 @@ namespace Speedtest
         public static bool useLinearity = false;
         public static double sensitivity = 1;
         public static double zeroValue = 1;
-        public static int numberOfPanels=1;
+        public static int numberOfPanels = 1;
         public StringBuilder csvBuffer;
+        public string savingFileDestinationPath;
 
         #endregion
 
@@ -45,13 +46,17 @@ namespace Speedtest
             InitializeComponent();
             MeasureTabController.FillEditors(this);
             PortOptionsTabController.FillEditors(this);
+            RecordingTabController.FillEditors(this);
             MeasureTabController.SetInitialState(this);
             portController = new PortController(this);
             gearedCharts = new List<SpeedTest>();
             myPortBuffer = new List<string[]>();
-            
+
+            savingFileDestinationPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+            changeFileDestinationCaption(savingFileDestinationPath);
 
         }
+
 
         public void testConnect()
         {
@@ -88,7 +93,7 @@ namespace Speedtest
             if (connectedState)
             {
                 //Disconnecting
-                
+
                 contentPanel.Controls.Clear();
                 mmw.deleteControls();
                 mmw.Dispose();
@@ -97,7 +102,7 @@ namespace Speedtest
                 MeasureTabController.SetGroupsAndIconsToCurrentState(this);
                 connectedState = false;
                 measureControlPanelGroup.Enabled = false;
-                
+
 
             }
             else
@@ -164,12 +169,12 @@ namespace Speedtest
                     }
                 }
             }
-            catch (Exception )
+            catch (Exception)
             {
 
                 MessageBox.Show("displayModeElement_EditValueChanged");
             }
-            
+
 
         }
 
@@ -216,7 +221,7 @@ namespace Speedtest
 
                 MessageBox.Show("startStopButton_ItemClick");
             }
-           
+
 
 
 
@@ -225,7 +230,7 @@ namespace Speedtest
         {
             try
             {
-                
+
                 //Debug.WriteLine(currentlyArrived);
                 sendingData = Array.ConvertAll(currentlyArrived.Split(' '), Double.Parse);
 
@@ -252,14 +257,14 @@ namespace Speedtest
                     ChartController.printXYChart(mmw.xyChartUserControl, sendingData, numberOfIncomingDataEditValue);
                     //ChartController.printGearedChart(sendingData, numberOfPanels, this);
                 }
-                
+
             }
             catch (Exception e)
             {
 
-                MessageBox.Show("printto"+e.Message);
+                MessageBox.Show("printto" + e.Message);
             }
-           
+
 
         }
 
@@ -272,18 +277,19 @@ namespace Speedtest
                     sendingData[i] = sendingData[i] * sensitivity + zeroValue;
                 }
             }
-            catch (Exception e )
+            catch (Exception e)
             {
 
-                MessageBox.Show("calculateLinearValue"+e.Message);
+                MessageBox.Show("calculateLinearValue" + e.Message);
             }
-           
+
             return sendingData;
         }
 
         private void calculateLinearityButton_ItemClick(object sender, ItemClickEventArgs e)
         {
-            if (adcMaxEditValue != 0) {
+            if (adcMaxEditValue != 0)
+            {
                 sensitivityElementValue = (double)((double)voltageReferenceEditValue / (double)adcMaxEditValue);
             }
         }
@@ -292,14 +298,20 @@ namespace Speedtest
         {
             if (Recording)
             {
-                //Stop Recording
-                string csvpath = "C:\\Users\\marcelloo\\Desktop\\"+DateTime.Now.ToString("yyyyMMddHHmmss")+".csv";
-                File.AppendAllText(csvpath,csvBuffer.ToString());
+                //Stop Recording and save
+                if (exportingFileFormatEditValue == Strings.Recording_ExportinFileFormat_CSV || exportingFileFormatEditValue == Strings.Recording_ExportinFileFormat_TXT)
+                {
+                    string csvpath = savingFileDestinationPath + @"\Measurement_" + DateTime.Now.ToString("yyyyMMddHHmmssfff") +exportingFileFormatEditValue;
+                    File.AppendAllText(csvpath, csvBuffer.ToString());
+                    
+                }
+                csvBuffer.Clear();
                 Recording = false;
                 recordButton.Caption = Strings.Recording_Start;
                 recordButton.ImageOptions.SvgImage = Resources.record;
             }
-            else {
+            else
+            {
                 //Recording
                 csvBuffer = new StringBuilder();
                 Recording = true;
@@ -312,6 +324,24 @@ namespace Speedtest
         {
             OpenFileDialog dialog = new OpenFileDialog();
             dialog.ShowDialog();
+        }
+
+        private void fileDestinationButtonElement_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            FolderBrowserDialog dialog = new FolderBrowserDialog();
+            DialogResult result = dialog.ShowDialog();
+            if (result == DialogResult.OK)
+            {
+                savingFileDestinationPath = dialog.SelectedPath;
+                changeFileDestinationCaption(savingFileDestinationPath);
+            }
+        }
+
+        private void changeFileDestinationCaption(string savingFileDestinationPath)
+        {
+            var splittedPath = savingFileDestinationPath.Split('\\');
+            var shortPath = splittedPath.First() + @"\...\" + splittedPath.Last();
+            fileDestinationButtonCaption = Strings.Recording_FileDestinationButton + ":\n" + shortPath;
         }
     }
 
