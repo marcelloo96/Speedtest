@@ -13,6 +13,8 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Speedtest.Properties;
+using System.IO;
 
 namespace Speedtest
 {
@@ -25,6 +27,7 @@ namespace Speedtest
         public MainMeasureWindow mmw;
         public bool connectedState { get; set; }
         public bool isRunning { get; set; }
+        public bool Recording { get; set; }
         public List<string[]> myPortBuffer;
         public double deltaTime;
         public double[] sendingData;
@@ -33,6 +36,7 @@ namespace Speedtest
         public static double sensitivity = 1;
         public static double zeroValue = 1;
         public static int numberOfPanels=1;
+        public StringBuilder csvBuffer;
 
         #endregion
 
@@ -45,6 +49,7 @@ namespace Speedtest
             portController = new PortController(this);
             gearedCharts = new List<SpeedTest>();
             myPortBuffer = new List<string[]>();
+            
 
         }
 
@@ -178,6 +183,10 @@ namespace Speedtest
                     isRunning = false;
                     dc.Dispose();
                     connectiongGroup.Enabled = true;
+                    measurePortBasicGroup.Enabled = true;
+                    keepRecordsElement.Enabled = true;
+                    StartStopButton.Caption = Strings.Global_Start;
+                    StartStopButton.ImageOptions.SvgImage = Resources.start;
                 }
                 else
                 {
@@ -194,6 +203,10 @@ namespace Speedtest
                     dc = new DataCollector(serialPort, printTo);
                     serialPort.DiscardInBuffer();
                     connectiongGroup.Enabled = false;
+                    measurePortBasicGroup.Enabled = false;
+                    keepRecordsElement.Enabled = false;
+                    StartStopButton.Caption = Strings.Global_Stop;
+                    StartStopButton.ImageOptions.SvgImage = Resources.stop;
 
 
                 }
@@ -212,8 +225,14 @@ namespace Speedtest
         {
             try
             {
+                
                 //Debug.WriteLine(currentlyArrived);
                 sendingData = Array.ConvertAll(currentlyArrived.Split(' '), Double.Parse);
+
+                if (Recording)
+                {
+                    csvBuffer.AppendLine(String.Join(",", sendingData));
+                }
                 if (useLinearity)
                 {
                     sendingData = calculateLinearValue(sendingData, sensitivity, zeroValue);
@@ -233,6 +252,7 @@ namespace Speedtest
                     ChartController.printXYChart(mmw.xyChartUserControl, sendingData, numberOfIncomingDataEditValue);
                     //ChartController.printGearedChart(sendingData, numberOfPanels, this);
                 }
+                
             }
             catch (Exception e)
             {
@@ -263,7 +283,35 @@ namespace Speedtest
 
         private void calculateLinearityButton_ItemClick(object sender, ItemClickEventArgs e)
         {
-            sensitivityElementValue = (double)((double)voltageReferenceEditValue / (double)adcMaxEditValue);
+            if (adcMaxEditValue != 0) {
+                sensitivityElementValue = (double)((double)voltageReferenceEditValue / (double)adcMaxEditValue);
+            }
+        }
+
+        private void recordButton_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            if (Recording)
+            {
+                //Stop Recording
+                string csvpath = "C:\\Users\\marcelloo\\Desktop\\"+DateTime.Now.ToString("yyyyMMddHHmmss")+".csv";
+                File.AppendAllText(csvpath,csvBuffer.ToString());
+                Recording = false;
+                recordButton.Caption = Strings.Recording_Start;
+                recordButton.ImageOptions.SvgImage = Resources.record;
+            }
+            else {
+                //Recording
+                csvBuffer = new StringBuilder();
+                Recording = true;
+                recordButton.Caption = Strings.Recording_Stop;
+                recordButton.ImageOptions.SvgImage = Resources.cancel;
+            }
+        }
+
+        private void barEditItem2_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            OpenFileDialog dialog = new OpenFileDialog();
+            dialog.ShowDialog();
         }
     }
 

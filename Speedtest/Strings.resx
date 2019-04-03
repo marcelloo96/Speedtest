@@ -123,6 +123,12 @@
   <data name="Global_Error_NoPortSelected" xml:space="preserve">
     <value>No port selected!</value>
   </data>
+  <data name="Global_Start" xml:space="preserve">
+    <value>Start</value>
+  </data>
+  <data name="Global_Stop" xml:space="preserve">
+    <value>Stop</value>
+  </data>
   <data name="MeasureTab_DisplayMode_Chart" xml:space="preserve">
     <value>Chart</value>
   </data>
@@ -134,5 +140,11 @@
   </data>
   <data name="PortController_GreaterIncomingDataError" xml:space="preserve">
     <value>The number panels are greater than the incoming datas.</value>
+  </data>
+  <data name="Recording_Start" xml:space="preserve">
+    <value>Start Recording</value>
+  </data>
+  <data name="Recording_Stop" xml:space="preserve">
+    <value>Stop  Recording</value>
   </data>
 </root>

@@ -115,12 +115,33 @@ namespace Speedtest
 
         public int adcMaxEditValue
         {
-            get { return Int32.Parse(adcMaxValueElement.EditValue.ToString()); }
+            get
+            {
+                if (adcMaxValueElement.EditValue != null)
+                {
+                    return Int32.Parse(adcMaxValueElement.EditValue.ToString());
+                }
+                else {
+                    return 0;
+                }
+            }
             set { adcMaxValueElement.EditValue = value; }
         }
 
-        public int voltageReferenceEditValue {
-            get { return Int32.Parse(voltageReferenceElement.EditValue.ToString()); }
+        public int voltageReferenceEditValue
+        {
+            get
+            {
+                if (voltageReferenceElement.EditValue != null)
+                {
+                    return Int32.Parse(voltageReferenceElement.EditValue.ToString());
+                }
+
+                else
+                {
+                    return 0;
+                }
+            }
             set { voltageReferenceElement.EditValue = value; }
         }
 

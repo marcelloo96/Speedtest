@@ -79,6 +79,24 @@ namespace Speedtest {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Start.
+        /// </summary>
+        internal static string Global_Start {
+            get {
+                return ResourceManager.GetString("Global_Start", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Stop.
+        /// </summary>
+        internal static string Global_Stop {
+            get {
+                return ResourceManager.GetString("Global_Stop", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Chart.
         /// </summary>
         internal static string MeasureTab_DisplayMode_Chart {
@@ -111,6 +129,24 @@ namespace Speedtest {
         internal static string PortController_GreaterIncomingDataError {
             get {
                 return ResourceManager.GetString("PortController_GreaterIncomingDataError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Start Recording.
+        /// </summary>
+        internal static string Recording_Start {
+            get {
+                return ResourceManager.GetString("Recording_Start", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Stop  Recording.
+        /// </summary>
+        internal static string Recording_Stop {
+            get {
+                return ResourceManager.GetString("Recording_Stop", resourceCulture);
             }
         }
     }
