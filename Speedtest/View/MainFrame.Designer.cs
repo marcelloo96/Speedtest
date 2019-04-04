@@ -128,6 +128,8 @@
             this.contentPanel = new DevExpress.XtraEditors.PanelControl();
             this.dockManager = new DevExpress.XtraBars.Docking.DockManager(this.components);
             this.serialPort = new System.IO.Ports.SerialPort(this.components);
+            this.importDisplayModeElement = new DevExpress.XtraBars.BarEditItem();
+            this.importDisplayModeElementRepositoryItemComboBox = new DevExpress.XtraEditors.Repository.RepositoryItemComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.ribbonControl1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.selectedPortRepositoryItemComboBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.baudRateRepositoryItemComboBox)).BeginInit();
@@ -169,6 +171,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.fileLocationBreadCrumbElementEepositoryItemBreadCrumbEdit)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.contentPanel)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dockManager)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.importDisplayModeElementRepositoryItemComboBox)).BeginInit();
             this.SuspendLayout();
             // 
             // ribbonControl1
@@ -211,9 +214,10 @@
             this.statisticImportButton,
             this.statisticChannelsFoundLabel,
             this.selectRecordedChannelElement,
-            this.showSelectedChannelElement});
+            this.showSelectedChannelElement,
+            this.importDisplayModeElement});
             this.ribbonControl1.Location = new System.Drawing.Point(0, 0);
-            this.ribbonControl1.MaxItemId = 22;
+            this.ribbonControl1.MaxItemId = 23;
             this.ribbonControl1.Name = "ribbonControl1";
             this.ribbonControl1.Pages.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPage[] {
             this.measurePage,
@@ -260,7 +264,8 @@
             this.repositoryItemBreadCrumbEdit2,
             this.repositoryItemButtonEdit2,
             this.fileLocationBreadCrumbElementEepositoryItemBreadCrumbEdit,
-            this.selectRecordedChannelRepositoryItemComboBox});
+            this.selectRecordedChannelRepositoryItemComboBox,
+            this.importDisplayModeElementRepositoryItemComboBox});
             this.ribbonControl1.Size = new System.Drawing.Size(1037, 146);
             this.ribbonControl1.StatusBar = this.ribbonStatusBar1;
             // 
@@ -908,6 +913,7 @@
             this.statisticImportGroup.ItemLinks.Add(this.statisticChannelsFoundLabel, true);
             this.statisticImportGroup.ItemLinks.Add(this.selectRecordedChannelElement);
             this.statisticImportGroup.ItemLinks.Add(this.samplingRateElement);
+            this.statisticImportGroup.ItemLinks.Add(this.importDisplayModeElement, true);
             this.statisticImportGroup.ItemLinks.Add(this.showSelectedChannelElement, true);
             this.statisticImportGroup.Name = "statisticImportGroup";
             this.statisticImportGroup.Text = "Import";
@@ -1034,6 +1040,22 @@
             "DevExpress.XtraBars.Navigation.TileNavPane",
             "DevExpress.XtraBars.TabFormControl"});
             // 
+            // importDisplayModeElement
+            // 
+            this.importDisplayModeElement.Caption = "Display Mode";
+            this.importDisplayModeElement.Edit = this.importDisplayModeElementRepositoryItemComboBox;
+            this.importDisplayModeElement.EditHeight = 20;
+            this.importDisplayModeElement.EditWidth = 100;
+            this.importDisplayModeElement.Id = 22;
+            this.importDisplayModeElement.Name = "importDisplayModeElement";
+            // 
+            // importDisplayModeElementRepositoryItemComboBox
+            // 
+            this.importDisplayModeElementRepositoryItemComboBox.AutoHeight = false;
+            this.importDisplayModeElementRepositoryItemComboBox.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.importDisplayModeElementRepositoryItemComboBox.Name = "importDisplayModeElementRepositoryItemComboBox";
+            // 
             // MainFrame
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1089,6 +1111,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.fileLocationBreadCrumbElementEepositoryItemBreadCrumbEdit)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.contentPanel)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dockManager)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.importDisplayModeElementRepositoryItemComboBox)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1194,5 +1217,7 @@
         private DevExpress.XtraBars.BarEditItem selectRecordedChannelElement;
         private DevExpress.XtraEditors.Repository.RepositoryItemComboBox selectRecordedChannelRepositoryItemComboBox;
         private DevExpress.XtraBars.BarButtonItem showSelectedChannelElement;
+        private DevExpress.XtraBars.BarEditItem importDisplayModeElement;
+        private DevExpress.XtraEditors.Repository.RepositoryItemComboBox importDisplayModeElementRepositoryItemComboBox;
     }
 }

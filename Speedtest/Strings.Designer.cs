@@ -97,6 +97,24 @@ namespace Speedtest {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Histogram.
+        /// </summary>
+        internal static string Import_DisplayMode_Histogram {
+            get {
+                return ResourceManager.GetString("Import_DisplayMode_Histogram", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Scrollable.
+        /// </summary>
+        internal static string Import_DisplayMode_Scroll {
+            get {
+                return ResourceManager.GetString("Import_DisplayMode_Scroll", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Chart.
         /// </summary>
         internal static string MeasureTab_DisplayMode_Chart {

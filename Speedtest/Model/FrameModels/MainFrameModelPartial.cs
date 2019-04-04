@@ -166,6 +166,11 @@ namespace Speedtest
             get { return Int32.Parse(selectRecordedChannelElement.EditValue.ToString()); }
             set { selectRecordedChannelElement.EditValue = value; }
         }
+
+        public string importDisplayModeElementValue{
+            get { return importDisplayModeElement.EditValue.ToString(); }
+            set { importDisplayModeElement.EditValue = value; }
+        }
         #endregion
 
         #region ComboBoxes
@@ -186,6 +191,7 @@ namespace Speedtest
         public RepositoryItemTextEdit KeepRecordsRepositoryItemTextEdit { get { return keepRecordsRepositoryItemTextBox; } }
         public RepositoryItemComboBox ExportingFileFormatRepositoryItemComboBox { get { return exportingFileFormatRepositoryItemComboBox; } }
         public RepositoryItemComboBox SelectRecordedChannelRepositoryItemComboBox { get { return selectRecordedChannelRepositoryItemComboBox; } }
+        public RepositoryItemComboBox ImportDisplayModeElementRepositoryItemComboBox { get { return importDisplayModeElementRepositoryItemComboBox; } }
         #endregion
         #region Elements
         public BarEditItem DisplayModeElement { get { return displayModeElement; } }

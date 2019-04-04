@@ -11,6 +11,7 @@ using Binding = System.Windows.Data.Binding;
 using Speedtest.Model.ChartViewModels;
 using Speedtest.Controller.Charts;
 using System.Collections.Generic;
+using LiveCharts.Defaults;
 
 namespace Speedtest.View.StatisticWindow
 {
@@ -18,6 +19,7 @@ namespace Speedtest.View.StatisticWindow
     {
         private ScrollableViewModel _viewModel;
         private double deltaT;
+        public List<double> doubleValues;
 
         public ScrollableChartUserControl(List<double> chart,double deltaT)
         {
@@ -25,12 +27,14 @@ namespace Speedtest.View.StatisticWindow
 
             _viewModel = new ScrollableViewModel(chart,deltaT);
             this.deltaT = deltaT;
+            doubleValues = chart;
            
             
             //Cartesian Chart
             mainChart.Zoom = ZoomingOptions.X;
             mainChart.DisableAnimations = true;
             mainChart.Hoverable = true;
+            mainChart.BackColor= System.Drawing.SystemColors.Control; 
 
             mainChart.Series.Add(new GLineSeries
             {
@@ -52,6 +56,7 @@ namespace Speedtest.View.StatisticWindow
             scrollerChart.DisableAnimations = true;
             scrollerChart.ScrollMode = ScrollMode.X;
             scrollerChart.ScrollBarFill = new SolidColorBrush(Color.FromArgb(37, 48, 48, 48));
+            scrollerChart.BackColor = System.Drawing.SystemColors.Control; 
             scrollerChart.DataTooltip = null;
             scrollerChart.Hoverable = false;
             scrollerChart.DataTooltip = null;

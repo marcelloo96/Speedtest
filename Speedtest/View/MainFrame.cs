@@ -19,6 +19,9 @@ using Speedtest.Model;
 using Speedtest.Controller.TabControllers;
 using Speedtest.Model.ChartViewModels;
 using Speedtest.View.StatisticWindow;
+using LiveCharts.Defaults;
+using LiveCharts.Geared;
+using Speedtest.View;
 
 namespace Speedtest
 {
@@ -44,6 +47,8 @@ namespace Speedtest
         public string savingFileDestinationPath;
         public string importingFilePath;
         public List<List<double>> listOfImportedCharts;
+        private List<UserControl> activePanels;
+        private readonly bool alreadyExisting = true;
         #endregion
 
         public MainFrame()
@@ -52,10 +57,12 @@ namespace Speedtest
             MeasureTabController.FillEditors(this);
             PortOptionsTabController.FillEditors(this);
             RecordingTabController.FillEditors(this);
+            ImportTabController.FillEditors(this);
             MeasureTabController.SetInitialState(this);
             portController = new PortController(this);
             gearedCharts = new List<SpeedTest>();
             myPortBuffer = new List<string[]>();
+            activePanels = new List<UserControl>();
 
             savingFileDestinationPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
             changeFileDestinationCaption(savingFileDestinationPath);
@@ -74,6 +81,7 @@ namespace Speedtest
                     if (connectedState)
                     {
                         mmw = new MainMeasureWindow(this);
+                        activePanels.Add(mmw);
                         mmw.Dock = DockStyle.Fill;
                         contentPanel.Controls.Add(mmw);
                     }
@@ -306,9 +314,9 @@ namespace Speedtest
                 //Stop Recording and save
                 if (exportingFileFormatEditValue == Strings.Recording_ExportinFileFormat_CSV || exportingFileFormatEditValue == Strings.Recording_ExportinFileFormat_TXT)
                 {
-                    string csvpath = savingFileDestinationPath + @"\Measurement_" + DateTime.Now.ToString("yyyyMMddHHmmssfff") +exportingFileFormatEditValue;
+                    string csvpath = savingFileDestinationPath + @"\Measurement_" + DateTime.Now.ToString("yyyyMMddHHmmssfff") + exportingFileFormatEditValue;
                     File.AppendAllText(csvpath, csvBuffer.ToString());
-                    
+
                 }
                 csvBuffer.Clear();
                 Recording = false;
@@ -354,14 +362,14 @@ namespace Speedtest
         {
             OpenFileDialog dialog = new OpenFileDialog();
             DialogResult result = dialog.ShowDialog();
-            if (result == DialogResult.OK) {
+            if (result == DialogResult.OK)
+            {
                 importingFilePath = dialog.FileName;
 
                 listOfImportedCharts = CSVModel.getListOfCharts(importingFilePath);
                 var channelsCount = listOfImportedCharts.Count();
                 statisticChannelsFoundLabel.Caption = Strings.Statistic_ChannelsFound + ": " + channelsCount;
-                StatisticTabController.FillEditors(this, channelsCount);
-
+                ImportTabController.ResetDetectedChannels(this, channelsCount);
 
             }
 
@@ -369,9 +377,96 @@ namespace Speedtest
 
         private void showSelectedChannelElement_ItemClick(object sender, ItemClickEventArgs e)
         {
-            var scrollable = new ScrollableChartUserControl(listOfImportedCharts[SelectRecordedChannelElementValue],deltaTime);
-            scrollable.Dock = DockStyle.Fill;
-            contentPanel.Controls.Add(scrollable);
+            var selectedChart = listOfImportedCharts[SelectRecordedChannelElementValue];
+            if (importDisplayModeElementValue == Strings.Import_DisplayMode_Scroll)
+            {
+                var onPanelWithThisType = activePanels.OfType<ScrollableChartUserControl>().ToList();
+
+                if (onPanelWithThisType != null && selectedChart != null) {
+                    foreach (var panel in onPanelWithThisType) {
+                        if (panel.doubleValues.Equals(selectedChart)){
+
+                            bringContentToFront(panel,alreadyExisting);
+                            return;
+                        }
+                    }
+                }
+                 
+                bringContentToFront(new ScrollableChartUserControl(selectedChart, deltaTime));
+
+
+
+            }
+            else if (importDisplayModeElementValue == Strings.Import_DisplayMode_Histogram)
+            {
+                var generated = getHistogramFromChart(selectedChart);
+                var onPanelWithThisType = activePanels.OfType<HistogramChartUserControl>().ToList();
+
+
+                if (onPanelWithThisType != null && generated != null)
+                {
+                    foreach (var panel in onPanelWithThisType)
+                    {
+                        if (isObservablePointedChartsEqual(panel.Values, generated))
+                        {
+
+                            bringContentToFront(panel, alreadyExisting);
+                            return;
+                        }
+                    }
+                    
+                }
+
+                bringContentToFront(new HistogramChartUserControl(generated));
+
+
+            }
+
+        }
+
+        private bool isObservablePointedChartsEqual(GearedValues<ObservablePoint> a, GearedValues<ObservablePoint> b)
+        {
+            if (a == null || b == null)
+            {
+                return false;
+            }
+            if (a.Count() != b.Count())
+            {
+                return false;
+            }
+            else if (a.Count() == b.Count())
+            {
+                for (int i = 0; i < a.Count(); i++)
+                {
+                    if (a[i].X != b[i].X || a[i].Y != b[i].Y)
+                    {
+                        return false;
+                    }
+
+                }
+
+            }
+
+            return true;
+        }
+
+        private void bringContentToFront(UserControl currentControl, bool alreadyExisting = false)
+        {
+            if (!alreadyExisting)
+            {
+                activePanels.Add(currentControl);
+            }
+
+            contentPanel.Controls.Clear();
+
+            foreach (var panel in activePanels)
+            {
+                panel.Dock = DockStyle.None;
+                panel.Visible = false;
+            }
+            currentControl.Dock = DockStyle.Fill;
+            currentControl.Visible = true;
+            contentPanel.Controls.Add(currentControl);
         }
 
         private void recordingWholeMeasurementElement_EditValueChanged(object sender, EventArgs e)
@@ -391,6 +486,30 @@ namespace Speedtest
 
             //recordButton.PerformClick();
 
+        }
+
+        private GearedValues<ObservablePoint> getHistogramFromChart(List<double> chart)
+        {
+            SortedDictionary<double, double> histogram = new SortedDictionary<double, double>();
+            GearedValues<ObservablePoint> histogramChartModel = new GearedValues<ObservablePoint>();
+
+            foreach (var point in chart)
+            {
+                if (histogram.ContainsKey(point))
+                {
+                    histogram[point]++;
+                }
+                else
+                {
+                    histogram[point] = 1;
+                }
+            }
+            foreach (var item in histogram)
+            {
+                histogramChartModel.Add(new ObservablePoint(item.Key, item.Value));
+            }
+
+            return histogramChartModel;
         }
     }
 
