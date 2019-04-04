@@ -81,14 +81,13 @@ namespace Speedtest
                     if (connectedState)
                     {
                         mmw = new MainMeasureWindow(this);
-                        activePanels.Add(mmw);
-                        mmw.Dock = DockStyle.Fill;
-                        contentPanel.Controls.Add(mmw);
+                        bringContentToFront(mmw);
                     }
                     else
                     {
 
                         contentPanel.Controls.Clear();
+                        activePanels.Remove(mmw);
                         mmw.deleteControls();
 
                     }
