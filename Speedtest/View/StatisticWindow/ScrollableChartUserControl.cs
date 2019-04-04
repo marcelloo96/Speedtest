@@ -17,25 +17,30 @@ namespace Speedtest.View.StatisticWindow
     public partial class ScrollableChartUserControl : UserControl
     {
         private ScrollableViewModel _viewModel;
+        private double deltaT;
 
         public ScrollableChartUserControl(List<double> chart,double deltaT)
         {
             InitializeComponent();
 
             _viewModel = new ScrollableViewModel(chart,deltaT);
+            this.deltaT = deltaT;
+           
             
             //Cartesian Chart
-            cartesianChart1.Zoom = ZoomingOptions.X;
-            cartesianChart1.DisableAnimations = true;
-            cartesianChart1.Hoverable = false;
+            mainChart.Zoom = ZoomingOptions.X;
+            mainChart.DisableAnimations = true;
+            mainChart.Hoverable = false;
 
-            cartesianChart1.Series.Add(new GLineSeries
+            mainChart.Series.Add(new GLineSeries
             {
                 Values = _viewModel.Values,
-                StrokeThickness = 0,
                 AreaLimit = 0,
-                Fill = new SolidColorBrush(Color.FromRgb(33, 147, 240)),
-                PointGeometry = null
+                LineSmoothness = 0,
+                Fill = Brushes.Transparent,
+
+                
+            PointGeometry = null
             });
             var ax = new Axis
             {
@@ -43,7 +48,7 @@ namespace Speedtest.View.StatisticWindow
                 Separator = new Separator { IsEnabled = false }
             };
             ax.RangeChanged += Axis_OnRangeChanged;
-            cartesianChart1.AxisX.Add(ax);
+            mainChart.AxisX.Add(ax);
 
             //Scroller Chart
             scrollerChart.DisableAnimations = true;
@@ -54,7 +59,7 @@ namespace Speedtest.View.StatisticWindow
             scrollerChart.DataTooltip = null;
             scrollerChart.AxisX.Add(new Axis
             {
-                LabelFormatter = x => new DateTime((long)x).ToString("yyyy"),
+                LabelFormatter = x => ((double)x * deltaT).ToString(),
                 Separator = new Separator { IsEnabled = false },
                 IsMerged = true,
                 Foreground = new SolidColorBrush(Color.FromArgb(152, 0, 0, 0)),
@@ -81,9 +86,9 @@ namespace Speedtest.View.StatisticWindow
                 To = _viewModel.To
             };
 
-            cartesianChart1.AxisX[0].SetBinding(Axis.MinValueProperty,
+            mainChart.AxisX[0].SetBinding(Axis.MinValueProperty,
                 new Binding { Path = new PropertyPath("From"), Source = assistant, Mode = BindingMode.TwoWay });
-            cartesianChart1.AxisX[0].SetBinding(Axis.MaxValueProperty,
+            mainChart.AxisX[0].SetBinding(Axis.MaxValueProperty,
                 new Binding { Path = new PropertyPath("To"), Source = assistant, Mode = BindingMode.TwoWay });
 
             scrollerChart.Base.SetBinding(CartesianChart.ScrollHorizontalFromProperty,
@@ -94,27 +99,7 @@ namespace Speedtest.View.StatisticWindow
 
         private void Axis_OnRangeChanged(RangeChangedEventArgs eventargs)
         {
-            var currentRange = eventargs.Range;
-
-            if (currentRange < TimeSpan.TicksPerDay * 2)
-            {
-                _viewModel.Formatter = x => new DateTime((long)x).ToString("t");
-                return;
-            }
-
-            if (currentRange < TimeSpan.TicksPerDay * 60)
-            {
-                _viewModel.Formatter = x => new DateTime((long)x).ToString("dd MMM yy");
-                return;
-            }
-
-            if (currentRange < TimeSpan.TicksPerDay * 540)
-            {
-                _viewModel.Formatter = x => new DateTime((long)x).ToString("MMM yy");
-                return;
-            }
-
-            _viewModel.Formatter = x => new DateTime((long)x).ToString("yyyy");
+            _viewModel.Formatter = x => ((double)x * deltaT).ToString();
         }
     }
 }

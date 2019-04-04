@@ -21,12 +21,12 @@ namespace Speedtest.Model.ChartViewModels
             }
 
 
-            Formatter = x => new DateTime((long)x).ToString("yyyy");
+            Formatter = x => ((double)x * deltaT).ToString();
 
             Values = l.AsGearedValues().WithQuality(Quality.High);
 
-            From = DateTime.Now.AddHours(10000).Ticks;
-            To = DateTime.Now.AddHours(90000).Ticks;
+            From = 0;
+            To = singleChart.Count();
         }
 
         public object Mapper { get; set; }

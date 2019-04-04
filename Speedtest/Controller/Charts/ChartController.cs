@@ -31,16 +31,13 @@ namespace Speedtest.Controller
             chart.DisableAnimations = true;
             chart.AutoSize = true;
 
-            var transparent = (Brush)new BrushConverter().ConvertFromString("#00FFFFFF");
-
             for (int i = 0; i < model.numOfSeries; i++)
             {
                 chart.Series.Add(new GLineSeries
                 {
                     Values = model.viewModel.listOfCharts[i],
-
                     DataLabels = false,
-                    Fill = transparent,
+                    Fill = Brushes.Transparent,
                     LineSmoothness = 0,
 
                 });
@@ -56,7 +53,7 @@ namespace Speedtest.Controller
             chart.Zoom = ZoomingOptions.X;
             chart.DisableAnimations = true;
             chart.AutoSize = true;
-            var transparent = (Brush)new BrushConverter().ConvertFromString("#00FFFFFF");
+            var transparent = Brushes.Transparent;
 
 
             chart.Series.Add(new GLineSeries
