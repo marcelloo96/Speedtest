@@ -20,19 +20,15 @@ namespace Speedtest.Model.ChartViewModels
                 T += deltaT;
             }
 
-
-            Formatter = x => ((double)x * deltaT).ToString();
-
             Values = l.AsGearedValues().WithQuality(Quality.High);
 
             From = 0;
-            To = singleChart.Count();
+            To = T/5;
         }
 
-        public object Mapper { get; set; }
         public GearedValues<ObservablePoint> Values { get; set; }
         public double From { get; set; }
         public double To { get; set; }
-        public Func<double, string> Formatter { get; set; }
+
     }
 }

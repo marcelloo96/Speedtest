@@ -30,7 +30,7 @@ namespace Speedtest.View.StatisticWindow
             //Cartesian Chart
             mainChart.Zoom = ZoomingOptions.X;
             mainChart.DisableAnimations = true;
-            mainChart.Hoverable = false;
+            mainChart.Hoverable = true;
 
             mainChart.Series.Add(new GLineSeries
             {
@@ -44,10 +44,8 @@ namespace Speedtest.View.StatisticWindow
             });
             var ax = new Axis
             {
-                LabelFormatter = _viewModel.Formatter,
                 Separator = new Separator { IsEnabled = false }
             };
-            ax.RangeChanged += Axis_OnRangeChanged;
             mainChart.AxisX.Add(ax);
 
             //Scroller Chart
@@ -59,7 +57,7 @@ namespace Speedtest.View.StatisticWindow
             scrollerChart.DataTooltip = null;
             scrollerChart.AxisX.Add(new Axis
             {
-                LabelFormatter = x => ((double)x * deltaT).ToString(),
+                LabelFormatter = x => x.ToString(),
                 Separator = new Separator { IsEnabled = false },
                 IsMerged = true,
                 Foreground = new SolidColorBrush(Color.FromArgb(152, 0, 0, 0)),
@@ -97,9 +95,5 @@ namespace Speedtest.View.StatisticWindow
                 new Binding { Path = new PropertyPath("To"), Source = assistant, Mode = BindingMode.TwoWay });
         }
 
-        private void Axis_OnRangeChanged(RangeChangedEventArgs eventargs)
-        {
-            _viewModel.Formatter = x => ((double)x * deltaT).ToString();
-        }
     }
 }
