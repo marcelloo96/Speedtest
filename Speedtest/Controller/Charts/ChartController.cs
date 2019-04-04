@@ -45,7 +45,7 @@ namespace Speedtest.Controller
 
                 });
             }
-
+            
             return chart;
         }
 
@@ -68,6 +68,39 @@ namespace Speedtest.Controller
 
             });
 
+            chart.AxisY.Add(new LiveCharts.Wpf.Axis
+            {
+                Sections = new LiveCharts.Wpf.SectionsCollection
+                {
+                    new LiveCharts.Wpf.AxisSection
+                    {
+                        Value = 2000,
+                        Stroke = new SolidColorBrush(System.Windows.Media.Color.FromRgb(248, 213, 72))
+                    },
+                    new LiveCharts.Wpf.AxisSection
+                    {
+                        //Label = "Good",
+                        Value = 500,
+                        SectionWidth = 1000,
+                        Fill = new SolidColorBrush
+                        {
+                            Color = System.Windows.Media.Color.FromRgb(204,204,204),
+                            Opacity = .4
+                        }
+                    },
+                    new LiveCharts.Wpf.AxisSection
+                    {
+                        //Label = "Bad",
+                        Value = 0,
+                        SectionWidth = 500,
+                        Fill = new SolidColorBrush
+                        {
+                            Color = System.Windows.Media.Color.FromRgb(254,132,132),
+                            Opacity = .4
+                        }
+                    }
+                }
+            });
 
             return chart;
         }

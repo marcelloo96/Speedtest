@@ -176,5 +176,14 @@ namespace Speedtest {
                 return ResourceManager.GetString("Recording_Stop", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Channels found.
+        /// </summary>
+        internal static string Statistic_ChannelsFound {
+            get {
+                return ResourceManager.GetString("Statistic_ChannelsFound", resourceCulture);
+            }
+        }
     }
 }

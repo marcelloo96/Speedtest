@@ -15,6 +15,10 @@ using System.Text;
 using System.Threading.Tasks;
 using Speedtest.Properties;
 using System.IO;
+using Speedtest.Model;
+using Speedtest.Controller.TabControllers;
+using Speedtest.Model.ChartViewModels;
+using Speedtest.View.StatisticWindow;
 
 namespace Speedtest
 {
@@ -38,7 +42,8 @@ namespace Speedtest
         public static int numberOfPanels = 1;
         public StringBuilder csvBuffer;
         public string savingFileDestinationPath;
-
+        public string importingFilePath;
+        public List<List<double>> listOfImportedCharts;
         #endregion
 
         public MainFrame()
@@ -329,6 +334,7 @@ namespace Speedtest
         private void fileDestinationButtonElement_ItemClick(object sender, ItemClickEventArgs e)
         {
             FolderBrowserDialog dialog = new FolderBrowserDialog();
+            dialog.SelectedPath = savingFileDestinationPath;
             DialogResult result = dialog.ShowDialog();
             if (result == DialogResult.OK)
             {
@@ -342,6 +348,49 @@ namespace Speedtest
             var splittedPath = savingFileDestinationPath.Split('\\');
             var shortPath = splittedPath.First() + @"\...\" + splittedPath.Last();
             fileDestinationButtonCaption = Strings.Recording_FileDestinationButton + ":\n" + shortPath;
+        }
+
+        private void statisticImportButton_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            OpenFileDialog dialog = new OpenFileDialog();
+            DialogResult result = dialog.ShowDialog();
+            if (result == DialogResult.OK) {
+                importingFilePath = dialog.FileName;
+
+                listOfImportedCharts = CSVModel.getListOfCharts(importingFilePath);
+                var channelsCount = listOfImportedCharts.Count();
+                statisticChannelsFoundLabel.Caption = Strings.Statistic_ChannelsFound + ": " + channelsCount;
+                StatisticTabController.FillEditors(this, channelsCount);
+
+
+            }
+
+        }
+
+        private void showSelectedChannelElement_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            var scrollable = new ScrollableChartUserControl(listOfImportedCharts[SelectRecordedChannelElementValue],deltaTime);
+            scrollable.Dock = DockStyle.Fill;
+            contentPanel.Controls.Add(scrollable);
+        }
+
+        private void recordingWholeMeasurementElement_EditValueChanged(object sender, EventArgs e)
+        {
+            //var recordfromStart = (bool)recordingWholeMeasurementElement.EditValue;
+
+            //if (recordfromStart)
+            //{
+            //    recordButton.Enabled = false;
+            //    Recording = true;
+            //}
+            //else
+            //{
+            //    recordButton.Enabled = true;
+            //    Recording = false;
+            //}
+
+            //recordButton.PerformClick();
+
         }
     }
 

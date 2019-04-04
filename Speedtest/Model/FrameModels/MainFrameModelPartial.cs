@@ -121,7 +121,8 @@ namespace Speedtest
                 {
                     return Int32.Parse(adcMaxValueElement.EditValue.ToString());
                 }
-                else {
+                else
+                {
                     return 0;
                 }
             }
@@ -144,19 +145,29 @@ namespace Speedtest
             }
             set { voltageReferenceElement.EditValue = value; }
         }
-        public string exportingFileFormatEditValue {
+        public string exportingFileFormatEditValue
+        {
             get { return exportingFileFormatElement.EditValue.ToString(); }
             set { exportingFileFormatElement.EditValue = value; }
         }
-        public string fileDestinationButtonCaption{
+        public string fileDestinationButtonCaption
+        {
             get { return fileDestinationButtonElement.Caption; }
             set { fileDestinationButtonElement.Caption = value; }
         }
-        #endregion
-        public BarEditItem ChannelsElement
+        public string DisplayModeElementValue
         {
-            get { return channelsElement; }
+            get { return (string)displayModeElement.EditValue; }
+            set { displayModeElement.EditValue = value; }
         }
+
+        public int SelectRecordedChannelElementValue
+        {
+            get { return Int32.Parse(selectRecordedChannelElement.EditValue.ToString()); }
+            set { selectRecordedChannelElement.EditValue = value; }
+        }
+        #endregion
+
         #region ComboBoxes
         public RepositoryItemComboBox SelectedPortRepositoryItemComboBox { get { return selectedPortRepositoryItemComboBox; } }
         public RepositoryItemComboBox BaudRateRepositoryItemComboBox { get { return baudRateRepositoryItemComboBox; } }
@@ -174,16 +185,17 @@ namespace Speedtest
         public RepositoryItemTextEdit NumberOfIncomingDataRepositoryItemTextBox { get { return numberOfIncomingDataRepositoryItemTextBox; } }
         public RepositoryItemTextEdit KeepRecordsRepositoryItemTextEdit { get { return keepRecordsRepositoryItemTextBox; } }
         public RepositoryItemComboBox ExportingFileFormatRepositoryItemComboBox { get { return exportingFileFormatRepositoryItemComboBox; } }
+        public RepositoryItemComboBox SelectRecordedChannelRepositoryItemComboBox { get { return selectRecordedChannelRepositoryItemComboBox; } }
         #endregion
         #region Elements
         public BarEditItem DisplayModeElement { get { return displayModeElement; } }
         public BarEditItem NumberOfIncomingDataElement { get { return numberOfIncomingDataElement; } }
-
-        public string DisplayModeElementValue
+        public BarEditItem SelectRecordedChannelElement { get { return selectRecordedChannelElement; } }
+        public BarEditItem ChannelsElement
         {
-            get { return (string)displayModeElement.EditValue; }
-            set { displayModeElement.EditValue = value; }
+            get { return channelsElement; }
         }
+
         #endregion
         #region Groups
         public RibbonPageGroup PortBasicsGroup { get { return portBasicsGroup; } }

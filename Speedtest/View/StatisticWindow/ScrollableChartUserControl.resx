@@ -117,46 +117,4 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Global_Error" xml:space="preserve">
-    <value>Error!</value>
-  </data>
-  <data name="Global_Error_NoPortSelected" xml:space="preserve">
-    <value>No port selected!</value>
-  </data>
-  <data name="Global_Start" xml:space="preserve">
-    <value>Start</value>
-  </data>
-  <data name="Global_Stop" xml:space="preserve">
-    <value>Stop</value>
-  </data>
-  <data name="MeasureTab_DisplayMode_Chart" xml:space="preserve">
-    <value>Chart</value>
-  </data>
-  <data name="MeasureTab_DisplayMode_Monitor" xml:space="preserve">
-    <value>Monitor</value>
-  </data>
-  <data name="MeasureTab_DisplayMode_XY" xml:space="preserve">
-    <value>XY </value>
-  </data>
-  <data name="PortController_GreaterIncomingDataError" xml:space="preserve">
-    <value>The number panels are greater than the incoming datas.</value>
-  </data>
-  <data name="Recording_ExportinFileFormat_CSV" xml:space="preserve">
-    <value>.csv</value>
-  </data>
-  <data name="Recording_ExportinFileFormat_TXT" xml:space="preserve">
-    <value>.txt</value>
-  </data>
-  <data name="Recording_FileDestinationButton" xml:space="preserve">
-    <value>File Destination</value>
-  </data>
-  <data name="Recording_Start" xml:space="preserve">
-    <value>Start Recording</value>
-  </data>
-  <data name="Recording_Stop" xml:space="preserve">
-    <value>Stop  Recording</value>
-  </data>
-  <data name="Statistic_ChannelsFound" xml:space="preserve">
-    <value>Channels found</value>
-  </data>
 </root>

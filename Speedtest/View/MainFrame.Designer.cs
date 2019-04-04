@@ -86,9 +86,11 @@
             this.repositoryItemBreadCrumbEdit2 = new DevExpress.XtraEditors.Repository.RepositoryItemBreadCrumbEdit();
             this.skinRibbonGallery = new DevExpress.XtraBars.SkinRibbonGalleryBarItem();
             this.fileDestinationButtonElement = new DevExpress.XtraBars.BarButtonItem();
-            this.recordingPage = new DevExpress.XtraBars.Ribbon.RibbonPage();
-            this.RecordTabStatStopButtonPageGroup = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
-            this.recordRibbonPageGroup = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
+            this.statisticImportButton = new DevExpress.XtraBars.BarButtonItem();
+            this.statisticChannelsFoundLabel = new DevExpress.XtraBars.BarStaticItem();
+            this.selectRecordedChannelElement = new DevExpress.XtraBars.BarEditItem();
+            this.selectRecordedChannelRepositoryItemComboBox = new DevExpress.XtraEditors.Repository.RepositoryItemComboBox();
+            this.showSelectedChannelElement = new DevExpress.XtraBars.BarButtonItem();
             this.measurePage = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.measurePortBasicGroup = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.displayGroup = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
@@ -103,6 +105,11 @@
             this.displayPage = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.displayChartGroup = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.skinPageGroup = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
+            this.exportPage = new DevExpress.XtraBars.Ribbon.RibbonPage();
+            this.RecordTabStatStopButtonPageGroup = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
+            this.recordRibbonPageGroup = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
+            this.importPage = new DevExpress.XtraBars.Ribbon.RibbonPage();
+            this.statisticImportGroup = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.repositoryItemComboBox2 = new DevExpress.XtraEditors.Repository.RepositoryItemComboBox();
             this.zeroValueRepositoryItemSpinEdit = new DevExpress.XtraEditors.Repository.RepositoryItemSpinEdit();
             this.sensitivityRepositoryItem = new DevExpress.XtraEditors.Repository.RepositoryItemSpinEdit();
@@ -146,6 +153,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.exportingFileFormatRepositoryItemComboBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.recordingWholeMeasurementRepositoryItemToggleSwitch)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemBreadCrumbEdit2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.selectRecordedChannelRepositoryItemComboBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemComboBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.zeroValueRepositoryItemSpinEdit)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.sensitivityRepositoryItem)).BeginInit();
@@ -199,16 +207,21 @@
             this.recordingWholeMeasurementElement,
             this.barEditItem1,
             this.skinRibbonGallery,
-            this.fileDestinationButtonElement});
+            this.fileDestinationButtonElement,
+            this.statisticImportButton,
+            this.statisticChannelsFoundLabel,
+            this.selectRecordedChannelElement,
+            this.showSelectedChannelElement});
             this.ribbonControl1.Location = new System.Drawing.Point(0, 0);
-            this.ribbonControl1.MaxItemId = 16;
+            this.ribbonControl1.MaxItemId = 22;
             this.ribbonControl1.Name = "ribbonControl1";
             this.ribbonControl1.Pages.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPage[] {
             this.measurePage,
             this.portOptionsPage,
             this.sensorOptionsPage,
             this.displayPage,
-            this.recordingPage});
+            this.exportPage,
+            this.importPage});
             this.ribbonControl1.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.baudRateRepositoryItemComboBox,
             this.selectedPortRepositoryItemComboBox,
@@ -246,7 +259,8 @@
             this.repositoryItemBreadCrumbEdit1,
             this.repositoryItemBreadCrumbEdit2,
             this.repositoryItemButtonEdit2,
-            this.fileLocationBreadCrumbElementEepositoryItemBreadCrumbEdit});
+            this.fileLocationBreadCrumbElementEepositoryItemBreadCrumbEdit,
+            this.selectRecordedChannelRepositoryItemComboBox});
             this.ribbonControl1.Size = new System.Drawing.Size(1037, 146);
             this.ribbonControl1.StatusBar = this.ribbonStatusBar1;
             // 
@@ -657,12 +671,13 @@
             // 
             // recordingWholeMeasurementElement
             // 
-            this.recordingWholeMeasurementElement.Caption = "Recording Whole ";
+            this.recordingWholeMeasurementElement.Caption = "Record from Start";
             this.recordingWholeMeasurementElement.Edit = this.recordingWholeMeasurementRepositoryItemToggleSwitch;
             this.recordingWholeMeasurementElement.EditHeight = 20;
             this.recordingWholeMeasurementElement.EditWidth = 100;
             this.recordingWholeMeasurementElement.Id = 4;
             this.recordingWholeMeasurementElement.Name = "recordingWholeMeasurementElement";
+            this.recordingWholeMeasurementElement.EditValueChanged += new System.EventHandler(this.recordingWholeMeasurementElement_EditValueChanged);
             // 
             // recordingWholeMeasurementRepositoryItemToggleSwitch
             // 
@@ -700,29 +715,45 @@
             this.fileDestinationButtonElement.Name = "fileDestinationButtonElement";
             this.fileDestinationButtonElement.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.fileDestinationButtonElement_ItemClick);
             // 
-            // recordingPage
+            // statisticImportButton
             // 
-            this.recordingPage.Groups.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageGroup[] {
-            this.RecordTabStatStopButtonPageGroup,
-            this.recordRibbonPageGroup});
-            this.recordingPage.Name = "recordingPage";
-            this.recordingPage.Text = "Record";
+            this.statisticImportButton.Caption = "Import";
+            this.statisticImportButton.Id = 18;
+            this.statisticImportButton.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("statisticImportButton.ImageOptions.Image")));
+            this.statisticImportButton.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("statisticImportButton.ImageOptions.LargeImage")));
+            this.statisticImportButton.Name = "statisticImportButton";
+            this.statisticImportButton.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.statisticImportButton_ItemClick);
             // 
-            // RecordTabStatStopButtonPageGroup
+            // statisticChannelsFoundLabel
             // 
-            this.RecordTabStatStopButtonPageGroup.AllowTextClipping = false;
-            this.RecordTabStatStopButtonPageGroup.ItemLinks.Add(this.startStopButton);
-            this.RecordTabStatStopButtonPageGroup.Name = "RecordTabStatStopButtonPageGroup";
-            this.RecordTabStatStopButtonPageGroup.Text = "Measuring";
+            this.statisticChannelsFoundLabel.Caption = "Channels found";
+            this.statisticChannelsFoundLabel.Id = 19;
+            this.statisticChannelsFoundLabel.Name = "statisticChannelsFoundLabel";
             // 
-            // recordRibbonPageGroup
+            // selectRecordedChannelElement
             // 
-            this.recordRibbonPageGroup.ItemLinks.Add(this.recordButton);
-            this.recordRibbonPageGroup.ItemLinks.Add(this.exportingFileFormatElement, true);
-            this.recordRibbonPageGroup.ItemLinks.Add(this.recordingWholeMeasurementElement);
-            this.recordRibbonPageGroup.ItemLinks.Add(this.fileDestinationButtonElement, true);
-            this.recordRibbonPageGroup.Name = "recordRibbonPageGroup";
-            this.recordRibbonPageGroup.Text = "Recording";
+            this.selectRecordedChannelElement.Caption = "Selected channel";
+            this.selectRecordedChannelElement.Edit = this.selectRecordedChannelRepositoryItemComboBox;
+            this.selectRecordedChannelElement.EditHeight = 20;
+            this.selectRecordedChannelElement.EditWidth = 100;
+            this.selectRecordedChannelElement.Id = 20;
+            this.selectRecordedChannelElement.Name = "selectRecordedChannelElement";
+            // 
+            // selectRecordedChannelRepositoryItemComboBox
+            // 
+            this.selectRecordedChannelRepositoryItemComboBox.AutoHeight = false;
+            this.selectRecordedChannelRepositoryItemComboBox.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.selectRecordedChannelRepositoryItemComboBox.Name = "selectRecordedChannelRepositoryItemComboBox";
+            // 
+            // showSelectedChannelElement
+            // 
+            this.showSelectedChannelElement.Caption = "Show";
+            this.showSelectedChannelElement.Id = 21;
+            this.showSelectedChannelElement.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("showSelectedChannelElement.ImageOptions.Image")));
+            this.showSelectedChannelElement.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("showSelectedChannelElement.ImageOptions.LargeImage")));
+            this.showSelectedChannelElement.Name = "showSelectedChannelElement";
+            this.showSelectedChannelElement.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.showSelectedChannelElement_ItemClick);
             // 
             // measurePage
             // 
@@ -838,6 +869,48 @@
             this.skinPageGroup.ItemLinks.Add(this.skinRibbonGallery);
             this.skinPageGroup.Name = "skinPageGroup";
             this.skinPageGroup.Text = "Skin";
+            // 
+            // exportPage
+            // 
+            this.exportPage.Groups.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageGroup[] {
+            this.RecordTabStatStopButtonPageGroup,
+            this.recordRibbonPageGroup});
+            this.exportPage.Name = "exportPage";
+            this.exportPage.Text = "Export";
+            // 
+            // RecordTabStatStopButtonPageGroup
+            // 
+            this.RecordTabStatStopButtonPageGroup.AllowTextClipping = false;
+            this.RecordTabStatStopButtonPageGroup.ItemLinks.Add(this.startStopButton);
+            this.RecordTabStatStopButtonPageGroup.Name = "RecordTabStatStopButtonPageGroup";
+            this.RecordTabStatStopButtonPageGroup.Text = "Measuring";
+            // 
+            // recordRibbonPageGroup
+            // 
+            this.recordRibbonPageGroup.ItemLinks.Add(this.recordButton);
+            this.recordRibbonPageGroup.ItemLinks.Add(this.exportingFileFormatElement, true);
+            this.recordRibbonPageGroup.ItemLinks.Add(this.recordingWholeMeasurementElement);
+            this.recordRibbonPageGroup.ItemLinks.Add(this.fileDestinationButtonElement, true);
+            this.recordRibbonPageGroup.Name = "recordRibbonPageGroup";
+            this.recordRibbonPageGroup.Text = "Recording";
+            // 
+            // importPage
+            // 
+            this.importPage.Groups.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageGroup[] {
+            this.statisticImportGroup});
+            this.importPage.Name = "importPage";
+            this.importPage.Text = "Import";
+            // 
+            // statisticImportGroup
+            // 
+            this.statisticImportGroup.AllowTextClipping = false;
+            this.statisticImportGroup.ItemLinks.Add(this.statisticImportButton);
+            this.statisticImportGroup.ItemLinks.Add(this.statisticChannelsFoundLabel, true);
+            this.statisticImportGroup.ItemLinks.Add(this.selectRecordedChannelElement);
+            this.statisticImportGroup.ItemLinks.Add(this.samplingRateElement);
+            this.statisticImportGroup.ItemLinks.Add(this.showSelectedChannelElement, true);
+            this.statisticImportGroup.Name = "statisticImportGroup";
+            this.statisticImportGroup.Text = "Import";
             // 
             // repositoryItemComboBox2
             // 
@@ -1000,6 +1073,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.exportingFileFormatRepositoryItemComboBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.recordingWholeMeasurementRepositoryItemToggleSwitch)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemBreadCrumbEdit2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.selectRecordedChannelRepositoryItemComboBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemComboBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.zeroValueRepositoryItemSpinEdit)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.sensitivityRepositoryItem)).EndInit();
@@ -1097,7 +1171,7 @@
         private DevExpress.XtraBars.BarEditItem voltageReferenceElement;
         private DevExpress.XtraEditors.Repository.RepositoryItemTextEdit voltageReferenceRepositoryItemTextEdit;
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup calculatelinearityGroup;
-        private DevExpress.XtraBars.Ribbon.RibbonPage recordingPage;
+        private DevExpress.XtraBars.Ribbon.RibbonPage exportPage;
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup RecordTabStatStopButtonPageGroup;
         private DevExpress.XtraBars.BarButtonItem recordButton;
         private DevExpress.XtraBars.BarEditItem exportingFileFormatElement;
@@ -1113,5 +1187,12 @@
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup skinPageGroup;
         private DevExpress.XtraBars.BarButtonItem fileDestinationButtonElement;
         private DevExpress.XtraEditors.Repository.RepositoryItemBreadCrumbEdit fileLocationBreadCrumbElementEepositoryItemBreadCrumbEdit;
+        private DevExpress.XtraBars.BarButtonItem statisticImportButton;
+        private DevExpress.XtraBars.Ribbon.RibbonPage importPage;
+        private DevExpress.XtraBars.Ribbon.RibbonPageGroup statisticImportGroup;
+        private DevExpress.XtraBars.BarStaticItem statisticChannelsFoundLabel;
+        private DevExpress.XtraBars.BarEditItem selectRecordedChannelElement;
+        private DevExpress.XtraEditors.Repository.RepositoryItemComboBox selectRecordedChannelRepositoryItemComboBox;
+        private DevExpress.XtraBars.BarButtonItem showSelectedChannelElement;
     }
 }
