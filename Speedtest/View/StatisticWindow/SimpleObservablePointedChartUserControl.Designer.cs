@@ -1,6 +1,6 @@
 ﻿namespace Speedtest.View.StatisticWindow
 {
-    partial class HistogramChartUserControl
+    partial class SimpleObservablePointedChartUserControl
     {
         /// <summary> 
         /// Required designer variable.

@@ -181,11 +181,11 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Model\ChartViewModels\SpeedTestVm.cs" />
-    <Compile Include="View\StatisticWindow\HistogramChartUserControl.cs">
+    <Compile Include="View\StatisticWindow\SimpleObservablePointedChartUserControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="View\StatisticWindow\HistogramChartUserControl.Designer.cs">
-      <DependentUpon>HistogramChartUserControl.cs</DependentUpon>
+    <Compile Include="View\StatisticWindow\SimpleObservablePointedChartUserControl.Designer.cs">
+      <DependentUpon>SimpleObservablePointedChartUserControl.cs</DependentUpon>
     </Compile>
     <Compile Include="View\StatisticWindow\ScrollableChartUserControl.cs">
       <SubType>UserControl</SubType>
@@ -233,8 +233,8 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <EmbeddedResource Include="View\StatisticWindow\HistogramChartUserControl.resx">
-      <DependentUpon>HistogramChartUserControl.cs</DependentUpon>
+    <EmbeddedResource Include="View\StatisticWindow\SimpleObservablePointedChartUserControl.resx">
+      <DependentUpon>SimpleObservablePointedChartUserControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="View\StatisticWindow\ScrollableChartUserControl.resx">
       <DependentUpon>ScrollableChartUserControl.cs</DependentUpon>

@@ -6,10 +6,10 @@ using System.Windows.Media;
 
 namespace Speedtest.View.StatisticWindow
 {
-    public partial class HistogramChartUserControl : UserControl 
+    public partial class SimpleObservablePointedChartUserControl : UserControl 
     {
         public GearedValues<ObservablePoint> Values;
-        public HistogramChartUserControl(GearedValues<ObservablePoint> chart)
+        public SimpleObservablePointedChartUserControl(GearedValues<ObservablePoint> chart)
         {
             Values = chart;
             InitializeComponent();

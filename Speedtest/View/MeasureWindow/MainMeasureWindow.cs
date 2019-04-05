@@ -19,6 +19,8 @@ namespace Speedtest.View.MeasureWindow
         public List<SpeedTest> gearedCharts;
         public SerialPort serialPort;
         public int numberOfPanelsDisplayed;
+        public XYChartUserControl xyChartUserControl;
+        public ChartMonitorUserControl chartMonitor;
 
         public MainMeasureWindow(MainFrame model)
         {
@@ -29,9 +31,11 @@ namespace Speedtest.View.MeasureWindow
             numberOfPanelsDisplayed= mainFrameModel.numberOfChannelsElementValue;
             InitializeComponent();
             InitialState();
-            xyChartUserControl.keepRecords = model.keepRecordsElementValue;
-            xyChartUserControl.deltaT = model.deltaTime;
-            xyChartUserControl.Initialize();
+            xyChartUserControl = new XYChartUserControl(model.keepRecordsElementValue, model.deltaTime);
+            chartMonitor = new ChartMonitorUserControl();
+            Controls.Add(xyChartUserControl);
+            Controls.Add(chartMonitor);
+
         }
 
         public void InitialState() {
@@ -107,7 +111,7 @@ namespace Speedtest.View.MeasureWindow
         {
             var newHeight = height / numberOfPanelsDisplayed;
             var panels = gearedChartUserControl.dockManager.Panels;
-            splitContainerControl.SplitterPosition = width * 3 / 4;
+            //splitContainerControl.SplitterPosition = width * 3 / 4;
 
             
             for (int i = 0; i < panels.Count(); i++) {
@@ -116,7 +120,7 @@ namespace Speedtest.View.MeasureWindow
         }
 
         public void dockPanelClicked(SpeedTest chart, DockPanel panel) {
-            chartSettingsUserControl.propertyGridControl.SelectedObjects = new object[] { chart, panel};
+            //chartSettingsUserControl.propertyGridControl.SelectedObjects = new object[] { chart, panel};
         }
     }
 

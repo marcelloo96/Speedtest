@@ -23,12 +23,12 @@ namespace Speedtest.View.MeasureWindow
         /// </summary>
         public int keepRecords { get; set; }
         public double deltaT { get; set; }
-        public XYChartUserControl()
+        public XYChartUserControl(int keepRecords, double deltaT)
         {
+            this.keepRecords = keepRecords;
+            this.deltaT = deltaT;
+
             InitializeComponent();
-            
-        }
-        public void Initialize() {
             XYChart = ChartController.InitializeXYChart(XYChart, this);
         }
     }

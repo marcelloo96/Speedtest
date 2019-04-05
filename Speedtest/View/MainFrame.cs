@@ -143,8 +143,8 @@ namespace Speedtest
                 {
                     if (DisplayModeElementValue == Strings.MeasureTab_DisplayMode_Chart)
                     {
-                        mmw.splitContainerControl.Dock = DockStyle.Fill;
-                        mmw.splitContainerControl.BringToFront();
+                        //mmw.splitContainerControl.Dock = DockStyle.Fill;
+                        //mmw.splitContainerControl.BringToFront();
 
                         mmw.chartMonitor.Dock = DockStyle.None;
                         mmw.chartMonitor.SendToBack();
@@ -158,8 +158,8 @@ namespace Speedtest
                         mmw.chartMonitor.Dock = DockStyle.Fill;
                         mmw.chartMonitor.BringToFront();
 
-                        mmw.splitContainerControl.Dock = DockStyle.None;
-                        mmw.splitContainerControl.SendToBack();
+                        //mmw.splitContainerControl.Dock = DockStyle.None;
+                        //mmw.splitContainerControl.SendToBack();
                         mmw.xyChartUserControl.Dock = DockStyle.None;
                         mmw.xyChartUserControl.SendToBack();
 
@@ -172,8 +172,8 @@ namespace Speedtest
 
                         mmw.chartMonitor.SendToBack();
                         mmw.chartMonitor.Dock = DockStyle.None;
-                        mmw.splitContainerControl.Dock = DockStyle.None;
-                        mmw.splitContainerControl.SendToBack();
+                        //mmw.splitContainerControl.Dock = DockStyle.None;
+                        //mmw.splitContainerControl.SendToBack();
 
                         ChartController.RemoveMonitorText(this);
                         ChartController.RemoveAllPointsFromGeared(gearedCharts);
@@ -409,7 +409,7 @@ namespace Speedtest
             else if (importDisplayModeElementValue == Strings.Import_DisplayMode_Histogram)
             {
                 var generated = getHistogramFromChart(selectedChart);
-                var onPanelWithThisType = activePanels.OfType<HistogramChartUserControl>().ToList();
+                var onPanelWithThisType = activePanels.OfType<SimpleObservablePointedChartUserControl>().ToList();
 
 
                 if (onPanelWithThisType != null && generated != null)
@@ -426,7 +426,7 @@ namespace Speedtest
                     
                 }
 
-                bringContentToFront(new HistogramChartUserControl(generated));
+                bringContentToFront(new SimpleObservablePointedChartUserControl(generated));
 
 
             }
