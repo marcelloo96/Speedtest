@@ -80,8 +80,6 @@
             this.recordButton = new DevExpress.XtraBars.BarButtonItem();
             this.exportingFileFormatElement = new DevExpress.XtraBars.BarEditItem();
             this.exportingFileFormatRepositoryItemComboBox = new DevExpress.XtraEditors.Repository.RepositoryItemComboBox();
-            this.recordingWholeMeasurementElement = new DevExpress.XtraBars.BarEditItem();
-            this.recordingWholeMeasurementRepositoryItemToggleSwitch = new DevExpress.XtraEditors.Repository.RepositoryItemToggleSwitch();
             this.barEditItem1 = new DevExpress.XtraBars.BarEditItem();
             this.repositoryItemBreadCrumbEdit2 = new DevExpress.XtraEditors.Repository.RepositoryItemBreadCrumbEdit();
             this.skinRibbonGallery = new DevExpress.XtraBars.SkinRibbonGalleryBarItem();
@@ -91,6 +89,10 @@
             this.selectRecordedChannelElement = new DevExpress.XtraBars.BarEditItem();
             this.selectRecordedChannelRepositoryItemComboBox = new DevExpress.XtraEditors.Repository.RepositoryItemComboBox();
             this.showSelectedChannelElement = new DevExpress.XtraBars.BarButtonItem();
+            this.importDisplayModeElement = new DevExpress.XtraBars.BarEditItem();
+            this.importDisplayModeElementRepositoryItemComboBox = new DevExpress.XtraEditors.Repository.RepositoryItemComboBox();
+            this.exportFileNameElement = new DevExpress.XtraBars.BarEditItem();
+            this.exportFileNameElementRepositoryItemTextEdit = new DevExpress.XtraEditors.Repository.RepositoryItemTextEdit();
             this.measurePage = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.measurePortBasicGroup = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.displayGroup = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
@@ -120,6 +122,7 @@
             this.repositoryItemButtonEdit1 = new DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit();
             this.repositoryItemToggleSwitch1 = new DevExpress.XtraEditors.Repository.RepositoryItemToggleSwitch();
             this.repositoryItemRadioGroup1 = new DevExpress.XtraEditors.Repository.RepositoryItemRadioGroup();
+            this.recordingWholeMeasurementRepositoryItemToggleSwitch = new DevExpress.XtraEditors.Repository.RepositoryItemToggleSwitch();
             this.repositoryItemBreadCrumbEdit1 = new DevExpress.XtraEditors.Repository.RepositoryItemBreadCrumbEdit();
             this.repositoryItemButtonEdit2 = new DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit();
             this.fileLocationBreadCrumbElementEepositoryItemBreadCrumbEdit = new DevExpress.XtraEditors.Repository.RepositoryItemBreadCrumbEdit();
@@ -128,8 +131,6 @@
             this.contentPanel = new DevExpress.XtraEditors.PanelControl();
             this.dockManager = new DevExpress.XtraBars.Docking.DockManager(this.components);
             this.serialPort = new System.IO.Ports.SerialPort(this.components);
-            this.importDisplayModeElement = new DevExpress.XtraBars.BarEditItem();
-            this.importDisplayModeElementRepositoryItemComboBox = new DevExpress.XtraEditors.Repository.RepositoryItemComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.ribbonControl1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.selectedPortRepositoryItemComboBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.baudRateRepositoryItemComboBox)).BeginInit();
@@ -153,9 +154,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.adcMaxValueRepositoryItemTextEdit)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.voltageReferenceRepositoryItemTextEdit)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.exportingFileFormatRepositoryItemComboBox)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.recordingWholeMeasurementRepositoryItemToggleSwitch)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemBreadCrumbEdit2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.selectRecordedChannelRepositoryItemComboBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.importDisplayModeElementRepositoryItemComboBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.exportFileNameElementRepositoryItemTextEdit)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemComboBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.zeroValueRepositoryItemSpinEdit)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.sensitivityRepositoryItem)).BeginInit();
@@ -166,12 +168,12 @@
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemButtonEdit1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemToggleSwitch1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemRadioGroup1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.recordingWholeMeasurementRepositoryItemToggleSwitch)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemBreadCrumbEdit1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemButtonEdit2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.fileLocationBreadCrumbElementEepositoryItemBreadCrumbEdit)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.contentPanel)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dockManager)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.importDisplayModeElementRepositoryItemComboBox)).BeginInit();
             this.SuspendLayout();
             // 
             // ribbonControl1
@@ -207,7 +209,6 @@
             this.voltageReferenceElement,
             this.recordButton,
             this.exportingFileFormatElement,
-            this.recordingWholeMeasurementElement,
             this.barEditItem1,
             this.skinRibbonGallery,
             this.fileDestinationButtonElement,
@@ -215,9 +216,10 @@
             this.statisticChannelsFoundLabel,
             this.selectRecordedChannelElement,
             this.showSelectedChannelElement,
-            this.importDisplayModeElement});
+            this.importDisplayModeElement,
+            this.exportFileNameElement});
             this.ribbonControl1.Location = new System.Drawing.Point(0, 0);
-            this.ribbonControl1.MaxItemId = 23;
+            this.ribbonControl1.MaxItemId = 26;
             this.ribbonControl1.Name = "ribbonControl1";
             this.ribbonControl1.Pages.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPage[] {
             this.measurePage,
@@ -265,7 +267,8 @@
             this.repositoryItemButtonEdit2,
             this.fileLocationBreadCrumbElementEepositoryItemBreadCrumbEdit,
             this.selectRecordedChannelRepositoryItemComboBox,
-            this.importDisplayModeElementRepositoryItemComboBox});
+            this.importDisplayModeElementRepositoryItemComboBox,
+            this.exportFileNameElementRepositoryItemTextEdit});
             this.ribbonControl1.Size = new System.Drawing.Size(1037, 146);
             this.ribbonControl1.StatusBar = this.ribbonStatusBar1;
             // 
@@ -674,24 +677,6 @@
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.exportingFileFormatRepositoryItemComboBox.Name = "exportingFileFormatRepositoryItemComboBox";
             // 
-            // recordingWholeMeasurementElement
-            // 
-            this.recordingWholeMeasurementElement.Caption = "Record from Start";
-            this.recordingWholeMeasurementElement.Edit = this.recordingWholeMeasurementRepositoryItemToggleSwitch;
-            this.recordingWholeMeasurementElement.EditHeight = 20;
-            this.recordingWholeMeasurementElement.EditWidth = 100;
-            this.recordingWholeMeasurementElement.Id = 4;
-            this.recordingWholeMeasurementElement.Name = "recordingWholeMeasurementElement";
-            this.recordingWholeMeasurementElement.EditValueChanged += new System.EventHandler(this.recordingWholeMeasurementElement_EditValueChanged);
-            // 
-            // recordingWholeMeasurementRepositoryItemToggleSwitch
-            // 
-            this.recordingWholeMeasurementRepositoryItemToggleSwitch.AutoHeight = false;
-            this.recordingWholeMeasurementRepositoryItemToggleSwitch.GlyphAlignment = DevExpress.Utils.HorzAlignment.Far;
-            this.recordingWholeMeasurementRepositoryItemToggleSwitch.Name = "recordingWholeMeasurementRepositoryItemToggleSwitch";
-            this.recordingWholeMeasurementRepositoryItemToggleSwitch.OffText = "Off";
-            this.recordingWholeMeasurementRepositoryItemToggleSwitch.OnText = "On";
-            // 
             // barEditItem1
             // 
             this.barEditItem1.Caption = "barEditItem1";
@@ -759,6 +744,38 @@
             this.showSelectedChannelElement.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("showSelectedChannelElement.ImageOptions.LargeImage")));
             this.showSelectedChannelElement.Name = "showSelectedChannelElement";
             this.showSelectedChannelElement.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.showSelectedChannelElement_ItemClick);
+            // 
+            // importDisplayModeElement
+            // 
+            this.importDisplayModeElement.Caption = "Display Mode";
+            this.importDisplayModeElement.Edit = this.importDisplayModeElementRepositoryItemComboBox;
+            this.importDisplayModeElement.EditHeight = 20;
+            this.importDisplayModeElement.EditWidth = 100;
+            this.importDisplayModeElement.Id = 22;
+            this.importDisplayModeElement.Name = "importDisplayModeElement";
+            // 
+            // importDisplayModeElementRepositoryItemComboBox
+            // 
+            this.importDisplayModeElementRepositoryItemComboBox.AutoHeight = false;
+            this.importDisplayModeElementRepositoryItemComboBox.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.importDisplayModeElementRepositoryItemComboBox.Name = "importDisplayModeElementRepositoryItemComboBox";
+            // 
+            // exportFileNameElement
+            // 
+            this.exportFileNameElement.Caption = "File name";
+            this.exportFileNameElement.Edit = this.exportFileNameElementRepositoryItemTextEdit;
+            this.exportFileNameElement.EditHeight = 20;
+            this.exportFileNameElement.EditWidth = 100;
+            this.exportFileNameElement.Id = 23;
+            this.exportFileNameElement.Name = "exportFileNameElement";
+            // 
+            // exportFileNameElementRepositoryItemTextEdit
+            // 
+            this.exportFileNameElementRepositoryItemTextEdit.AutoHeight = false;
+            this.exportFileNameElementRepositoryItemTextEdit.Mask.EditMask = "[A-Za-zaáeéiíoóöőuúüűAÁEÉIÍOÓÖŐUÚÜŰ]+[A-Za-z0-9_aáeéiíoóöőuúüűAÁEÉIÍOÓÖŐUÚÜŰ-]*";
+            this.exportFileNameElementRepositoryItemTextEdit.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.RegEx;
+            this.exportFileNameElementRepositoryItemTextEdit.Name = "exportFileNameElementRepositoryItemTextEdit";
             // 
             // measurePage
             // 
@@ -894,7 +911,7 @@
             // 
             this.recordRibbonPageGroup.ItemLinks.Add(this.recordButton);
             this.recordRibbonPageGroup.ItemLinks.Add(this.exportingFileFormatElement, true);
-            this.recordRibbonPageGroup.ItemLinks.Add(this.recordingWholeMeasurementElement);
+            this.recordRibbonPageGroup.ItemLinks.Add(this.exportFileNameElement);
             this.recordRibbonPageGroup.ItemLinks.Add(this.fileDestinationButtonElement, true);
             this.recordRibbonPageGroup.Name = "recordRibbonPageGroup";
             this.recordRibbonPageGroup.Text = "Recording";
@@ -984,6 +1001,14 @@
             // 
             this.repositoryItemRadioGroup1.Name = "repositoryItemRadioGroup1";
             // 
+            // recordingWholeMeasurementRepositoryItemToggleSwitch
+            // 
+            this.recordingWholeMeasurementRepositoryItemToggleSwitch.AutoHeight = false;
+            this.recordingWholeMeasurementRepositoryItemToggleSwitch.GlyphAlignment = DevExpress.Utils.HorzAlignment.Far;
+            this.recordingWholeMeasurementRepositoryItemToggleSwitch.Name = "recordingWholeMeasurementRepositoryItemToggleSwitch";
+            this.recordingWholeMeasurementRepositoryItemToggleSwitch.OffText = "Off";
+            this.recordingWholeMeasurementRepositoryItemToggleSwitch.OnText = "On";
+            // 
             // repositoryItemBreadCrumbEdit1
             // 
             this.repositoryItemBreadCrumbEdit1.AutoHeight = false;
@@ -1040,22 +1065,6 @@
             "DevExpress.XtraBars.Navigation.TileNavPane",
             "DevExpress.XtraBars.TabFormControl"});
             // 
-            // importDisplayModeElement
-            // 
-            this.importDisplayModeElement.Caption = "Display Mode";
-            this.importDisplayModeElement.Edit = this.importDisplayModeElementRepositoryItemComboBox;
-            this.importDisplayModeElement.EditHeight = 20;
-            this.importDisplayModeElement.EditWidth = 100;
-            this.importDisplayModeElement.Id = 22;
-            this.importDisplayModeElement.Name = "importDisplayModeElement";
-            // 
-            // importDisplayModeElementRepositoryItemComboBox
-            // 
-            this.importDisplayModeElementRepositoryItemComboBox.AutoHeight = false;
-            this.importDisplayModeElementRepositoryItemComboBox.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.importDisplayModeElementRepositoryItemComboBox.Name = "importDisplayModeElementRepositoryItemComboBox";
-            // 
             // MainFrame
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1093,9 +1102,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.adcMaxValueRepositoryItemTextEdit)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.voltageReferenceRepositoryItemTextEdit)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.exportingFileFormatRepositoryItemComboBox)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.recordingWholeMeasurementRepositoryItemToggleSwitch)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemBreadCrumbEdit2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.selectRecordedChannelRepositoryItemComboBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.importDisplayModeElementRepositoryItemComboBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.exportFileNameElementRepositoryItemTextEdit)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemComboBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.zeroValueRepositoryItemSpinEdit)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.sensitivityRepositoryItem)).EndInit();
@@ -1106,12 +1116,12 @@
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemButtonEdit1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemToggleSwitch1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemRadioGroup1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.recordingWholeMeasurementRepositoryItemToggleSwitch)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemBreadCrumbEdit1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemButtonEdit2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.fileLocationBreadCrumbElementEepositoryItemBreadCrumbEdit)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.contentPanel)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dockManager)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.importDisplayModeElementRepositoryItemComboBox)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1200,7 +1210,6 @@
         private DevExpress.XtraBars.BarEditItem exportingFileFormatElement;
         private DevExpress.XtraEditors.Repository.RepositoryItemComboBox exportingFileFormatRepositoryItemComboBox;
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup recordRibbonPageGroup;
-        private DevExpress.XtraBars.BarEditItem recordingWholeMeasurementElement;
         private DevExpress.XtraEditors.Repository.RepositoryItemToggleSwitch recordingWholeMeasurementRepositoryItemToggleSwitch;
         private DevExpress.XtraEditors.Repository.RepositoryItemBreadCrumbEdit repositoryItemBreadCrumbEdit1;
         private DevExpress.XtraBars.BarEditItem barEditItem1;
@@ -1219,5 +1228,7 @@
         private DevExpress.XtraBars.BarButtonItem showSelectedChannelElement;
         private DevExpress.XtraBars.BarEditItem importDisplayModeElement;
         private DevExpress.XtraEditors.Repository.RepositoryItemComboBox importDisplayModeElementRepositoryItemComboBox;
+        private DevExpress.XtraBars.BarEditItem exportFileNameElement;
+        private DevExpress.XtraEditors.Repository.RepositoryItemTextEdit exportFileNameElementRepositoryItemTextEdit;
     }
 }

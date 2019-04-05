@@ -243,7 +243,7 @@ namespace Speedtest
             try
             {
 
-                //Debug.WriteLine(currentlyArrived);
+                Debug.WriteLine(currentlyArrived);
                 sendingData = Array.ConvertAll(currentlyArrived.Split(' '), Double.Parse);
 
                 if (Recording)
@@ -313,7 +313,11 @@ namespace Speedtest
                 //Stop Recording and save
                 if (exportingFileFormatEditValue == Strings.Recording_ExportinFileFormat_CSV || exportingFileFormatEditValue == Strings.Recording_ExportinFileFormat_TXT)
                 {
-                    string csvpath = savingFileDestinationPath + @"\Measurement_" + DateTime.Now.ToString("yyyyMMddHHmmssfff") + exportingFileFormatEditValue;
+                    if (String.IsNullOrEmpty(exportFileNameElementValue))
+                    {
+                        exportFileNameElementValue = "Measurement_" + DateTime.Now.ToString("yyyyMMddHHmmssfff");
+                    }
+                    string csvpath = savingFileDestinationPath + @"\"+exportFileNameElementValue + exportingFileFormatEditValue;
                     File.AppendAllText(csvpath, csvBuffer.ToString());
 
                 }
@@ -321,6 +325,7 @@ namespace Speedtest
                 Recording = false;
                 recordButton.Caption = Strings.Recording_Start;
                 recordButton.ImageOptions.SvgImage = Resources.record;
+                exportFileNameElementValue = "";
             }
             else
             {
@@ -329,6 +334,11 @@ namespace Speedtest
                 Recording = true;
                 recordButton.Caption = Strings.Recording_Stop;
                 recordButton.ImageOptions.SvgImage = Resources.cancel;
+
+                if (String.IsNullOrEmpty(exportFileNameElementValue)) {
+                    exportFileNameElementValue = "Measurement_" + DateTime.Now.ToString("yyyyMMddHHmmssfff");
+                }
+
             }
         }
 
@@ -466,25 +476,6 @@ namespace Speedtest
             currentControl.Dock = DockStyle.Fill;
             currentControl.Visible = true;
             contentPanel.Controls.Add(currentControl);
-        }
-
-        private void recordingWholeMeasurementElement_EditValueChanged(object sender, EventArgs e)
-        {
-            //var recordfromStart = (bool)recordingWholeMeasurementElement.EditValue;
-
-            //if (recordfromStart)
-            //{
-            //    recordButton.Enabled = false;
-            //    Recording = true;
-            //}
-            //else
-            //{
-            //    recordButton.Enabled = true;
-            //    Recording = false;
-            //}
-
-            //recordButton.PerformClick();
-
         }
 
         private GearedValues<ObservablePoint> getHistogramFromChart(List<double> chart)

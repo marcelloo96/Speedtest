@@ -171,6 +171,12 @@ namespace Speedtest
             get { return importDisplayModeElement.EditValue.ToString(); }
             set { importDisplayModeElement.EditValue = value; }
         }
+
+        public string exportFileNameElementValue
+        {
+            get { return exportFileNameElement.EditValue == null ? "" : exportFileNameElement.EditValue.ToString(); }
+            set { exportFileNameElement.EditValue = value; }
+        }
         #endregion
 
         #region ComboBoxes

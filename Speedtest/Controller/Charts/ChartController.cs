@@ -273,7 +273,7 @@ namespace Speedtest.Controller
                     _tmpval = sendingData[0];
                 }
 
-                Debug.WriteLine(_tmpval);
+                //Debug.WriteLine(_tmpval);
                 //xyChartUserControl.viewModel.xyChartList.Add(new ObservablePoint(x, y));
                 ChartController.RefreshXYChartValues(xyChartUserControl.viewModel, _tmpval);
             }

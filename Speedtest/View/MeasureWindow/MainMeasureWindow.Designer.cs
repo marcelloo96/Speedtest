@@ -79,10 +79,13 @@ namespace Speedtest.View.MeasureWindow
             // 
             // xyChartUserControl
             // 
+            this.xyChartUserControl.deltaT = 0D;
+            this.xyChartUserControl.keepRecords = 0;
             this.xyChartUserControl.Location = new System.Drawing.Point(420, 35);
             this.xyChartUserControl.Name = "xyChartUserControl";
             this.xyChartUserControl.Size = new System.Drawing.Size(306, 280);
             this.xyChartUserControl.TabIndex = 2;
+            this.xyChartUserControl.viewModel = null;
             // 
             // MainMeasureWindow
             // 
