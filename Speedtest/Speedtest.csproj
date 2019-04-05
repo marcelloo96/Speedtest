@@ -125,7 +125,7 @@
     <Compile Include="Model\PortModel.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Model\ChartViewModels\XYViewModel.cs" />
+    <Compile Include="Model\ChartViewModels\DefaultChartViewModel.cs" />
     <Compile Include="Strings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -166,11 +166,11 @@
     <Compile Include="View\MeasureWindow\MainMeasureWindow.Designer.cs">
       <DependentUpon>MainMeasureWindow.cs</DependentUpon>
     </Compile>
-    <Compile Include="View\MeasureWindow\XYChartUserControl.cs">
+    <Compile Include="View\MeasureWindow\DefaultChartUserControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="View\MeasureWindow\XYChartUserControl.Designer.cs">
-      <DependentUpon>XYChartUserControl.cs</DependentUpon>
+    <Compile Include="View\MeasureWindow\DefaultChartUserControl.Designer.cs">
+      <DependentUpon>DefaultChartUserControl.cs</DependentUpon>
     </Compile>
     <Compile Include="View\MeasureWindow\SpeedTest.cs">
       <SubType>UserControl</SubType>
@@ -217,8 +217,8 @@
     <EmbeddedResource Include="View\MeasureWindow\MainMeasureWindow.resx">
       <DependentUpon>MainMeasureWindow.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="View\MeasureWindow\XYChartUserControl.resx">
-      <DependentUpon>XYChartUserControl.cs</DependentUpon>
+    <EmbeddedResource Include="View\MeasureWindow\DefaultChartUserControl.resx">
+      <DependentUpon>DefaultChartUserControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="View\MeasureWindow\SpeedTest.resx">
       <DependentUpon>SpeedTest.cs</DependentUpon>

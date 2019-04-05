@@ -1,6 +1,6 @@
 ﻿namespace Speedtest.View.MeasureWindow
 {
-    partial class XYChartUserControl
+    partial class DefaultChartUserControl
     {
         /// <summary> 
         /// Required designer variable.

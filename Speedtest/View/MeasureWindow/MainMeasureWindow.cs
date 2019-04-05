@@ -1,4 +1,5 @@
 ﻿ using DevExpress.XtraBars.Docking;
+using LiveCharts.Geared;
 using Speedtest.Controller;
 using System;
 using System.Collections.Generic;
@@ -15,23 +16,23 @@ namespace Speedtest.View.MeasureWindow
     public partial class MainMeasureWindow : UserControl
     {
         public MainFrame mainFrameModel;
-        public SpeedTest gearedChart;
-        public List<SpeedTest> gearedCharts;
+        public DefaultChartUserControl gearedChart;
+        public GearedValues<DefaultChartUserControl> gearedCharts;
         public SerialPort serialPort;
         public int numberOfPanelsDisplayed;
-        public XYChartUserControl xyChartUserControl;
+        public DefaultChartUserControl xyChartUserControl;
         public ChartMonitorUserControl chartMonitor;
 
         public MainMeasureWindow(MainFrame model)
         {
             serialPort = model.serialPort;
             mainFrameModel = model;
-            gearedChart = model.gearedChart;
-            gearedCharts = model.gearedCharts;
+            gearedChart = model.defaultChart;
+            gearedCharts = model.defaultCharts;
             numberOfPanelsDisplayed= mainFrameModel.numberOfChannelsElementValue;
             InitializeComponent();
             InitialState();
-            xyChartUserControl = new XYChartUserControl(model.keepRecordsElementValue, model.deltaTime);
+            xyChartUserControl = new DefaultChartUserControl(model.keepRecordsElementValue, model.deltaTime);
             chartMonitor = new ChartMonitorUserControl();
             Controls.Add(xyChartUserControl);
             Controls.Add(chartMonitor);
@@ -52,7 +53,7 @@ namespace Speedtest.View.MeasureWindow
                         //the Connection Manager already swapped the 'connectedState' value
 
                         int height = this.Size.Height / numberOfPanelsDisplayed;
-                        gearedChartUserControl.Width = mainFrameModel.contentPanel.Width * 3 / 4;
+                        //gearedChartUserControl.Width = mainFrameModel.contentPanel.Width * 3 / 4;
                         for (int i = 0; i < numberOfPanelsDisplayed; i++)
                         {
 
@@ -67,7 +68,7 @@ namespace Speedtest.View.MeasureWindow
                             
                             tmpPanel.Height = height;
                             tmpPanel.Controls.Add(tmpPanel_Container);
-                            tmpPanel.Click += (s, e) => { dockPanelClicked(currentChart, tmpPanel); };
+
 
                             gearedChartUserControl.dockManager.AddPanel(DockingStyle.Top, tmpPanel);
 
@@ -92,7 +93,7 @@ namespace Speedtest.View.MeasureWindow
         {
             for (int i = 0; i < numberOfPanelsDisplayed; i++)
             {
-                gearedChart = new SpeedTest(serialPort, numberOfPanelsDisplayed)
+                gearedChart = new DefaultChartUserControl(mainFrameModel.keepRecordsElementValue,mainFrameModel.deltaTime)
                 {
                     Dock = DockStyle.Fill
                 };
@@ -119,9 +120,6 @@ namespace Speedtest.View.MeasureWindow
             }
         }
 
-        public void dockPanelClicked(SpeedTest chart, DockPanel panel) {
-            //chartSettingsUserControl.propertyGridControl.SelectedObjects = new object[] { chart, panel};
-        }
     }
 
 

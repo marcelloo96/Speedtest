@@ -46,9 +46,9 @@ namespace Speedtest.Controller
             return chart;
         }
 
-        internal static CartesianChart InitializeXYChart(CartesianChart chart, XYChartUserControl model)
+        internal static CartesianChart InitializeXYChart(CartesianChart chart, DefaultChartUserControl model)
         {
-            model.viewModel = new XYViewModel(model.deltaT, model.keepRecords);
+            model.viewModel = new DefaultChartViewModel(model.deltaT, model.keepRecords);
             chart.Hoverable = true;
             chart.Zoom = ZoomingOptions.X;
             chart.DisableAnimations = true;
@@ -58,7 +58,7 @@ namespace Speedtest.Controller
 
             chart.Series.Add(new GLineSeries
             {
-                Values = model.viewModel.xyChartList,
+                Values = model.viewModel.values,
                 DataLabels = false,
                 Fill = transparent,
                 LineSmoothness = 0,
@@ -136,11 +136,11 @@ namespace Speedtest.Controller
 
         }
 
-        internal static void RefreshXYChartValues(XYViewModel viewModel, ObservablePoint current)
+        internal static void RefreshXYChartValues(DefaultChartViewModel viewModel, ObservablePoint current)
         {
             try
             {
-                var i = viewModel.xyChartList;
+                var i = viewModel.values;
 
                 if (i.Count > viewModel.keepRecords - 1)
                 {
@@ -149,7 +149,7 @@ namespace Speedtest.Controller
                 }
                 if (i.Count < viewModel.keepRecords)
                 {
-                    var removable = viewModel.xyChartList.Where(p => p.X == current.X || p.Y == current.Y).ToList();
+                    var removable = viewModel.values.Where(p => p.X == current.X || p.Y == current.Y).ToList();
                     if (removable != null && removable.Count > 0)
                     {
                         foreach (var removablePoint in removable)
@@ -170,14 +170,12 @@ namespace Speedtest.Controller
 
 
         }
-        internal static void RemoveAllPointsFromGeared(List<SpeedTest> gearedCharts)
+        internal static void RemoveAllPointsFromGeared(GearedValues<DefaultChartUserControl> defaultCharts)
         {
-            foreach (var gearedChart in gearedCharts)
+            foreach (var chart in defaultCharts)
             {
-                foreach (var singleChartList in gearedChart.viewModel.listOfCharts)
-                {
-                    singleChartList.Clear();
-                }
+                chart.viewModel.values.Clear();
+                chart.viewModel.setValuesInicialState(chart.viewModel);
             }
 
         }
@@ -221,16 +219,18 @@ namespace Speedtest.Controller
                 {
                     for (var i = 0; i < numberOfPanelsDisplayed; i++)
                     {
-                        mainFrameModel.gearedCharts[i].viewModel.recivedChartValues.Add(importantValues[i]);
-                        ChartController.RefreshChartValues(mainFrameModel.gearedCharts[i].viewModel, mainFrameModel.gearedCharts[i].viewModel.recivedChartValues);
+                        //mainFrameModel.gearedCharts[i].viewModel.recivedChartValues.Add(importantValues[i]);
+                        //ChartController.RefreshChartValues(mainFrameModel.gearedCharts[i].viewModel, mainFrameModel.gearedCharts[i].viewModel.recivedChartValues);
+                        ChartController.RefreshXYChartValues(mainFrameModel.defaultCharts[i].viewModel, importantValues[i]);
                     }
                 }
                 else
                 {
                     for (var i = 0; i < numberOfPanelsDisplayed; i++)
                     {
-                        mainFrameModel.gearedCharts[i].viewModel.recivedChartValues.Add(double.NaN);
-                        ChartController.RefreshChartValues(mainFrameModel.gearedCharts[i].viewModel, mainFrameModel.gearedCharts[i].viewModel.recivedChartValues);
+                        //mainFrameModel.gearedCharts[i].viewModel.recivedChartValues.Add(double.NaN);
+                        //ChartController.RefreshChartValues(mainFrameModel.gearedCharts[i].viewModel, mainFrameModel.gearedCharts[i].viewModel.recivedChartValues);
+                        ChartController.RefreshXYChartValues(mainFrameModel.defaultCharts[i].viewModel, double.NaN);
                     }
                 }
             }
@@ -254,7 +254,7 @@ namespace Speedtest.Controller
             }
         }
 
-        internal static void printXYChart(XYChartUserControl xyChartUserControl, double[] sendingData, int numberOfIncomingData, int choosenXChannel = 0, int choosenYChannel = 0)
+        internal static void printXYChart(DefaultChartUserControl xyChartUserControl, double[] sendingData, int numberOfIncomingData, int choosenXChannel = 0, int choosenYChannel = 0)
         {
             try
             {
@@ -286,9 +286,9 @@ namespace Speedtest.Controller
 
         }
 
-        private static void RefreshXYChartValues(XYViewModel viewModel, double tmpval)
+        private static void RefreshXYChartValues(DefaultChartViewModel viewModel, double tmpval)
         {
-            var i = viewModel.xyChartList;
+            var i = viewModel.values;
             if (lastInsertedXYValue < viewModel.keepRecords)
             {
                 i[lastInsertedXYValue++].Y = tmpval;
@@ -301,7 +301,7 @@ namespace Speedtest.Controller
 
         }
 
-        private static GearedValues<ObservablePoint> shiftListToTheLeft(GearedValues<ObservablePoint> list, XYViewModel viewModel)
+        private static GearedValues<ObservablePoint> shiftListToTheLeft(GearedValues<ObservablePoint> list, DefaultChartViewModel viewModel)
         {
             list.Remove(list.First());
             list.Add(new ObservablePoint(Double.NaN, Double.NaN));

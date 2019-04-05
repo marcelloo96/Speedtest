@@ -28,8 +28,8 @@ namespace Speedtest
     public partial class MainFrame : RibbonForm
     {
         #region fields
-        public SpeedTest gearedChart;
-        public List<SpeedTest> gearedCharts;
+        public DefaultChartUserControl defaultChart;
+        public GearedValues<DefaultChartUserControl> defaultCharts;
         public PortController portController;
         public MainMeasureWindow mmw;
         public bool connectedState { get; set; }
@@ -60,7 +60,7 @@ namespace Speedtest
             ImportTabController.FillEditors(this);
             MeasureTabController.SetInitialState(this);
             portController = new PortController(this);
-            gearedCharts = new List<SpeedTest>();
+            defaultCharts = new GearedValues<DefaultChartUserControl>();
             myPortBuffer = new List<string[]>();
             activePanels = new List<UserControl>();
 
@@ -143,9 +143,6 @@ namespace Speedtest
                 {
                     if (DisplayModeElementValue == Strings.MeasureTab_DisplayMode_Chart)
                     {
-                        //mmw.splitContainerControl.Dock = DockStyle.Fill;
-                        //mmw.splitContainerControl.BringToFront();
-
                         mmw.chartMonitor.Dock = DockStyle.None;
                         mmw.chartMonitor.SendToBack();
                         mmw.xyChartUserControl.Dock = DockStyle.None;
@@ -157,13 +154,11 @@ namespace Speedtest
                     {
                         mmw.chartMonitor.Dock = DockStyle.Fill;
                         mmw.chartMonitor.BringToFront();
-
-                        //mmw.splitContainerControl.Dock = DockStyle.None;
-                        //mmw.splitContainerControl.SendToBack();
+                        
                         mmw.xyChartUserControl.Dock = DockStyle.None;
                         mmw.xyChartUserControl.SendToBack();
 
-                        ChartController.RemoveAllPointsFromGeared(gearedCharts);
+                        ChartController.RemoveAllPointsFromGeared(defaultCharts);
                     }
                     else if (DisplayModeElementValue == Strings.MeasureTab_DisplayMode_XY)
                     {
@@ -172,11 +167,9 @@ namespace Speedtest
 
                         mmw.chartMonitor.SendToBack();
                         mmw.chartMonitor.Dock = DockStyle.None;
-                        //mmw.splitContainerControl.Dock = DockStyle.None;
-                        //mmw.splitContainerControl.SendToBack();
-
+                       
                         ChartController.RemoveMonitorText(this);
-                        ChartController.RemoveAllPointsFromGeared(gearedCharts);
+                        ChartController.RemoveAllPointsFromGeared(defaultCharts);
 
                     }
                 }
@@ -254,7 +247,7 @@ namespace Speedtest
                 {
                     sendingData = calculateLinearValue(sendingData, sensitivity, zeroValue);
                 }
-                gearedCharts.ForEach(p => p.viewModel.recivedChartValues.Clear());
+                //gearedCharts.ForEach(p => p.viewModel.recivedChartValues.Clear());
 
                 if (DisplayModeElementValue == Strings.MeasureTab_DisplayMode_Chart)
                 {

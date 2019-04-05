@@ -15,15 +15,15 @@ using Speedtest.Model;
 
 namespace Speedtest.View.MeasureWindow
 {
-    public partial class XYChartUserControl : UserControl
+    public partial class DefaultChartUserControl : UserControl
     {
-        public XYViewModel viewModel { get; set; }
+        public DefaultChartViewModel viewModel { get; set; }
         /// <summary>
         /// Constructor of MMW change the values below
         /// </summary>
         public int keepRecords { get; set; }
         public double deltaT { get; set; }
-        public XYChartUserControl(int keepRecords, double deltaT)
+        public DefaultChartUserControl(int keepRecords, double deltaT)
         {
             this.keepRecords = keepRecords;
             this.deltaT = deltaT;
