@@ -252,7 +252,7 @@ namespace Speedtest
 
                 if (DisplayModeElementValue == Strings.MeasureTab_DisplayMode_Chart)
                 {
-                    ChartController.printGearedChart(sendingData, numberOfPanels, this);
+                    ChartController.printGearedChart(sendingData, numberOfPanels, this, Recording);
                 }
                 else if (DisplayModeElementValue == Strings.MeasureTab_DisplayMode_Monitor)
                 {

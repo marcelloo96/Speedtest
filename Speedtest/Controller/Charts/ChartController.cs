@@ -53,6 +53,7 @@ namespace Speedtest.Controller
             chart.Zoom = ZoomingOptions.X;
             chart.DisableAnimations = true;
             chart.AutoSize = true;
+            chart.DataTooltip = null;
             var transparent = Brushes.Transparent;
 
 
@@ -72,39 +73,39 @@ namespace Speedtest.Controller
 
             });
 
-            chart.AxisY.Add(new LiveCharts.Wpf.Axis
-            {
-                Sections = new LiveCharts.Wpf.SectionsCollection
-                {
-                    new LiveCharts.Wpf.AxisSection
-                    {
-                        Value = 2000,
-                        Stroke = new SolidColorBrush(System.Windows.Media.Color.FromRgb(248, 213, 72))
-                    },
-                    new LiveCharts.Wpf.AxisSection
-                    {
-                        //Label = "Good",
-                        Value = 500,
-                        SectionWidth = 1000,
-                        Fill = new SolidColorBrush
-                        {
-                            Color = System.Windows.Media.Color.FromRgb(204,204,204),
-                            Opacity = .4
-                        }
-                    },
-                    new LiveCharts.Wpf.AxisSection
-                    {
-                        //Label = "Bad",
-                        Value = 0,
-                        SectionWidth = 500,
-                        Fill = new SolidColorBrush
-                        {
-                            Color = System.Windows.Media.Color.FromRgb(254,132,132),
-                            Opacity = .4
-                        }
-                    }
-                }
-            });
+            //chart.AxisY.Add(new LiveCharts.Wpf.Axis
+            //{
+            //    Sections = new LiveCharts.Wpf.SectionsCollection
+            //    {
+            //        new LiveCharts.Wpf.AxisSection
+            //        {
+            //            Value = 2000,
+            //            Stroke = new SolidColorBrush(System.Windows.Media.Color.FromRgb(248, 213, 72))
+            //        },
+            //        new LiveCharts.Wpf.AxisSection
+            //        {
+            //            //Label = "Good",
+            //            Value = 500,
+            //            SectionWidth = 1000,
+            //            Fill = new SolidColorBrush
+            //            {
+            //                Color = System.Windows.Media.Color.FromRgb(204,204,204),
+            //                Opacity = .4
+            //            }
+            //        },
+            //        new LiveCharts.Wpf.AxisSection
+            //        {
+            //            //Label = "Bad",
+            //            Value = 0,
+            //            SectionWidth = 500,
+            //            Fill = new SolidColorBrush
+            //            {
+            //                Color = System.Windows.Media.Color.FromRgb(254,132,132),
+            //                Opacity = .4
+            //            }
+            //        }
+            //    }
+            //});
 
             return chart;
         }
@@ -218,7 +219,7 @@ namespace Speedtest.Controller
             }
         }
 
-        internal static void printGearedChart(double[] importantValues, int numberOfPanelsDisplayed, MainFrame mainFrameModel)
+        internal static void printGearedChart(double[] importantValues, int numberOfPanelsDisplayed, MainFrame mainFrameModel, bool recording=false)
         {
             try
             {
@@ -228,7 +229,7 @@ namespace Speedtest.Controller
                     {
                         //mainFrameModel.gearedCharts[i].viewModel.recivedChartValues.Add(importantValues[i]);
                         //ChartController.RefreshChartValues(mainFrameModel.gearedCharts[i].viewModel, mainFrameModel.gearedCharts[i].viewModel.recivedChartValues);
-                        ChartController.RefreshDefaultChartValues(mainFrameModel.defaultCharts[i].viewModel, importantValues[i]);
+                        ChartController.RefreshDefaultChartValues(mainFrameModel.defaultCharts[i].viewModel, importantValues[i],recording);
                     }
                 }
                 else
@@ -237,7 +238,7 @@ namespace Speedtest.Controller
                     {
                         //mainFrameModel.gearedCharts[i].viewModel.recivedChartValues.Add(double.NaN);
                         //ChartController.RefreshChartValues(mainFrameModel.gearedCharts[i].viewModel, mainFrameModel.gearedCharts[i].viewModel.recivedChartValues);
-                        ChartController.RefreshDefaultChartValues(mainFrameModel.defaultCharts[i].viewModel, double.NaN);
+                        ChartController.RefreshDefaultChartValues(mainFrameModel.defaultCharts[i].viewModel, double.NaN, recording);
                     }
                 }
             }
