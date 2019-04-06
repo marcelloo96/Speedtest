@@ -29,7 +29,7 @@ namespace Speedtest.View.MeasureWindow
             this.deltaT = deltaT;
 
             InitializeComponent();
-            XYChart = ChartController.InitializeXYChart(XYChart, this);
+            XYChart = ChartController.InitializeDefaultChart(XYChart, this);
         }
     }
 }

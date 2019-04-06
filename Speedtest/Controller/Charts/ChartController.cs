@@ -46,7 +46,7 @@ namespace Speedtest.Controller
             return chart;
         }
 
-        internal static CartesianChart InitializeXYChart(CartesianChart chart, DefaultChartUserControl model)
+        internal static CartesianChart InitializeDefaultChart(CartesianChart chart, DefaultChartUserControl model)
         {
             model.viewModel = new DefaultChartViewModel(model.deltaT, model.keepRecords);
             chart.Hoverable = true;
@@ -61,6 +61,13 @@ namespace Speedtest.Controller
                 Values = model.viewModel.values,
                 DataLabels = false,
                 Fill = transparent,
+                LineSmoothness = 0,
+
+            });
+            chart.Series.Add(new GLineSeries
+            {
+                Values = model.viewModel.RecordValues,
+                DataLabels = false,
                 LineSmoothness = 0,
 
             });
@@ -221,7 +228,7 @@ namespace Speedtest.Controller
                     {
                         //mainFrameModel.gearedCharts[i].viewModel.recivedChartValues.Add(importantValues[i]);
                         //ChartController.RefreshChartValues(mainFrameModel.gearedCharts[i].viewModel, mainFrameModel.gearedCharts[i].viewModel.recivedChartValues);
-                        ChartController.RefreshXYChartValues(mainFrameModel.defaultCharts[i].viewModel, importantValues[i]);
+                        ChartController.RefreshDefaultChartValues(mainFrameModel.defaultCharts[i].viewModel, importantValues[i]);
                     }
                 }
                 else
@@ -230,7 +237,7 @@ namespace Speedtest.Controller
                     {
                         //mainFrameModel.gearedCharts[i].viewModel.recivedChartValues.Add(double.NaN);
                         //ChartController.RefreshChartValues(mainFrameModel.gearedCharts[i].viewModel, mainFrameModel.gearedCharts[i].viewModel.recivedChartValues);
-                        ChartController.RefreshXYChartValues(mainFrameModel.defaultCharts[i].viewModel, double.NaN);
+                        ChartController.RefreshDefaultChartValues(mainFrameModel.defaultCharts[i].viewModel, double.NaN);
                     }
                 }
             }
@@ -254,28 +261,17 @@ namespace Speedtest.Controller
             }
         }
 
-        internal static void printXYChart(DefaultChartUserControl xyChartUserControl, double[] sendingData, int numberOfIncomingData, int choosenXChannel = 0, int choosenYChannel = 0)
+        internal static void printDefaultChart(DefaultChartUserControl defaultChartUserControl, double[] sendingData, int numberOfIncomingData,bool recording, int choosenXChannel = 0, int choosenYChannel = 0)
         {
             try
             {
-                //ObservablePoint point;
-                //if (sendingData != null && sendingData.Length == numberOfIncomingData && Math.Max(choosenXChannel, choosenYChannel) < sendingData.Length && Math.Min(choosenXChannel, choosenYChannel) >= 0)
-                //{
-                //    point = new ObservablePoint(sendingData[choosenXChannel], sendingData[choosenYChannel]);
-                //}
-                //else
-                //{
-                //    point = new ObservablePoint(double.NaN, double.NaN);
-                //}
                 double _tmpval = 0;
                 if (sendingData != null && sendingData.Length >= numberOfIncomingData && Math.Max(choosenXChannel, choosenYChannel) < sendingData.Length && Math.Min(choosenXChannel, choosenYChannel) >= 0)
                 {
                     _tmpval = sendingData[0];
                 }
 
-                //Debug.WriteLine(_tmpval);
-                //xyChartUserControl.viewModel.xyChartList.Add(new ObservablePoint(x, y));
-                ChartController.RefreshXYChartValues(xyChartUserControl.viewModel, _tmpval);
+                ChartController.RefreshDefaultChartValues(defaultChartUserControl.viewModel, _tmpval,recording);
             }
             catch (Exception e)
             {
@@ -286,19 +282,46 @@ namespace Speedtest.Controller
 
         }
 
-        private static void RefreshXYChartValues(DefaultChartViewModel viewModel, double tmpval)
+        private static void RefreshDefaultChartValues(DefaultChartViewModel viewModel, double tmpval,bool recording=false)
         {
-            var i = viewModel.values;
-            if (lastInsertedXYValue < viewModel.keepRecords)
-            {
-                i[lastInsertedXYValue++].Y = tmpval;
-            }
-            else
-            {
-                i = shiftListToTheLeft(i, viewModel);
-                i[lastInsertedXYValue - 1].Y = tmpval;
-            }
+            var values = viewModel.values;
+            var rec = viewModel.RecordValues;
 
+            if (recording)
+            {
+                if (lastInsertedXYValue < viewModel.keepRecords)
+                {
+                    values[lastInsertedXYValue++].Y = double.NaN;
+                    rec[lastInsertedXYValue++].Y = tmpval;
+
+                }
+                else
+                {
+                    values = shiftListToTheLeft(values, viewModel);
+                    values[lastInsertedXYValue - 1].Y = double.NaN;
+
+                    rec = shiftListToTheLeft(rec, viewModel);
+                    rec[lastInsertedXYValue - 1].Y = tmpval;
+                }
+            }
+            else {
+                if (lastInsertedXYValue < viewModel.keepRecords)
+                {
+                    values[lastInsertedXYValue++].Y = tmpval;
+                    rec[lastInsertedXYValue++].Y = double.NaN;
+
+                }
+                else
+                {
+                    values = shiftListToTheLeft(values, viewModel);
+                    values[lastInsertedXYValue - 1].Y = tmpval;
+
+                    rec = shiftListToTheLeft(rec, viewModel);
+                    rec[lastInsertedXYValue - 1].Y = double.NaN;
+                }
+
+            }
+            
         }
 
         private static GearedValues<ObservablePoint> shiftListToTheLeft(GearedValues<ObservablePoint> list, DefaultChartViewModel viewModel)
