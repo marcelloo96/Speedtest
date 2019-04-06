@@ -135,6 +135,18 @@
   <data name="Import_DisplayMode_Scroll" xml:space="preserve">
     <value>Scrollable</value>
   </data>
+  <data name="Import_FileFilter_CSV" xml:space="preserve">
+    <value>CSV files (*.csv)|*.csv</value>
+  </data>
+  <data name="Import_FileFilter_TXT" xml:space="preserve">
+    <value>Text files (*.txt)|*.txt</value>
+  </data>
+  <data name="Import_NoFilesImported" xml:space="preserve">
+    <value>Nincs importált fájl!</value>
+  </data>
+  <data name="Import_ShowButtonCaption" xml:space="preserve">
+    <value>Show</value>
+  </data>
   <data name="MeasureTab_DisplayMode_Chart" xml:space="preserve">
     <value>Chart</value>
   </data>

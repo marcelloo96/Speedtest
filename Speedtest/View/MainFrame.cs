@@ -46,9 +46,10 @@ namespace Speedtest
         public StringBuilder csvBuffer;
         public string savingFileDestinationPath;
         public string importingFilePath;
-        public List<List<double>> listOfImportedCharts;
+        public List<List<double>> listOfImportedSeries;
         private List<UserControl> activePanels;
         private readonly bool alreadyExisting = true;
+        private List<string> availableFileFilters;
         #endregion
 
         public MainFrame()
@@ -63,12 +64,12 @@ namespace Speedtest
             defaultCharts = new GearedValues<DefaultChartUserControl>();
             myPortBuffer = new List<string[]>();
             activePanels = new List<UserControl>();
+            availableFileFilters = getFileFilters();
 
             savingFileDestinationPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
             changeFileDestinationCaption(savingFileDestinationPath);
 
         }
-
 
         public void testConnect()
         {
@@ -154,7 +155,7 @@ namespace Speedtest
                     {
                         mmw.chartMonitor.Dock = DockStyle.Fill;
                         mmw.chartMonitor.BringToFront();
-                        
+
                         mmw.xyChartUserControl.Dock = DockStyle.None;
                         mmw.xyChartUserControl.SendToBack();
 
@@ -167,7 +168,7 @@ namespace Speedtest
 
                         mmw.chartMonitor.SendToBack();
                         mmw.chartMonitor.Dock = DockStyle.None;
-                       
+
                         ChartController.RemoveMonitorText(this);
                         ChartController.RemoveAllPointsFromGeared(defaultCharts);
 
@@ -310,7 +311,7 @@ namespace Speedtest
                     {
                         exportFileNameElementValue = "Measurement_" + DateTime.Now.ToString("yyyyMMddHHmmssfff");
                     }
-                    string csvpath = savingFileDestinationPath + @"\"+exportFileNameElementValue + exportingFileFormatEditValue;
+                    string csvpath = savingFileDestinationPath + @"\" + exportFileNameElementValue + exportingFileFormatEditValue;
                     File.AppendAllText(csvpath, csvBuffer.ToString());
 
                 }
@@ -328,7 +329,8 @@ namespace Speedtest
                 recordButton.Caption = Strings.Recording_Stop;
                 recordButton.ImageOptions.SvgImage = Resources.cancel;
 
-                if (String.IsNullOrEmpty(exportFileNameElementValue)) {
+                if (String.IsNullOrEmpty(exportFileNameElementValue))
+                {
                     exportFileNameElementValue = "Measurement_" + DateTime.Now.ToString("yyyyMMddHHmmssfff");
                 }
 
@@ -363,14 +365,20 @@ namespace Speedtest
         private void statisticImportButton_ItemClick(object sender, ItemClickEventArgs e)
         {
             OpenFileDialog dialog = new OpenFileDialog();
+            dialog.Filter = String.Join("|", availableFileFilters);
             DialogResult result = dialog.ShowDialog();
             if (result == DialogResult.OK)
             {
                 importingFilePath = dialog.FileName;
 
-                listOfImportedCharts = CSVModel.getListOfCharts(importingFilePath);
-                var channelsCount = listOfImportedCharts.Count();
+                listOfImportedSeries = CSVModel.getListOfCharts(importingFilePath);
+                var channelsCount = listOfImportedSeries.Count();
                 statisticChannelsFoundLabel.Caption = Strings.Statistic_ChannelsFound + ": " + channelsCount;
+                var fileName = importingFilePath.Split('\\').Last().Split('.').First();
+                if (fileName.Length > 25) {
+                    fileName=fileName.Remove(25,fileName.Length-25) + "...";
+                }
+                importedFileName.Caption = fileName;
                 ImportTabController.ResetDetectedChannels(this, channelsCount);
 
             }
@@ -379,51 +387,62 @@ namespace Speedtest
 
         private void showSelectedChannelElement_ItemClick(object sender, ItemClickEventArgs e)
         {
-            var selectedChart = listOfImportedCharts[SelectRecordedChannelElementValue];
-            if (importDisplayModeElementValue == Strings.Import_DisplayMode_Scroll)
+            if (listOfImportedSeries != null)
             {
-                var onPanelWithThisType = activePanels.OfType<ScrollableChartUserControl>().ToList();
+                var selectedChart = listOfImportedSeries[SelectRecordedChannelElementValue];
 
-                if (onPanelWithThisType != null && selectedChart != null) {
-                    foreach (var panel in onPanelWithThisType) {
-                        if (panel.doubleValues.Equals(selectedChart)){
-
-                            bringContentToFront(panel,alreadyExisting);
-                            return;
-                        }
-                    }
-                }
-                 
-                bringContentToFront(new ScrollableChartUserControl(selectedChart, deltaTime));
-
-
-
-            }
-            else if (importDisplayModeElementValue == Strings.Import_DisplayMode_Histogram)
-            {
-                var generated = getHistogramFromChart(selectedChart);
-                var onPanelWithThisType = activePanels.OfType<SimpleObservablePointedChartUserControl>().ToList();
-
-
-                if (onPanelWithThisType != null && generated != null)
+                if (importDisplayModeElementValue == Strings.Import_DisplayMode_Scroll)
                 {
-                    foreach (var panel in onPanelWithThisType)
-                    {
-                        if (isObservablePointedChartsEqual(panel.Values, generated))
-                        {
-
-                            bringContentToFront(panel, alreadyExisting);
-                            return;
-                        }
-                    }
-                    
+                    bringScrollableToFront(selectedChart, activePanels.OfType<ScrollableChartUserControl>().ToList());
+                }
+                else if (importDisplayModeElementValue == Strings.Import_DisplayMode_Histogram)
+                {
+                    bringHistogramToFront(getHistogramFromChart(selectedChart), activePanels.OfType<SimpleObservablePointedChartUserControl>().ToList());
                 }
 
-                bringContentToFront(new SimpleObservablePointedChartUserControl(generated));
+            }
+            else
+            {
+                MessageBox.Show(Strings.Import_NoFilesImported);
+            }
 
+        }
+
+        private void bringScrollableToFront(List<double> selectedChart, List<ScrollableChartUserControl> onPanelWithThisType)
+        {
+            if (onPanelWithThisType != null && selectedChart != null)
+            {
+                foreach (var panel in onPanelWithThisType)
+                {
+                    if (panel.doubleValues.Equals(selectedChart))
+                    {
+
+                        bringContentToFront(panel, alreadyExisting);
+                        return;
+                    }
+                }
+            }
+
+            bringContentToFront(new ScrollableChartUserControl(selectedChart, deltaTime));
+        }
+
+        private void bringHistogramToFront(GearedValues<ObservablePoint> generated, List<SimpleObservablePointedChartUserControl> onPanelWithThisType)
+        {
+            if (onPanelWithThisType != null && generated != null)
+            {
+                foreach (var panel in onPanelWithThisType)
+                {
+                    if (isObservablePointedChartsEqual(panel.Values, generated))
+                    {
+
+                        bringContentToFront(panel, alreadyExisting);
+                        return;
+                    }
+                }
 
             }
 
+            bringContentToFront(new SimpleObservablePointedChartUserControl(generated));
         }
 
         private bool isObservablePointedChartsEqual(GearedValues<ObservablePoint> a, GearedValues<ObservablePoint> b)
@@ -494,6 +513,16 @@ namespace Speedtest
 
             return histogramChartModel;
         }
+
+        private List<string> getFileFilters()
+        {
+            availableFileFilters = new List<string>();
+            availableFileFilters.Add(Strings.Import_FileFilter_CSV);
+            availableFileFilters.Add(Strings.Import_FileFilter_TXT);
+
+            return availableFileFilters;
+        }
+
     }
 
 }

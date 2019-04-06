@@ -115,6 +115,42 @@ namespace Speedtest {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to CSV files (*.csv)|*.csv.
+        /// </summary>
+        internal static string Import_FileFilter_CSV {
+            get {
+                return ResourceManager.GetString("Import_FileFilter_CSV", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Text files (*.txt)|*.txt.
+        /// </summary>
+        internal static string Import_FileFilter_TXT {
+            get {
+                return ResourceManager.GetString("Import_FileFilter_TXT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Nincs importált fájl!.
+        /// </summary>
+        internal static string Import_NoFilesImported {
+            get {
+                return ResourceManager.GetString("Import_NoFilesImported", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Show.
+        /// </summary>
+        internal static string Import_ShowButtonCaption {
+            get {
+                return ResourceManager.GetString("Import_ShowButtonCaption", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Chart.
         /// </summary>
         internal static string MeasureTab_DisplayMode_Chart {
