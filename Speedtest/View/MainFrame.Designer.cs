@@ -93,6 +93,8 @@
             this.importDisplayModeElementRepositoryItemComboBox = new DevExpress.XtraEditors.Repository.RepositoryItemComboBox();
             this.exportFileNameElement = new DevExpress.XtraBars.BarEditItem();
             this.exportFileNameElementRepositoryItemTextEdit = new DevExpress.XtraEditors.Repository.RepositoryItemTextEdit();
+            this.importedFileName = new DevExpress.XtraBars.BarStaticItem();
+            this.chartNameLookUpRepositoryItemLookUpEdit = new DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit();
             this.measurePage = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.measurePortBasicGroup = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.displayGroup = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
@@ -131,7 +133,6 @@
             this.contentPanel = new DevExpress.XtraEditors.PanelControl();
             this.dockManager = new DevExpress.XtraBars.Docking.DockManager(this.components);
             this.serialPort = new System.IO.Ports.SerialPort(this.components);
-            this.importedFileName = new DevExpress.XtraBars.BarStaticItem();
             ((System.ComponentModel.ISupportInitialize)(this.ribbonControl1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.selectedPortRepositoryItemComboBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.baudRateRepositoryItemComboBox)).BeginInit();
@@ -159,6 +160,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.selectRecordedChannelRepositoryItemComboBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.importDisplayModeElementRepositoryItemComboBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.exportFileNameElementRepositoryItemTextEdit)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chartNameLookUpRepositoryItemLookUpEdit)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemComboBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.zeroValueRepositoryItemSpinEdit)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.sensitivityRepositoryItem)).BeginInit();
@@ -222,7 +224,7 @@
             this.importedFileName});
             this.ribbonControl1.Location = new System.Drawing.Point(0, 0);
             this.ribbonControl1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.ribbonControl1.MaxItemId = 27;
+            this.ribbonControl1.MaxItemId = 28;
             this.ribbonControl1.Name = "ribbonControl1";
             this.ribbonControl1.Pages.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPage[] {
             this.measurePage,
@@ -271,7 +273,8 @@
             this.fileLocationBreadCrumbElementEepositoryItemBreadCrumbEdit,
             this.selectRecordedChannelRepositoryItemComboBox,
             this.importDisplayModeElementRepositoryItemComboBox,
-            this.exportFileNameElementRepositoryItemTextEdit});
+            this.exportFileNameElementRepositoryItemTextEdit,
+            this.chartNameLookUpRepositoryItemLookUpEdit});
             this.ribbonControl1.Size = new System.Drawing.Size(1210, 185);
             this.ribbonControl1.StatusBar = this.ribbonStatusBar1;
             // 
@@ -780,6 +783,18 @@
             this.exportFileNameElementRepositoryItemTextEdit.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.RegEx;
             this.exportFileNameElementRepositoryItemTextEdit.Name = "exportFileNameElementRepositoryItemTextEdit";
             // 
+            // importedFileName
+            // 
+            this.importedFileName.Id = 26;
+            this.importedFileName.Name = "importedFileName";
+            // 
+            // chartNameLookUpRepositoryItemLookUpEdit
+            // 
+            this.chartNameLookUpRepositoryItemLookUpEdit.AutoHeight = false;
+            this.chartNameLookUpRepositoryItemLookUpEdit.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.chartNameLookUpRepositoryItemLookUpEdit.Name = "chartNameLookUpRepositoryItemLookUpEdit";
+            // 
             // measurePage
             // 
             this.measurePage.Groups.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageGroup[] {
@@ -893,7 +908,7 @@
             this.skinPageGroup.AllowTextClipping = false;
             this.skinPageGroup.ItemLinks.Add(this.skinRibbonGallery);
             this.skinPageGroup.Name = "skinPageGroup";
-            this.skinPageGroup.Text = "Skin";
+            this.skinPageGroup.Text = "Appearance";
             // 
             // exportPage
             // 
@@ -1071,11 +1086,6 @@
             "DevExpress.XtraBars.Navigation.TileNavPane",
             "DevExpress.XtraBars.TabFormControl"});
             // 
-            // importedFileName
-            // 
-            this.importedFileName.Id = 26;
-            this.importedFileName.Name = "importedFileName";
-            // 
             // MainFrame
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 16F);
@@ -1118,6 +1128,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.selectRecordedChannelRepositoryItemComboBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.importDisplayModeElementRepositoryItemComboBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.exportFileNameElementRepositoryItemTextEdit)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chartNameLookUpRepositoryItemLookUpEdit)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemComboBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.zeroValueRepositoryItemSpinEdit)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.sensitivityRepositoryItem)).EndInit();
@@ -1243,5 +1254,6 @@
         private DevExpress.XtraBars.BarEditItem exportFileNameElement;
         private DevExpress.XtraEditors.Repository.RepositoryItemTextEdit exportFileNameElementRepositoryItemTextEdit;
         private DevExpress.XtraBars.BarStaticItem importedFileName;
+        private DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit chartNameLookUpRepositoryItemLookUpEdit;
     }
 }

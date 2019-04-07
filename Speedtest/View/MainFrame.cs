@@ -236,33 +236,35 @@ namespace Speedtest
         {
             try
             {
+                if (isRunning) {
+                    Debug.WriteLine(currentlyArrived);
+                    sendingData = Array.ConvertAll(currentlyArrived.Split(' '), Double.Parse);
 
-                Debug.WriteLine(currentlyArrived);
-                sendingData = Array.ConvertAll(currentlyArrived.Split(' '), Double.Parse);
+                    if (Recording)
+                    {
+                        csvBuffer.AppendLine(String.Join(",", sendingData));
+                    }
+                    if (useLinearity)
+                    {
+                        sendingData = calculateLinearValue(sendingData, sensitivity, zeroValue);
+                    }
+                    //gearedCharts.ForEach(p => p.viewModel.recivedChartValues.Clear());
 
-                if (Recording)
-                {
-                    csvBuffer.AppendLine(String.Join(",", sendingData));
+                    if (DisplayModeElementValue == Strings.MeasureTab_DisplayMode_Chart)
+                    {
+                        ChartController.printGearedChart(sendingData, numberOfPanels, this, Recording);
+                    }
+                    else if (DisplayModeElementValue == Strings.MeasureTab_DisplayMode_Monitor)
+                    {
+                        ChartController.printChartMonitor(mmw.chartMonitor, sendingData);
+                    }
+                    else if (DisplayModeElementValue == Strings.MeasureTab_DisplayMode_XY)
+                    {
+                        ChartController.printDefaultChart(mmw.xyChartUserControl, sendingData, numberOfIncomingDataEditValue, Recording);
+                        //ChartController.printGearedChart(sendingData, numberOfPanels, this);
+                    }
                 }
-                if (useLinearity)
-                {
-                    sendingData = calculateLinearValue(sendingData, sensitivity, zeroValue);
-                }
-                //gearedCharts.ForEach(p => p.viewModel.recivedChartValues.Clear());
-
-                if (DisplayModeElementValue == Strings.MeasureTab_DisplayMode_Chart)
-                {
-                    ChartController.printGearedChart(sendingData, numberOfPanels, this, Recording);
-                }
-                else if (DisplayModeElementValue == Strings.MeasureTab_DisplayMode_Monitor)
-                {
-                    ChartController.printChartMonitor(mmw.chartMonitor, sendingData);
-                }
-                else if (DisplayModeElementValue == Strings.MeasureTab_DisplayMode_XY)
-                {
-                    ChartController.printDefaultChart(mmw.xyChartUserControl, sendingData, numberOfIncomingDataEditValue,Recording);
-                    //ChartController.printGearedChart(sendingData, numberOfPanels, this);
-                }
+                
 
             }
             catch (Exception e)

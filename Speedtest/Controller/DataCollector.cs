@@ -26,7 +26,7 @@ namespace Speedtest.Controller
 
         private void SerialPortDataReceived(object sender, SerialDataReceivedEventArgs e)
         {
-            while (serialPort.BytesToRead > 0)
+            while (serialPort.IsOpen && serialPort.BytesToRead > 0)
             {
                 var count = serialPort.BytesToRead;
                 var bytes = new byte[count];

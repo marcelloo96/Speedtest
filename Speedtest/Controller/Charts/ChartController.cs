@@ -50,7 +50,7 @@ namespace Speedtest.Controller
         {
             model.viewModel = new DefaultChartViewModel(model.deltaT, model.keepRecords);
             chart.Hoverable = true;
-            chart.Zoom = ZoomingOptions.X;
+            //chart.Zoom = ZoomingOptions.X;
             chart.DisableAnimations = true;
             chart.AutoSize = true;
             chart.DataTooltip = null;
@@ -73,6 +73,11 @@ namespace Speedtest.Controller
 
             });
 
+            //chart.AxisY.Add(new LiveCharts.Wpf.Axis {
+            //    MinValue = model.viewModel.values.Min(p=>p.Y),
+            //    MaxValue= model.viewModel.values.Max(p => p.Y),
+
+            //});
             //chart.AxisY.Add(new LiveCharts.Wpf.Axis
             //{
             //    Sections = new LiveCharts.Wpf.SectionsCollection
