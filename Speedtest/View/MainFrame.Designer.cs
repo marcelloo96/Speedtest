@@ -94,8 +94,7 @@
             this.exportFileNameElement = new DevExpress.XtraBars.BarEditItem();
             this.exportFileNameElementRepositoryItemTextEdit = new DevExpress.XtraEditors.Repository.RepositoryItemTextEdit();
             this.importedFileName = new DevExpress.XtraBars.BarStaticItem();
-            this.chartNameLookUpRepositoryItemLookUpEdit = new DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit();
-            this.measurePage = new DevExpress.XtraBars.Ribbon.RibbonPage();
+            this.homePage = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.measurePortBasicGroup = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.displayGroup = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.connectiongGroup = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
@@ -128,6 +127,7 @@
             this.repositoryItemBreadCrumbEdit1 = new DevExpress.XtraEditors.Repository.RepositoryItemBreadCrumbEdit();
             this.repositoryItemButtonEdit2 = new DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit();
             this.fileLocationBreadCrumbElementEepositoryItemBreadCrumbEdit = new DevExpress.XtraEditors.Repository.RepositoryItemBreadCrumbEdit();
+            this.chartNameLookUpRepositoryItemLookUpEdit = new DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit();
             this.ribbonStatusBar1 = new DevExpress.XtraBars.Ribbon.RibbonStatusBar();
             this.defaultLookAndFeel1 = new DevExpress.LookAndFeel.DefaultLookAndFeel(this.components);
             this.contentPanel = new DevExpress.XtraEditors.PanelControl();
@@ -160,7 +160,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.selectRecordedChannelRepositoryItemComboBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.importDisplayModeElementRepositoryItemComboBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.exportFileNameElementRepositoryItemTextEdit)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.chartNameLookUpRepositoryItemLookUpEdit)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemComboBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.zeroValueRepositoryItemSpinEdit)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.sensitivityRepositoryItem)).BeginInit();
@@ -175,6 +174,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemBreadCrumbEdit1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemButtonEdit2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.fileLocationBreadCrumbElementEepositoryItemBreadCrumbEdit)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chartNameLookUpRepositoryItemLookUpEdit)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.contentPanel)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dockManager)).BeginInit();
             this.SuspendLayout();
@@ -223,11 +223,10 @@
             this.exportFileNameElement,
             this.importedFileName});
             this.ribbonControl1.Location = new System.Drawing.Point(0, 0);
-            this.ribbonControl1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.ribbonControl1.MaxItemId = 28;
             this.ribbonControl1.Name = "ribbonControl1";
             this.ribbonControl1.Pages.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPage[] {
-            this.measurePage,
+            this.homePage,
             this.portOptionsPage,
             this.sensorOptionsPage,
             this.displayPage,
@@ -275,7 +274,7 @@
             this.importDisplayModeElementRepositoryItemComboBox,
             this.exportFileNameElementRepositoryItemTextEdit,
             this.chartNameLookUpRepositoryItemLookUpEdit});
-            this.ribbonControl1.Size = new System.Drawing.Size(1210, 185);
+            this.ribbonControl1.Size = new System.Drawing.Size(1037, 146);
             this.ribbonControl1.StatusBar = this.ribbonStatusBar1;
             // 
             // selectedPortElement
@@ -788,22 +787,15 @@
             this.importedFileName.Id = 26;
             this.importedFileName.Name = "importedFileName";
             // 
-            // chartNameLookUpRepositoryItemLookUpEdit
+            // homePage
             // 
-            this.chartNameLookUpRepositoryItemLookUpEdit.AutoHeight = false;
-            this.chartNameLookUpRepositoryItemLookUpEdit.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.chartNameLookUpRepositoryItemLookUpEdit.Name = "chartNameLookUpRepositoryItemLookUpEdit";
-            // 
-            // measurePage
-            // 
-            this.measurePage.Groups.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageGroup[] {
+            this.homePage.Groups.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageGroup[] {
             this.measurePortBasicGroup,
             this.displayGroup,
             this.connectiongGroup,
             this.measureControlPanelGroup});
-            this.measurePage.Name = "measurePage";
-            this.measurePage.Text = "Measure";
+            this.homePage.Name = "homePage";
+            this.homePage.Text = "Home";
             // 
             // measurePortBasicGroup
             // 
@@ -1049,14 +1041,20 @@
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.fileLocationBreadCrumbElementEepositoryItemBreadCrumbEdit.Name = "fileLocationBreadCrumbElementEepositoryItemBreadCrumbEdit";
             // 
+            // chartNameLookUpRepositoryItemLookUpEdit
+            // 
+            this.chartNameLookUpRepositoryItemLookUpEdit.AutoHeight = false;
+            this.chartNameLookUpRepositoryItemLookUpEdit.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.chartNameLookUpRepositoryItemLookUpEdit.Name = "chartNameLookUpRepositoryItemLookUpEdit";
+            // 
             // ribbonStatusBar1
             // 
             this.ribbonStatusBar1.ItemLinks.Add(this.portStatusLabel);
-            this.ribbonStatusBar1.Location = new System.Drawing.Point(0, 580);
-            this.ribbonStatusBar1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.ribbonStatusBar1.Location = new System.Drawing.Point(0, 473);
             this.ribbonStatusBar1.Name = "ribbonStatusBar1";
             this.ribbonStatusBar1.Ribbon = this.ribbonControl1;
-            this.ribbonStatusBar1.Size = new System.Drawing.Size(1210, 28);
+            this.ribbonStatusBar1.Size = new System.Drawing.Size(1037, 21);
             // 
             // defaultLookAndFeel1
             // 
@@ -1065,10 +1063,9 @@
             // contentPanel
             // 
             this.contentPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.contentPanel.Location = new System.Drawing.Point(0, 185);
-            this.contentPanel.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.contentPanel.Location = new System.Drawing.Point(0, 146);
             this.contentPanel.Name = "contentPanel";
-            this.contentPanel.Size = new System.Drawing.Size(1210, 395);
+            this.contentPanel.Size = new System.Drawing.Size(1037, 327);
             this.contentPanel.TabIndex = 2;
             // 
             // dockManager
@@ -1088,14 +1085,13 @@
             // 
             // MainFrame
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1210, 608);
+            this.ClientSize = new System.Drawing.Size(1037, 494);
             this.Controls.Add(this.contentPanel);
             this.Controls.Add(this.ribbonStatusBar1);
             this.Controls.Add(this.ribbonControl1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.MinimumSize = new System.Drawing.Size(1031, 495);
             this.Name = "MainFrame";
             this.Ribbon = this.ribbonControl1;
@@ -1128,7 +1124,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.selectRecordedChannelRepositoryItemComboBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.importDisplayModeElementRepositoryItemComboBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.exportFileNameElementRepositoryItemTextEdit)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.chartNameLookUpRepositoryItemLookUpEdit)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemComboBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.zeroValueRepositoryItemSpinEdit)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.sensitivityRepositoryItem)).EndInit();
@@ -1143,6 +1138,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemBreadCrumbEdit1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemButtonEdit2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.fileLocationBreadCrumbElementEepositoryItemBreadCrumbEdit)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chartNameLookUpRepositoryItemLookUpEdit)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.contentPanel)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dockManager)).EndInit();
             this.ResumeLayout(false);
@@ -1153,7 +1149,7 @@
         #endregion
 
         private DevExpress.XtraBars.Ribbon.RibbonControl ribbonControl1;
-        private DevExpress.XtraBars.Ribbon.RibbonPage measurePage;
+        private DevExpress.XtraBars.Ribbon.RibbonPage homePage;
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup measurePortBasicGroup;
         private DevExpress.XtraBars.Ribbon.RibbonStatusBar ribbonStatusBar1;
         private DevExpress.LookAndFeel.DefaultLookAndFeel defaultLookAndFeel1;

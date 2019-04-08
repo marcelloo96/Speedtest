@@ -129,7 +129,22 @@
     <Compile Include="Controller\TabControllers\ImportTabController.cs" />
     <Compile Include="Model\ChartViewModels\ScrollableViewModel.cs" />
     <Compile Include="Model\FormatModels\CSVModel.cs" />
-    <Compile Include="Model\FrameModels\MainFrameModelPartial.cs">
+    <Compile Include="View\MainFramePartials\MainFrameHomePartial.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\MainFramePartials\MainFrameDisplayPartial.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\MainFramePartials\MainFrameExportPartial.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\MainFramePartials\MainFrameImportPartial.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\MainFramePartials\MainFrameSensorPartial.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\MainFramePartials\MainFramePortPartial.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Model\PortModel.cs">
@@ -157,12 +172,6 @@
     </Compile>
     <Compile Include="View\MeasureWindow\ChartMonitorUserControl.Designer.cs">
       <DependentUpon>ChartMonitorUserControl.cs</DependentUpon>
-    </Compile>
-    <Compile Include="View\MeasureWindow\ChartSettingsUserControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="View\MeasureWindow\ChartSettingsUserControl.Designer.cs">
-      <DependentUpon>ChartSettingsUserControl.cs</DependentUpon>
     </Compile>
     <Compile Include="View\MeasureWindow\GearedChartUserControl.cs">
       <SubType>UserControl</SubType>
@@ -210,9 +219,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="View\MeasureWindow\ChartMonitorUserControl.resx">
       <DependentUpon>ChartMonitorUserControl.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="View\MeasureWindow\ChartSettingsUserControl.resx">
-      <DependentUpon>ChartSettingsUserControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="View\MeasureWindow\GearedChartUserControl.resx">
       <DependentUpon>GearedChartUserControl.cs</DependentUpon>
