@@ -22,6 +22,8 @@ using Speedtest.View.StatisticWindow;
 using LiveCharts.Defaults;
 using LiveCharts.Geared;
 using Speedtest.View;
+using AForge.Math;
+using static Speedtest.View.StatisticWindow.ScrollableChartUserControl;
 
 namespace Speedtest
 {
@@ -236,7 +238,8 @@ namespace Speedtest
         {
             try
             {
-                if (isRunning) {
+                if (isRunning)
+                {
                     Debug.WriteLine(currentlyArrived);
                     sendingData = Array.ConvertAll(currentlyArrived.Split(' '), Double.Parse);
 
@@ -264,7 +267,7 @@ namespace Speedtest
                         //ChartController.printGearedChart(sendingData, numberOfPanels, this);
                     }
                 }
-                
+
 
             }
             catch (Exception e)
@@ -377,8 +380,9 @@ namespace Speedtest
                 var channelsCount = listOfImportedSeries.Count();
                 statisticChannelsFoundLabel.Caption = Strings.Statistic_ChannelsFound + ": " + channelsCount;
                 var fileName = importingFilePath.Split('\\').Last().Split('.').First();
-                if (fileName.Length > 25) {
-                    fileName=fileName.Remove(25,fileName.Length-25) + "...";
+                if (fileName.Length > 25)
+                {
+                    fileName = fileName.Remove(25, fileName.Length - 25) + "...";
                 }
                 importedFileName.Caption = fileName;
                 ImportTabController.ResetDetectedChannels(this, channelsCount);
@@ -393,13 +397,32 @@ namespace Speedtest
             {
                 var selectedChart = listOfImportedSeries[SelectRecordedChannelElementValue];
 
+                
+
+
+                //MathNet.Numerics.IntegralTransforms.Fourier.ForwardReal(selectedChart.ToArray(),n);
                 if (importDisplayModeElementValue == Strings.Import_DisplayMode_Scroll)
                 {
-                    bringScrollableToFront(selectedChart, activePanels.OfType<ScrollableChartUserControl>().ToList());
+                    bringScrollableToFront(selectedChart.ToList(), activePanels.OfType<ScrollableChartUserControl>().ToList());
                 }
                 else if (importDisplayModeElementValue == Strings.Import_DisplayMode_Histogram)
                 {
                     bringHistogramToFront(getHistogramFromChart(selectedChart), activePanels.OfType<SimpleObservablePointedChartUserControl>().ToList());
+                }
+                else if (importDisplayModeElementValue == Strings.Import_DisplayMode_FFT) {
+                    Complex[] complexArray = new Complex[selectedChart.Count];
+                    for (int i = 0; i < selectedChart.Count; i++)
+                    {
+                        complexArray[i] = new Complex(selectedChart[i], 0);
+                    }
+
+                    FourierTransform.DFT(complexArray, FourierTransform.Direction.Forward);
+                    double[] abs = new double[complexArray.Count()];
+                    for (int i = 0; i < complexArray.Count(); i++)
+                    {
+                        abs[i] = complexArray[i].SquaredMagnitude;
+                    }
+                    bringScrollableToFront(abs.ToList(), activePanels.OfType<ScrollableChartUserControl>().ToList(), ScrollableType.FFT);
                 }
 
             }
@@ -410,7 +433,7 @@ namespace Speedtest
 
         }
 
-        private void bringScrollableToFront(List<double> selectedChart, List<ScrollableChartUserControl> onPanelWithThisType)
+        private void bringScrollableToFront(List<double> selectedChart, List<ScrollableChartUserControl> onPanelWithThisType, ScrollableType type = ScrollableType.Basic)
         {
             if (onPanelWithThisType != null && selectedChart != null)
             {
@@ -425,7 +448,7 @@ namespace Speedtest
                 }
             }
 
-            bringContentToFront(new ScrollableChartUserControl(selectedChart, deltaTime));
+            bringContentToFront(new ScrollableChartUserControl(selectedChart, deltaTime, type));
         }
 
         private void bringHistogramToFront(GearedValues<ObservablePoint> generated, List<SimpleObservablePointedChartUserControl> onPanelWithThisType)

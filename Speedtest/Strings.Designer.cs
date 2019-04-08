@@ -97,6 +97,15 @@ namespace Speedtest {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to FFT.
+        /// </summary>
+        internal static string Import_DisplayMode_FFT {
+            get {
+                return ResourceManager.GetString("Import_DisplayMode_FFT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Histogram.
         /// </summary>
         internal static string Import_DisplayMode_Histogram {

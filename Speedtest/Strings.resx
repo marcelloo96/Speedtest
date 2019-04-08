@@ -129,6 +129,9 @@
   <data name="Global_Stop" xml:space="preserve">
     <value>Stop</value>
   </data>
+  <data name="Import_DisplayMode_FFT" xml:space="preserve">
+    <value>FFT</value>
+  </data>
   <data name="Import_DisplayMode_Histogram" xml:space="preserve">
     <value>Histogram</value>
   </data>
