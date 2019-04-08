@@ -182,15 +182,8 @@
     <Compile Include="View\MeasureWindow\DefaultChartUserControl.Designer.cs">
       <DependentUpon>DefaultChartUserControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="View\MeasureWindow\SpeedTest.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="View\MeasureWindow\SpeedTest.Designer.cs">
-      <DependentUpon>SpeedTest.cs</DependentUpon>
-    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Model\ChartViewModels\SpeedTestVm.cs" />
     <Compile Include="View\StatisticWindow\SimpleObservablePointedChartUserControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -229,9 +222,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="View\MeasureWindow\DefaultChartUserControl.resx">
       <DependentUpon>DefaultChartUserControl.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="View\MeasureWindow\SpeedTest.resx">
-      <DependentUpon>SpeedTest.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

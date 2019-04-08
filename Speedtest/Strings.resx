@@ -129,8 +129,11 @@
   <data name="Global_Stop" xml:space="preserve">
     <value>Stop</value>
   </data>
-  <data name="Import_DisplayMode_FFT" xml:space="preserve">
-    <value>FFT</value>
+  <data name="Import_DisplayMode_FFT_PhaseSpectrum" xml:space="preserve">
+    <value>Phase Spectrum</value>
+  </data>
+  <data name="Import_DisplayMode_FFT_PowerSpectrum" xml:space="preserve">
+    <value>Power Spectrum</value>
   </data>
   <data name="Import_DisplayMode_Histogram" xml:space="preserve">
     <value>Histogram</value>

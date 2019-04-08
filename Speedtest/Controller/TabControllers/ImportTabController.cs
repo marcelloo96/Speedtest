@@ -14,7 +14,8 @@ namespace Speedtest.Controller.TabControllers
             
             displayModes.Add(Strings.Import_DisplayMode_Scroll);
             displayModes.Add(Strings.Import_DisplayMode_Histogram);
-            displayModes.Add(Strings.Import_DisplayMode_FFT);
+            displayModes.Add(Strings.Import_DisplayMode_FFT_PowerSpectrum);
+            displayModes.Add(Strings.Import_DisplayMode_FFT_PhaseSpectrum);
 
             model.ImportDisplayModeElementRepositoryItemComboBox.Items.AddRange(displayModes);
 

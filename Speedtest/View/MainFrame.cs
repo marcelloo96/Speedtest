@@ -409,7 +409,7 @@ namespace Speedtest
                 {
                     bringHistogramToFront(getHistogramFromChart(selectedChart), activePanels.OfType<SimpleObservablePointedChartUserControl>().ToList());
                 }
-                else if (importDisplayModeElementValue == Strings.Import_DisplayMode_FFT) {
+                else if (importDisplayModeElementValue == Strings.Import_DisplayMode_FFT_PowerSpectrum) {
                     Complex[] complexArray = new Complex[selectedChart.Count];
                     for (int i = 0; i < selectedChart.Count; i++)
                     {
@@ -423,6 +423,22 @@ namespace Speedtest
                         abs[i] = complexArray[i].SquaredMagnitude;
                     }
                     bringScrollableToFront(abs.ToList(), activePanels.OfType<ScrollableChartUserControl>().ToList(), ScrollableType.FFT);
+                }
+                else if (importDisplayModeElementValue == Strings.Import_DisplayMode_FFT_PhaseSpectrum)
+                {
+                    Complex[] complexArray = new Complex[selectedChart.Count];
+                    for (int i = 0; i < selectedChart.Count; i++)
+                    {
+                        complexArray[i] = new Complex(selectedChart[i], 0);
+                    }
+
+                    FourierTransform.DFT(complexArray, FourierTransform.Direction.Forward);
+                    double[] abs = new double[complexArray.Count()];
+                    for (int i = 0; i < complexArray.Count(); i++)
+                    {
+                        abs[i] = complexArray[i].Phase;
+                    }
+                    bringScrollableToFront(abs.ToList(), activePanels.OfType<ScrollableChartUserControl>().ToList());
                 }
 
             }

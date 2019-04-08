@@ -97,11 +97,20 @@ namespace Speedtest {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to FFT.
+        ///   Looks up a localized string similar to Phase Spectrum.
         /// </summary>
-        internal static string Import_DisplayMode_FFT {
+        internal static string Import_DisplayMode_FFT_PhaseSpectrum {
             get {
-                return ResourceManager.GetString("Import_DisplayMode_FFT", resourceCulture);
+                return ResourceManager.GetString("Import_DisplayMode_FFT_PhaseSpectrum", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Power Spectrum.
+        /// </summary>
+        internal static string Import_DisplayMode_FFT_PowerSpectrum {
+            get {
+                return ResourceManager.GetString("Import_DisplayMode_FFT_PowerSpectrum", resourceCulture);
             }
         }
         

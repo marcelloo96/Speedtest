@@ -21,30 +21,6 @@ namespace Speedtest.Controller
     {
         public static double tryparseTmp;
         public static int lastInsertedXYValue = 0;
-        public static CartesianChart SetDefaultChart(CartesianChart chart, SpeedTest model)
-        {
-            model.viewModel = new SpeedTestVm(model.numOfSeries, model.serialPort);
-
-            //chart.Hoverable = true;
-            //chart.DataTooltip = null;
-            chart.Zoom = ZoomingOptions.X;
-            chart.DisableAnimations = true;
-            chart.AutoSize = true;
-
-            for (int i = 0; i < model.numOfSeries; i++)
-            {
-                chart.Series.Add(new GLineSeries
-                {
-                    Values = model.viewModel.listOfCharts[i],
-                    DataLabels = false,
-                    Fill = Brushes.Transparent,
-                    LineSmoothness = 0,
-
-                });
-            }
-            
-            return chart;
-        }
 
         internal static CartesianChart InitializeDefaultChart(CartesianChart chart, DefaultChartUserControl model)
         {
@@ -113,40 +89,6 @@ namespace Speedtest.Controller
             //});
 
             return chart;
-        }
-
-        internal static void RefreshChartValues(SpeedTestVm speedTestModel, List<double> current)
-        {
-            try
-            {
-                int index = 0;
-                foreach (var i in speedTestModel.listOfCharts)
-                {
-                    if (index < speedTestModel.listOfCharts.Count() && index < current.Count())
-                    {
-
-                        var first = i.DefaultIfEmpty(0).FirstOrDefault();
-                        if (i.Count > speedTestModel.keepRecords - 1)
-                        {
-                            i.Remove(first);
-                        }
-                        if (i.Count < speedTestModel.keepRecords)
-                        {
-                            i.Add(current[index]);
-                        }
-
-                        index++;
-                    }
-
-                }
-            }
-            catch (Exception e)
-            {
-
-                MessageBox.Show("refresh chartvalues" + e.Message);
-            }
-
-
         }
 
         internal static void RefreshXYChartValues(DefaultChartViewModel viewModel, ObservablePoint current)
@@ -232,8 +174,6 @@ namespace Speedtest.Controller
                 {
                     for (var i = 0; i < numberOfPanelsDisplayed; i++)
                     {
-                        //mainFrameModel.gearedCharts[i].viewModel.recivedChartValues.Add(importantValues[i]);
-                        //ChartController.RefreshChartValues(mainFrameModel.gearedCharts[i].viewModel, mainFrameModel.gearedCharts[i].viewModel.recivedChartValues);
                         ChartController.RefreshDefaultChartValues(mainFrameModel.defaultCharts[i].viewModel, importantValues[i],recording);
                     }
                 }
@@ -241,8 +181,6 @@ namespace Speedtest.Controller
                 {
                     for (var i = 0; i < numberOfPanelsDisplayed; i++)
                     {
-                        //mainFrameModel.gearedCharts[i].viewModel.recivedChartValues.Add(double.NaN);
-                        //ChartController.RefreshChartValues(mainFrameModel.gearedCharts[i].viewModel, mainFrameModel.gearedCharts[i].viewModel.recivedChartValues);
                         ChartController.RefreshDefaultChartValues(mainFrameModel.defaultCharts[i].viewModel, double.NaN, recording);
                     }
                 }
@@ -252,19 +190,6 @@ namespace Speedtest.Controller
                 MessageBox.Show("Chartcontroller / Print Chart" + ex.Message);
             }
 
-        }
-
-        /// <summary>
-        /// The model's 'listOfCharts' List will contain the same amount of element as the model's 'numOfSeries' value is.  
-        /// </summary>
-        /// <param name="model"></param>
-        internal static void InitializeListOfCharts(SpeedTestVm model, int numOfSeries)
-        {
-            model.listOfCharts = new List<GearedValues<double>>();
-            for (int i = 0; i < numOfSeries; i++)
-            {
-                model.listOfCharts.Add(new GearedValues<double>().WithQuality(Quality.High));
-            }
         }
 
         internal static void printDefaultChart(DefaultChartUserControl defaultChartUserControl, double[] sendingData, int numberOfIncomingData,bool recording, int choosenXChannel = 0, int choosenYChannel = 0)
