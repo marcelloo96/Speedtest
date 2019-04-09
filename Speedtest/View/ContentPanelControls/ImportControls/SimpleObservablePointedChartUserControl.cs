@@ -17,7 +17,7 @@ namespace Speedtest.View.StatisticWindow
             mainChart.Zoom = ZoomingOptions.X;
             mainChart.DisableAnimations = true;
             mainChart.Hoverable = true;
-            mainChart.BackColor= System.Drawing.SystemColors.Control;
+            mainChart.BackColor= System.Drawing.Color.Transparent;
             mainChart.Series.Add(new GColumnSeries
             {
                 Values = Values,
