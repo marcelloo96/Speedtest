@@ -61,6 +61,15 @@ namespace Speedtest {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Display.
+        /// </summary>
+        internal static string Global_Display {
+            get {
+                return ResourceManager.GetString("Global_Display", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Error!.
         /// </summary>
         internal static string Global_Error {
@@ -75,6 +84,60 @@ namespace Speedtest {
         internal static string Global_Error_NoPortSelected {
             get {
                 return ResourceManager.GetString("Global_Error_NoPortSelected", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Export.
+        /// </summary>
+        internal static string Global_Export {
+            get {
+                return ResourceManager.GetString("Global_Export", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Home.
+        /// </summary>
+        internal static string Global_Home {
+            get {
+                return ResourceManager.GetString("Global_Home", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Import.
+        /// </summary>
+        internal static string Global_Import {
+            get {
+                return ResourceManager.GetString("Global_Import", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Measure.
+        /// </summary>
+        internal static string Global_Measure {
+            get {
+                return ResourceManager.GetString("Global_Measure", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Port.
+        /// </summary>
+        internal static string Global_Port {
+            get {
+                return ResourceManager.GetString("Global_Port", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sensor.
+        /// </summary>
+        internal static string Global_Sensor {
+            get {
+                return ResourceManager.GetString("Global_Sensor", resourceCulture);
             }
         }
         
@@ -97,18 +160,9 @@ namespace Speedtest {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Phase Spectrum.
+        ///   Looks up a localized string similar to FFT.
         /// </summary>
-        internal static string Import_DisplayMode_FFT_PhaseSpectrum {
-            get {
-                return ResourceManager.GetString("Import_DisplayMode_FFT_PhaseSpectrum", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Power Spectrum.
-        /// </summary>
-        internal static string Import_DisplayMode_FFT_PowerSpectrum {
+        internal static string Import_DisplayMode_FFT {
             get {
                 return ResourceManager.GetString("Import_DisplayMode_FFT_PowerSpectrum", resourceCulture);
             }

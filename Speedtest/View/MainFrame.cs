@@ -8,6 +8,7 @@ using System.Diagnostics;
 using System.Text;
 using Speedtest.Controller.TabControllers;
 using LiveCharts.Geared;
+using System.Linq;
 
 namespace Speedtest
 {
@@ -23,8 +24,9 @@ namespace Speedtest
         public double deltaTime;
         public double[] printingData;
         DataCollector dc;
-        public static int numberOfPanels = 1;        
+        public static int numberOfPanels = 1;
         private List<UserControl> activePanels;
+        private List<string> mmwFocusedPages;
         #endregion
 
         public MainFrame()
@@ -39,11 +41,15 @@ namespace Speedtest
             defaultCharts = new GearedValues<DefaultChartUserControl>();
             activePanels = new List<UserControl>();
             availableFileFilters = getFileFilters();
+            mmwFocusedPages = getMMWPages();
+
 
             savingFileDestinationPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
             changeFileDestinationCaption(savingFileDestinationPath);
 
         }
+
+
 
         public void testConnect()
         {
@@ -138,6 +144,42 @@ namespace Speedtest
             currentControl.Dock = DockStyle.Fill;
             currentControl.Visible = true;
             contentPanel.Controls.Add(currentControl);
+        }
+
+        private void ribbonControl_SelectedPageChanged(object sender, EventArgs e)
+        {
+            var selectedPage = ribbonControl.SelectedPage.ToString();
+
+            if (mmwFocusedPages.Contains(selectedPage))
+            {
+                if (mmw != null)
+                {
+                    bringContentToFront(mmw);
+                }
+            }
+            else
+            {
+                var lastUsedNowMMWPage = activePanels.Where(p => p != mmw).LastOrDefault();
+                if (lastUsedNowMMWPage != null)
+                {
+                    bringContentToFront(lastUsedNowMMWPage);
+
+                }
+            }
+
+        }
+        private List<string> getMMWPages()
+        {
+            mmwFocusedPages = new List<string>();
+            mmwFocusedPages.Add(Strings.Global_Display);
+            mmwFocusedPages.Add(Strings.Global_Export);
+            mmwFocusedPages.Add(Strings.Global_Home);
+            //mmwFocusedPages.Add(Strings.Global_Import);
+            mmwFocusedPages.Add(Strings.Global_Measure);
+            mmwFocusedPages.Add(Strings.Global_Port);
+            mmwFocusedPages.Add(Strings.Global_Sensor);
+
+            return mmwFocusedPages;
         }
     }
 

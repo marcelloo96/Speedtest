@@ -20,11 +20,13 @@ namespace Speedtest
         public List<List<double>> listOfImportedSeries;
         private List<string> availableFileFilters;
         private readonly bool alreadyExisting = true;
+        private Complex[] complexArray;
+        GearedValues<ObservablePoint> fftPrintList;
 
         #region ElementValues
         public int SelectRecordedChannelElementValue
         {
-            get { return Int32.Parse(selectRecordedChannelElement.EditValue.ToString()); }
+            get { return Int32.Parse(selectRecordedChannelElement.EditValue.ToString())-1; }
             set { selectRecordedChannelElement.EditValue = value; }
         }
 
@@ -78,54 +80,27 @@ namespace Speedtest
                 {
                     bringHistogramToFront(getHistogramFromChart(selectedChart), activePanels.OfType<SimpleObservablePointedChartUserControl>().ToList());
                 }
-                else if (importDisplayModeElementValue == Strings.Import_DisplayMode_FFT_PowerSpectrum)
+                else if (importDisplayModeElementValue == Strings.Import_DisplayMode_FFT)
                 {
-                    int originalLenght = selectedChart.Count;
-                    int fftLenght = originalLenght / 2;
-                    Complex[] complexArray = new Complex[originalLenght];
-                    for (int i = 0; i < selectedChart.Count; i++)
-                    {
-                        complexArray[i] = new Complex(selectedChart[i], 0);
-                    }
-
-                    FourierTransform.DFT(complexArray, FourierTransform.Direction.Forward);
-                    double[] abs = new double[fftLenght];
-                    for (int i = fftLenght; i < complexArray.Count(); i++)
-                    {
-                        abs[i- fftLenght] = complexArray[i].Magnitude;
-                    }
-                    double[] Y = abs.Reverse().ToArray();
-                    double[] X = new double[originalLenght];
-
-                    double axisDT = 1 / (originalLenght * deltaTime);
-                    for (int i = 0; i < fftLenght; i++) {
-                        X[i] = i * axisDT;
-
-                    }
-
-                    GearedValues<ObservablePoint> printList = new GearedValues<ObservablePoint>();
-                    for (int i = 0; i < fftLenght;i++) {
-                        printList.Add(new ObservablePoint(X[i], Y[i]));
-                    }
-
-                    //bringScrollableToFront(printList, activePanels.OfType<ScrollableChartUserControl>().ToList(), ScrollableType.FFT);
+                    printFFT(selectedChart);
+                    
                 }
-                else if (importDisplayModeElementValue == Strings.Import_DisplayMode_FFT_PhaseSpectrum)
-                {
-                    Complex[] complexArray = new Complex[selectedChart.Count];
-                    for (int i = 0; i < selectedChart.Count; i++)
-                    {
-                        complexArray[i] = new Complex(selectedChart[i], 0);
-                    }
+                //else if (importDisplayModeElementValue == Strings.Import_DisplayMode_FFT_PhaseSpectrum)
+                //{
+                //    Complex[] complexArray = new Complex[selectedChart.Count];
+                //    for (int i = 0; i < selectedChart.Count; i++)
+                //    {
+                //        complexArray[i] = new Complex(selectedChart[i], 0);
+                //    }
 
-                    FourierTransform.DFT(complexArray, FourierTransform.Direction.Forward);
-                    double[] abs = new double[complexArray.Count()];
-                    for (int i = 0; i < complexArray.Count(); i++)
-                    {
-                        abs[i] = complexArray[i].Phase;
-                    }
-                    bringScrollableToFront(abs.ToList(), activePanels.OfType<ScrollableChartUserControl>().ToList());
-                }
+                //    FourierTransform.DFT(complexArray, FourierTransform.Direction.Forward);
+                //    double[] abs = new double[complexArray.Count()];
+                //    for (int i = 0; i < complexArray.Count(); i++)
+                //    {
+                //        abs[i] = complexArray[i].Phase;
+                //    }
+                //    bringScrollableToFront(abs.ToList(), activePanels.OfType<ScrollableChartUserControl>().ToList());
+                //}
 
             }
             else
@@ -135,13 +110,68 @@ namespace Speedtest
             
 
         }
+
+        private void printFFT(List<double> selectedChart)
+        {
+            int originalLenght = selectedChart.Count;
+            int fftLenght = originalLenght / 2;
+
+            complexArray = new Complex[originalLenght];
+            for (int i = 0; i < selectedChart.Count; i++)
+            {
+                complexArray[i] = new Complex(selectedChart[i], 0);
+            }
+
+            FourierTransform.DFT(complexArray, FourierTransform.Direction.Forward);
+            double[] fftValues = new double[fftLenght];
+            for (int i = fftLenght; i < complexArray.Count(); i++)
+            {
+                fftValues[i - fftLenght] = complexArray[i].Magnitude;
+            }
+
+            double[] Y = fftValues.Reverse().ToArray();
+            double[] X = new double[originalLenght];
+
+            double axisDT = 1 / (originalLenght * deltaTime);
+            for (int i = 0; i < fftLenght; i++)
+            {
+                X[i] = i * axisDT;
+
+            }
+
+            fftPrintList = new GearedValues<ObservablePoint>();
+            for (int i = 0; i < fftLenght; i++)
+            {
+                fftPrintList.Add(new ObservablePoint(X[i], Y[i]));
+            }
+
+            bringFFTToFront(fftPrintList, activePanels.OfType<ScrollableChartUserControl>().ToList(), ScrollableType.FFT);
+        }
+
         private void bringScrollableToFront(List<double> selectedChart, List<ScrollableChartUserControl> onPanelWithThisType, ScrollableType type = ScrollableType.Basic)
         {
             if (onPanelWithThisType != null && selectedChart != null)
             {
                 foreach (var panel in onPanelWithThisType)
                 {
-                    if (panel.doubleValues.Equals(selectedChart))
+                    if (panel.doubleValues!=null && panel.doubleValues.Equals(selectedChart))
+                    {
+
+                        bringContentToFront(panel, alreadyExisting);
+                        return;
+                    }
+                }
+            }
+
+            bringContentToFront(new ScrollableChartUserControl(selectedChart, deltaTime, type));
+        }
+        private void bringFFTToFront(GearedValues<ObservablePoint> selectedChart, List<ScrollableChartUserControl> onPanelWithThisType, ScrollableType type = ScrollableType.Basic)
+        {
+            if (onPanelWithThisType != null && selectedChart != null)
+            {
+                foreach (var panel in onPanelWithThisType)
+                {
+                    if (panel.observableValues != null && panel.observableValues.Equals(selectedChart))
                     {
 
                         bringContentToFront(panel, alreadyExisting);

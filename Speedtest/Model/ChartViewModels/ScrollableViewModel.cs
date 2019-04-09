@@ -25,6 +25,11 @@ namespace Speedtest.Model.ChartViewModels
             From = 0;
             To = T/5;
         }
+        public ScrollableViewModel(GearedValues<ObservablePoint> observableChart) {
+            Values = observableChart;
+            From = 0;
+            To = 1;
+        }
 
         public GearedValues<ObservablePoint> Values { get; set; }
         public double From { get; set; }
