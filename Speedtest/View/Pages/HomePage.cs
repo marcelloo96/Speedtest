@@ -115,9 +115,9 @@ namespace Speedtest
                 mmw.Dispose();
                 PortController.CloseSerialOnExit(serialPort);
                 serialPort.Dispose();
-                MeasureTabController.SetGroupsAndIconsToCurrentState(this);
+                HomeTabController.SetGroupsAndIconsToCurrentState(this);
                 connectedState = false;
-                measureControlPanelGroup.Enabled = false;
+                homeControlPanelGroup.Enabled = false;
 
 
             }
@@ -134,7 +134,7 @@ namespace Speedtest
                 }
                 connectedState = true;
                 isRunning = false;
-                measureControlPanelGroup.Enabled = true;
+                homeControlPanelGroup.Enabled = true;
             }
 
         }
@@ -196,8 +196,8 @@ namespace Speedtest
                 {
                     isRunning = false;
                     dc.Dispose();
-                    connectiongGroup.Enabled = true;
-                    measurePortBasicGroup.Enabled = true;
+                    homeConnectiongGroup.Enabled = true;
+                    homePortBasicGroup.Enabled = true;
                     keepRecordsElement.Enabled = true;
                     StartStopButton.Caption = Strings.Global_Start;
                     StartStopButton.ImageOptions.SvgImage = Resources.start;
@@ -216,8 +216,8 @@ namespace Speedtest
                     }
                     dc = new DataCollector(serialPort, printTo);
                     serialPort.DiscardInBuffer();
-                    connectiongGroup.Enabled = false;
-                    measurePortBasicGroup.Enabled = false;
+                    homeConnectiongGroup.Enabled = false;
+                    homePortBasicGroup.Enabled = false;
                     keepRecordsElement.Enabled = false;
                     StartStopButton.Caption = Strings.Global_Stop;
                     StartStopButton.ImageOptions.SvgImage = Resources.stop;

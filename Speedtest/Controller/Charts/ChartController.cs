@@ -49,11 +49,12 @@ namespace Speedtest.Controller
 
             });
 
-            //chart.AxisY.Add(new LiveCharts.Wpf.Axis {
-            //    MinValue = model.viewModel.values.Min(p=>p.Y),
-            //    MaxValue= model.viewModel.values.Max(p => p.Y),
+            chart.AxisY.Add(new LiveCharts.Wpf.Axis
+            {
+                MinValue = model.viewModel.values.Min(p => p.Y),
+                MaxValue = model.viewModel.values.Max(p => p.Y),
 
-            //});
+            });
             //chart.AxisY.Add(new LiveCharts.Wpf.Axis
             //{
             //    Sections = new LiveCharts.Wpf.SectionsCollection

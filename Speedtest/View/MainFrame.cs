@@ -30,11 +30,11 @@ namespace Speedtest
         public MainFrame()
         {
             InitializeComponent();
-            MeasureTabController.FillEditors(this);
+            HomeTabController.FillEditors(this);
             PortOptionsTabController.FillEditors(this);
             RecordingTabController.FillEditors(this);
             ImportTabController.FillEditors(this);
-            MeasureTabController.SetInitialState(this);
+            HomeTabController.SetInitialState(this);
             portController = new PortController(this);
             defaultCharts = new GearedValues<DefaultChartUserControl>();
             activePanels = new List<UserControl>();
@@ -51,7 +51,7 @@ namespace Speedtest
             {
                 try
                 {
-                    MeasureTabController.SetGroupsAndIconsToCurrentState(this);
+                    HomeTabController.SetGroupsAndIconsToCurrentState(this);
 
                     if (connectedState)
                     {
@@ -139,8 +139,6 @@ namespace Speedtest
             currentControl.Visible = true;
             contentPanel.Controls.Add(currentControl);
         }
-
-
     }
 
 }

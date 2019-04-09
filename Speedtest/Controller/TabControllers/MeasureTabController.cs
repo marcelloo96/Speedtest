@@ -1,117 +1,27 @@
-﻿using Speedtest.Model;
-using Speedtest.Properties;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO.Ports;
 using System.Linq;
 using System.Text;
-using System.Threading;
 using System.Threading.Tasks;
-using System.Windows;
 
 namespace Speedtest.Controller
 {
-    public static class MeasureTabController
+    class MeasureTabController
     {
+        public static readonly int[] baudRateOptionsList = new int[] { 300, 1200, 2400, 4800, 9600, 19200, 38400, 57600, 74880, 115200, 230400, 250000, 500000, 1000000, 2000000 };
+        public static readonly int[] dataBitsOptionList = new int[] { 5, 6, 7, 8 };
+        public static readonly int[] numberOfChannelsOptionList = new int[] { 1, 2, 3, 4, 5 };
+        public static readonly Parity[] paritiesOptionList = new Parity[] { Parity.None, Parity.Even, Parity.Odd, Parity.Mark, Parity.Space };
+        public static readonly StopBits[] stopBitsOptionList = new StopBits[] { StopBits.One, StopBits.OnePointFive, StopBits.Two };
+        public static readonly bool[] boolOptions = new bool[] { true, false };
+        public static readonly Handshake[] handshakeOptionList = new Handshake[] { Handshake.None, Handshake.RequestToSend, Handshake.RequestToSendXOnXOff, Handshake.XOnXOff };
+
         internal static void FillEditors(MainFrame model)
         {
-            //TODO DISPLAY
-            model.numberOfChannelsElementValue = 1;
-            //model.SelectedPortElement.EditValue = "COM3";
-            model.samplingRateElementValue = 1;
-            model.keepRecordsElementValue = 300;
-            model.NumberOfIncomingDataElement.EditValue = 1;
-            model.DisplayModeElement.EditValue = Strings.MeasureTab_DisplayMode_Chart;
-            model.DisplayModeRepositoryItemComboBox.Items.AddRange(new string[] {
-                Strings.MeasureTab_DisplayMode_Chart,
-                Strings.MeasureTab_DisplayMode_Monitor,
-                Strings.MeasureTab_DisplayMode_XY
-            }
-            );
 
         }
-        /// <summary>
-        /// Disable all functions that need a connection
-        /// </summary>
-        /// <param name="model"></param>
-        internal static void SetInitialState(MainFrame model)
-        {
-            //model.DisplayModeElement.Enabled = false;
-            model.StartStopButton.Enabled = false;
-            //model.DisplayModeRepositoryItemComboBox.ReadOnly = true;
-        }
 
-        internal static void SetGroupsAndIconsToCurrentState(MainFrame mainFrameModel)
-        {
-            if (mainFrameModel.connectedState)
-            {
-                ///*Disconnecting*/                
-
-                setAllPortOptionsToRecentConnectState(mainFrameModel);
-
-                try
-                {
-                    var succesfullyClosed = PortController.CloseSerialOnExit(mainFrameModel.serialPort);
-                    if (succesfullyClosed)
-                    {
-                        mainFrameModel.connectedState = false;
-                    }
-                    else
-                    {
-                        mainFrameModel.connectedState = true;
-                    }
-
-                    mainFrameModel.serialPort.Dispose();
-                    mainFrameModel.IsPortConnectedStatusBarLabel.Caption = StringConstants.portStatusDisconnected;
-                    mainFrameModel.ConnectButton.ImageOptions.SvgImage = Resources.connect;
-                    mainFrameModel.ConnectButton.Caption = StringConstants.connect;
-
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message);
-
-                }
-
-
-            }
-            else
-            {
-                /*Connecting*/
-
-                //TODO: Check the editors
-
-                setAllPortOptionsToRecentConnectState(mainFrameModel);
-
-                mainFrameModel.ConnectButton.ImageOptions.SvgImage = Resources.disconnect;
-                mainFrameModel.ConnectButton.Caption = StringConstants.disconnect;
-
-                //model.portController.CreatePort();
-                mainFrameModel.portController.CreatePort();
-                var portOpened = mainFrameModel.portController.OpenThePort();
-
-                if (portOpened)
-                {
-                    // mainFrameModel.numberOfPanelsDisplayed = mainFrameModel.numberOfChannelsFromElementValue;
-                    mainFrameModel.IsPortConnectedStatusBarLabel.Caption = StringConstants.portStatusConnected;
-
-                }
-
-                mainFrameModel.connectedState = true;
-            }
-
-
-        }
-        /// <summary>
-        /// Enable/Diasble all Port options depending on the model's 'connectingState' parameter
-        /// </summary>
-        /// <param name="model"></param>
-        private static void setAllPortOptionsToRecentConnectState(MainFrame model)
-        {
-            model.ChannelsElement.Enabled = model.connectedState;
-            model.PortAdvancedsGroup.Enabled = model.connectedState;
-            model.StartStopButton.Enabled = !model.connectedState;
-        }
 
     }
 }

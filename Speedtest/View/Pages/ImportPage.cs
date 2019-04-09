@@ -80,19 +80,35 @@ namespace Speedtest
                 }
                 else if (importDisplayModeElementValue == Strings.Import_DisplayMode_FFT_PowerSpectrum)
                 {
-                    Complex[] complexArray = new Complex[selectedChart.Count];
+                    int originalLenght = selectedChart.Count;
+                    int fftLenght = originalLenght / 2;
+                    Complex[] complexArray = new Complex[originalLenght];
                     for (int i = 0; i < selectedChart.Count; i++)
                     {
                         complexArray[i] = new Complex(selectedChart[i], 0);
                     }
 
                     FourierTransform.DFT(complexArray, FourierTransform.Direction.Forward);
-                    double[] abs = new double[complexArray.Count()];
-                    for (int i = 0; i < complexArray.Count(); i++)
+                    double[] abs = new double[fftLenght];
+                    for (int i = fftLenght; i < complexArray.Count(); i++)
                     {
-                        abs[i] = complexArray[i].SquaredMagnitude;
+                        abs[i- fftLenght] = complexArray[i].Magnitude;
                     }
-                    bringScrollableToFront(abs.ToList(), activePanels.OfType<ScrollableChartUserControl>().ToList(), ScrollableType.FFT);
+                    double[] Y = abs.Reverse().ToArray();
+                    double[] X = new double[originalLenght];
+
+                    double axisDT = 1 / (originalLenght * deltaTime);
+                    for (int i = 0; i < fftLenght; i++) {
+                        X[i] = i * axisDT;
+
+                    }
+
+                    GearedValues<ObservablePoint> printList = new GearedValues<ObservablePoint>();
+                    for (int i = 0; i < fftLenght;i++) {
+                        printList.Add(new ObservablePoint(X[i], Y[i]));
+                    }
+
+                    //bringScrollableToFront(printList, activePanels.OfType<ScrollableChartUserControl>().ToList(), ScrollableType.FFT);
                 }
                 else if (importDisplayModeElementValue == Strings.Import_DisplayMode_FFT_PhaseSpectrum)
                 {

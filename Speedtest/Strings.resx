@@ -162,6 +162,12 @@
   <data name="MeasureTab_DisplayMode_XY" xml:space="preserve">
     <value>XY </value>
   </data>
+  <data name="Measure_EdgeType_Fall" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Measure_EdgeType_Rising" xml:space="preserve">
+    <value>Rising edge</value>
+  </data>
   <data name="PortController_GreaterIncomingDataError" xml:space="preserve">
     <value>The number panels are greater than the incoming datas.</value>
   </data>

@@ -169,6 +169,24 @@ namespace Speedtest {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Measure_EdgeType_Fall {
+            get {
+                return ResourceManager.GetString("Measure_EdgeType_Fall", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Rising edge.
+        /// </summary>
+        internal static string Measure_EdgeType_Rising {
+            get {
+                return ResourceManager.GetString("Measure_EdgeType_Rising", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Chart.
         /// </summary>
         internal static string MeasureTab_DisplayMode_Chart {
