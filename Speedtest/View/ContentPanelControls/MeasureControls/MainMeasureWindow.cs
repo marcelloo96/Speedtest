@@ -59,7 +59,7 @@ namespace Speedtest.View.MeasureWindow
 
                             DockPanel tmpPanel = new DockPanel
                             {
-                                Text = "Chart " + i,
+                                Text = "Channel " + i,
                                 AutoScaleMode=AutoScaleMode.Inherit
                             };
                             ControlContainer tmpPanel_Container = new ControlContainer();

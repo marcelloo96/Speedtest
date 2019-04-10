@@ -135,6 +135,9 @@
   <data name="Global_Import" xml:space="preserve">
     <value>Import</value>
   </data>
+  <data name="Global_MeanValue" xml:space="preserve">
+    <value>Mean value: </value>
+  </data>
   <data name="Global_Measure" xml:space="preserve">
     <value>Measure</value>
   </data>
@@ -150,7 +153,7 @@
   <data name="Global_Stop" xml:space="preserve">
     <value>Stop</value>
   </data>
-  <data name="Import_DisplayMode_FFT_PowerSpectrum" xml:space="preserve">
+  <data name="Import_DisplayMode_FFT" xml:space="preserve">
     <value>FFT</value>
   </data>
   <data name="Import_DisplayMode_Histogram" xml:space="preserve">
@@ -171,14 +174,14 @@
   <data name="Import_ShowButtonCaption" xml:space="preserve">
     <value>Show</value>
   </data>
-  <data name="MeasureTab_DisplayMode_Chart" xml:space="preserve">
-    <value>Chart</value>
-  </data>
   <data name="MeasureTab_DisplayMode_Monitor" xml:space="preserve">
     <value>Monitor</value>
   </data>
-  <data name="MeasureTab_DisplayMode_XY" xml:space="preserve">
-    <value>XY </value>
+  <data name="MeasureTab_DisplayMode_MultiPanel" xml:space="preserve">
+    <value>Multiple Chart</value>
+  </data>
+  <data name="MeasureTab_DisplayMode_SinglePanel" xml:space="preserve">
+    <value>Single Chart</value>
   </data>
   <data name="Measure_EdgeType_Fall" xml:space="preserve">
     <value />

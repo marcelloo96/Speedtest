@@ -101,7 +101,7 @@ namespace Speedtest
                     }
                     //gearedCharts.ForEach(p => p.viewModel.recivedChartValues.Clear());
 
-                    if (DisplayModeElementValue == Strings.MeasureTab_DisplayMode_Chart)
+                    if (DisplayModeElementValue == Strings.MeasureTab_DisplayMode_MultiPanel)
                     {
                         ChartController.printGearedChart(printingData, numberOfPanels, this, Recording);
                     }
@@ -109,9 +109,9 @@ namespace Speedtest
                     {
                         ChartController.printChartMonitor(mmw.chartMonitor, printingData);
                     }
-                    else if (DisplayModeElementValue == Strings.MeasureTab_DisplayMode_XY)
+                    else if (DisplayModeElementValue == Strings.MeasureTab_DisplayMode_SinglePanel)
                     {
-                        ChartController.printDefaultChart(mmw.xyChartUserControl, printingData, numberOfIncomingDataEditValue, Recording);
+                        ChartController.printDefaultChart(mmw.xyChartUserControl, printingData, numberOfIncomingDataEditValue, Recording, this);
                         //ChartController.printGearedChart(sendingData, numberOfPanels, this);
                     }
                 }
@@ -150,6 +150,14 @@ namespace Speedtest
         {
             var selectedPage = ribbonControl.SelectedPage.ToString();
 
+            if (selectedPage == Strings.Global_Measure) {
+                if (mmw != null) {
+                    bringContentToFront(mmw);
+                    BrintSingleChartToFrontInsideOfMMW();
+                    DisplayModeElementValue = Strings.MeasureTab_DisplayMode_SinglePanel;
+                    return;
+                }
+            }
             if (mmwFocusedPages.Contains(selectedPage))
             {
                 if (mmw != null)
@@ -159,10 +167,10 @@ namespace Speedtest
             }
             else
             {
-                var lastUsedNowMMWPage = activePanels.Where(p => p != mmw).LastOrDefault();
-                if (lastUsedNowMMWPage != null)
+                var lastUsedNOTMMWPage = activePanels.Where(p => p != mmw).LastOrDefault();
+                if (lastUsedNOTMMWPage != null)
                 {
-                    bringContentToFront(lastUsedNowMMWPage);
+                    bringContentToFront(lastUsedNOTMMWPage);
 
                 }
             }
@@ -175,12 +183,13 @@ namespace Speedtest
             mmwFocusedPages.Add(Strings.Global_Export);
             mmwFocusedPages.Add(Strings.Global_Home);
             //mmwFocusedPages.Add(Strings.Global_Import);
-            mmwFocusedPages.Add(Strings.Global_Measure);
+            //mmwFocusedPages.Add(Strings.Global_Measure);
             mmwFocusedPages.Add(Strings.Global_Port);
             mmwFocusedPages.Add(Strings.Global_Sensor);
 
             return mmwFocusedPages;
         }
+
     }
 
 }

@@ -1,5 +1,6 @@
 ﻿using DevExpress.XtraBars;
 using DevExpress.XtraEditors.Repository;
+using Speedtest.Controller;
 using System;
 using System.Windows.Forms;
 
@@ -8,7 +9,8 @@ namespace Speedtest
     public partial class MainFrame
     {
         public static bool edgeDetecting = false;
-        public static bool meanValue = false;
+        public static bool meanValueIsOn = false;
+        public static double Treshold = 0;
 
         #region ElementValues
 
@@ -21,7 +23,9 @@ namespace Speedtest
             get { return Double.Parse(tresholdValueElement.EditValue.ToString());}
             set { tresholdValueElement.EditValue = value; }
         }
-
+         public string meanValueLabelCaption {
+            set { meanValueLabel.Caption = value; }
+        }
         #endregion
         #region ComboBoxes
         public RepositoryItemComboBox EdgeTypeElement
@@ -37,13 +41,22 @@ namespace Speedtest
         }
         #endregion
 
+        
         private void detectingEdgeElement_EditValueChanged(object sender, EventArgs e)
         {
             edgeDetecting = (bool)detectingEdgeElement.EditValue;
         }
         private void chartMeanValueElement_EditValueChanged(object sender, EventArgs e)
         {
-            meanValue = (bool)chartMeanValueElement.EditValue;
+            meanValueIsOn = (bool)chartMeanValueElement.EditValue;
+            if (meanValueIsOn == false) {
+                meanValueLabelCaption = Strings.Global_MeanValue;
+            }
+        }
+
+        private void tresholdValueElement_EditValueChanged(object sender, EventArgs e)
+        {
+            Treshold = tresholdElementValue;
         }
     }
 }

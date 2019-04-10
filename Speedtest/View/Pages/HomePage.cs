@@ -145,36 +145,20 @@ namespace Speedtest
             {
                 if (mmw != null)
                 {
-                    if (DisplayModeElementValue == Strings.MeasureTab_DisplayMode_Chart)
+                    if (DisplayModeElementValue == Strings.MeasureTab_DisplayMode_MultiPanel)
                     {
-                        mmw.chartMonitor.Dock = DockStyle.None;
-                        mmw.chartMonitor.SendToBack();
-                        mmw.xyChartUserControl.Dock = DockStyle.None;
-                        mmw.xyChartUserControl.SendToBack();
-
-                        ChartController.RemoveMonitorText(this);
+                        BringChartToFrontInsideOfMMW();
+                        
                     }
                     else if (DisplayModeElementValue == Strings.MeasureTab_DisplayMode_Monitor)
                     {
-                        mmw.chartMonitor.Dock = DockStyle.Fill;
-                        mmw.chartMonitor.BringToFront();
-
-                        mmw.xyChartUserControl.Dock = DockStyle.None;
-                        mmw.xyChartUserControl.SendToBack();
-
-                        ChartController.RemoveAllPointsFromGeared(defaultCharts);
+                        BrintMonitorToFrontInsideOfMMW();
+                       
                     }
-                    else if (DisplayModeElementValue == Strings.MeasureTab_DisplayMode_XY)
+                    else if (DisplayModeElementValue == Strings.MeasureTab_DisplayMode_SinglePanel)
                     {
-                        mmw.xyChartUserControl.Dock = DockStyle.Fill;
-                        mmw.xyChartUserControl.BringToFront();
-
-                        mmw.chartMonitor.SendToBack();
-                        mmw.chartMonitor.Dock = DockStyle.None;
-
-                        ChartController.RemoveMonitorText(this);
-                        ChartController.RemoveAllPointsFromGeared(defaultCharts);
-
+                        BrintSingleChartToFrontInsideOfMMW();
+                       
                     }
                 }
             }
@@ -185,6 +169,38 @@ namespace Speedtest
             }
 
 
+        }
+
+        private void BrintSingleChartToFrontInsideOfMMW()
+        {
+            mmw.xyChartUserControl.Dock = DockStyle.Fill;
+            mmw.xyChartUserControl.BringToFront();
+
+            mmw.chartMonitor.SendToBack();
+            mmw.chartMonitor.Dock = DockStyle.None;
+
+            ChartController.RemoveMonitorText(this);
+            ChartController.RemoveAllPointsFromGeared(defaultCharts);
+        }
+
+        private void BrintMonitorToFrontInsideOfMMW()
+        {
+            mmw.chartMonitor.Dock = DockStyle.Fill;
+            mmw.chartMonitor.BringToFront();
+
+            mmw.xyChartUserControl.Dock = DockStyle.None;
+            mmw.xyChartUserControl.SendToBack();
+
+            ChartController.RemoveAllPointsFromGeared(defaultCharts);
+        }
+
+        private void BringChartToFrontInsideOfMMW()
+        {
+            mmw.chartMonitor.Dock = DockStyle.None;
+            mmw.chartMonitor.SendToBack();
+            mmw.xyChartUserControl.Dock = DockStyle.None;
+            mmw.xyChartUserControl.SendToBack();
+            ChartController.RemoveMonitorText(this);
         }
 
         private void startStopButton_ItemClick(object sender, ItemClickEventArgs ea)

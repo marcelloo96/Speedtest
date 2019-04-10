@@ -26,12 +26,11 @@ namespace Speedtest.Controller
         {
             model.viewModel = new DefaultChartViewModel(model.deltaT, model.keepRecords);
             chart.Hoverable = true;
-            //chart.Zoom = ZoomingOptions.X;
+            chart.Zoom = ZoomingOptions.Y;
             chart.DisableAnimations = true;
             chart.AutoSize = true;
             chart.DataTooltip = null;
             var transparent = Brushes.Transparent;
-
 
             chart.Series.Add(new GLineSeries
             {
@@ -48,45 +47,19 @@ namespace Speedtest.Controller
                 LineSmoothness = 0,
 
             });
-
-            chart.AxisY.Add(new LiveCharts.Wpf.Axis
+            chart.Series.Add(new GLineSeries
             {
-                MinValue = model.viewModel.values.Min(p => p.Y),
-                MaxValue = model.viewModel.values.Max(p => p.Y),
+                Values = model.viewModel.MeanValues,
+                DataLabels = false,
+                LineSmoothness = 0,
 
             });
+
             //chart.AxisY.Add(new LiveCharts.Wpf.Axis
             //{
-            //    Sections = new LiveCharts.Wpf.SectionsCollection
-            //    {
-            //        new LiveCharts.Wpf.AxisSection
-            //        {
-            //            Value = 2000,
-            //            Stroke = new SolidColorBrush(System.Windows.Media.Color.FromRgb(248, 213, 72))
-            //        },
-            //        new LiveCharts.Wpf.AxisSection
-            //        {
-            //            //Label = "Good",
-            //            Value = 500,
-            //            SectionWidth = 1000,
-            //            Fill = new SolidColorBrush
-            //            {
-            //                Color = System.Windows.Media.Color.FromRgb(204,204,204),
-            //                Opacity = .4
-            //            }
-            //        },
-            //        new LiveCharts.Wpf.AxisSection
-            //        {
-            //            //Label = "Bad",
-            //            Value = 0,
-            //            SectionWidth = 500,
-            //            Fill = new SolidColorBrush
-            //            {
-            //                Color = System.Windows.Media.Color.FromRgb(254,132,132),
-            //                Opacity = .4
-            //            }
-            //        }
-            //    }
+            //    MinValue = model.viewModel.values.Min(p => p.Y),
+            //    MaxValue = model.viewModel.values.Max(p => p.Y),
+
             //});
 
             return chart;
@@ -175,14 +148,14 @@ namespace Speedtest.Controller
                 {
                     for (var i = 0; i < numberOfPanelsDisplayed; i++)
                     {
-                        ChartController.RefreshDefaultChartValues(mainFrameModel.defaultCharts[i].viewModel, importantValues[i],recording);
+                        ChartController.RefreshDefaultChartValues(mainFrameModel.defaultCharts[i].viewModel, importantValues[i], recording, mainFrameModel,false);
                     }
                 }
                 else
                 {
                     for (var i = 0; i < numberOfPanelsDisplayed; i++)
                     {
-                        ChartController.RefreshDefaultChartValues(mainFrameModel.defaultCharts[i].viewModel, double.NaN, recording);
+                        ChartController.RefreshDefaultChartValues(mainFrameModel.defaultCharts[i].viewModel, double.NaN, recording, mainFrameModel,false);
                     }
                 }
             }
@@ -193,17 +166,17 @@ namespace Speedtest.Controller
 
         }
 
-        internal static void printDefaultChart(DefaultChartUserControl defaultChartUserControl, double[] sendingData, int numberOfIncomingData,bool recording, int choosenXChannel = 0, int choosenYChannel = 0)
+        internal static void printDefaultChart(DefaultChartUserControl defaultChartUserControl, double[] sendingData, int numberOfIncomingData,bool recording,MainFrame mainframe)
         {
             try
             {
                 double _tmpval = 0;
-                if (sendingData != null && sendingData.Length >= numberOfIncomingData && Math.Max(choosenXChannel, choosenYChannel) < sendingData.Length && Math.Min(choosenXChannel, choosenYChannel) >= 0)
+                if (sendingData != null && sendingData.Length >= numberOfIncomingData)
                 {
                     _tmpval = sendingData[0];
                 }
 
-                ChartController.RefreshDefaultChartValues(defaultChartUserControl.viewModel, _tmpval,recording);
+                ChartController.RefreshDefaultChartValues(defaultChartUserControl.viewModel, _tmpval,recording, mainframe);
             }
             catch (Exception e)
             {
@@ -214,7 +187,7 @@ namespace Speedtest.Controller
 
         }
 
-        private static void RefreshDefaultChartValues(DefaultChartViewModel viewModel, double tmpval,bool recording=false)
+        private static void RefreshDefaultChartValues(DefaultChartViewModel viewModel, double tmpval,bool recording, MainFrame mainFrame, bool isSingleGraph=true)
         {
             var values = viewModel.values;
             var rec = viewModel.RecordValues;
@@ -252,6 +225,17 @@ namespace Speedtest.Controller
                     rec[lastInsertedXYValue - 1].Y = double.NaN;
                 }
 
+            }
+            double avg = double.NaN;
+            if (MainFrame.meanValueIsOn && isSingleGraph)
+            {
+                avg = values.Select(p => p.Y).ToArray().Average();
+                mainFrame.meanValueLabelCaption = Strings.Global_MeanValue + avg.ToString("F2");
+                
+            }
+            for (int i = 0; i < viewModel.MeanValues.Count; i++) {
+                viewModel.MeanValues[i].Y = avg;
+                viewModel.MeanValues[i].X = values[i].X;
             }
             
         }

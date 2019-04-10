@@ -21,11 +21,11 @@ namespace Speedtest.Controller
             model.samplingRateElementValue = 1;
             model.keepRecordsElementValue = 300;
             model.NumberOfIncomingDataElement.EditValue = 1;
-            model.DisplayModeElement.EditValue = Strings.MeasureTab_DisplayMode_Chart;
+            model.DisplayModeElement.EditValue = Strings.MeasureTab_DisplayMode_MultiPanel;
             model.DisplayModeRepositoryItemComboBox.Items.AddRange(new string[] {
-                Strings.MeasureTab_DisplayMode_Chart,
-                Strings.MeasureTab_DisplayMode_Monitor,
-                Strings.MeasureTab_DisplayMode_XY
+                Strings.MeasureTab_DisplayMode_MultiPanel,
+                Strings.MeasureTab_DisplayMode_SinglePanel,
+                Strings.MeasureTab_DisplayMode_Monitor
             }
             );
 

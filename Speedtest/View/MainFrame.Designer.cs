@@ -103,6 +103,7 @@
             this.detectingEdgeElement = new DevExpress.XtraBars.BarEditItem();
             this.detectingEdgeRepositoryItemToggleSwitch = new DevExpress.XtraEditors.Repository.RepositoryItemToggleSwitch();
             this.periodTimeLabel = new DevExpress.XtraBars.BarStaticItem();
+            this.meanValueLabel = new DevExpress.XtraBars.BarStaticItem();
             this.homePage = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.homePortBasicGroup = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.homeDisplayGroup = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
@@ -144,6 +145,8 @@
             this.contentPanel = new DevExpress.XtraEditors.PanelControl();
             this.dockManager = new DevExpress.XtraBars.Docking.DockManager(this.components);
             this.serialPort = new System.IO.Ports.SerialPort(this.components);
+            this.measurePageStartStopButtonGroup = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
+            this.sensorPageStartStopButtonGroup = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             ((System.ComponentModel.ISupportInitialize)(this.ribbonControl)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.selectedPortRepositoryItemComboBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.baudRateRepositoryItemComboBox)).BeginInit();
@@ -241,9 +244,10 @@
             this.edgeTypeElement,
             this.tresholdValueElement,
             this.detectingEdgeElement,
-            this.periodTimeLabel});
+            this.periodTimeLabel,
+            this.meanValueLabel});
             this.ribbonControl.Location = new System.Drawing.Point(0, 0);
-            this.ribbonControl.MaxItemId = 33;
+            this.ribbonControl.MaxItemId = 34;
             this.ribbonControl.Name = "ribbonControl";
             this.ribbonControl.Pages.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPage[] {
             this.homePage,
@@ -855,6 +859,7 @@
             this.tresholdValueElement.EditWidth = 100;
             this.tresholdValueElement.Id = 30;
             this.tresholdValueElement.Name = "tresholdValueElement";
+            this.tresholdValueElement.EditValueChanged += new System.EventHandler(this.tresholdValueElement_EditValueChanged);
             // 
             // tresholdValueRepositoryItemTextEdit
             // 
@@ -885,6 +890,12 @@
             this.periodTimeLabel.Caption = "Period time:";
             this.periodTimeLabel.Id = 32;
             this.periodTimeLabel.Name = "periodTimeLabel";
+            // 
+            // meanValueLabel
+            // 
+            this.meanValueLabel.Caption = "Mean value:";
+            this.meanValueLabel.Id = 33;
+            this.meanValueLabel.Name = "meanValueLabel";
             // 
             // homePage
             // 
@@ -960,6 +971,7 @@
             // measurePage
             // 
             this.measurePage.Groups.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageGroup[] {
+            this.measurePageStartStopButtonGroup,
             this.edgeDetectGroup,
             this.measureGroup});
             this.measurePage.Name = "measurePage";
@@ -976,6 +988,7 @@
             // 
             // measureGroup
             // 
+            this.measureGroup.ItemLinks.Add(this.meanValueLabel);
             this.measureGroup.ItemLinks.Add(this.chartMeanValueElement);
             this.measureGroup.Name = "measureGroup";
             this.measureGroup.Text = "Measure";
@@ -983,6 +996,7 @@
             // sensorOptionsPage
             // 
             this.sensorOptionsPage.Groups.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageGroup[] {
+            this.sensorPageStartStopButtonGroup,
             this.ribbonPageGroup1,
             this.calculatelinearityGroup});
             this.sensorOptionsPage.Name = "sensorOptionsPage";
@@ -1017,7 +1031,7 @@
             this.RecordTabStatStopButtonPageGroup.AllowTextClipping = false;
             this.RecordTabStatStopButtonPageGroup.ItemLinks.Add(this.startStopButton);
             this.RecordTabStatStopButtonPageGroup.Name = "RecordTabStatStopButtonPageGroup";
-            this.RecordTabStatStopButtonPageGroup.Text = "Measuring";
+            this.RecordTabStatStopButtonPageGroup.Text = "Controller";
             // 
             // recordRibbonPageGroup
             // 
@@ -1198,6 +1212,20 @@
             "DevExpress.XtraBars.Navigation.OfficeNavigationBar",
             "DevExpress.XtraBars.Navigation.TileNavPane",
             "DevExpress.XtraBars.TabFormControl"});
+            // 
+            // measurePageStartStopButtonGroup
+            // 
+            this.measurePageStartStopButtonGroup.AllowTextClipping = false;
+            this.measurePageStartStopButtonGroup.ItemLinks.Add(this.startStopButton);
+            this.measurePageStartStopButtonGroup.Name = "measurePageStartStopButtonGroup";
+            this.measurePageStartStopButtonGroup.Text = "Controller";
+            // 
+            // sensorPageStartStopButtonGroup
+            // 
+            this.sensorPageStartStopButtonGroup.AllowTextClipping = false;
+            this.sensorPageStartStopButtonGroup.ItemLinks.Add(this.startStopButton);
+            this.sensorPageStartStopButtonGroup.Name = "sensorPageStartStopButtonGroup";
+            this.sensorPageStartStopButtonGroup.Text = "Controller";
             // 
             // MainFrame
             // 
@@ -1382,5 +1410,8 @@
         private DevExpress.XtraEditors.Repository.RepositoryItemToggleSwitch detectingEdgeRepositoryItemToggleSwitch;
         private DevExpress.XtraBars.BarStaticItem periodTimeLabel;
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup edgeDetectGroup;
+        private DevExpress.XtraBars.BarStaticItem meanValueLabel;
+        private DevExpress.XtraBars.Ribbon.RibbonPageGroup measurePageStartStopButtonGroup;
+        private DevExpress.XtraBars.Ribbon.RibbonPageGroup sensorPageStartStopButtonGroup;
     }
 }

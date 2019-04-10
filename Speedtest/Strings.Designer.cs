@@ -115,6 +115,15 @@ namespace Speedtest {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Mean value: .
+        /// </summary>
+        internal static string Global_MeanValue {
+            get {
+                return ResourceManager.GetString("Global_MeanValue", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Measure.
         /// </summary>
         internal static string Global_Measure {
@@ -164,7 +173,7 @@ namespace Speedtest {
         /// </summary>
         internal static string Import_DisplayMode_FFT {
             get {
-                return ResourceManager.GetString("Import_DisplayMode_FFT_PowerSpectrum", resourceCulture);
+                return ResourceManager.GetString("Import_DisplayMode_FFT", resourceCulture);
             }
         }
         
@@ -241,15 +250,6 @@ namespace Speedtest {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Chart.
-        /// </summary>
-        internal static string MeasureTab_DisplayMode_Chart {
-            get {
-                return ResourceManager.GetString("MeasureTab_DisplayMode_Chart", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Monitor.
         /// </summary>
         internal static string MeasureTab_DisplayMode_Monitor {
@@ -259,11 +259,20 @@ namespace Speedtest {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to XY .
+        ///   Looks up a localized string similar to Multiple Chart.
         /// </summary>
-        internal static string MeasureTab_DisplayMode_XY {
+        internal static string MeasureTab_DisplayMode_MultiPanel {
             get {
-                return ResourceManager.GetString("MeasureTab_DisplayMode_XY", resourceCulture);
+                return ResourceManager.GetString("MeasureTab_DisplayMode_MultiPanel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Single Chart.
+        /// </summary>
+        internal static string MeasureTab_DisplayMode_SinglePanel {
+            get {
+                return ResourceManager.GetString("MeasureTab_DisplayMode_SinglePanel", resourceCulture);
             }
         }
         
