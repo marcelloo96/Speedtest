@@ -19,9 +19,11 @@ namespace Speedtest.Controller
             model.numberOfChannelsElementValue = 1;
             //model.SelectedPortElement.EditValue = "COM3";
             model.samplingRateElementValue = 1;
+            model.selectIncomingLiveChannelsElementValue = 1;
             model.keepRecordsElementValue = 300;
             model.DisplayModeElement.EditValue = Strings.MeasureTab_DisplayMode_MultiPanel;
             model.SelectIncomingLiveChannelsElement.Enabled = false;
+            model.SelectIncomingLiveChannelsRepositoryItemComboBox.Items.AddRange(new int[5] {1,2,3,4,5 });
             model.DisplayModeRepositoryItemComboBox.Items.AddRange(new string[] {
                 Strings.MeasureTab_DisplayMode_MultiPanel,
                 Strings.MeasureTab_DisplayMode_SinglePanel,

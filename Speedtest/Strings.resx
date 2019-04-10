@@ -117,6 +117,9 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Error_ChannelNetExistOrFound" xml:space="preserve">
+    <value>The selected channel is not existing or found!</value>
+  </data>
   <data name="Global_Display" xml:space="preserve">
     <value>Display</value>
   </data>

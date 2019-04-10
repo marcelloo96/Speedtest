@@ -115,7 +115,7 @@ namespace Speedtest
                     }
                     else if (DisplayModeElementValue == Strings.MeasureTab_DisplayMode_SinglePanel)
                     {
-                        ChartController.printDefaultChart(mmw.xyChartUserControl, printingData, Recording, this);
+                        ChartController.printDefaultChart(this,mmw.xyChartUserControl, printingData);
                         //ChartController.printGearedChart(sendingData, numberOfPanels, this);
                     }
                 }

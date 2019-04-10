@@ -36,6 +36,11 @@ namespace Speedtest
             get { return (string)displayModeElement.EditValue; }
             set { displayModeElement.EditValue = value; }
         }
+
+        public int selectIncomingLiveChannelsElementValue {
+            get { return Int32.Parse(selectIncomingLiveChannelsElement.EditValue.ToString()) - 1; }
+            set { selectIncomingLiveChannelsElement.EditValue = value; }
+        }
         #endregion
         #region EditValueChanged
         private void channelsElement_EditValueChanged(object sender, EventArgs e)

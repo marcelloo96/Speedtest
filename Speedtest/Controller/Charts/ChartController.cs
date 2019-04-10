@@ -166,17 +166,23 @@ namespace Speedtest.Controller
 
         }
 
-        internal static void printDefaultChart(DefaultChartUserControl defaultChartUserControl, double[] sendingData,bool recording,MainFrame mainframe)
+        internal static void printDefaultChart(MainFrame mainframe, DefaultChartUserControl defaultChartUserControl, double[] sendingData)
         {
             try
             {
-                double _tmpval = 0;
-                if (sendingData != null)
+                double _tmpval = double.NaN ;
+                if (sendingData != null && sendingData.Length > mainframe.selectIncomingLiveChannelsElementValue)
                 {
-                    _tmpval = sendingData[0];
+                    _tmpval = sendingData[mainframe.selectIncomingLiveChannelsElementValue];
+                }
+                else {
+                    MessageBox.Show(Strings.Error_ChannelNetExistOrFound);
+                    mainframe.StartStopButton.PerformClick();
                 }
 
-                ChartController.RefreshDefaultChartValues(defaultChartUserControl.viewModel, _tmpval,recording, mainframe);
+                
+
+                ChartController.RefreshDefaultChartValues(defaultChartUserControl.viewModel, _tmpval,mainframe.Recording, mainframe);
             }
             catch (Exception e)
             {

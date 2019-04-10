@@ -61,6 +61,15 @@ namespace Speedtest {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The selected channel is not existing or found!.
+        /// </summary>
+        internal static string Error_ChannelNetExistOrFound {
+            get {
+                return ResourceManager.GetString("Error_ChannelNetExistOrFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Display.
         /// </summary>
         internal static string Global_Display {
