@@ -166,12 +166,12 @@ namespace Speedtest.Controller
 
         }
 
-        internal static void printDefaultChart(DefaultChartUserControl defaultChartUserControl, double[] sendingData, int numberOfIncomingData,bool recording,MainFrame mainframe)
+        internal static void printDefaultChart(DefaultChartUserControl defaultChartUserControl, double[] sendingData,bool recording,MainFrame mainframe)
         {
             try
             {
                 double _tmpval = 0;
-                if (sendingData != null && sendingData.Length >= numberOfIncomingData)
+                if (sendingData != null)
                 {
                     _tmpval = sendingData[0];
                 }

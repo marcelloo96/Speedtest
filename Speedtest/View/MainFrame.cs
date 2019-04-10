@@ -47,6 +47,8 @@ namespace Speedtest
             savingFileDestinationPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
             changeFileDestinationCaption(savingFileDestinationPath);
 
+            
+
         }
 
 
@@ -59,14 +61,16 @@ namespace Speedtest
                 {
                     HomeTabController.SetGroupsAndIconsToCurrentState(this);
 
-                    if (connectedState)
+                    if (connectedState)                        
                     {
+                        homePortBasicGroup.Enabled = false;
+                        keepRecordsElement.Enabled = false;
+
                         mmw = new MainMeasureWindow(this);
                         bringContentToFront(mmw);
                     }
                     else
                     {
-
                         contentPanel.Controls.Clear();
                         activePanels.Remove(mmw);
                         mmw.deleteControls();
@@ -111,7 +115,7 @@ namespace Speedtest
                     }
                     else if (DisplayModeElementValue == Strings.MeasureTab_DisplayMode_SinglePanel)
                     {
-                        ChartController.printDefaultChart(mmw.xyChartUserControl, printingData, numberOfIncomingDataEditValue, Recording, this);
+                        ChartController.printDefaultChart(mmw.xyChartUserControl, printingData, Recording, this);
                         //ChartController.printGearedChart(sendingData, numberOfPanels, this);
                     }
                 }
@@ -151,18 +155,18 @@ namespace Speedtest
             var selectedPage = ribbonControl.SelectedPage.ToString();
 
             if (selectedPage == Strings.Global_Measure) {
-                if (mmw != null) {
-                    bringContentToFront(mmw);
-                    BrintSingleChartToFrontInsideOfMMW();
+                if (mmw != null && activePanels.Contains(mmw)) {
+                    bringContentToFront(mmw,alreadyExisting);
+                    BringSingleChartToFrontInsideOfMMW();
                     DisplayModeElementValue = Strings.MeasureTab_DisplayMode_SinglePanel;
                     return;
                 }
             }
             if (mmwFocusedPages.Contains(selectedPage))
             {
-                if (mmw != null)
+                if (mmw != null && activePanels.Contains(mmw))
                 {
-                    bringContentToFront(mmw);
+                    bringContentToFront(mmw, alreadyExisting);
                 }
             }
             else
@@ -170,7 +174,7 @@ namespace Speedtest
                 var lastUsedNOTMMWPage = activePanels.Where(p => p != mmw).LastOrDefault();
                 if (lastUsedNOTMMWPage != null)
                 {
-                    bringContentToFront(lastUsedNOTMMWPage);
+                    bringContentToFront(lastUsedNOTMMWPage, alreadyExisting);
 
                 }
             }

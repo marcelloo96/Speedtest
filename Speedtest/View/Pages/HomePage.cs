@@ -31,11 +31,6 @@ namespace Speedtest
             get { return Int32.Parse(keepRecordsElement.EditValue.ToString()); }
             set { keepRecordsElement.EditValue = value; }
         }
-        public int numberOfIncomingDataEditValue
-        {
-            get { return Int32.Parse(numberOfIncomingDataElement.EditValue.ToString()); }
-            set { numberOfIncomingDataElement.EditValue = value; }
-        }
         public string DisplayModeElementValue
         {
             get { return (string)displayModeElement.EditValue; }
@@ -55,14 +50,6 @@ namespace Speedtest
             {
                 portController.deltaTime = 1 / samplingRateElementValue;
                 deltaTime = 1 / (double)samplingRateElementValue;
-            }
-        }
-
-        private void numberOfIncomingDataElement_EditValueChanged(object sender, EventArgs e)
-        {
-            if (portController != null)
-            {
-                portController.numberOfIncomingData = numberOfIncomingDataEditValue;
             }
         }
 
@@ -97,11 +84,12 @@ namespace Speedtest
         #region ComboBoxes
         public RepositoryItemComboBox NumberOfChannelsRepositoryItemComboBox { get { return numberOfChannelsRepositoryItemComboBox; } }
         public RepositoryItemComboBox DisplayModeRepositoryItemComboBox { get { return displayModeRepositoryItemComboBox; } }
+        public RepositoryItemComboBox SelectIncomingLiveChannelsRepositoryItemComboBox { get { return selectIncomingLiveChannelsRepositoryItemComboBox; } }
         #endregion
         #region Elements
         public BarEditItem DisplayModeElement { get { return displayModeElement; } }
-        public BarEditItem NumberOfIncomingDataElement { get { return numberOfIncomingDataElement; } }
         public BarEditItem ChannelsElement { get { return channelsElement; } }
+        public BarEditItem SelectIncomingLiveChannelsElement { get { return selectIncomingLiveChannelsElement; } }
         #endregion
 
         private void connectButton_ItemClick(object sender, ItemClickEventArgs ea)
@@ -109,8 +97,13 @@ namespace Speedtest
             if (connectedState)
             {
                 //Disconnecting
+               
+                homePortBasicGroup.Enabled = true;
+                keepRecordsElement.Enabled = true;
+
 
                 contentPanel.Controls.Clear();
+                activePanels.Remove(mmw);
                 mmw.deleteControls();
                 mmw.Dispose();
                 PortController.CloseSerialOnExit(serialPort);
@@ -124,6 +117,10 @@ namespace Speedtest
             else
             {
                 //Connecting
+
+                homePortBasicGroup.Enabled = false;
+                keepRecordsElement.Enabled = false;
+
                 if (String.IsNullOrWhiteSpace(selectedPortElementValue))
                 {
                     MessageBox.Show(Strings.Global_Error_NoPortSelected);
@@ -148,17 +145,18 @@ namespace Speedtest
                     if (DisplayModeElementValue == Strings.MeasureTab_DisplayMode_MultiPanel)
                     {
                         BringChartToFrontInsideOfMMW();
-                        
+                        SelectIncomingLiveChannelsElement.Enabled = false;
                     }
                     else if (DisplayModeElementValue == Strings.MeasureTab_DisplayMode_Monitor)
                     {
-                        BrintMonitorToFrontInsideOfMMW();
-                       
+                        BringMonitorToFrontInsideOfMMW();
+                        SelectIncomingLiveChannelsElement.Enabled = false;
                     }
                     else if (DisplayModeElementValue == Strings.MeasureTab_DisplayMode_SinglePanel)
                     {
-                        BrintSingleChartToFrontInsideOfMMW();
-                       
+                        BringSingleChartToFrontInsideOfMMW();
+                        SelectIncomingLiveChannelsElement.Enabled = true;
+
                     }
                 }
             }
@@ -171,7 +169,7 @@ namespace Speedtest
 
         }
 
-        private void BrintSingleChartToFrontInsideOfMMW()
+        private void BringSingleChartToFrontInsideOfMMW()
         {
             mmw.xyChartUserControl.Dock = DockStyle.Fill;
             mmw.xyChartUserControl.BringToFront();
@@ -183,7 +181,7 @@ namespace Speedtest
             ChartController.RemoveAllPointsFromGeared(defaultCharts);
         }
 
-        private void BrintMonitorToFrontInsideOfMMW()
+        private void BringMonitorToFrontInsideOfMMW()
         {
             mmw.chartMonitor.Dock = DockStyle.Fill;
             mmw.chartMonitor.BringToFront();
@@ -212,9 +210,6 @@ namespace Speedtest
                 {
                     isRunning = false;
                     dc.Dispose();
-                    homeConnectiongGroup.Enabled = true;
-                    homePortBasicGroup.Enabled = true;
-                    keepRecordsElement.Enabled = true;
                     StartStopButton.Caption = Strings.Global_Start;
                     StartStopButton.ImageOptions.SvgImage = Resources.start;
                 }
@@ -232,11 +227,21 @@ namespace Speedtest
                     }
                     dc = new DataCollector(serialPort, printTo);
                     serialPort.DiscardInBuffer();
-                    homeConnectiongGroup.Enabled = false;
-                    homePortBasicGroup.Enabled = false;
-                    keepRecordsElement.Enabled = false;
                     StartStopButton.Caption = Strings.Global_Stop;
                     StartStopButton.ImageOptions.SvgImage = Resources.stop;
+
+                    if (DisplayModeElementValue == Strings.MeasureTab_DisplayMode_Monitor)
+                    {
+                        BringMonitorToFrontInsideOfMMW();
+                    }
+                    else if (DisplayModeElementValue == Strings.MeasureTab_DisplayMode_MultiPanel)
+                    {
+                        BringChartToFrontInsideOfMMW();
+                    }
+                    else if (DisplayModeElementValue == Strings.MeasureTab_DisplayMode_SinglePanel)
+                    {
+                        BringSingleChartToFrontInsideOfMMW();
+                    }
 
 
                 }
