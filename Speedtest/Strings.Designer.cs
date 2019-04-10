@@ -241,7 +241,7 @@ namespace Speedtest {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to Falling edge.
         /// </summary>
         internal static string Measure_EdgeType_Fall {
             get {

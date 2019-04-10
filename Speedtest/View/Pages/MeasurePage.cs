@@ -10,6 +10,7 @@ namespace Speedtest
     {
         public static bool edgeDetecting = false;
         public static bool meanValueIsOn = false;
+        public static string edgeType = Strings.Measure_EdgeType_Rising;
         public static double Treshold = 0;
 
         #region ElementValues
@@ -28,7 +29,7 @@ namespace Speedtest
         }
         #endregion
         #region ComboBoxes
-        public RepositoryItemComboBox EdgeTypeElement
+        public RepositoryItemComboBox EdgeTypeRepositoryItemComboBox
         {
             get { return edgeTypeRepositoryItemComboBox; }
         }

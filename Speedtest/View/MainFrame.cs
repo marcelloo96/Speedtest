@@ -37,6 +37,7 @@ namespace Speedtest
             RecordingTabController.FillEditors(this);
             ImportTabController.FillEditors(this);
             HomeTabController.SetInitialState(this);
+            MeasureTabController.FillEditors(this);
             portController = new PortController(this);
             defaultCharts = new GearedValues<DefaultChartUserControl>();
             activePanels = new List<UserControl>();
@@ -103,7 +104,6 @@ namespace Speedtest
                     {
                         printingData = calculateLinearValue(printingData, sensitivity, zeroValue);
                     }
-                    //gearedCharts.ForEach(p => p.viewModel.recivedChartValues.Clear());
 
                     if (DisplayModeElementValue == Strings.MeasureTab_DisplayMode_MultiPanel)
                     {
@@ -194,6 +194,10 @@ namespace Speedtest
             return mmwFocusedPages;
         }
 
+        private void edgeTypeElement_EditValueChanged(object sender, EventArgs e)
+        {
+            edgeType = edgeTypeElementValue;
+        }
     }
 
 }

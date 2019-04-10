@@ -102,6 +102,8 @@
             this.detectingEdgeRepositoryItemToggleSwitch = new DevExpress.XtraEditors.Repository.RepositoryItemToggleSwitch();
             this.periodTimeLabel = new DevExpress.XtraBars.BarStaticItem();
             this.meanValueLabel = new DevExpress.XtraBars.BarStaticItem();
+            this.selectIncomingLiveChannelsElement = new DevExpress.XtraBars.BarEditItem();
+            this.selectIncomingLiveChannelsRepositoryItemComboBox = new DevExpress.XtraEditors.Repository.RepositoryItemComboBox();
             this.homePage = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.homePortBasicGroup = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.homeDisplayGroup = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
@@ -146,8 +148,6 @@
             this.contentPanel = new DevExpress.XtraEditors.PanelControl();
             this.dockManager = new DevExpress.XtraBars.Docking.DockManager(this.components);
             this.serialPort = new System.IO.Ports.SerialPort(this.components);
-            this.selectIncomingLiveChannelsElement = new DevExpress.XtraBars.BarEditItem();
-            this.selectIncomingLiveChannelsRepositoryItemComboBox = new DevExpress.XtraEditors.Repository.RepositoryItemComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.ribbonControl)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.selectedPortRepositoryItemComboBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.baudRateRepositoryItemComboBox)).BeginInit();
@@ -178,6 +178,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.edgeTypeRepositoryItemComboBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tresholdValueRepositoryItemTextEdit)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.detectingEdgeRepositoryItemToggleSwitch)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.selectIncomingLiveChannelsRepositoryItemComboBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemComboBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.zeroValueRepositoryItemSpinEdit)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.sensitivityRepositoryItem)).BeginInit();
@@ -196,7 +197,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.chartNameLookUpRepositoryItemLookUpEdit)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.contentPanel)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dockManager)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.selectIncomingLiveChannelsRepositoryItemComboBox)).BeginInit();
             this.SuspendLayout();
             // 
             // ribbonControl
@@ -831,6 +831,7 @@
             this.edgeTypeElement.EditWidth = 100;
             this.edgeTypeElement.Id = 29;
             this.edgeTypeElement.Name = "edgeTypeElement";
+            this.edgeTypeElement.EditValueChanged += new System.EventHandler(this.edgeTypeElement_EditValueChanged);
             // 
             // edgeTypeRepositoryItemComboBox
             // 
@@ -884,6 +885,22 @@
             this.meanValueLabel.Caption = "Mean value:";
             this.meanValueLabel.Id = 33;
             this.meanValueLabel.Name = "meanValueLabel";
+            // 
+            // selectIncomingLiveChannelsElement
+            // 
+            this.selectIncomingLiveChannelsElement.Caption = "Selected channel";
+            this.selectIncomingLiveChannelsElement.Edit = this.selectIncomingLiveChannelsRepositoryItemComboBox;
+            this.selectIncomingLiveChannelsElement.EditHeight = 20;
+            this.selectIncomingLiveChannelsElement.EditWidth = 100;
+            this.selectIncomingLiveChannelsElement.Id = 34;
+            this.selectIncomingLiveChannelsElement.Name = "selectIncomingLiveChannelsElement";
+            // 
+            // selectIncomingLiveChannelsRepositoryItemComboBox
+            // 
+            this.selectIncomingLiveChannelsRepositoryItemComboBox.AutoHeight = false;
+            this.selectIncomingLiveChannelsRepositoryItemComboBox.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.selectIncomingLiveChannelsRepositoryItemComboBox.Name = "selectIncomingLiveChannelsRepositoryItemComboBox";
             // 
             // homePage
             // 
@@ -1222,22 +1239,6 @@
             "DevExpress.XtraBars.Navigation.TileNavPane",
             "DevExpress.XtraBars.TabFormControl"});
             // 
-            // selectIncomingLiveChannelsElement
-            // 
-            this.selectIncomingLiveChannelsElement.Caption = "Selected channel";
-            this.selectIncomingLiveChannelsElement.Edit = this.selectIncomingLiveChannelsRepositoryItemComboBox;
-            this.selectIncomingLiveChannelsElement.EditHeight = 20;
-            this.selectIncomingLiveChannelsElement.EditWidth = 100;
-            this.selectIncomingLiveChannelsElement.Id = 34;
-            this.selectIncomingLiveChannelsElement.Name = "selectIncomingLiveChannelsElement";
-            // 
-            // selectIncomingLiveChannelsRepositoryItemComboBox
-            // 
-            this.selectIncomingLiveChannelsRepositoryItemComboBox.AutoHeight = false;
-            this.selectIncomingLiveChannelsRepositoryItemComboBox.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.selectIncomingLiveChannelsRepositoryItemComboBox.Name = "selectIncomingLiveChannelsRepositoryItemComboBox";
-            // 
             // MainFrame
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1282,6 +1283,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.edgeTypeRepositoryItemComboBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.tresholdValueRepositoryItemTextEdit)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.detectingEdgeRepositoryItemToggleSwitch)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.selectIncomingLiveChannelsRepositoryItemComboBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemComboBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.zeroValueRepositoryItemSpinEdit)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.sensitivityRepositoryItem)).EndInit();
@@ -1300,7 +1302,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.chartNameLookUpRepositoryItemLookUpEdit)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.contentPanel)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dockManager)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.selectIncomingLiveChannelsRepositoryItemComboBox)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

@@ -187,7 +187,7 @@
     <value>Single Chart</value>
   </data>
   <data name="Measure_EdgeType_Fall" xml:space="preserve">
-    <value />
+    <value>Falling edge</value>
   </data>
   <data name="Measure_EdgeType_Rising" xml:space="preserve">
     <value>Rising edge</value>

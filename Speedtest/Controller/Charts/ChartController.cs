@@ -50,6 +50,15 @@ namespace Speedtest.Controller
             chart.Series.Add(new GLineSeries
             {
                 Values = model.viewModel.MeanValues,
+                Fill = Brushes.Transparent,
+                DataLabels = false,
+                LineSmoothness = 0,
+
+            });
+            chart.Series.Add(new GLineSeries
+            {
+                Values = model.viewModel.EdgeDetectingLine,
+                Fill = Brushes.Transparent,
                 DataLabels = false,
                 LineSmoothness = 0,
 
@@ -197,30 +206,58 @@ namespace Speedtest.Controller
         {
             var values = viewModel.values;
             var rec = viewModel.RecordValues;
+            var edge = viewModel.EdgeDetectingLine;
+            var mean = viewModel.MeanValues;
 
-            if (recording)
+            double avg = double.NaN;
+            
+            if (MainFrame.meanValueIsOn && isSingleGraph)
             {
-                if (lastInsertedXYValue < viewModel.keepRecords)
+                avg = values.Select(p => p.Y).ToArray().Average();
+                mainFrame.meanValueLabelCaption = Strings.Global_MeanValue + avg.ToString("F2");
+            }
+
+            if (lastInsertedXYValue < viewModel.keepRecords)
+            {
+                if (recording)
                 {
                     values[lastInsertedXYValue++].Y = double.NaN;
                     rec[lastInsertedXYValue++].Y = tmpval;
-
                 }
-                else
+                else {
+                    values[lastInsertedXYValue++].Y = tmpval;
+                    rec[lastInsertedXYValue++].Y = double.NaN;
+                }
+
+                if (MainFrame.meanValueIsOn && isSingleGraph)
+                {
+
+                    mean[lastInsertedXYValue++].Y = avg;
+                }
+                else {
+                    mean[lastInsertedXYValue++].Y = double.NaN;
+                }
+
+                if (MainFrame.edgeDetecting)
+                {
+                    for (int i = 0; i < edge.Count(); i++)
+                    {
+                        edge[i].Y = mainFrame.tresholdElementValue;
+                    }
+                }
+                else {
+                    edge[lastInsertedXYValue++].Y = double.NaN;
+                }
+
+            }
+            else {
+                if (recording)
                 {
                     values = shiftListToTheLeft(values, viewModel);
                     values[lastInsertedXYValue - 1].Y = double.NaN;
 
                     rec = shiftListToTheLeft(rec, viewModel);
                     rec[lastInsertedXYValue - 1].Y = tmpval;
-                }
-            }
-            else {
-                if (lastInsertedXYValue < viewModel.keepRecords)
-                {
-                    values[lastInsertedXYValue++].Y = tmpval;
-                    rec[lastInsertedXYValue++].Y = double.NaN;
-
                 }
                 else
                 {
@@ -231,19 +268,33 @@ namespace Speedtest.Controller
                     rec[lastInsertedXYValue - 1].Y = double.NaN;
                 }
 
+                if (MainFrame.meanValueIsOn && isSingleGraph)
+                {
+                    mean = shiftListToTheLeft(mean, viewModel);
+                    mean[lastInsertedXYValue-1].Y = avg;
+                }
+                else
+                {
+                    mean = shiftListToTheLeft(mean, viewModel);
+                    mean[lastInsertedXYValue-1].Y = double.NaN;
+                }
+
+                if (MainFrame.edgeDetecting)
+                {
+                    edge = shiftListToTheLeft(edge, viewModel);
+                    for (int i = 0; i < edge.Count(); i++)
+                    {
+                        edge[i].Y = mainFrame.tresholdElementValue;
+                    }
+                }
+                else {
+                    edge = shiftListToTheLeft(edge, viewModel);
+                    edge[lastInsertedXYValue-1].Y = double.NaN;
+                }
+
+
             }
-            double avg = double.NaN;
-            if (MainFrame.meanValueIsOn && isSingleGraph)
-            {
-                avg = values.Select(p => p.Y).ToArray().Average();
-                mainFrame.meanValueLabelCaption = Strings.Global_MeanValue + avg.ToString("F2");
-                
-            }
-            for (int i = 0; i < viewModel.MeanValues.Count; i++) {
-                viewModel.MeanValues[i].Y = avg;
-                viewModel.MeanValues[i].X = values[i].X;
-            }
-            
+
         }
 
         private static GearedValues<ObservablePoint> shiftListToTheLeft(GearedValues<ObservablePoint> list, DefaultChartViewModel viewModel)
