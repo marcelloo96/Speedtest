@@ -91,7 +91,7 @@ namespace Speedtest
             catch (Exception e)
             {
 
-                MessageBox.Show("calculateLinearValue" + e.Message);
+                //MessageBox.Show("calculateLinearValue" + e.Message);
             }
 
             return sendingData;

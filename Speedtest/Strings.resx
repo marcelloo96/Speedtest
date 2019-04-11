@@ -192,6 +192,9 @@
   <data name="Measure_EdgeType_Rising" xml:space="preserve">
     <value>Rising edge</value>
   </data>
+  <data name="Measure_PeriodTimeLabel" xml:space="preserve">
+    <value>Period time:</value>
+  </data>
   <data name="PortController_GreaterIncomingDataError" xml:space="preserve">
     <value>The number panels are greater than the incoming datas.</value>
   </data>

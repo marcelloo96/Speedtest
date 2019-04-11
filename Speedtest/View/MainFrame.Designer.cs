@@ -115,7 +115,7 @@
             this.measurePage = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.measurePageStartStopButtonGroup = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.edgeDetectGroup = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
-            this.measureGroup = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
+            this.MeanValueGroup = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.sensorOptionsPage = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.sensorPageStartStopButtonGroup = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.ribbonPageGroup1 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
@@ -977,8 +977,8 @@
             // 
             this.measurePage.Groups.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageGroup[] {
             this.measurePageStartStopButtonGroup,
-            this.edgeDetectGroup,
-            this.measureGroup});
+            this.MeanValueGroup,
+            this.edgeDetectGroup});
             this.measurePage.Name = "measurePage";
             this.measurePage.Text = "Measure";
             // 
@@ -998,12 +998,12 @@
             this.edgeDetectGroup.Name = "edgeDetectGroup";
             this.edgeDetectGroup.Text = "Edge detect";
             // 
-            // measureGroup
+            // MeanValueGroup
             // 
-            this.measureGroup.ItemLinks.Add(this.meanValueLabel);
-            this.measureGroup.ItemLinks.Add(this.chartMeanValueElement);
-            this.measureGroup.Name = "measureGroup";
-            this.measureGroup.Text = "Measure";
+            this.MeanValueGroup.ItemLinks.Add(this.meanValueLabel);
+            this.MeanValueGroup.ItemLinks.Add(this.chartMeanValueElement);
+            this.MeanValueGroup.Name = "MeanValueGroup";
+            this.MeanValueGroup.Text = "Mean Value";
             // 
             // sensorOptionsPage
             // 
@@ -1413,7 +1413,7 @@
         private DevExpress.XtraBars.BarEditItem chartMeanValueElement;
         private DevExpress.XtraEditors.Repository.RepositoryItemToggleSwitch chartMeanValueRepositoryItemToggleSwitch;
         private DevExpress.XtraBars.Ribbon.RibbonPage measurePage;
-        private DevExpress.XtraBars.Ribbon.RibbonPageGroup measureGroup;
+        private DevExpress.XtraBars.Ribbon.RibbonPageGroup MeanValueGroup;
         private DevExpress.XtraBars.BarEditItem edgeTypeElement;
         private DevExpress.XtraEditors.Repository.RepositoryItemComboBox edgeTypeRepositoryItemComboBox;
         private DevExpress.XtraBars.BarEditItem tresholdValueElement;

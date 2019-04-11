@@ -43,6 +43,7 @@ namespace Speedtest
             activePanels = new List<UserControl>();
             availableFileFilters = getFileFilters();
             mmwFocusedPages = getMMWPages();
+            timer = new Stopwatch();
 
 
             savingFileDestinationPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
@@ -80,7 +81,7 @@ namespace Speedtest
                 }
                 catch (Exception e)
                 {
-                    MessageBox.Show(e.Message);
+                    //MessageBox.Show(e.Message);
                 }
             }
 
@@ -107,7 +108,7 @@ namespace Speedtest
 
                     if (DisplayModeElementValue == Strings.MeasureTab_DisplayMode_MultiPanel)
                     {
-                        ChartController.printGearedChart(printingData, numberOfPanels, this, Recording);
+                        ChartController.printGearedChart(this, numberOfPanels, printingData);
                     }
                     else if (DisplayModeElementValue == Strings.MeasureTab_DisplayMode_Monitor)
                     {
@@ -116,7 +117,6 @@ namespace Speedtest
                     else if (DisplayModeElementValue == Strings.MeasureTab_DisplayMode_SinglePanel)
                     {
                         ChartController.printDefaultChart(this,mmw.xyChartUserControl, printingData);
-                        //ChartController.printGearedChart(sendingData, numberOfPanels, this);
                     }
                 }
 
@@ -125,7 +125,7 @@ namespace Speedtest
             catch (Exception e)
             {
 
-                MessageBox.Show("printto" + e.Message);
+                //MessageBox.Show("printto" + e.Message);
             }
 
 

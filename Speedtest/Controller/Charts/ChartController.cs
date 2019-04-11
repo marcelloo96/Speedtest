@@ -21,6 +21,8 @@ namespace Speedtest.Controller
     {
         public static double tryparseTmp;
         public static int lastInsertedXYValue = 0;
+        public static readonly bool multipleChart = false;
+        public static double lastValueForEdgeDetecting = double.NaN;
 
         internal static CartesianChart InitializeDefaultChart(CartesianChart chart, DefaultChartUserControl model)
         {
@@ -103,7 +105,7 @@ namespace Speedtest.Controller
             catch (Exception e)
             {
 
-                MessageBox.Show("refresh chartvalues" + e.Message);
+                //MessageBox.Show("refresh chartvalues" + e.Message);
             }
 
 
@@ -145,11 +147,11 @@ namespace Speedtest.Controller
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Chartcontroller / Print Chart Monitor" + ex.Message);
+                //MessageBox.Show("Chartcontroller / Print Chart Monitor" + ex.Message);
             }
         }
 
-        internal static void printGearedChart(double[] importantValues, int numberOfPanelsDisplayed, MainFrame mainFrameModel, bool recording=false)
+        internal static void printGearedChart(MainFrame mainFrameModel, int numberOfPanelsDisplayed, double[] importantValues)
         {
             try
             {
@@ -157,20 +159,20 @@ namespace Speedtest.Controller
                 {
                     for (var i = 0; i < numberOfPanelsDisplayed; i++)
                     {
-                        ChartController.RefreshDefaultChartValues(mainFrameModel.defaultCharts[i].viewModel, importantValues[i], recording, mainFrameModel,false);
+                        ChartController.RefreshDefaultChartValues(mainFrameModel, mainFrameModel.defaultCharts[i].viewModel, importantValues[i], multipleChart);
                     }
                 }
                 else
                 {
                     for (var i = 0; i < numberOfPanelsDisplayed; i++)
                     {
-                        ChartController.RefreshDefaultChartValues(mainFrameModel.defaultCharts[i].viewModel, double.NaN, recording, mainFrameModel,false);
+                        ChartController.RefreshDefaultChartValues(mainFrameModel, mainFrameModel.defaultCharts[i].viewModel, double.NaN, multipleChart);
                     }
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Chartcontroller / Print Chart" + ex.Message);
+                //MessageBox.Show("Chartcontroller / Print Chart" + ex.Message);
             }
 
         }
@@ -179,38 +181,39 @@ namespace Speedtest.Controller
         {
             try
             {
-                double _tmpval = double.NaN ;
+                double _tmpval = double.NaN;
                 if (sendingData != null && sendingData.Length > mainframe.selectIncomingLiveChannelsElementValue)
                 {
                     _tmpval = sendingData[mainframe.selectIncomingLiveChannelsElementValue];
                 }
-                else {
+                else
+                {
                     MessageBox.Show(Strings.Error_ChannelNetExistOrFound);
                     mainframe.StartStopButton.PerformClick();
                 }
 
-                
 
-                ChartController.RefreshDefaultChartValues(defaultChartUserControl.viewModel, _tmpval,mainframe.Recording, mainframe);
+
+                ChartController.RefreshDefaultChartValues(mainframe, defaultChartUserControl.viewModel, _tmpval);
             }
             catch (Exception e)
             {
 
-                MessageBox.Show("XY" + e.Message);
+                //MessageBox.Show("XY" + e.Message);
             }
 
 
         }
 
-        private static void RefreshDefaultChartValues(DefaultChartViewModel viewModel, double tmpval,bool recording, MainFrame mainFrame, bool isSingleGraph=true)
+        private static void RefreshDefaultChartValues(MainFrame mainFrame, DefaultChartViewModel viewModel, double tmpval, bool isSingleGraph = true)
         {
             var values = viewModel.values;
             var rec = viewModel.RecordValues;
             var edge = viewModel.EdgeDetectingLine;
             var mean = viewModel.MeanValues;
-
+            bool recording = mainFrame.Recording;
             double avg = double.NaN;
-            
+
             if (MainFrame.meanValueIsOn && isSingleGraph)
             {
                 avg = values.Select(p => p.Y).ToArray().Average();
@@ -224,7 +227,8 @@ namespace Speedtest.Controller
                     values[lastInsertedXYValue++].Y = double.NaN;
                     rec[lastInsertedXYValue++].Y = tmpval;
                 }
-                else {
+                else
+                {
                     values[lastInsertedXYValue++].Y = tmpval;
                     rec[lastInsertedXYValue++].Y = double.NaN;
                 }
@@ -234,7 +238,8 @@ namespace Speedtest.Controller
 
                     mean[lastInsertedXYValue++].Y = avg;
                 }
-                else {
+                else
+                {
                     mean[lastInsertedXYValue++].Y = double.NaN;
                 }
 
@@ -245,12 +250,14 @@ namespace Speedtest.Controller
                         edge[i].Y = mainFrame.tresholdElementValue;
                     }
                 }
-                else {
+                else
+                {
                     edge[lastInsertedXYValue++].Y = double.NaN;
                 }
 
             }
-            else {
+            else
+            {
                 if (recording)
                 {
                     values = shiftListToTheLeft(values, viewModel);
@@ -271,26 +278,63 @@ namespace Speedtest.Controller
                 if (MainFrame.meanValueIsOn && isSingleGraph)
                 {
                     mean = shiftListToTheLeft(mean, viewModel);
-                    mean[lastInsertedXYValue-1].Y = avg;
+                    mean[lastInsertedXYValue - 1].Y = avg;
                 }
                 else
                 {
                     mean = shiftListToTheLeft(mean, viewModel);
-                    mean[lastInsertedXYValue-1].Y = double.NaN;
+                    mean[lastInsertedXYValue - 1].Y = double.NaN;
                 }
 
                 if (MainFrame.edgeDetecting)
                 {
+                    var timer = mainFrame.timer;
+                    if (mainFrame.edgeTypeElementValue == Strings.Measure_EdgeType_Rising)
+                    {
+                        if (lastValueForEdgeDetecting < MainFrame.Treshold && tmpval > MainFrame.Treshold) {
+                            if (timer.IsRunning)
+                            {
+                                timer.Stop();
+                                mainFrame.periodTimeCaption = Strings.Measure_PeriodTimeLabel + timer.ElapsedMilliseconds+"ms";
+                                timer.Restart();
+                            }
+                            else {
+                                timer.Start();
+                            }
+                        }
+
+                    }
+                    else if(mainFrame.edgeTypeElementValue == Strings.Measure_EdgeType_Fall){
+                        if (lastValueForEdgeDetecting > MainFrame.Treshold && tmpval < MainFrame.Treshold)
+                        {
+                            if (timer.IsRunning)
+                            {
+                                timer.Stop();
+                                mainFrame.periodTimeCaption = Strings.Measure_PeriodTimeLabel + timer.ElapsedMilliseconds + "ms";
+                                timer.Restart();
+                            }
+                            else
+                            {
+                                timer.Start();
+                            }
+                        }
+
+                    }
+
                     edge = shiftListToTheLeft(edge, viewModel);
                     for (int i = 0; i < edge.Count(); i++)
                     {
                         edge[i].Y = mainFrame.tresholdElementValue;
                     }
+
+                    lastValueForEdgeDetecting = tmpval;
                 }
-                else {
+                else
+                {
                     edge = shiftListToTheLeft(edge, viewModel);
-                    edge[lastInsertedXYValue-1].Y = double.NaN;
+                    edge[lastInsertedXYValue - 1].Y = double.NaN;
                 }
+
 
 
             }
@@ -302,9 +346,9 @@ namespace Speedtest.Controller
             list.Remove(list.First());
             list.Add(new ObservablePoint(Double.NaN, Double.NaN));
             double T = 0;
-            for(int i=0; i<list.Count;i++)
+            for (int i = 0; i < list.Count; i++)
             {
-                list[i].X = (double) T;
+                list[i].X = (double)T;
                 T += viewModel.deltaTime;
             }
             return list;

@@ -168,7 +168,7 @@ namespace Speedtest
             catch (Exception)
             {
 
-                MessageBox.Show("displayModeElement_EditValueChanged");
+                //MessageBox.Show("displayModeElement_EditValueChanged");
             }
 
 
@@ -254,7 +254,7 @@ namespace Speedtest
             catch (Exception e)
             {
 
-                MessageBox.Show("startStopButton_ItemClick");
+                //MessageBox.Show("startStopButton_ItemClick");
             }
 
 

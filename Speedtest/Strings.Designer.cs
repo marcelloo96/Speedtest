@@ -259,6 +259,15 @@ namespace Speedtest {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Period time:.
+        /// </summary>
+        internal static string Measure_PeriodTimeLabel {
+            get {
+                return ResourceManager.GetString("Measure_PeriodTimeLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Monitor.
         /// </summary>
         internal static string MeasureTab_DisplayMode_Monitor {

@@ -69,8 +69,8 @@ namespace Speedtest.Controller
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
-                MessageBox.Show("Do The Connection");
+                //MessageBox.Show(ex.Message);
+                //MessageBox.Show("Do The Connection");
             }
             return false;
         }
@@ -94,8 +94,8 @@ namespace Speedtest.Controller
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show(ex.Message);
-                    MessageBox.Show("MeasureTabController CloseSerialOnExit");
+                    //MessageBox.Show(ex.Message);
+                    //MessageBox.Show("MeasureTabController CloseSerialOnExit");
 
                 }
             }

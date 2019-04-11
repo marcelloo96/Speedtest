@@ -2,6 +2,7 @@
 using DevExpress.XtraEditors.Repository;
 using Speedtest.Controller;
 using System;
+using System.Diagnostics;
 using System.Windows.Forms;
 
 namespace Speedtest
@@ -12,6 +13,7 @@ namespace Speedtest
         public static bool meanValueIsOn = false;
         public static string edgeType = Strings.Measure_EdgeType_Rising;
         public static double Treshold = 0;
+        public Stopwatch timer;
 
         #region ElementValues
 
