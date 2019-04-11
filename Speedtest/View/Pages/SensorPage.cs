@@ -8,7 +8,7 @@ namespace Speedtest
     {
         public static bool useLinearity = false;
         public static double sensitivity = 1;
-        public static double zeroValue = 1;
+        public static double zeroValue = 0;
 
         #region ElementValues
 
