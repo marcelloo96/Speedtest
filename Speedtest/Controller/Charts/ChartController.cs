@@ -260,29 +260,29 @@ namespace Speedtest.Controller
             {
                 if (recording)
                 {
-                    values = shiftListToTheLeft(values, viewModel);
+                    values = PopFirstAndAddNewCorrectPoint(values, viewModel);
                     values[lastInsertedXYValue - 1].Y = double.NaN;
 
-                    rec = shiftListToTheLeft(rec, viewModel);
+                    rec = PopFirstAndAddNewCorrectPoint(rec, viewModel);
                     rec[lastInsertedXYValue - 1].Y = tmpval;
                 }
                 else
                 {
-                    values = shiftListToTheLeft(values, viewModel);
+                    values = PopFirstAndAddNewCorrectPoint(values, viewModel);
                     values[lastInsertedXYValue - 1].Y = tmpval;
 
-                    rec = shiftListToTheLeft(rec, viewModel);
+                    rec = PopFirstAndAddNewCorrectPoint(rec, viewModel);
                     rec[lastInsertedXYValue - 1].Y = double.NaN;
                 }
 
                 if (MainFrame.meanValueIsOn && isSingleGraph)
                 {
-                    mean = shiftListToTheLeft(mean, viewModel);
+                    mean = PopFirstAndAddNewCorrectPoint(mean, viewModel);
                     mean[lastInsertedXYValue - 1].Y = avg;
                 }
                 else
                 {
-                    mean = shiftListToTheLeft(mean, viewModel);
+                    mean = PopFirstAndAddNewCorrectPoint(mean, viewModel);
                     mean[lastInsertedXYValue - 1].Y = double.NaN;
                 }
 
@@ -321,7 +321,7 @@ namespace Speedtest.Controller
 
                     }
 
-                    edge = shiftListToTheLeft(edge, viewModel);
+                    edge = PopFirstAndAddNewCorrectPoint(edge, viewModel);
                     for (int i = 0; i < edge.Count(); i++)
                     {
                         edge[i].Y = mainFrame.tresholdElementValue;
@@ -331,7 +331,7 @@ namespace Speedtest.Controller
                 }
                 else
                 {
-                    edge = shiftListToTheLeft(edge, viewModel);
+                    edge = PopFirstAndAddNewCorrectPoint(edge, viewModel);
                     edge[lastInsertedXYValue - 1].Y = double.NaN;
                 }
 
@@ -341,16 +341,12 @@ namespace Speedtest.Controller
 
         }
 
-        private static GearedValues<ObservablePoint> shiftListToTheLeft(GearedValues<ObservablePoint> list, DefaultChartViewModel viewModel)
+        private static GearedValues<ObservablePoint> PopFirstAndAddNewCorrectPoint(GearedValues<ObservablePoint> list, DefaultChartViewModel viewModel)
         {
             list.Remove(list.First());
-            list.Add(new ObservablePoint(Double.NaN, Double.NaN));
-            double T = 0;
-            for (int i = 0; i < list.Count; i++)
-            {
-                list[i].X = (double)T;
-                T += viewModel.deltaTime;
-            }
+            var nextT = list.LastOrDefault().X + viewModel.deltaTime;
+            list.Add(new ObservablePoint(nextT, Double.NaN));
+
             return list;
         }
 
