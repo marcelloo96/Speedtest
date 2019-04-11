@@ -9,6 +9,7 @@ using System.Text;
 using Speedtest.Controller.TabControllers;
 using LiveCharts.Geared;
 using System.Linq;
+using System.Globalization;
 
 namespace Speedtest
 {
@@ -27,6 +28,8 @@ namespace Speedtest
         public static int numberOfPanels = 1;
         private List<UserControl> activePanels;
         private List<string> mmwFocusedPages;
+        CultureInfo culture = CultureInfo.CreateSpecificCulture("en-US");
+        public static int intervals=10;
         #endregion
 
         public MainFrame()
@@ -97,14 +100,14 @@ namespace Speedtest
                     Debug.WriteLine(currentlyArrived);
                     printingData = Array.ConvertAll(currentlyArrived.Split(' '), Double.Parse);
 
-                    if (Recording)
-                    {
-                        csvBuffer.AppendLine(String.Join(",", printingData));
-                    }
                     if (useLinearity)
                     {
                         printingData = calculateLinearValue(printingData, sensitivity, zeroValue);
                     }
+                    if (Recording)
+                    {
+                        csvBuffer.AppendLine(String.Join(",", printingData.Select(p=>p.ToString("F",culture))));
+                    }                   
 
                     if (DisplayModeElementValue == Strings.MeasureTab_DisplayMode_MultiPanel)
                     {

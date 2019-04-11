@@ -39,7 +39,7 @@ namespace Speedtest.Model
                 }
                 foreach (var line in lines)
                 {
-                    var columns = Array.ConvertAll(line.Split(','), Double.Parse);
+                    var columns = Array.ConvertAll(line.Split(',').Select(p=>p.Replace('.',',')).ToArray(), Double.Parse);
 
                     for (int i = 0; i < columns.Count(); i++)
                     {
