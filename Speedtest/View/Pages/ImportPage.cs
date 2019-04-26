@@ -114,7 +114,7 @@ namespace Speedtest
         private void printFFT(List<double> selectedChart)
         {
             int originalLenght = selectedChart.Count;
-            int fftLenght = originalLenght / 2;
+            int fftLenght = originalLenght / 2 + (originalLenght%2==1 ? 1:0);
 
             complexArray = new Complex[originalLenght];
             for (int i = 0; i < selectedChart.Count; i++)
@@ -123,11 +123,12 @@ namespace Speedtest
             }
 
             FourierTransform.DFT(complexArray, FourierTransform.Direction.Forward);
-            double[] fftValues = new double[fftLenght];
-            for (int i = fftLenght; i < complexArray.Count(); i++)
+            double[] fftValues = new double[originalLenght];
+            for (int i = 0; i < complexArray.Count(); i++)
             {
-                fftValues[i - fftLenght] = complexArray[i].Magnitude;
+                fftValues[i] = complexArray[i].Magnitude;
             }
+            fftValues.ToList().RemoveRange(0, fftLenght);
 
             double[] Y = fftValues.Reverse().ToArray();
             double[] X = new double[originalLenght];
