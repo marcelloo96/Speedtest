@@ -155,18 +155,11 @@ namespace Speedtest.Controller
         {
             try
             {
-                if (importantValues != null && importantValues.Length >= numberOfPanelsDisplayed)
+                if (importantValues != null)
                 {
-                    for (var i = 0; i < numberOfPanelsDisplayed; i++)
+                    for (var i = 0; i < importantValues.Length; i++)
                     {
                         ChartController.RefreshDefaultChartValues(mainFrameModel, mainFrameModel.defaultCharts[i].viewModel, importantValues[i], multipleChart);
-                    }
-                }
-                else
-                {
-                    for (var i = 0; i < numberOfPanelsDisplayed; i++)
-                    {
-                        ChartController.RefreshDefaultChartValues(mainFrameModel, mainFrameModel.defaultCharts[i].viewModel, double.NaN, multipleChart);
                     }
                 }
             }
@@ -216,7 +209,7 @@ namespace Speedtest.Controller
 
             if (MainFrame.meanValueIsOn && isSingleGraph)
             {
-                avg = values.Select(p => p.Y).ToArray().Average();
+                avg = values.Concat(rec).Where(p => double.IsNaN(p.Y)==false).Select(p => p.Y).Average();
                 mainFrame.meanValueLabelCaption = Strings.Global_MeanValue + avg.ToString("F2");
             }
 
@@ -243,7 +236,7 @@ namespace Speedtest.Controller
                     mean[lastInsertedXYValue++].Y = double.NaN;
                 }
 
-                if (MainFrame.edgeDetecting)
+                if (MainFrame.edgeDetecting && isSingleGraph)
                 {
                     for (int i = 0; i < edge.Count(); i++)
                     {
@@ -286,7 +279,7 @@ namespace Speedtest.Controller
                     mean[lastInsertedXYValue - 1].Y = double.NaN;
                 }
 
-                if (MainFrame.edgeDetecting)
+                if (MainFrame.edgeDetecting && isSingleGraph)
                 {
                     var timer = mainFrame.timer;
                     if (mainFrame.edgeTypeElementValue == Strings.Measure_EdgeType_Rising)
