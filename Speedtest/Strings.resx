@@ -129,6 +129,9 @@
   <data name="Global_Error_NoPortSelected" xml:space="preserve">
     <value>No port selected!</value>
   </data>
+  <data name="Global_Error_WrongFormat" xml:space="preserve">
+    <value>Wrong input format, check settings!</value>
+  </data>
   <data name="Global_Export" xml:space="preserve">
     <value>Export</value>
   </data>

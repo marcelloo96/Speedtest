@@ -97,7 +97,16 @@ namespace Speedtest
                 if (isRunning)
                 {
                     Debug.WriteLine(currentlyArrived);
-                    printingData = Array.ConvertAll(currentlyArrived.Split(' '), Double.Parse);
+
+                    try
+                    {
+                        printingData = Array.ConvertAll(currentlyArrived.Split(' '), Double.Parse);
+                    }
+                    catch (FormatException)
+                    {
+                        startStopButton.PerformClick();
+                        MessageBox.Show(Strings.Global_Error_WrongFormat);
+                    }
 
                     if (useLinearity)
                     {

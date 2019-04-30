@@ -97,6 +97,15 @@ namespace Speedtest {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Wrong input format, check settings!.
+        /// </summary>
+        internal static string Global_Error_WrongFormat {
+            get {
+                return ResourceManager.GetString("Global_Error_WrongFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Export.
         /// </summary>
         internal static string Global_Export {

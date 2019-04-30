@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainFrame));
             this.ribbonControl = new DevExpress.XtraBars.Ribbon.RibbonControl();
             this.selectedPortElement = new DevExpress.XtraBars.BarEditItem();
@@ -143,10 +142,12 @@
             this.fileLocationBreadCrumbElementEepositoryItemBreadCrumbEdit = new DevExpress.XtraEditors.Repository.RepositoryItemBreadCrumbEdit();
             this.chartNameLookUpRepositoryItemLookUpEdit = new DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit();
             this.ribbonStatusBar1 = new DevExpress.XtraBars.Ribbon.RibbonStatusBar();
-            this.defaultLookAndFeel1 = new DevExpress.LookAndFeel.DefaultLookAndFeel(this.components);
+            this.defaultLookAndFeel1 = new DevExpress.LookAndFeel.DefaultLookAndFeel();
             this.contentPanel = new DevExpress.XtraEditors.PanelControl();
-            this.dockManager = new DevExpress.XtraBars.Docking.DockManager(this.components);
-            this.serialPort = new System.IO.Ports.SerialPort(this.components);
+            this.dockManager = new DevExpress.XtraBars.Docking.DockManager();
+            this.serialPort = new System.IO.Ports.SerialPort();
+            this.portConnectButton = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
+            this.PortControlPanel = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             ((System.ComponentModel.ISupportInitialize)(this.ribbonControl)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.selectedPortRepositoryItemComboBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.baudRateRepositoryItemComboBox)).BeginInit();
@@ -304,14 +305,14 @@
             this.tresholdValueRepositoryItemTextEdit,
             this.detectingEdgeRepositoryItemToggleSwitch,
             this.selectIncomingLiveChannelsRepositoryItemComboBox});
-            this.ribbonControl.Size = new System.Drawing.Size(1037, 146);
+            this.ribbonControl.Size = new System.Drawing.Size(1127, 146);
             this.ribbonControl.StatusBar = this.ribbonStatusBar1;
             this.ribbonControl.SelectedPageChanged += new System.EventHandler(this.ribbonControl_SelectedPageChanged);
             // 
             // selectedPortElement
             // 
             this.selectedPortElement.AccessibleName = "";
-            this.selectedPortElement.Caption = "Selected Port:";
+            this.selectedPortElement.Caption = "Port Name:";
             this.selectedPortElement.Edit = this.selectedPortRepositoryItemComboBox;
             this.selectedPortElement.EditHeight = 20;
             this.selectedPortElement.EditWidth = 100;
@@ -929,7 +930,9 @@
             // 
             this.portOptionsPage.Groups.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageGroup[] {
             this.portBasicsGroup,
-            this.portAdvancedsGroup});
+            this.portAdvancedsGroup,
+            this.portConnectButton,
+            this.PortControlPanel});
             this.portOptionsPage.Name = "portOptionsPage";
             this.portOptionsPage.Text = "Port";
             // 
@@ -943,6 +946,7 @@
             // 
             // portAdvancedsGroup
             // 
+            this.portAdvancedsGroup.AllowTextClipping = false;
             this.portAdvancedsGroup.ItemLinks.Add(this.dataBitsElement, true);
             this.portAdvancedsGroup.ItemLinks.Add(this.parityElement);
             this.portAdvancedsGroup.ItemLinks.Add(this.stopBitElement);
@@ -1196,7 +1200,7 @@
             this.ribbonStatusBar1.Location = new System.Drawing.Point(0, 473);
             this.ribbonStatusBar1.Name = "ribbonStatusBar1";
             this.ribbonStatusBar1.Ribbon = this.ribbonControl;
-            this.ribbonStatusBar1.Size = new System.Drawing.Size(1037, 21);
+            this.ribbonStatusBar1.Size = new System.Drawing.Size(1127, 21);
             // 
             // defaultLookAndFeel1
             // 
@@ -1207,7 +1211,7 @@
             this.contentPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.contentPanel.Location = new System.Drawing.Point(0, 146);
             this.contentPanel.Name = "contentPanel";
-            this.contentPanel.Size = new System.Drawing.Size(1037, 327);
+            this.contentPanel.Size = new System.Drawing.Size(1127, 327);
             this.contentPanel.TabIndex = 2;
             // 
             // dockManager
@@ -1225,11 +1229,25 @@
             "DevExpress.XtraBars.Navigation.TileNavPane",
             "DevExpress.XtraBars.TabFormControl"});
             // 
+            // portConnectButton
+            // 
+            this.portConnectButton.AllowTextClipping = false;
+            this.portConnectButton.ItemLinks.Add(this.connectButton);
+            this.portConnectButton.Name = "portConnectButton";
+            this.portConnectButton.Text = "Connect";
+            // 
+            // PortControlPanel
+            // 
+            this.PortControlPanel.AllowTextClipping = false;
+            this.PortControlPanel.ItemLinks.Add(this.startStopButton);
+            this.PortControlPanel.Name = "PortControlPanel";
+            this.PortControlPanel.Text = "Control Panel";
+            // 
             // MainFrame
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1037, 494);
+            this.ClientSize = new System.Drawing.Size(1127, 494);
             this.Controls.Add(this.contentPanel);
             this.Controls.Add(this.ribbonStatusBar1);
             this.Controls.Add(this.ribbonControl);
@@ -1412,5 +1430,7 @@
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup sensorPageStartStopButtonGroup;
         private DevExpress.XtraBars.BarEditItem selectIncomingLiveChannelsElement;
         private DevExpress.XtraEditors.Repository.RepositoryItemComboBox selectIncomingLiveChannelsRepositoryItemComboBox;
+        private DevExpress.XtraBars.Ribbon.RibbonPageGroup portConnectButton;
+        private DevExpress.XtraBars.Ribbon.RibbonPageGroup PortControlPanel;
     }
 }

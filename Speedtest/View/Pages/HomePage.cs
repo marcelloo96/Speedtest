@@ -102,6 +102,9 @@ namespace Speedtest
             if (connectedState)
             {
                 //Disconnecting
+                if (isRunning) {
+                    startStopButton.PerformClick();
+                }
                
                 homePortBasicGroup.Enabled = true;
                 keepRecordsElement.Enabled = true;
