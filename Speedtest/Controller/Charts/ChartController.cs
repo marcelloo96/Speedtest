@@ -157,7 +157,8 @@ namespace Speedtest.Controller
             {
                 if (importantValues != null)
                 {
-                    for (var i = 0; i < importantValues.Length; i++)
+                    var correctLenght = Math.Min(importantValues.Length, numberOfPanelsDisplayed);
+                    for (var i = 0; i < correctLenght; i++)
                     {
                         ChartController.RefreshDefaultChartValues(mainFrameModel, mainFrameModel.defaultCharts[i].viewModel, importantValues[i], multipleChart);
                     }
