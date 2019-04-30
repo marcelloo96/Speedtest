@@ -72,12 +72,6 @@ namespace Speedtest
         {
             testConnect();
         }
-        private void selectedPortRepositoryItemComboBox_DoubleClick(object sender, EventArgs e)
-        {
-            SelectedPortRepositoryItemComboBox.Items.Clear();
-            SelectedPortRepositoryItemComboBox.Items.AddRange(SerialPort.GetPortNames());
-
-        }
         private void baudRateElement_EditValueChanged(object sender, EventArgs e)
         {
             if (serialPort != null)
@@ -167,6 +161,21 @@ namespace Speedtest
         #region Groups
         public RibbonPageGroup PortAdvancedsGroup { get { return portAdvancedsGroup; } }
         #endregion
+        /// <summary>
+        /// New COM port available event
+        /// </summary>
+        /// <param name="m"></param>
+        protected override void WndProc(ref Message m)
+        {
+            switch (m.Msg)
+            {
+                case 537: //WM_DEVICECHANGE
+                    SelectedPortRepositoryItemComboBox.Items.Clear();
+                    SelectedPortRepositoryItemComboBox.Items.AddRange(SerialPort.GetPortNames());
+                    break;
+            }
+            base.WndProc(ref m);
+        }
 
     }
 }

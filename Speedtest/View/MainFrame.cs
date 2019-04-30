@@ -5,7 +5,6 @@ using DevExpress.XtraBars.Ribbon;
 using System.Collections.Generic;
 using Speedtest.View.MeasureWindow;
 using System.Diagnostics;
-using System.Text;
 using Speedtest.Controller.TabControllers;
 using LiveCharts.Geared;
 using System.Linq;

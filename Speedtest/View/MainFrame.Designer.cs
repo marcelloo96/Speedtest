@@ -58,7 +58,6 @@
             this.dtrEnableRepositoryItemComboBox = new DevExpress.XtraEditors.Repository.RepositoryItemComboBox();
             this.handShakeElement = new DevExpress.XtraBars.BarEditItem();
             this.handShakeRepositoryItemComboBox = new DevExpress.XtraEditors.Repository.RepositoryItemComboBox();
-            this.delimeterRepositoryItemTextBox = new DevExpress.XtraEditors.Repository.RepositoryItemTextEdit();
             this.samplingRateElement = new DevExpress.XtraBars.BarEditItem();
             this.SamplingRepositoryRateItemTextEdit = new DevExpress.XtraEditors.Repository.RepositoryItemTextEdit();
             this.keepRecordsElement = new DevExpress.XtraBars.BarEditItem();
@@ -130,6 +129,7 @@
             this.zeroValueRepositoryItemSpinEdit = new DevExpress.XtraEditors.Repository.RepositoryItemSpinEdit();
             this.sensitivityRepositoryItem = new DevExpress.XtraEditors.Repository.RepositoryItemSpinEdit();
             this.delimeterRepositoryItemComboBox = new DevExpress.XtraEditors.Repository.RepositoryItemComboBox();
+            this.delimeterRepositoryItemTextBox = new DevExpress.XtraEditors.Repository.RepositoryItemTextEdit();
             this.samplingRateRepositoryItem = new DevExpress.XtraEditors.Repository.RepositoryItemSpinEdit();
             this.repositoryItemTextEdit1 = new DevExpress.XtraEditors.Repository.RepositoryItemTextEdit();
             this.numberOfIncomingDataRepositoryItemTextBox = new DevExpress.XtraEditors.Repository.RepositoryItemTextEdit();
@@ -160,7 +160,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.rtsEnableRepositoryItemComboBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dtrEnableRepositoryItemComboBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.handShakeRepositoryItemComboBox)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.delimeterRepositoryItemTextBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.SamplingRepositoryRateItemTextEdit)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.keepRecordsRepositoryItemTextBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.zeroValueRepositoryItemTextEdit)).BeginInit();
@@ -182,6 +181,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.zeroValueRepositoryItemSpinEdit)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.sensitivityRepositoryItem)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.delimeterRepositoryItemComboBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.delimeterRepositoryItemTextBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.samplingRateRepositoryItem)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemTextEdit1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numberOfIncomingDataRepositoryItemTextBox)).BeginInit();
@@ -325,7 +325,6 @@
             this.selectedPortRepositoryItemComboBox.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.selectedPortRepositoryItemComboBox.Name = "selectedPortRepositoryItemComboBox";
-            this.selectedPortRepositoryItemComboBox.DoubleClick += new System.EventHandler(this.selectedPortRepositoryItemComboBox_DoubleClick);
             // 
             // baudRateElement
             // 
@@ -534,11 +533,6 @@
             this.handShakeRepositoryItemComboBox.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.handShakeRepositoryItemComboBox.Name = "handShakeRepositoryItemComboBox";
-            // 
-            // delimeterRepositoryItemTextBox
-            // 
-            this.delimeterRepositoryItemTextBox.AutoHeight = false;
-            this.delimeterRepositoryItemTextBox.Name = "delimeterRepositoryItemTextBox";
             // 
             // samplingRateElement
             // 
@@ -1110,6 +1104,11 @@
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.delimeterRepositoryItemComboBox.Name = "delimeterRepositoryItemComboBox";
             // 
+            // delimeterRepositoryItemTextBox
+            // 
+            this.delimeterRepositoryItemTextBox.AutoHeight = false;
+            this.delimeterRepositoryItemTextBox.Name = "delimeterRepositoryItemTextBox";
+            // 
             // samplingRateRepositoryItem
             // 
             this.samplingRateRepositoryItem.AutoHeight = false;
@@ -1253,7 +1252,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.rtsEnableRepositoryItemComboBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dtrEnableRepositoryItemComboBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.handShakeRepositoryItemComboBox)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.delimeterRepositoryItemTextBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.SamplingRepositoryRateItemTextEdit)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.keepRecordsRepositoryItemTextBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.zeroValueRepositoryItemTextEdit)).EndInit();
@@ -1275,6 +1273,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.zeroValueRepositoryItemSpinEdit)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.sensitivityRepositoryItem)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.delimeterRepositoryItemComboBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.delimeterRepositoryItemTextBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.samplingRateRepositoryItem)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemTextEdit1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numberOfIncomingDataRepositoryItemTextBox)).EndInit();
