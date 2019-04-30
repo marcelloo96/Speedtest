@@ -17,7 +17,7 @@ namespace Speedtest.Controller
         public static readonly bool[] boolOptions = new bool[] { true, false };
         public static readonly Handshake[] handshakeOptionList = new Handshake[] { Handshake.None, Handshake.RequestToSend, Handshake.RequestToSendXOnXOff, Handshake.XOnXOff };
         public static readonly String defaultDelimeter = ("\\n");
-        public static readonly int[] readBufferSizeOptionList = getListOf2Exponents();
+        public static readonly int[] readWriteBufferSizes = getListOf2Exponents();
 
 
         internal static void FillEditors(MainFrame model)
@@ -34,8 +34,8 @@ namespace Speedtest.Controller
             model.RtsEnableRepositoryItemComboBox.Items.AddRange(boolOptions);
             model.DtrEnableRepositoryItemComboBox.Items.AddRange(boolOptions);
             model.HandShakeRepositoryItemComboBox.Items.AddRange(handshakeOptionList);
-            model.ReadBufferSizeRepositoryItemComboBox.Items.AddRange(readBufferSizeOptionList);
-            //model.DelimeterRepositoryItemComboBox.Items.Add("\\r\\n");
+            model.ReadBufferSizeRepositoryItemComboBox.Items.AddRange(readWriteBufferSizes);
+            model.WriteBufferSizeRepositoryItemComboBox.Items.AddRange(readWriteBufferSizes);
 
             //SETTING DEFAULT VALUES
             model.baudRateFromElementValue = baudRateOptionsList[11]; //115200
@@ -43,10 +43,10 @@ namespace Speedtest.Controller
             model.parityElementValue = Parity.None;
             model.stopBitElementValue = StopBits.One;
             model.handShakeElementValue = Handshake.None;
-            model.readBufferSizeElementValue = readBufferSizeOptionList[0];
+            model.readBufferSizeElementValue = readWriteBufferSizes[0];
+            model.writeBufferSizeElementValue = readWriteBufferSizes[0];
             model.rtsEnableElementValue = false;
             model.dtrEnableElementValue = false;
-            model.delimeterElementValue = defaultDelimeter;
 
             #region DisableEditingOnComboBoxes
             model.BaudRateRepositoryItemComboBox.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;

@@ -65,11 +65,6 @@ namespace Speedtest
             get { return (int)writeBufferSizeElement.EditValue; }
             set { writeBufferSizeElement.EditValue = value; }
         }
-        public string delimeterElementValue
-        {
-            get { return (string)delimeterElement.EditValue; }
-            set { delimeterElement.EditValue = value; }
-        }
 
         #endregion
         #region EditValueChanged
@@ -152,23 +147,6 @@ namespace Speedtest
             if (serialPort != null)
             {
                 serialPort.ReadBufferSize = readBufferSizeElementValue;
-            }
-        }
-        private void delimeterElement_EditValueChanged(object sender, EventArgs e)
-        {
-            if (serialPort != null)
-            {
-                if ((string)delimeterElement.EditValue == "" || (string)delimeterElement.EditValue == PortOptionsTabController.defaultDelimeter)
-                {
-                    serialPort.NewLine = "\n";
-                }
-                //TODO különböző delimetereket tudjon megkülönböztetni
-
-                if ((string)delimeterElement.EditValue == "")
-                {
-                    delimeterElementValue = PortOptionsTabController.defaultDelimeter;
-                }
-
             }
         }
         #endregion

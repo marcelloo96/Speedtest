@@ -58,7 +58,6 @@
             this.dtrEnableRepositoryItemComboBox = new DevExpress.XtraEditors.Repository.RepositoryItemComboBox();
             this.handShakeElement = new DevExpress.XtraBars.BarEditItem();
             this.handShakeRepositoryItemComboBox = new DevExpress.XtraEditors.Repository.RepositoryItemComboBox();
-            this.delimeterElement = new DevExpress.XtraBars.BarEditItem();
             this.delimeterRepositoryItemTextBox = new DevExpress.XtraEditors.Repository.RepositoryItemTextEdit();
             this.samplingRateElement = new DevExpress.XtraBars.BarEditItem();
             this.SamplingRepositoryRateItemTextEdit = new DevExpress.XtraEditors.Repository.RepositoryItemTextEdit();
@@ -114,8 +113,8 @@
             this.portAdvancedsGroup = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.measurePage = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.measurePageStartStopButtonGroup = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
-            this.edgeDetectGroup = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.MeanValueGroup = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
+            this.edgeDetectGroup = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.sensorOptionsPage = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.sensorPageStartStopButtonGroup = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.ribbonPageGroup1 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
@@ -220,7 +219,6 @@
             this.rtsEnableElement,
             this.dtrEnableElement,
             this.handShakeElement,
-            this.delimeterElement,
             this.samplingRateElement,
             this.keepRecordsElement,
             this.zeroValueElement,
@@ -536,16 +534,6 @@
             this.handShakeRepositoryItemComboBox.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.handShakeRepositoryItemComboBox.Name = "handShakeRepositoryItemComboBox";
-            // 
-            // delimeterElement
-            // 
-            this.delimeterElement.Caption = "Delimeter:";
-            this.delimeterElement.Edit = this.delimeterRepositoryItemTextBox;
-            this.delimeterElement.EditHeight = 20;
-            this.delimeterElement.EditWidth = 100;
-            this.delimeterElement.Id = 22;
-            this.delimeterElement.Name = "delimeterElement";
-            this.delimeterElement.EditValueChanged += new System.EventHandler(this.delimeterElement_EditValueChanged);
             // 
             // delimeterRepositoryItemTextBox
             // 
@@ -969,7 +957,6 @@
             this.portAdvancedsGroup.ItemLinks.Add(this.handShakeElement);
             this.portAdvancedsGroup.ItemLinks.Add(this.writeBufferSizeElement, true);
             this.portAdvancedsGroup.ItemLinks.Add(this.readBufferSizeElement);
-            this.portAdvancedsGroup.ItemLinks.Add(this.delimeterElement);
             this.portAdvancedsGroup.Name = "portAdvancedsGroup";
             this.portAdvancedsGroup.Text = "Advanced";
             // 
@@ -989,6 +976,13 @@
             this.measurePageStartStopButtonGroup.Name = "measurePageStartStopButtonGroup";
             this.measurePageStartStopButtonGroup.Text = "Controller";
             // 
+            // MeanValueGroup
+            // 
+            this.MeanValueGroup.ItemLinks.Add(this.meanValueLabel);
+            this.MeanValueGroup.ItemLinks.Add(this.chartMeanValueElement);
+            this.MeanValueGroup.Name = "MeanValueGroup";
+            this.MeanValueGroup.Text = "Mean Value";
+            // 
             // edgeDetectGroup
             // 
             this.edgeDetectGroup.ItemLinks.Add(this.edgeTypeElement);
@@ -997,13 +991,6 @@
             this.edgeDetectGroup.ItemLinks.Add(this.periodTimeLabel, true);
             this.edgeDetectGroup.Name = "edgeDetectGroup";
             this.edgeDetectGroup.Text = "Edge detect";
-            // 
-            // MeanValueGroup
-            // 
-            this.MeanValueGroup.ItemLinks.Add(this.meanValueLabel);
-            this.MeanValueGroup.ItemLinks.Add(this.chartMeanValueElement);
-            this.MeanValueGroup.Name = "MeanValueGroup";
-            this.MeanValueGroup.Text = "Mean Value";
             // 
             // sensorOptionsPage
             // 
@@ -1354,7 +1341,6 @@
         private DevExpress.XtraBars.Ribbon.RibbonPage displayPage;
         private DevExpress.XtraBars.Docking.DockManager dockManager;
         private DevExpress.XtraEditors.Repository.RepositoryItemComboBox delimeterRepositoryItemComboBox;
-        private DevExpress.XtraBars.BarEditItem delimeterElement;
         private DevExpress.XtraEditors.Repository.RepositoryItemTextEdit delimeterRepositoryItemTextBox;
         public DevExpress.XtraEditors.PanelControl contentPanel;
         private DevExpress.XtraEditors.Repository.RepositoryItemSpinEdit samplingRateRepositoryItem;
