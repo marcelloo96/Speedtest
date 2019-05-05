@@ -27,7 +27,7 @@ namespace Speedtest.Controller
         internal static CartesianChart InitializeDefaultChart(CartesianChart chart, DefaultChartUserControl model)
         {
             model.viewModel = new DefaultChartViewModel(model.deltaT, model.keepRecords);
-            chart.Hoverable = true;
+            chart.Hoverable = false;
             chart.Zoom = ZoomingOptions.Y;
             chart.DisableAnimations = true;
             chart.AutoSize = true;
@@ -254,68 +254,37 @@ namespace Speedtest.Controller
             {
                 if (recording)
                 {
-                    values = PopFirstAndAddNewCorrectPoint(values, viewModel);
+                    values = PopFirstAndAddNewCorrectXValuedPoint(values, viewModel);
                     values[lastInsertedXYValue - 1].Y = double.NaN;
 
-                    rec = PopFirstAndAddNewCorrectPoint(rec, viewModel);
+                    rec = PopFirstAndAddNewCorrectXValuedPoint(rec, viewModel);
                     rec[lastInsertedXYValue - 1].Y = tmpval;
                 }
                 else
                 {
-                    values = PopFirstAndAddNewCorrectPoint(values, viewModel);
+                    values = PopFirstAndAddNewCorrectXValuedPoint(values, viewModel);
                     values[lastInsertedXYValue - 1].Y = tmpval;
 
-                    rec = PopFirstAndAddNewCorrectPoint(rec, viewModel);
+                    rec = PopFirstAndAddNewCorrectXValuedPoint(rec, viewModel);
                     rec[lastInsertedXYValue - 1].Y = double.NaN;
                 }
 
                 if (MainFrame.meanValueIsOn && isSingleGraph)
                 {
-                    mean = PopFirstAndAddNewCorrectPoint(mean, viewModel);
+                    mean = PopFirstAndAddNewCorrectXValuedPoint(mean, viewModel);
                     mean[lastInsertedXYValue - 1].Y = avg;
                 }
                 else
                 {
-                    mean = PopFirstAndAddNewCorrectPoint(mean, viewModel);
+                    mean = PopFirstAndAddNewCorrectXValuedPoint(mean, viewModel);
                     mean[lastInsertedXYValue - 1].Y = double.NaN;
                 }
 
                 if (MainFrame.edgeDetecting && isSingleGraph)
                 {
-                    var timer = mainFrame.timer;
-                    if (mainFrame.edgeTypeElementValue == Strings.Measure_EdgeType_Rising)
-                    {
-                        if (lastValueForEdgeDetecting < MainFrame.Treshold && tmpval > MainFrame.Treshold) {
-                            if (timer.IsRunning)
-                            {
-                                timer.Stop();
-                                mainFrame.periodTimeCaption = Strings.Measure_PeriodTimeLabel + timer.ElapsedMilliseconds+"ms";
-                                timer.Restart();
-                            }
-                            else {
-                                timer.Start();
-                            }
-                        }
+                    printEdgeDetectedPeriodTime(mainFrame, tmpval);
 
-                    }
-                    else if(mainFrame.edgeTypeElementValue == Strings.Measure_EdgeType_Fall){
-                        if (lastValueForEdgeDetecting > MainFrame.Treshold && tmpval < MainFrame.Treshold)
-                        {
-                            if (timer.IsRunning)
-                            {
-                                timer.Stop();
-                                mainFrame.periodTimeCaption = Strings.Measure_PeriodTimeLabel + timer.ElapsedMilliseconds + "ms";
-                                timer.Restart();
-                            }
-                            else
-                            {
-                                timer.Start();
-                            }
-                        }
-
-                    }
-
-                    edge = PopFirstAndAddNewCorrectPoint(edge, viewModel);
+                    edge = PopFirstAndAddNewCorrectXValuedPoint(edge, viewModel);
                     for (int i = 0; i < edge.Count(); i++)
                     {
                         edge[i].Y = mainFrame.tresholdElementValue;
@@ -325,7 +294,7 @@ namespace Speedtest.Controller
                 }
                 else
                 {
-                    edge = PopFirstAndAddNewCorrectPoint(edge, viewModel);
+                    edge = PopFirstAndAddNewCorrectXValuedPoint(edge, viewModel);
                     edge[lastInsertedXYValue - 1].Y = double.NaN;
                 }
 
@@ -335,7 +304,46 @@ namespace Speedtest.Controller
 
         }
 
-        private static GearedValues<ObservablePoint> PopFirstAndAddNewCorrectPoint(GearedValues<ObservablePoint> list, DefaultChartViewModel viewModel)
+        private static void printEdgeDetectedPeriodTime(MainFrame mainFrame, double tmpval)
+        {
+            var timer = mainFrame.timer;
+            if (mainFrame.edgeTypeElementValue == Strings.Measure_EdgeType_Rising)
+            {
+                if (lastValueForEdgeDetecting < MainFrame.Treshold && tmpval > MainFrame.Treshold)
+                {
+                    if (timer.IsRunning)
+                    {
+                        timer.Stop();
+                        mainFrame.periodTimeCaption = Strings.Measure_PeriodTimeLabel + timer.ElapsedMilliseconds + "ms";
+                        timer.Restart();
+                    }
+                    else
+                    {
+                        timer.Start();
+                    }
+                }
+
+            }
+            else if (mainFrame.edgeTypeElementValue == Strings.Measure_EdgeType_Fall)
+            {
+                if (lastValueForEdgeDetecting > MainFrame.Treshold && tmpval < MainFrame.Treshold)
+                {
+                    if (timer.IsRunning)
+                    {
+                        timer.Stop();
+                        mainFrame.periodTimeCaption = Strings.Measure_PeriodTimeLabel + timer.ElapsedMilliseconds + "ms";
+                        timer.Restart();
+                    }
+                    else
+                    {
+                        timer.Start();
+                    }
+                }
+
+            }
+        }
+
+        private static GearedValues<ObservablePoint> PopFirstAndAddNewCorrectXValuedPoint(GearedValues<ObservablePoint> list, DefaultChartViewModel viewModel)
         {
             list.Remove(list.First());
             var nextT = list.LastOrDefault().X + viewModel.deltaTime;

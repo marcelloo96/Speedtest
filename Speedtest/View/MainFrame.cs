@@ -209,6 +209,11 @@ namespace Speedtest
         {
             edgeType = edgeTypeElementValue;
         }
+
+        private void selectIncomingLiveChannelsElement_EditValueChanged(object sender, EventArgs e)
+        {
+            //selectin
+        }
     }
 
 }

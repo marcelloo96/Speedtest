@@ -16,7 +16,6 @@ namespace Speedtest.Controller
         public static readonly StopBits[] stopBitsOptionList = new StopBits[] { StopBits.One, StopBits.OnePointFive, StopBits.Two };
         public static readonly bool[] boolOptions = new bool[] { true, false };
         public static readonly Handshake[] handshakeOptionList = new Handshake[] { Handshake.None, Handshake.RequestToSend, Handshake.RequestToSendXOnXOff, Handshake.XOnXOff };
-        public static readonly String defaultDelimeter = ("\\n");
         public static readonly int[] readWriteBufferSizes = getListOf2Exponents();
 
 

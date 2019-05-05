@@ -47,11 +47,7 @@ namespace Speedtest.Controller
                 if (SampleList[i].Contains("\r"))
                 {
                     comingDataBuffer = comingDataBuffer.Remove(0, SampleList[i].Length);
-                    //Debug.WriteLine(SampleList[i]);
-                    //printAll(SampleList[i]);
                     _processMeasurement?.Invoke(SampleList[i]);
-
-
                 }
                 else
                 {

@@ -109,6 +109,8 @@
             this.portOptionsPage = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.portBasicsGroup = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.portAdvancedsGroup = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
+            this.portConnectButton = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
+            this.PortControlPanel = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.measurePage = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.measurePageStartStopButtonGroup = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.MeanValueGroup = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
@@ -146,8 +148,6 @@
             this.contentPanel = new DevExpress.XtraEditors.PanelControl();
             this.dockManager = new DevExpress.XtraBars.Docking.DockManager();
             this.serialPort = new System.IO.Ports.SerialPort();
-            this.portConnectButton = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
-            this.PortControlPanel = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             ((System.ComponentModel.ISupportInitialize)(this.ribbonControl)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.selectedPortRepositoryItemComboBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.baudRateRepositoryItemComboBox)).BeginInit();
@@ -877,6 +877,7 @@
             this.selectIncomingLiveChannelsElement.EditWidth = 100;
             this.selectIncomingLiveChannelsElement.Id = 34;
             this.selectIncomingLiveChannelsElement.Name = "selectIncomingLiveChannelsElement";
+            this.selectIncomingLiveChannelsElement.EditValueChanged += new System.EventHandler(this.selectIncomingLiveChannelsElement_EditValueChanged);
             // 
             // selectIncomingLiveChannelsRepositoryItemComboBox
             // 
@@ -957,6 +958,20 @@
             this.portAdvancedsGroup.ItemLinks.Add(this.readBufferSizeElement);
             this.portAdvancedsGroup.Name = "portAdvancedsGroup";
             this.portAdvancedsGroup.Text = "Advanced";
+            // 
+            // portConnectButton
+            // 
+            this.portConnectButton.AllowTextClipping = false;
+            this.portConnectButton.ItemLinks.Add(this.connectButton);
+            this.portConnectButton.Name = "portConnectButton";
+            this.portConnectButton.Text = "Connect";
+            // 
+            // PortControlPanel
+            // 
+            this.PortControlPanel.AllowTextClipping = false;
+            this.PortControlPanel.ItemLinks.Add(this.startStopButton);
+            this.PortControlPanel.Name = "PortControlPanel";
+            this.PortControlPanel.Text = "Control Panel";
             // 
             // measurePage
             // 
@@ -1228,20 +1243,6 @@
             "DevExpress.XtraBars.Navigation.OfficeNavigationBar",
             "DevExpress.XtraBars.Navigation.TileNavPane",
             "DevExpress.XtraBars.TabFormControl"});
-            // 
-            // portConnectButton
-            // 
-            this.portConnectButton.AllowTextClipping = false;
-            this.portConnectButton.ItemLinks.Add(this.connectButton);
-            this.portConnectButton.Name = "portConnectButton";
-            this.portConnectButton.Text = "Connect";
-            // 
-            // PortControlPanel
-            // 
-            this.PortControlPanel.AllowTextClipping = false;
-            this.PortControlPanel.ItemLinks.Add(this.startStopButton);
-            this.PortControlPanel.Name = "PortControlPanel";
-            this.PortControlPanel.Text = "Control Panel";
             // 
             // MainFrame
             // 

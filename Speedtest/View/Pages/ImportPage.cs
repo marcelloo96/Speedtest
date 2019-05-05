@@ -3,12 +3,15 @@ using DevExpress.XtraBars;
 using DevExpress.XtraEditors.Repository;
 using LiveCharts.Defaults;
 using LiveCharts.Geared;
+using MathNet.Numerics;
 using Speedtest.Controller.TabControllers;
 using Speedtest.Model;
 using Speedtest.View.StatisticWindow;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Text;
 using System.Windows.Forms;
 using static Speedtest.View.StatisticWindow.ScrollableChartUserControl;
 
@@ -71,7 +74,6 @@ namespace Speedtest
             {
                 var selectedChart = listOfImportedSeries[SelectRecordedChannelElementValue];
 
-                //MathNet.Numerics.IntegralTransforms.Fourier.ForwardReal(selectedChart.ToArray(),n);
                 if (importDisplayModeElementValue == Strings.Import_DisplayMode_Scroll)
                 {
                     bringScrollableToFront(selectedChart.ToList(), activePanels.OfType<ScrollableChartUserControl>().ToList());
@@ -115,22 +117,39 @@ namespace Speedtest
         {
             int originalLenght = selectedChart.Count;
             int fftLenght = originalLenght / 2 + (originalLenght%2==1 ? 1:0);
-
             complexArray = new Complex[originalLenght];
+
             for (int i = 0; i < selectedChart.Count; i++)
             {
                 complexArray[i] = new Complex(selectedChart[i], 0);
             }
 
-            FourierTransform.DFT(complexArray, FourierTransform.Direction.Forward);
+            FourierTransform.DFT(complexArray, FourierTransform.Direction.Backward);
+
             double[] fftValues = new double[originalLenght];
             for (int i = 0; i < complexArray.Count(); i++)
             {
                 fftValues[i] = complexArray[i].Magnitude;
             }
-            fftValues.ToList().RemoveRange(0, fftLenght);
+           
 
-            double[] Y = fftValues.Reverse().ToArray();
+            var Y = new double[fftLenght];
+            int k = 0;
+            for (int i = originalLenght-1; k<fftLenght; i--) {
+                Y[k] = fftValues[i];
+                k++;
+            }
+
+
+            //in case of Testing the result
+            //var csvbuffer = new StringBuilder();
+            //csvbuffer.AppendLine(String.Join("\n", Y.Select(p => p.ToString("G", culture))));
+            //string csvpath = savingFileDestinationPath + @"\" + exportFileNameElementValue + exportingFileFormatEditValue;
+            //File.AppendAllText(csvpath, csvbuffer.ToString());
+
+            var tmpremovable = fftValues.ToList();
+            tmpremovable.RemoveRange(0, fftLenght);
+            fftValues = tmpremovable.ToArray();
             double[] X = new double[originalLenght];
 
             double axisDT = 1 / (originalLenght * deltaTime);
@@ -139,13 +158,15 @@ namespace Speedtest
                 X[i] = i * axisDT;
 
             }
-
+            
             fftPrintList = new GearedValues<ObservablePoint>();
             for (int i = 0; i < fftLenght; i++)
             {
                 fftPrintList.Add(new ObservablePoint(X[i], Y[i]));
+                
             }
-
+            
+            
             bringFFTToFront(fftPrintList, activePanels.OfType<ScrollableChartUserControl>().ToList(), ScrollableType.FFT);
         }
 
