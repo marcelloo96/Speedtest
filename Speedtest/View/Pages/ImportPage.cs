@@ -13,6 +13,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using MathNet.Numerics.Statistics;
 using static Speedtest.View.StatisticWindow.ScrollableChartUserControl;
 
 namespace Speedtest
@@ -249,23 +250,14 @@ namespace Speedtest
         }
         private GearedValues<ObservablePoint> getHistogramFromChart(List<double> chart)
         {
-            SortedDictionary<double, double> histogram = new SortedDictionary<double, double>();
             GearedValues<ObservablePoint> histogramChartModel = new GearedValues<ObservablePoint>();
 
-            foreach (var point in chart)
-            {
-                if (histogram.ContainsKey(point))
-                {
-                    histogram[point]++;
-                }
-                else
-                {
-                    histogram[point] = 1;
-                }
-            }
-            foreach (var item in histogram)
-            {
-                histogramChartModel.Add(new ObservablePoint(item.Key, item.Value));
+            MathNet.Numerics.Statistics.Histogram asd = new MathNet.Numerics.Statistics.Histogram(chart, 50);
+            for (int i = 0; i < asd.BucketCount; i++) {
+                var bucketCount = asd[i].Count;
+                var bucketMean = asd[i].UpperBound;
+
+                histogramChartModel.Add(new ObservablePoint(bucketMean, bucketCount));
             }
 
             return histogramChartModel;

@@ -24,7 +24,7 @@ namespace Speedtest.View.StatisticWindow
                 Fill = new SolidColorBrush(Color.FromRgb(32, 112, 176)),
                 ScalesXAt = 0,
                 ColumnPadding = 0,
-                //MaxColumnWidth = 9999,
+                MaxColumnWidth = 10,
                 SharesPosition = false
             });
         }
