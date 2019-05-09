@@ -151,7 +151,7 @@ namespace Speedtest
             var tmpremovable = fftValues.ToList();
             tmpremovable.RemoveRange(0, fftLenght);
             fftValues = tmpremovable.ToArray();
-            double[] X = new double[originalLenght];
+            double[] X = new double[fftLenght];
 
             double axisDT = 1 / (originalLenght * deltaTime);
             for (int i = 0; i < fftLenght; i++)
@@ -251,11 +251,11 @@ namespace Speedtest
         private GearedValues<ObservablePoint> getHistogramFromChart(List<double> chart)
         {
             GearedValues<ObservablePoint> histogramChartModel = new GearedValues<ObservablePoint>();
+            MathNet.Numerics.Statistics.Histogram histogram = new MathNet.Numerics.Statistics.Histogram(chart, 50);
 
-            MathNet.Numerics.Statistics.Histogram asd = new MathNet.Numerics.Statistics.Histogram(chart, 50);
-            for (int i = 0; i < asd.BucketCount; i++) {
-                var bucketCount = asd[i].Count;
-                var bucketMean = asd[i].UpperBound;
+            for (int i = 0; i < histogram.BucketCount; i++) {
+                var bucketCount = histogram[i].Count;
+                var bucketMean = histogram[i].UpperBound;
 
                 histogramChartModel.Add(new ObservablePoint(bucketMean, bucketCount));
             }
