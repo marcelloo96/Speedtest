@@ -1,13 +1,6 @@
-﻿using Speedtest.Controller.TabControllers;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Speedtest.Controller
+﻿namespace Speedtest.Controller
 {
-    class RecordingTabController 
+    class RecordingTabController
     {
         internal static void FillEditors(MainFrame model)
         {

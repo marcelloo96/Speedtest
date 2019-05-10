@@ -1,12 +1,12 @@
-﻿using System.Windows.Forms;
+﻿using LiveCharts;
 using LiveCharts.Defaults;
 using LiveCharts.Geared;
-using LiveCharts;
+using System.Windows.Forms;
 using System.Windows.Media;
 
 namespace Speedtest.View.StatisticWindow
 {
-    public partial class SimpleObservablePointedChartUserControl : UserControl 
+    public partial class SimpleObservablePointedChartUserControl : UserControl
     {
         public GearedValues<ObservablePoint> Values;
         public SimpleObservablePointedChartUserControl(GearedValues<ObservablePoint> chart)
@@ -17,7 +17,7 @@ namespace Speedtest.View.StatisticWindow
             mainChart.Zoom = ZoomingOptions.X;
             mainChart.DisableAnimations = true;
             mainChart.Hoverable = true;
-            mainChart.BackColor= System.Drawing.Color.Transparent;
+            mainChart.BackColor = System.Drawing.Color.Transparent;
             mainChart.Series.Add(new GColumnSeries
             {
                 Values = Values,

@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainFrame));
             this.ribbonControl = new DevExpress.XtraBars.Ribbon.RibbonControl();
             this.selectedPortElement = new DevExpress.XtraBars.BarEditItem();
@@ -144,10 +145,10 @@
             this.fileLocationBreadCrumbElementEepositoryItemBreadCrumbEdit = new DevExpress.XtraEditors.Repository.RepositoryItemBreadCrumbEdit();
             this.chartNameLookUpRepositoryItemLookUpEdit = new DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit();
             this.ribbonStatusBar1 = new DevExpress.XtraBars.Ribbon.RibbonStatusBar();
-            this.defaultLookAndFeel1 = new DevExpress.LookAndFeel.DefaultLookAndFeel();
+            this.defaultLookAndFeel1 = new DevExpress.LookAndFeel.DefaultLookAndFeel(this.components);
             this.contentPanel = new DevExpress.XtraEditors.PanelControl();
-            this.dockManager = new DevExpress.XtraBars.Docking.DockManager();
-            this.serialPort = new System.IO.Ports.SerialPort();
+            this.dockManager = new DevExpress.XtraBars.Docking.DockManager(this.components);
+            this.serialPort = new System.IO.Ports.SerialPort(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.ribbonControl)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.selectedPortRepositoryItemComboBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.baudRateRepositoryItemComboBox)).BeginInit();

@@ -1,29 +1,26 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Speedtest.Controller.TabControllers
 {
     class ImportTabController
     {
-        internal static void FillEditors(MainFrame model, int numberOfChannels=0)
+        internal static void FillEditors(MainFrame model, int numberOfChannels = 0)
         {
             List<string> displayModes = new List<string>();
-            
+
             displayModes.Add(Strings.Import_DisplayMode_Scroll);
             displayModes.Add(Strings.Import_DisplayMode_Histogram);
             displayModes.Add(Strings.Import_DisplayMode_FFT);
 
             model.ImportDisplayModeElementRepositoryItemComboBox.Items.AddRange(displayModes);
 
-            
+
             model.importDisplayModeElementValue = displayModes.First();
 
 
 
-           
+
 
         }
 

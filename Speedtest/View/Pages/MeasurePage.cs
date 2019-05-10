@@ -1,9 +1,6 @@
-﻿using DevExpress.XtraBars;
-using DevExpress.XtraEditors.Repository;
-using Speedtest.Controller;
+﻿using DevExpress.XtraEditors.Repository;
 using System;
 using System.Diagnostics;
-using System.Windows.Forms;
 
 namespace Speedtest
 {
@@ -17,16 +14,19 @@ namespace Speedtest
 
         #region ElementValues
 
-        public string edgeTypeElementValue {
+        public string edgeTypeElementValue
+        {
             get { return edgeTypeElement.EditValue.ToString(); }
             set { edgeTypeElement.EditValue = value; }
         }
-        
-        public double tresholdElementValue {
-            get { return Double.Parse(tresholdValueElement.EditValue.ToString());}
+
+        public double tresholdElementValue
+        {
+            get { return Double.Parse(tresholdValueElement.EditValue.ToString()); }
             set { tresholdValueElement.EditValue = value; }
         }
-         public string meanValueLabelCaption {
+        public string meanValueLabelCaption
+        {
             set { meanValueLabel.Caption = value; }
         }
         #endregion
@@ -44,7 +44,7 @@ namespace Speedtest
         }
         #endregion
 
-        
+
         private void detectingEdgeElement_EditValueChanged(object sender, EventArgs e)
         {
             edgeDetecting = (bool)detectingEdgeElement.EditValue;
@@ -52,7 +52,8 @@ namespace Speedtest
         private void chartMeanValueElement_EditValueChanged(object sender, EventArgs e)
         {
             meanValueIsOn = (bool)chartMeanValueElement.EditValue;
-            if (meanValueIsOn == false) {
+            if (meanValueIsOn == false)
+            {
                 meanValueLabelCaption = Strings.Global_MeanValue;
             }
         }

@@ -1,15 +1,7 @@
-﻿using Speedtest.Model;
-using Speedtest.Properties;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO.Ports;
-using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading;
-using System.Threading.Tasks;
-using System.Windows;
 
 namespace Speedtest.Controller
 {
@@ -18,7 +10,6 @@ namespace Speedtest.Controller
         private MainFrame mainFrameModel;
         public double tryparseTmp;
         public int deltaTime;
-        public Regex regex;
         public int numberOfPanelsDisplayed;
         public int numberOfIncomingData;
         public SerialPort serialPort;
@@ -33,13 +24,13 @@ namespace Speedtest.Controller
             this.mainFrameModel = model;
             numberOfIncomingData = 1;
             deltaTime = 1000;
-            regex = new Regex(@"-?[0-9]*(\s|\\r)");
             timer = new Stopwatch();
             buffer = new List<string>();
         }
         public void CreatePort()
         {
-            if (mainFrameModel.serialPort == null) {
+            if (mainFrameModel.serialPort == null)
+            {
                 mainFrameModel.serialPort = new SerialPort();
             }
             mainFrameModel.serialPort.PortName = mainFrameModel.selectedPortElementValue;
@@ -64,7 +55,7 @@ namespace Speedtest.Controller
             try
             {
                 mainFrameModel.serialPort.Open();
-              
+
                 return true;
             }
             catch (Exception ex)
@@ -101,7 +92,7 @@ namespace Speedtest.Controller
             }
             return false;
         }
-         
+
     }
 
 }

@@ -3,17 +3,13 @@ using DevExpress.XtraBars;
 using DevExpress.XtraEditors.Repository;
 using LiveCharts.Defaults;
 using LiveCharts.Geared;
-using MathNet.Numerics;
 using Speedtest.Controller.TabControllers;
 using Speedtest.Model;
 using Speedtest.View.StatisticWindow;
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Text;
 using System.Windows.Forms;
-using MathNet.Numerics.Statistics;
 using static Speedtest.View.StatisticWindow.ScrollableChartUserControl;
 
 namespace Speedtest
@@ -30,7 +26,7 @@ namespace Speedtest
         #region ElementValues
         public int SelectRecordedChannelElementValue
         {
-            get { return Int32.Parse(selectRecordedChannelElement.EditValue.ToString())-1; }
+            get { return Int32.Parse(selectRecordedChannelElement.EditValue.ToString()) - 1; }
             set { selectRecordedChannelElement.EditValue = value; }
         }
 
@@ -86,7 +82,7 @@ namespace Speedtest
                 else if (importDisplayModeElementValue == Strings.Import_DisplayMode_FFT)
                 {
                     printFFT(selectedChart);
-                    
+
                 }
                 //else if (importDisplayModeElementValue == Strings.Import_DisplayMode_FFT_PhaseSpectrum)
                 //{
@@ -110,14 +106,14 @@ namespace Speedtest
             {
                 MessageBox.Show(Strings.Import_NoFilesImported);
             }
-            
+
 
         }
 
         private void printFFT(List<double> selectedChart)
         {
             int originalLenght = selectedChart.Count;
-            int fftLenght = originalLenght / 2 + (originalLenght%2==1 ? 1:0);
+            int fftLenght = originalLenght / 2 + (originalLenght % 2 == 1 ? 1 : 0);
             complexArray = new Complex[originalLenght];
 
             for (int i = 0; i < selectedChart.Count; i++)
@@ -132,11 +128,12 @@ namespace Speedtest
             {
                 fftValues[i] = complexArray[i].Magnitude;
             }
-           
+
 
             var Y = new double[fftLenght];
             int k = 0;
-            for (int i = originalLenght-1; k<fftLenght; i--) {
+            for (int i = originalLenght - 1; k < fftLenght; i--)
+            {
                 Y[k] = fftValues[i];
                 k++;
             }
@@ -159,15 +156,15 @@ namespace Speedtest
                 X[i] = i * axisDT;
 
             }
-            
+
             fftPrintList = new GearedValues<ObservablePoint>();
             for (int i = 0; i < fftLenght; i++)
             {
                 fftPrintList.Add(new ObservablePoint(X[i], Y[i]));
-                
+
             }
-            
-            
+
+
             bringFFTToFront(fftPrintList, activePanels.OfType<ScrollableChartUserControl>().ToList(), ScrollableType.FFT);
         }
 
@@ -177,7 +174,7 @@ namespace Speedtest
             {
                 foreach (var panel in onPanelWithThisType)
                 {
-                    if (panel.doubleValues!=null && panel.doubleValues.Equals(selectedChart))
+                    if (panel.doubleValues != null && panel.doubleValues.Equals(selectedChart))
                     {
 
                         bringContentToFront(panel, alreadyExisting);
@@ -253,7 +250,8 @@ namespace Speedtest
             GearedValues<ObservablePoint> histogramChartModel = new GearedValues<ObservablePoint>();
             MathNet.Numerics.Statistics.Histogram histogram = new MathNet.Numerics.Statistics.Histogram(chart, 50);
 
-            for (int i = 0; i < histogram.BucketCount; i++) {
+            for (int i = 0; i < histogram.BucketCount; i++)
+            {
                 var bucketCount = histogram[i].Count;
                 var bucketMean = histogram[i].UpperBound;
 

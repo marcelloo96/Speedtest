@@ -1,10 +1,6 @@
 ﻿using LiveCharts.Defaults;
 using LiveCharts.Geared;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Speedtest.Model.ChartViewModels
 {
@@ -15,7 +11,8 @@ namespace Speedtest.Model.ChartViewModels
             var l = new List<ObservablePoint>();
 
             double T = 0;
-            foreach (var point in singleChart) {
+            foreach (var point in singleChart)
+            {
                 l.Add(new ObservablePoint(T, point));
                 T += deltaT;
             }
@@ -23,12 +20,13 @@ namespace Speedtest.Model.ChartViewModels
             Values = l.AsGearedValues().WithQuality(Quality.High);
 
             From = 0;
-            To = T/5;
+            To = T / 5;
         }
-        public ScrollableViewModel(GearedValues<ObservablePoint> observableChart) {
+        public ScrollableViewModel(GearedValues<ObservablePoint> observableChart)
+        {
             Values = observableChart;
             From = 0;
-            To = observableChart[observableChart.Count/5].X;
+            To = observableChart[observableChart.Count / 5].X;
         }
 
         public GearedValues<ObservablePoint> Values { get; set; }

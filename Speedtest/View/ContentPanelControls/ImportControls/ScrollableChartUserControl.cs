@@ -1,18 +1,17 @@
-﻿using System;
+﻿using LiveCharts;
+using LiveCharts.Configurations;
+using LiveCharts.Defaults;
+using LiveCharts.Geared;
+using LiveCharts.Wpf;
+using Speedtest.Controller.Charts;
+using Speedtest.Model.ChartViewModels;
+using System;
+using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Data;
 using System.Windows.Forms;
 using System.Windows.Media;
-using LiveCharts;
-using LiveCharts.Events;
-using LiveCharts.Geared;
-using LiveCharts.Wpf;
 using Binding = System.Windows.Data.Binding;
-using Speedtest.Model.ChartViewModels;
-using Speedtest.Controller.Charts;
-using System.Collections.Generic;
-using LiveCharts.Defaults;
-using LiveCharts.Configurations;
 
 namespace Speedtest.View.StatisticWindow
 {
@@ -26,8 +25,8 @@ namespace Speedtest.View.StatisticWindow
         public GearedValues<ObservablePoint> observableValues;
         public ScrollableType type;
 
-        
-        
+
+
 
         public ScrollableChartUserControl(List<double> chart, double deltaT, ScrollableType type = ScrollableType.Basic)
         {
@@ -161,7 +160,7 @@ namespace Speedtest.View.StatisticWindow
             scrollerChart.DataTooltip = null;
 
             scrollerChart.AxisY.Add(new Axis { Separator = new Separator { IsEnabled = true }, ShowLabels = false });
-            
+
 
             //lets bind the charts
 

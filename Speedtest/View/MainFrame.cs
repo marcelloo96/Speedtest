@@ -1,14 +1,14 @@
-﻿using Speedtest.Controller;
-using System;
-using System.Windows.Forms;
-using DevExpress.XtraBars.Ribbon;
-using System.Collections.Generic;
-using Speedtest.View.MeasureWindow;
-using System.Diagnostics;
-using Speedtest.Controller.TabControllers;
+﻿using DevExpress.XtraBars.Ribbon;
 using LiveCharts.Geared;
-using System.Linq;
+using Speedtest.Controller;
+using Speedtest.Controller.TabControllers;
+using Speedtest.View.MeasureWindow;
+using System;
+using System.Collections.Generic;
+using System.Diagnostics;
 using System.Globalization;
+using System.Linq;
+using System.Windows.Forms;
 
 namespace Speedtest
 {
@@ -28,7 +28,7 @@ namespace Speedtest
         private List<UserControl> activePanels;
         private List<string> mmwFocusedPages;
         CultureInfo culture = CultureInfo.CreateSpecificCulture("en-US");
-        public static int intervals=10;
+        public static int intervals = 10;
         #endregion
 
         public MainFrame()
@@ -51,7 +51,7 @@ namespace Speedtest
             savingFileDestinationPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
             changeFileDestinationCaption(savingFileDestinationPath);
 
-            
+
 
         }
 
@@ -65,7 +65,7 @@ namespace Speedtest
                 {
                     HomeTabController.SetGroupsAndIconsToCurrentState(this);
 
-                    if (connectedState)                        
+                    if (connectedState)
                     {
                         homePortBasicGroup.Enabled = false;
                         keepRecordsElement.Enabled = false;
@@ -114,8 +114,8 @@ namespace Speedtest
                     }
                     if (Recording)
                     {
-                        csvBuffer.AppendLine(String.Join(",", printingData.Select(p=>p.ToString("F",culture))));
-                    }                   
+                        csvBuffer.AppendLine(String.Join(",", printingData.Select(p => p.ToString("F", culture))));
+                    }
 
                     if (DisplayModeElementValue == Strings.MeasureTab_DisplayMode_MultiPanel)
                     {
@@ -127,7 +127,7 @@ namespace Speedtest
                     }
                     else if (DisplayModeElementValue == Strings.MeasureTab_DisplayMode_SinglePanel)
                     {
-                        ChartController.printDefaultChart(this,mmw.xyChartUserControl, printingData);
+                        ChartController.printDefaultChart(this, mmw.xyChartUserControl, printingData);
                     }
                 }
 
@@ -165,9 +165,11 @@ namespace Speedtest
         {
             var selectedPage = ribbonControl.SelectedPage.ToString();
 
-            if (selectedPage == Strings.Global_Measure) {
-                if (mmw != null && activePanels.Contains(mmw)) {
-                    bringContentToFront(mmw,alreadyExisting);
+            if (selectedPage == Strings.Global_Measure)
+            {
+                if (mmw != null && activePanels.Contains(mmw))
+                {
+                    bringContentToFront(mmw, alreadyExisting);
                     BringSingleChartToFrontInsideOfMMW();
                     DisplayModeElementValue = Strings.MeasureTab_DisplayMode_SinglePanel;
                     return;

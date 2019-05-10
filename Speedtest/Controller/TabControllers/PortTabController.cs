@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO.Ports;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Speedtest.Controller
 {
@@ -60,10 +56,12 @@ namespace Speedtest.Controller
             #endregion
         }
 
-        public static int[] getListOf2Exponents() {
+        public static int[] getListOf2Exponents()
+        {
             int[] list = new int[19];
-            for (int i = 12; i < 31; i++) {
-                list[i - 12] = Convert.ToInt32(Math.Pow(2,i));
+            for (int i = 12; i < 31; i++)
+            {
+                list[i - 12] = Convert.ToInt32(Math.Pow(2, i));
             }
             return list;
         }

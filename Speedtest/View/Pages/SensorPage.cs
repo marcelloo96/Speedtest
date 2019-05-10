@@ -1,6 +1,5 @@
 ﻿using DevExpress.XtraBars;
 using System;
-using System.Windows.Forms;
 
 namespace Speedtest
 {

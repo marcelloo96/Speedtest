@@ -1,19 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using System.Windows.Media;
-using LiveCharts;
+﻿using LiveCharts;
 using LiveCharts.Defaults;
 using LiveCharts.Geared;
-using LiveCharts.Helpers;
 using LiveCharts.WinForms;
 using Speedtest.Model;
 using Speedtest.View.MeasureWindow;
-using LiveCharts.Helpers;
-using System.Diagnostics;
+using System;
+using System.Linq;
+using System.Windows.Forms;
+using System.Windows.Media;
 
 namespace Speedtest.Controller
 {
@@ -210,7 +204,7 @@ namespace Speedtest.Controller
 
             if (MainFrame.meanValueIsOn && isSingleGraph)
             {
-                avg = values.Concat(rec).Where(p => double.IsNaN(p.Y)==false).Select(p => p.Y).Average();
+                avg = values.Concat(rec).Where(p => double.IsNaN(p.Y) == false).Select(p => p.Y).Average();
                 mainFrame.meanValueLabelCaption = Strings.Global_MeanValue + avg.ToString("F2");
             }
 

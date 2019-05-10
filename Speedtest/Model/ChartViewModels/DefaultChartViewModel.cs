@@ -1,11 +1,6 @@
-﻿using LiveCharts;
-using LiveCharts.Defaults;
+﻿using LiveCharts.Defaults;
 using LiveCharts.Geared;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Speedtest.Model
 {
@@ -30,7 +25,8 @@ namespace Speedtest.Model
             setValuesInicialState(this);
 
         }
-        public void setValuesInicialState(DefaultChartViewModel vm) {
+        public void setValuesInicialState(DefaultChartViewModel vm)
+        {
             //double previousDeltaT = 0;
             vm.values.Clear();
             vm.RecordValues.Clear();
@@ -38,7 +34,7 @@ namespace Speedtest.Model
             vm.EdgeDetectingLine.Clear();
             for (int i = 0; i < vm.keepRecords; i++)
             {
-                var point = new ObservablePoint((double)(i*deltaTime), Double.NaN);
+                var point = new ObservablePoint((double)(i * deltaTime), Double.NaN);
                 vm.values.Add(point);
                 vm.RecordValues.Add(point);
                 vm.MeanValues.Add(point);

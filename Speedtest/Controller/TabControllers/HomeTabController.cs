@@ -1,13 +1,5 @@
-﻿using Speedtest.Model;
-using Speedtest.Properties;
+﻿using Speedtest.Properties;
 using System;
-using System.Collections.Generic;
-using System.IO.Ports;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
-using System.Windows;
 
 namespace Speedtest.Controller
 {
@@ -23,7 +15,7 @@ namespace Speedtest.Controller
             model.keepRecordsElementValue = 300;
             model.DisplayModeElement.EditValue = Strings.MeasureTab_DisplayMode_MultiPanel;
             model.SelectIncomingLiveChannelsElement.Enabled = false;
-            model.SelectIncomingLiveChannelsRepositoryItemComboBox.Items.AddRange(new int[5] {1,2,3,4,5 });
+            model.SelectIncomingLiveChannelsRepositoryItemComboBox.Items.AddRange(new int[5] { 1, 2, 3, 4, 5 });
             model.DisplayModeRepositoryItemComboBox.Items.AddRange(new string[] {
                 Strings.MeasureTab_DisplayMode_MultiPanel,
                 Strings.MeasureTab_DisplayMode_SinglePanel,

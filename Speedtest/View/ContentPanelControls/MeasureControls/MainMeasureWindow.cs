@@ -1,14 +1,8 @@
-﻿ using DevExpress.XtraBars.Docking;
+﻿using DevExpress.XtraBars.Docking;
 using LiveCharts.Geared;
-using Speedtest.Controller;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
 using System.IO.Ports;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Speedtest.View.MeasureWindow
@@ -29,7 +23,7 @@ namespace Speedtest.View.MeasureWindow
             mainFrameModel = model;
             gearedChart = model.defaultChart;
             gearedCharts = model.defaultCharts;
-            numberOfPanelsDisplayed= mainFrameModel.numberOfChannelsElementValue;
+            numberOfPanelsDisplayed = mainFrameModel.numberOfChannelsElementValue;
             InitializeComponent();
             InitialState();
             xyChartUserControl = new DefaultChartUserControl(model.keepRecordsElementValue, model.deltaTime);
@@ -39,7 +33,8 @@ namespace Speedtest.View.MeasureWindow
 
         }
 
-        public void InitialState() {
+        public void InitialState()
+        {
             if (!String.IsNullOrWhiteSpace(mainFrameModel.selectedPortElementValue))
             {
                 try
@@ -60,12 +55,12 @@ namespace Speedtest.View.MeasureWindow
                             DockPanel tmpPanel = new DockPanel
                             {
                                 Text = "Channel " + i,
-                                AutoScaleMode=AutoScaleMode.Inherit
+                                AutoScaleMode = AutoScaleMode.Inherit
                             };
                             ControlContainer tmpPanel_Container = new ControlContainer();
                             var currentChart = gearedCharts[i];
                             tmpPanel_Container.Controls.Add(currentChart);
-                            
+
                             tmpPanel.Height = height;
                             tmpPanel.Controls.Add(tmpPanel_Container);
 
@@ -93,7 +88,7 @@ namespace Speedtest.View.MeasureWindow
         {
             for (int i = 0; i < numberOfPanelsDisplayed; i++)
             {
-                gearedChart = new DefaultChartUserControl(mainFrameModel.keepRecordsElementValue,mainFrameModel.deltaTime)
+                gearedChart = new DefaultChartUserControl(mainFrameModel.keepRecordsElementValue, mainFrameModel.deltaTime)
                 {
                     Dock = DockStyle.Fill
                 };
@@ -101,7 +96,8 @@ namespace Speedtest.View.MeasureWindow
             }
         }
 
-        public void deleteControls() {
+        public void deleteControls()
+        {
             this.Controls.Clear();
             gearedCharts.Clear();
             gearedChartUserControl.dockManager.Clear();
@@ -114,8 +110,9 @@ namespace Speedtest.View.MeasureWindow
             var panels = gearedChartUserControl.dockManager.Panels;
             //splitContainerControl.SplitterPosition = width * 3 / 4;
 
-            
-            for (int i = 0; i < panels.Count(); i++) {
+
+            for (int i = 0; i < panels.Count(); i++)
+            {
                 panels[i].Height = newHeight;
             }
         }

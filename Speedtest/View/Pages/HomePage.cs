@@ -37,7 +37,8 @@ namespace Speedtest
             set { displayModeElement.EditValue = value; }
         }
 
-        public int selectIncomingLiveChannelsElementValue {
+        public int selectIncomingLiveChannelsElementValue
+        {
             get { return Int32.Parse(selectIncomingLiveChannelsElement.EditValue.ToString()) - 1; }
             set { selectIncomingLiveChannelsElement.EditValue = value; }
         }
@@ -102,10 +103,11 @@ namespace Speedtest
             if (connectedState)
             {
                 //Disconnecting
-                if (isRunning) {
+                if (isRunning)
+                {
                     startStopButton.PerformClick();
                 }
-               
+
                 homePortBasicGroup.Enabled = true;
                 keepRecordsElement.Enabled = true;
 
