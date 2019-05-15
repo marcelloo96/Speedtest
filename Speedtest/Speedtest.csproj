@@ -277,6 +277,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="favicon.ico" />
+    <Content Include="icon.ico" />
     <Content Include="View\Icons\m_Gyt_icon.ico" />
     <Content Include="View\Icons\cancel.svg" />
     <Content Include="View\Icons\M.png" />
