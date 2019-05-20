@@ -1,5 +1,5 @@
 ### Software development to assist sensor based measurements for Arduino
-#### This program is made to visualise live data from an microcontroller -Arduino- using COM port.
+#### This program is made to visualize live data from a microcontroller -Arduino- using COM port.
 <br />
 
 ![allCharts](https://user-images.githubusercontent.com/33758813/57813140-759fe880-776f-11e9-9f48-ec1c754a197c.png )
